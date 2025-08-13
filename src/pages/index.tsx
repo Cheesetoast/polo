@@ -3,6 +3,8 @@ import type { HeadFC, PageProps } from "gatsby"
 import { graphql } from "gatsby"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
+import { Button } from "../components/Button"
+import { Text } from "../components/Text"
 
 const pageStyles = {
   color: "#232129",
@@ -154,16 +156,20 @@ const IndexPage: React.FC<PageProps<HomepageData>> = ({ data }) => {
   return (
     <Layout>
     <main style={pageStyles}>
-      <h1 style={headingStyles}>
-        {homepage?.title || "Congratulations"}
-        <br />
-        <span style={headingAccentStyles}>— you just made a Gatsby site! 🎉🎉🎉</span>
-      </h1>
-      <h2>{homepage?.subtitle || "Subtitle"}</h2>
-      <p style={paragraphStyles}>
+      <div style={headingStyles}>
+        <Text variant="h1">
+          {homepage?.title || "Congratulations"}
+        </Text>
+        <Text variant="h1" color="secondary">
+          — you just made a Gatsby site! 🎉🎉🎉
+        </Text>
+      </div>
+      <Text variant="h2">{homepage?.subtitle || "Subtitle"}</Text>
+      <Button>Click me</Button>
+      <Text variant="p" style={paragraphStyles}>
         Edit <code style={codeStyles}>src/pages/index.tsx</code> to see this page
         update in real-time. 😎
-      </p>
+      </Text>
       <ul style={doclistStyles}>
         {docLinks.map(doc => (
           <li key={doc.url} style={docLinkStyle}>
@@ -191,7 +197,7 @@ const IndexPage: React.FC<PageProps<HomepageData>> = ({ data }) => {
                   NEW!
                 </span>
               )}
-              <p style={descriptionStyle}>{link.description}</p>
+              <Text variant="p" style={descriptionStyle}>{link.description}</Text>
             </span>
           </li>
         ))}
