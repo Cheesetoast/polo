@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
+import { SITE_CONFIG } from '../constants';
 
 interface NavItem {
   label: string;
@@ -42,7 +43,7 @@ const Navbar: React.FC<NavbarProps> = ({ transparent = false }) => {
     <NavContainer transparent={transparent} scrolled={scrolled}>
       <NavContent>
         <LogoLink to="/" onClick={closeMenu}>
-          Polo
+          {SITE_CONFIG.SITE_NAME}
         </LogoLink>
 
         <NavLinks isOpen={isOpen}>
