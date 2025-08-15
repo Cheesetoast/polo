@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import { ImageBlock } from './ImageBlock';
 import { Text } from './Text';
+import { StatusIndicator } from './StatusIndicator';
+import { ReadingStatus } from './BookBoard';
 import { DEFAULTS } from '../constants';
 
-export interface BookData {
+export interface Book {
     title: string;
     author: string;
     description: {
@@ -19,7 +21,10 @@ export interface BookData {
 }
 
 export interface BookProps {
-    book: BookData;
+    book: Book & { status?: ReadingStatus };
+    onClick?: () => void;
+    style?: React.CSSProperties;
+    showStatus?: boolean;
 }
 
 const StyledBook = styled.div`
@@ -58,16 +63,23 @@ const BookFooter = styled.div`
   border-top: 1px solid ${theme.colors.muted};
 `;
 
-export const Book: React.FC<BookProps> = ({ book }) => {
+export const Book: React.FC<BookProps> = ({ book, onClick, style, showStatus = false }) => {
     return (
-        <StyledBook>
+        <StyledBook onClick={onClick} style={style}>
             <BookHeader>
-                <Text variant="h3" style={{ marginBottom: theme.spacing.xs }}>
-                    {book.title}
-                </Text>
-                <Text variant="p" color="secondary">
-                    By {book.author}
-                </Text>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: theme.spacing.xs }}>
+                    <div style={{ flex: 1 }}>
+                        <Text variant="h3" style={{ marginBottom: theme.spacing.xs }}>
+                            {book.title}
+                        </Text>
+                        <Text variant="p" color="secondary">
+                            By {book.author}
+                        </Text>
+                    </div>
+                    {showStatus && book.status && (
+                        <StatusIndicator status={book.status} size="small" showLabel={false} />
+                    )}
+                </div>
             </BookHeader>
 
             <BookContent>

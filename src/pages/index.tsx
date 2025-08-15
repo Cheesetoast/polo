@@ -7,8 +7,9 @@ import { Button } from "../components/Button"
 import { Text } from "../components/Text"
 import { ContentWrapper } from "../components/ContentWrapper"
 import { SITE_CONFIG } from "../constants"
-import BooksContainer from "../components/BooksContainer"
+import { BookBoardContainer } from "../components/BookBoardContainer"
 import { ButtonContainer } from "../components/ButtonContainer"
+import { theme } from "../styles/theme"
 
 
 interface HomepageData {
@@ -43,7 +44,7 @@ const IndexPage: React.FC<PageProps<HomepageData>> = ({ data }) => {
         <ContentWrapper>
           <div>
             <Text variant="h1">
-              {homepage?.title}
+              {homepage?.title || SITE_CONFIG.SITE_NAME}
             </Text>
           </div>
 
@@ -52,7 +53,9 @@ const IndexPage: React.FC<PageProps<HomepageData>> = ({ data }) => {
           </ButtonContainer>
 
           {/* Books Section */}
-          <BooksContainer books={books} />
+          {books.length > 0 && (
+            <BookBoardContainer books={books} title="My Reading List" />
+          )}
 
         </ContentWrapper>
 
@@ -65,7 +68,7 @@ export default IndexPage
 
 export const Head: HeadFC = () => (
   <SEO
-    title={SITE_CONFIG.TITLE}
+    title={SITE_CONFIG.SITE_NAME}
     description="Welcome to my portfolio showcasing my work and projects."
     keywords={['portfolio', 'web development', 'design', 'react', 'gatsby']}
   />

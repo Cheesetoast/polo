@@ -1,3 +1,5 @@
+import { ReadingStatus } from '../components/BookBoard';
+
 export const SITE_CONFIG = {
   SITE_NAME: 'Book Stack'
 } as const;
@@ -28,4 +30,5 @@ export const DEFAULTS = {
   FALLBACK_TITLE: SITE_CONFIG.SITE_NAME,
   FALLBACK_IMAGE_ALT: 'Image',
   FALLBACK_BOOK_COVER: 'Book cover',
+  DEFAULT_BOOK_STATUS: 'want-to-read' satisfies ReadingStatus,
 } as const;
