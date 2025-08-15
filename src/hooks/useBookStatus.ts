@@ -6,7 +6,10 @@ import { DEFAULTS } from '../constants';
 const STORAGE_KEY = 'book-status-data';
 
 interface BookStatusData {
-  [isbn: string]: ReadingStatus;
+  [isbn: string]: {
+    status: ReadingStatus;
+    progress?: number;
+  };
 }
 
 export const useBookStatus = (books: Book[]) => {
@@ -22,7 +25,18 @@ export const useBookStatus = (books: Book[]) => {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
-        setReadingStatusData(parsed);
+        // Migrate old format to new format
+        const migrated = Object.entries(parsed).reduce((acc, [isbn, data]) => {
+          if (typeof data === 'string') {
+            // Old format: just status string
+            acc[isbn] = { status: data as ReadingStatus, progress: 0 };
+          } else {
+            // New format: object with status and progress
+            acc[isbn] = data as { status: ReadingStatus; progress?: number };
+          }
+          return acc;
+        }, {} as BookStatusData);
+        setReadingStatusData(migrated);
       }
     } catch (error) {
       console.warn('Failed to load book statuses from localStorage:', error);
@@ -42,21 +56,51 @@ export const useBookStatus = (books: Book[]) => {
     }
   }, [readingStatusData, isLoading]);
 
-  // Get books with their current status
+  // Get books with their current status and progress
   const getBooksWithStatus = useCallback((): BookWithReadingStatus[] => {
-    return books.map(book => ({
-      ...book,
-      status: readingStatusData[book.isbn || ''] || DEFAULT_STATUS,
-    }));
+    return books.map(book => {
+      const storedData = readingStatusData[book.isbn || ''];
+      
+      // For progress: use stored progress if it exists, otherwise use book's original progress
+      let finalProgress = book.progress; // Start with book's original progress
+      if (storedData?.progress !== undefined) {
+        finalProgress = storedData.progress; // Override only if stored progress exists
+      }
+      
+
+      
+      return {
+        ...book,
+        status: storedData?.status || DEFAULT_STATUS,
+        progress: finalProgress,
+      };
+    });
   }, [books, readingStatusData]);
 
   // Update a book's status
   const updateBookStatus = useCallback((isbn: string | undefined, status: ReadingStatus) => {
     if (!isbn) return; // Skip books without ISBN
     
+    const book = books.find(b => b.isbn === isbn);
     setReadingStatusData(prev => ({
       ...prev,
-      [isbn]: status,
+      [isbn]: {
+        status,
+        progress: prev[isbn]?.progress ?? book?.progress ?? 0, // Use stored progress, then book progress, then default to 0
+      },
+    }));
+  }, [books]);
+
+  // Update a book's progress
+  const updateBookProgress = useCallback((isbn: string | undefined, progress: number) => {
+    if (!isbn) return; // Skip books without ISBN
+    
+    setReadingStatusData(prev => ({
+      ...prev,
+      [isbn]: {
+        status: prev[isbn]?.status || DEFAULT_STATUS,
+        progress: Math.max(0, Math.min(100, progress)), // Ensure progress is between 0-100
+      },
     }));
   }, []);
 
@@ -65,10 +109,23 @@ export const useBookStatus = (books: Book[]) => {
     setReadingStatusData({});
   }, []);
 
+  // Clear localStorage and reset to use original JSON data
+  const clearLocalStorage = useCallback(() => {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      setReadingStatusData({});
+      console.log('LocalStorage cleared, using original JSON data');
+    } catch (error) {
+      console.warn('Failed to clear localStorage:', error);
+    }
+  }, []);
+
   return {
     booksWithStatus: getBooksWithStatus(),
     updateBookStatus,
+    updateBookProgress,
     resetStatuses,
+    clearLocalStorage,
     isLoading,
   };
 };

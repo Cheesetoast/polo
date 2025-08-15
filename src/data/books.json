@@ -1,0 +1,1562 @@
+[
+  {
+    "title": "1984",
+    "author": "George Orwell",
+    "description": {
+      "description": "A dystopian social science fiction novel and cautionary tale about totalitarianism, surveillance, and the manipulation of truth."
+    },
+    "isbn": "978-0451524935",
+    "image": null,
+    "rating": 5,
+    "genre": "Philosophy",
+    "progress": 2,
+    "dateStarted": "2023-05-19",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "description": {
+      "description": "A story of the fabulously wealthy Jay Gatsby and his love for the beautiful Daisy Buchanan, exploring themes of decadence, idealism, and the American Dream."
+    },
+    "isbn": "978-0743273565",
+    "image": null,
+    "rating": 5,
+    "genre": "Adventure",
+    "progress": 0,
+    "dateStarted": "2023-12-25",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "description": {
+      "description": "A powerful story of racial injustice and the loss of innocence in the American South, told through the eyes of young Scout Finch."
+    },
+    "isbn": "978-0446310789",
+    "image": null,
+    "rating": 4,
+    "genre": "Fiction",
+    "progress": 0,
+    "dateStarted": "2023-01-02",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "description": {
+      "description": "A classic romance novel about the relationship between Elizabeth Bennet and Mr. Darcy, exploring themes of marriage, class, and personal growth."
+    },
+    "isbn": "978-0141439518",
+    "image": null,
+    "rating": 3,
+    "genre": "Mystery",
+    "progress": 0,
+    "dateStarted": "2023-02-16",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "The Catcher in the Rye",
+    "author": "J.D. Salinger",
+    "description": {
+      "description": "A coming-of-age story following Holden Caulfield's journey through New York City, exploring themes of alienation, loss of innocence, and the phoniness of the adult world."
+    },
+    "isbn": "978-0316769488",
+    "image": null,
+    "rating": 5,
+    "genre": "Science Fiction",
+    "progress": 0,
+    "dateStarted": "2023-03-15",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "Lord of the Flies",
+    "author": "William Golding",
+    "description": {
+      "description": "A novel about a group of British boys stranded on an uninhabited island who descend into savagery, exploring the dark side of human nature."
+    },
+    "isbn": "978-0399501487",
+    "image": null,
+    "rating": 2,
+    "genre": "Non-Fiction",
+    "progress": 0,
+    "dateStarted": "2023-06-26",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Animal Farm",
+    "author": "George Orwell",
+    "description": {
+      "description": "An allegorical novella about a group of farm animals who rebel against their human farmer, only to see their revolution corrupted by power."
+    },
+    "isbn": "978-0451526342",
+    "image": null,
+    "rating": 5,
+    "genre": "Drama",
+    "progress": 0,
+    "dateStarted": "2023-07-25",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "description": {
+      "description": "A fantasy novel about Bilbo Baggins, a hobbit who embarks on a quest with thirteen dwarves to reclaim their homeland from a dragon."
+    },
+    "isbn": "978-0547928247",
+    "image": null,
+    "rating": 4,
+    "genre": "Adventure",
+    "progress": 0,
+    "dateStarted": "2023-07-25",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "The Lord of the Rings",
+    "author": "J.R.R. Tolkien",
+    "description": {
+      "description": "An epic high-fantasy novel about the quest to destroy a powerful ring and save Middle-earth from the Dark Lord Sauron."
+    },
+    "isbn": "978-0547928210",
+    "image": null,
+    "rating": 3,
+    "genre": "Mystery",
+    "progress": 0,
+    "dateStarted": "2023-01-06",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Brave New World",
+    "author": "Aldous Huxley",
+    "description": {
+      "description": "A dystopian novel set in a futuristic World State where people are genetically bred and pharmaceutically anesthetized to maintain social stability."
+    },
+    "isbn": "978-0060850524",
+    "image": null,
+    "rating": 3,
+    "genre": "Thriller",
+    "progress": 0,
+    "dateStarted": "2023-02-11",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Fahrenheit 451",
+    "author": "Ray Bradbury",
+    "description": {
+      "description": "A dystopian novel about a future society where books are outlawed and 'firemen' burn any that are found, exploring themes of censorship and knowledge."
+    },
+    "isbn": "978-1451673319",
+    "image": null,
+    "rating": 1,
+    "genre": "Thriller",
+    "progress": 0,
+    "dateStarted": "2023-01-26",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "description": {
+      "description": "A novel about a young Andalusian shepherd who dreams of finding a worldly treasure and embarks on a journey to discover his personal legend."
+    },
+    "isbn": "978-0062315007",
+    "image": null,
+    "rating": 1,
+    "genre": "Biography",
+    "progress": 0,
+    "dateStarted": "2023-07-16",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The Little Prince",
+    "author": "Antoine de Saint-Exupéry",
+    "description": {
+      "description": "A poetic tale about a young prince who visits various planets in space, exploring themes of love, loss, and the meaning of life."
+    },
+    "isbn": "978-0156013987",
+    "image": null,
+    "rating": 1,
+    "genre": "Self-Help",
+    "progress": 0,
+    "dateStarted": "2023-07-23",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "The Kite Runner",
+    "author": "Khaled Hosseini",
+    "description": {
+      "description": "A powerful story of friendship, betrayal, and redemption set against the backdrop of Afghanistan's tumultuous history."
+    },
+    "isbn": "978-1594631931",
+    "image": null,
+    "rating": 3,
+    "genre": "Romance",
+    "progress": 0,
+    "dateStarted": "2023-04-27",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "The Book Thief",
+    "author": "Markus Zusak",
+    "description": {
+      "description": "A novel set in Nazi Germany, narrated by Death, about a young girl who steals books and shares them with neighbors during bombing raids."
+    },
+    "isbn": "978-0375842207",
+    "image": null,
+    "rating": 1,
+    "genre": "Fiction",
+    "progress": 0,
+    "dateStarted": "2023-09-30",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "The Hunger Games",
+    "author": "Suzanne Collins",
+    "description": {
+      "description": "A dystopian novel about a young woman who volunteers to take her sister's place in a televised battle to the death between teenagers."
+    },
+    "isbn": "978-0439023481",
+    "image": null,
+    "rating": 5,
+    "genre": "Fantasy",
+    "progress": 0,
+    "dateStarted": "2023-11-22",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The Fault in Our Stars",
+    "author": "John Green",
+    "description": {
+      "description": "A young adult novel about two teenagers who meet at a cancer support group and fall in love, exploring themes of life, death, and love."
+    },
+    "isbn": "978-0142424179",
+    "image": null,
+    "rating": 3,
+    "genre": "Self-Help",
+    "progress": 0,
+    "dateStarted": "2023-06-11",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Gone Girl",
+    "author": "Gillian Flynn",
+    "description": {
+      "description": "A psychological thriller about a woman who disappears on her fifth wedding anniversary, and the investigation that follows."
+    },
+    "isbn": "978-0307588364",
+    "image": null,
+    "rating": 3,
+    "genre": "Romance",
+    "progress": 0,
+    "dateStarted": "2023-08-30",
+    "dateFinished": "2023-09-09",
+    "type": "audio"
+  },
+  {
+    "title": "The Girl on the Train",
+    "author": "Paula Hawkins",
+    "description": {
+      "description": "A psychological thriller about a woman who becomes entangled in a missing person investigation after witnessing something from her daily train commute."
+    },
+    "isbn": "978-1594634024",
+    "image": null,
+    "rating": 3,
+    "genre": "History",
+    "progress": 0,
+    "dateStarted": "2023-10-05",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Big Little Lies",
+    "author": "Liane Moriarty",
+    "description": {
+      "description": "A novel about three women whose seemingly perfect lives unravel to the point of murder, exploring themes of friendship, marriage, and motherhood."
+    },
+    "isbn": "978-0399158665",
+    "image": null,
+    "rating": 2,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": "2023-09-30",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The Silent Patient",
+    "author": "Alex Michaelides",
+    "description": {
+      "description": "A psychological thriller about a woman who shoots her husband and then never speaks again, and the criminal psychotherapist who tries to unravel her motive."
+    },
+    "isbn": "978-1250301697",
+    "image": null,
+    "rating": 5,
+    "genre": "Mystery",
+    "progress": 0,
+    "dateStarted": "2023-04-09",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Educated",
+    "author": "Tara Westover",
+    "description": {
+      "description": "A memoir about a woman who leaves her survivalist family and goes on to earn a PhD from Cambridge University."
+    },
+    "isbn": "978-0399590504",
+    "image": null,
+    "rating": 5,
+    "genre": "Self-Help",
+    "progress": 0,
+    "dateStarted": "2023-05-18",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Becoming",
+    "author": "Michelle Obama",
+    "description": {
+      "description": "A memoir by the former First Lady of the United States, sharing her journey from the South Side of Chicago to the White House."
+    },
+    "isbn": "978-1524763138",
+    "image": null,
+    "rating": 4,
+    "genre": "Mystery",
+    "progress": 0,
+    "dateStarted": "2023-02-23",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "Sapiens",
+    "author": "Yuval Noah Harari",
+    "description": {
+      "description": "A groundbreaking narrative of humanity's creation and evolution that explores the ways in which biology and history have defined us."
+    },
+    "isbn": "978-0062316097",
+    "image": null,
+    "rating": 5,
+    "genre": "Biography",
+    "progress": 0,
+    "dateStarted": "2023-06-21",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "description": {
+      "description": "A guide to breaking bad habits and building good ones, based on proven scientific research about how habits work."
+    },
+    "isbn": "978-0735211292",
+    "image": null,
+    "rating": 1,
+    "genre": "Non-Fiction",
+    "progress": 0,
+    "dateStarted": "2023-05-14",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "The Power of Habit",
+    "author": "Charles Duhigg",
+    "description": {
+      "description": "An examination of how habits work and how they can be changed, drawing on scientific research and real-life examples."
+    },
+    "isbn": "978-0812981605",
+    "image": null,
+    "rating": 5,
+    "genre": "Drama",
+    "progress": 0,
+    "dateStarted": "2023-05-08",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "Thinking, Fast and Slow",
+    "author": "Daniel Kahneman",
+    "description": {
+      "description": "A comprehensive overview of the two systems that drive the way we think: the fast, intuitive, and emotional system and the slower, more deliberative, and logical system."
+    },
+    "isbn": "978-0374533557",
+    "image": null,
+    "rating": 2,
+    "genre": "Non-Fiction",
+    "progress": 0,
+    "dateStarted": "2023-06-17",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Outliers",
+    "author": "Malcolm Gladwell",
+    "description": {
+      "description": "An examination of the factors that contribute to high levels of success, challenging the notion that success is solely based on individual merit."
+    },
+    "isbn": "978-0316017923",
+    "image": null,
+    "rating": 3,
+    "genre": "Adventure",
+    "progress": 0,
+    "dateStarted": "2023-05-16",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Blink",
+    "author": "Malcolm Gladwell",
+    "description": {
+      "description": "A book about how we think without thinking, about choices that seem to be made in an instant and why they're often better than carefully considered decisions."
+    },
+    "isbn": "978-0316010665",
+    "image": null,
+    "rating": 5,
+    "genre": "Psychology",
+    "progress": 0,
+    "dateStarted": "2023-01-02",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The Tipping Point",
+    "author": "Malcolm Gladwell",
+    "description": {
+      "description": "An examination of how little changes can make a big difference, exploring the moment of critical mass, the threshold, the boiling point."
+    },
+    "isbn": "978-0316346627",
+    "image": null,
+    "rating": 3,
+    "genre": "Romance",
+    "progress": 0,
+    "dateStarted": "2023-09-23",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Freakonomics",
+    "author": "Steven D. Levitt & Stephen J. Dubner",
+    "description": {
+      "description": "A book that applies economic theory to diverse subjects not ordinarily covered by traditional economists, revealing the hidden side of everything."
+    },
+    "isbn": "978-0060731335",
+    "image": null,
+    "rating": 2,
+    "genre": "Romance",
+    "progress": 0,
+    "dateStarted": "2023-07-04",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Predictably Irrational",
+    "author": "Dan Ariely",
+    "description": {
+      "description": "An examination of the hidden forces that shape our decisions, revealing why we make the choices we do and how we can make better ones."
+    },
+    "isbn": "978-0061353246",
+    "image": null,
+    "rating": 2,
+    "genre": "Science Fiction",
+    "progress": 0,
+    "dateStarted": "2023-09-12",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Nudge",
+    "author": "Richard H. Thaler & Cass R. Sunstein",
+    "description": {
+      "description": "A book about how small changes in the way choices are presented can have a big impact on the decisions people make."
+    },
+    "isbn": "978-0143115267",
+    "image": null,
+    "rating": 4,
+    "genre": "Romance",
+    "progress": 0,
+    "dateStarted": "2023-01-07",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "The Art of War",
+    "author": "Sun Tzu",
+    "description": {
+      "description": "An ancient Chinese text on military strategy and tactics, whose principles have been applied to business, politics, and other competitive endeavors."
+    },
+    "isbn": "978-0140439199",
+    "image": null,
+    "rating": 5,
+    "genre": "Adventure",
+    "progress": 0,
+    "dateStarted": "2023-09-12",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "The Prince",
+    "author": "Niccolò Machiavelli",
+    "description": {
+      "description": "A political treatise that offers advice to rulers on how to gain and maintain power, often considered a manual for political manipulation."
+    },
+    "isbn": "978-0140449150",
+    "image": null,
+    "rating": 5,
+    "genre": "Classic Literature",
+    "progress": 0,
+    "dateStarted": "2023-05-10",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Meditations",
+    "author": "Marcus Aurelius",
+    "description": {
+      "description": "A series of personal writings by the Roman Emperor, offering insights into Stoic philosophy and practical wisdom for daily life."
+    },
+    "isbn": "978-0812968255",
+    "image": null,
+    "rating": 5,
+    "genre": "Fantasy",
+    "progress": 0,
+    "dateStarted": "2023-02-25",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "The Republic",
+    "author": "Plato",
+    "description": {
+      "description": "A philosophical dialogue about the nature of justice and the ideal society, exploring themes of education, justice, and the philosopher-king."
+    },
+    "isbn": "978-0872201361",
+    "image": null,
+    "rating": 2,
+    "genre": "History",
+    "progress": 0,
+    "dateStarted": "2023-09-27",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "The Nicomachean Ethics",
+    "author": "Aristotle",
+    "description": {
+      "description": "A philosophical work that explores the nature of happiness and virtue, arguing that the highest good is eudaimonia, or human flourishing."
+    },
+    "isbn": "978-0872204645",
+    "image": null,
+    "rating": 3,
+    "genre": "Philosophy",
+    "progress": 0,
+    "dateStarted": "2023-09-07",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "Confessions",
+    "author": "Saint Augustine",
+    "description": {
+      "description": "An autobiographical work that recounts the author's sinful youth and his conversion to Christianity, exploring themes of sin, grace, and redemption."
+    },
+    "isbn": "978-0192817793",
+    "image": null,
+    "rating": 3,
+    "genre": "Psychology",
+    "progress": 0,
+    "dateStarted": "2023-04-10",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The Divine Comedy",
+    "author": "Dante Alighieri",
+    "description": {
+      "description": "An epic poem that describes the author's journey through Hell, Purgatory, and Paradise, exploring themes of sin, redemption, and divine justice."
+    },
+    "isbn": "978-0142437223",
+    "image": null,
+    "rating": 1,
+    "genre": "Science Fiction",
+    "progress": 0,
+    "dateStarted": "2023-07-13",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Don Quixote",
+    "author": "Miguel de Cervantes",
+    "description": {
+      "description": "A novel about a man who reads so many chivalric romances that he loses his sanity and decides to become a knight-errant."
+    },
+    "isbn": "978-0060934347",
+    "image": null,
+    "rating": 1,
+    "genre": "Drama",
+    "progress": 0,
+    "dateStarted": "2023-07-01",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "Hamlet",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A tragedy about the Prince of Denmark who seeks revenge against his uncle for murdering his father and marrying his mother."
+    },
+    "isbn": "978-0743477109",
+    "image": null,
+    "rating": 1,
+    "genre": "Drama",
+    "progress": 0,
+    "dateStarted": "2023-06-20",
+    "dateFinished": "2023-07-14",
+    "type": "paper"
+  },
+  {
+    "title": "Macbeth",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A tragedy about a Scottish general who receives a prophecy that he will become King of Scotland and commits regicide to fulfill it."
+    },
+    "isbn": "978-0743477109",
+    "image": null,
+    "rating": 2,
+    "genre": "Comedy",
+    "progress": 0,
+    "dateStarted": "2023-01-08",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Romeo and Juliet",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A tragedy about two young lovers whose deaths ultimately unite their feuding families, exploring themes of love, fate, and family conflict."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 2,
+    "genre": "Mystery",
+    "progress": 0,
+    "dateStarted": "2023-03-10",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "A Midsummer Night's Dream",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about the events surrounding the marriage of Theseus and Hippolyta, including the adventures of four young Athenian lovers and a group of amateur actors."
+    },
+    "isbn": "978-0743477543",
+    "image": null,
+    "rating": 4,
+    "genre": "Non-Fiction",
+    "progress": 0,
+    "dateStarted": "2023-12-08",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The Tempest",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A play about a sorcerer who uses his magic to restore his daughter to power and deal with his enemies, exploring themes of power, betrayal, and forgiveness."
+    },
+    "isbn": "978-0743482776",
+    "image": null,
+    "rating": 4,
+    "genre": "Non-Fiction",
+    "progress": 0,
+    "dateStarted": "2023-09-19",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "King Lear",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A tragedy about an aging king who divides his kingdom among his three daughters, leading to tragic consequences and exploring themes of power, loyalty, and madness."
+    },
+    "isbn": "978-0743482769",
+    "image": null,
+    "rating": 4,
+    "genre": "Fantasy",
+    "progress": 0,
+    "dateStarted": "2023-11-16",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Othello",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A tragedy about a Moorish general who is manipulated by his ensign into believing his wife is unfaithful, exploring themes of jealousy, race, and manipulation."
+    },
+    "isbn": "978-0743477550",
+    "image": null,
+    "rating": 1,
+    "genre": "Drama",
+    "progress": 0,
+    "dateStarted": "2023-01-09",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "The Merchant of Venice",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about a merchant who borrows money from a Jewish moneylender, exploring themes of justice, mercy, and prejudice."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 5,
+    "genre": "Classic Literature",
+    "progress": 0,
+    "dateStarted": "2023-03-05",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Much Ado About Nothing",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about two pairs of lovers, exploring themes of love, deception, and the battle of the sexes."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 4,
+    "genre": "Psychology",
+    "progress": 0,
+    "dateStarted": "2023-01-24",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "Twelfth Night",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about twins separated in a shipwreck and the romantic complications that ensue, exploring themes of love, identity, and gender."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 4,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": "2023-01-31",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "As You Like It",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A pastoral comedy about love, exile, and reconciliation, set in the Forest of Arden."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 5,
+    "genre": "Adventure",
+    "progress": 0,
+    "dateStarted": "2023-06-22",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "The Taming of the Shrew",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about the courtship of Petruchio and Katherina, exploring themes of marriage, gender roles, and power dynamics."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 3,
+    "genre": "Fantasy",
+    "progress": 0,
+    "dateStarted": "2023-02-10",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "The Comedy of Errors",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about two sets of identical twins separated at birth, leading to a series of mistaken identities and comic situations."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 1,
+    "genre": "Comedy",
+    "progress": 0,
+    "dateStarted": "2023-12-06",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "The Two Gentlemen of Verona",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about two friends who fall in love with the same woman, exploring themes of friendship, love, and loyalty."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 3,
+    "genre": "Comedy",
+    "progress": 0,
+    "dateStarted": "2023-03-15",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Love's Labour's Lost",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about a king and three lords who swear to avoid women for three years, only to fall in love with a princess and her ladies."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 1,
+    "genre": "History",
+    "progress": 0,
+    "dateStarted": "2023-04-16",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "All's Well That Ends Well",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about a young woman who cures a king and wins the hand of a count, exploring themes of love, class, and gender."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 2,
+    "genre": "Science Fiction",
+    "progress": 0,
+    "dateStarted": "2023-05-19",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "Measure for Measure",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about a duke who leaves his deputy in charge and disguises himself to observe the deputy's strict enforcement of morality laws."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 4,
+    "genre": "Mystery",
+    "progress": 0,
+    "dateStarted": "2023-08-17",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The Winter's Tale",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A romance about a king who becomes jealous of his wife and abandons their daughter, leading to a series of events that eventually bring about reconciliation."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 2,
+    "genre": "Non-Fiction",
+    "progress": 0,
+    "dateStarted": "2023-12-07",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Cymbeline",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A romance about a king who banishes his daughter's husband and the various adventures and misunderstandings that follow."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 3,
+    "genre": "History",
+    "progress": 0,
+    "dateStarted": "2023-06-06",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Pericles, Prince of Tyre",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A romance about a prince who flees his homeland and experiences various adventures, including shipwrecks and family separation."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 2,
+    "genre": "Classic Literature",
+    "progress": 0,
+    "dateStarted": "2023-09-15",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The Two Noble Kinsmen",
+    "author": "William Shakespeare & John Fletcher",
+    "description": {
+      "description": "A tragicomedy about two friends who fall in love with the same woman, leading to a duel and tragic consequences."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 2,
+    "genre": "History",
+    "progress": 0,
+    "dateStarted": "2023-11-02",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Henry V",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A history play about King Henry V's military campaign in France, culminating in the Battle of Agincourt."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 2,
+    "genre": "Psychology",
+    "progress": 0,
+    "dateStarted": "2023-08-15",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Richard III",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A history play about the rise and fall of Richard III, exploring themes of power, ambition, and the consequences of evil."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 2,
+    "genre": "Mystery",
+    "progress": 0,
+    "dateStarted": "2023-09-06",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Henry IV, Part 1",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A history play about King Henry IV's struggle to maintain his throne and his son Prince Hal's journey from irresponsible youth to responsible leader."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 3,
+    "genre": "Science Fiction",
+    "progress": 0,
+    "dateStarted": "2023-11-04",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "Henry IV, Part 2",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A continuation of the story of King Henry IV and Prince Hal, exploring themes of power, responsibility, and the transition of leadership."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 3,
+    "genre": "Drama",
+    "progress": 0,
+    "dateStarted": "2023-04-09",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "Richard II",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A history play about the deposition of King Richard II by his cousin Henry Bolingbroke, exploring themes of kingship, power, and divine right."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 5,
+    "genre": "Classic Literature",
+    "progress": 0,
+    "dateStarted": "2023-05-15",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Henry VI, Part 1",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A history play about the early reign of King Henry VI and the beginning of the Wars of the Roses."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 4,
+    "genre": "Mystery",
+    "progress": 0,
+    "dateStarted": "2023-01-11",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "Henry VI, Part 2",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A continuation of the story of King Henry VI and the escalating conflict between the houses of Lancaster and York."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 2,
+    "genre": "Thriller",
+    "progress": 0,
+    "dateStarted": "2023-11-19",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Henry VI, Part 3",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "The final part of the Henry VI trilogy, depicting the climax of the Wars of the Roses and the rise of the Yorkist faction."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 5,
+    "genre": "Romance",
+    "progress": 0,
+    "dateStarted": "2023-01-11",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Edward III",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A history play about King Edward III's military campaigns in France and Scotland, exploring themes of kingship and military leadership."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 5,
+    "genre": "Adventure",
+    "progress": 0,
+    "dateStarted": "2023-11-16",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The Merry Wives of Windsor",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about Sir John Falstaff and his attempts to seduce two married women, who turn the tables on him."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 5,
+    "genre": "History",
+    "progress": 0,
+    "dateStarted": "2023-08-14",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "The Merry Wives of Windsor",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about Sir John Falstaff and his attempts to seduce two married women, who turn the tables on him."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 2,
+    "genre": "Fantasy",
+    "progress": 0,
+    "dateStarted": "2023-07-21",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Troilus and Cressida",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A tragicomedy set during the Trojan War, exploring themes of love, war, and the futility of conflict."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 3,
+    "genre": "History",
+    "progress": 0,
+    "dateStarted": "2023-12-02",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Coriolanus",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A tragedy about a Roman general who is banished from Rome and allies with his former enemies, exploring themes of pride, politics, and military leadership."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 5,
+    "genre": "Poetry",
+    "progress": 0,
+    "dateStarted": "2023-02-03",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Titus Andronicus",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A revenge tragedy about a Roman general who seeks vengeance for the crimes committed against his family, featuring extreme violence and bloodshed."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 5,
+    "genre": "Fantasy",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Timon of Athens",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A tragedy about a wealthy Athenian who gives away his fortune and is abandoned by his friends, leading to his misanthropy and eventual death."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 1,
+    "genre": "Poetry",
+    "progress": 0,
+    "dateStarted": "2023-03-25",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Julius Caesar",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A tragedy about the conspiracy to assassinate Julius Caesar and the consequences that follow, exploring themes of power, betrayal, and political ambition."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 2,
+    "genre": "Non-Fiction",
+    "progress": 0,
+    "dateStarted": "2023-03-16",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Antony and Cleopatra",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A tragedy about the love affair between Mark Antony and Cleopatra, and their eventual downfall, exploring themes of love, power, and political intrigue."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 5,
+    "genre": "Romance",
+    "progress": 0,
+    "dateStarted": "2023-01-20",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "The Life and Death of King John",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A history play about King John's struggle to maintain his throne against various challengers, exploring themes of kingship and political legitimacy."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 2,
+    "genre": "Poetry",
+    "progress": 0,
+    "dateStarted": "2023-11-13",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "The Famous History of the Life of King Henry VIII",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A history play about the reign of King Henry VIII, focusing on his marriages and the political and religious changes of his reign."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 2,
+    "genre": "Romance",
+    "progress": 0,
+    "dateStarted": "2023-01-30",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The Life of King Henry V",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A history play about King Henry V's military campaign in France, culminating in the Battle of Agincourt and his marriage to Catherine of Valois."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 2,
+    "genre": "Fantasy",
+    "progress": 0,
+    "dateStarted": "2023-09-20",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The First Part of King Henry IV",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A history play about King Henry IV's struggle to maintain his throne and his son Prince Hal's journey from irresponsible youth to responsible leader."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 4,
+    "genre": "Adventure",
+    "progress": 0,
+    "dateStarted": "2023-12-19",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "The Second Part of King Henry IV",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A continuation of the story of King Henry IV and Prince Hal, exploring themes of power, responsibility, and the transition of leadership."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 5,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": "2023-06-09",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "The Tragedy of King Richard the Second",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A history play about the deposition of King Richard II by his cousin Henry Bolingbroke, exploring themes of kingship, power, and divine right."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 5,
+    "genre": "Fiction",
+    "progress": 0,
+    "dateStarted": "2023-06-23",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The First Part of Henry the Sixth",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A history play about the early reign of King Henry VI and the beginning of the Wars of the Roses."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 1,
+    "genre": "Adventure",
+    "progress": 0,
+    "dateStarted": "2023-03-29",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "The Second Part of Henry the Sixth",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A continuation of the story of King Henry VI and the escalating conflict between the houses of Lancaster and York."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 5,
+    "genre": "Comedy",
+    "progress": 0,
+    "dateStarted": "2023-05-05",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The Third Part of Henry the Sixth",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "The final part of the Henry VI trilogy, depicting the climax of the Wars of the Roses and the rise of the Yorkist faction."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 1,
+    "genre": "Philosophy",
+    "progress": 0,
+    "dateStarted": "2023-01-09",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The Life and Death of King Richard the Third",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A history play about the rise and fall of Richard III, exploring themes of power, ambition, and the consequences of evil."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 3,
+    "genre": "Fantasy",
+    "progress": 0,
+    "dateStarted": "2023-03-15",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The Life of King Henry the Fifth",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A history play about King Henry V's military campaign in France, culminating in the Battle of Agincourt and his marriage to Catherine of Valois."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 3,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": "2023-04-16",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "The Merry Wives of Windsor",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about Sir John Falstaff and his attempts to seduce two married women, who turn the tables on him."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 2,
+    "genre": "Classic Literature",
+    "progress": 0,
+    "dateStarted": "2023-12-21",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Much Ado About Nothing",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about two pairs of lovers, exploring themes of love, deception, and the battle of the sexes."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 3,
+    "genre": "Tragedy",
+    "progress": 0,
+    "dateStarted": "2023-11-09",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "Love's Labour's Lost",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about a king and three lords who swear to avoid women for three years, only to fall in love with a princess and her ladies."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 2,
+    "genre": "Thriller",
+    "progress": 0,
+    "dateStarted": "2023-08-06",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "A Midsummer Night's Dream",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about the events surrounding the marriage of Theseus and Hippolyta, including the adventures of four young Athenian lovers and a group of amateur actors."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 4,
+    "genre": "Tragedy",
+    "progress": 0,
+    "dateStarted": "2023-04-15",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The Merchant of Venice",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about a merchant who borrows money from a Jewish moneylender, exploring themes of justice, mercy, and prejudice."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 1,
+    "genre": "Romance",
+    "progress": 0,
+    "dateStarted": "2023-01-17",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "As You Like It",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A pastoral comedy about love, exile, and reconciliation, set in the Forest of Arden."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 5,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": "2023-05-12",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "The Taming of the Shrew",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about the courtship of Petruchio and Katherina, exploring themes of marriage, gender roles, and power dynamics."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 3,
+    "genre": "Fiction",
+    "progress": 0,
+    "dateStarted": "2023-12-01",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "All's Well That Ends Well",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about a young woman who cures a king and wins the hand of a count, exploring themes of love, class, and gender."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 5,
+    "genre": "Thriller",
+    "progress": 0,
+    "dateStarted": "2023-09-09",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "Twelfth Night",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A comedy about twins separated in a shipwreck and the romantic complications that ensue, exploring themes of love, identity, and gender."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 1,
+    "genre": "Classic Literature",
+    "progress": 0,
+    "dateStarted": "2023-07-06",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The Winter's Tale",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A romance about a king who becomes jealous of his wife and abandons their daughter, leading to a series of events that eventually bring about reconciliation."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 3,
+    "genre": "Thriller",
+    "progress": 0,
+    "dateStarted": "2023-07-15",
+    "dateFinished": null,
+    "type": "digital"
+  },
+  {
+    "title": "The Tempest",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A play about a sorcerer who uses his magic to restore his daughter to power and deal with his enemies, exploring themes of power, betrayal, and forgiveness."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 2,
+    "genre": "Adventure",
+    "progress": 0,
+    "dateStarted": "2023-02-06",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Cymbeline",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A romance about a king who banishes his daughter's husband and the various adventures and misunderstandings that follow."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 3,
+    "genre": "Tragedy",
+    "progress": 0,
+    "dateStarted": "2023-11-03",
+    "dateFinished": null,
+    "type": "paper"
+  },
+  {
+    "title": "Pericles, Prince of Tyre",
+    "author": "William Shakespeare",
+    "description": {
+      "description": "A romance about a prince who flees his homeland and experiences various adventures, including shipwrecks and family separation."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 4,
+    "genre": "Comedy",
+    "progress": 0,
+    "dateStarted": "2023-05-04",
+    "dateFinished": null,
+    "type": "audio"
+  },
+  {
+    "title": "The Two Noble Kinsmen",
+    "author": "William Shakespeare & John Fletcher",
+    "description": {
+      "description": "A tragicomedy about two friends who fall in love with the same woman, leading to a duel and tragic consequences."
+    },
+    "isbn": "978-0743477567",
+    "image": null,
+    "rating": 3,
+    "genre": "Science Fiction",
+    "progress": 0,
+    "dateStarted": "2023-02-10",
+    "dateFinished": null,
+    "type": "paper"
+  }
+]

@@ -8,6 +8,7 @@ export type ReadingStatus = 'want-to-read' | 'currently-reading' | 'finished';
 
 export interface BookWithReadingStatus extends Book {
   status: ReadingStatus;
+  // Progress is inherited from Book interface (optional)
 }
 
 export interface BookBoardProps {

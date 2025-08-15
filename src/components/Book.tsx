@@ -18,6 +18,12 @@ export interface Book {
         title?: string;
     } | null;
     isbn: string;
+    rating?: number;
+    genre?: string;
+    progress?: number;
+    dateStarted?: string | null;
+    dateFinished?: string | null;
+    type?: string;
 }
 
 export interface BookProps {
@@ -64,6 +70,8 @@ const BookFooter = styled.div`
 `;
 
 export const Book: React.FC<BookProps> = ({ book, onClick, style, showStatus = false }) => {
+
+    
     return (
         <StyledBook onClick={onClick} style={style}>
             <BookHeader>
@@ -89,6 +97,59 @@ export const Book: React.FC<BookProps> = ({ book, onClick, style, showStatus = f
                     </Text>
                 )}
                 
+                {/* Book Metadata */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: theme.spacing.xs, marginTop: theme.spacing.xs }}>
+                    {book.genre && (
+                        <span style={{ 
+                            backgroundColor: theme.colors.primary, 
+                            color: 'white', 
+                            padding: '2px 8px', 
+                            borderRadius: theme.borderRadius.sm,
+                            fontSize: '12px'
+                        }}>
+                            {book.genre}
+                        </span>
+                    )}
+                    {book.type && (
+                        <span style={{ 
+                            backgroundColor: theme.colors.secondary, 
+                            color: 'white', 
+                            padding: '2px 8px', 
+                            borderRadius: theme.borderRadius.sm,
+                            fontSize: '12px'
+                        }}>
+                            {book.type}
+                        </span>
+                    )}
+                </div>
+
+                {/* Progress Bar */}
+                <div style={{ marginTop: theme.spacing.xs }}>
+                    <div style={{ 
+                        display: 'flex', 
+                        justifyContent: 'space-between', 
+                        alignItems: 'center',
+                        marginBottom: '4px'
+                    }}>
+                        <Text variant="caption">Progress</Text>
+                        <Text variant="caption">{book.progress !== undefined ? book.progress : 0}%</Text>
+                    </div>
+                    <div style={{
+                        width: '100%',
+                        height: '6px',
+                        backgroundColor: theme.colors.muted,
+                        borderRadius: theme.borderRadius.sm,
+                        overflow: 'hidden'
+                    }}>
+                        <div style={{
+                            width: `${book.progress !== undefined ? book.progress : 0}%`,
+                            height: '100%',
+                            backgroundColor: theme.colors.primary,
+                            transition: 'width 0.3s ease'
+                        }} />
+                    </div>
+                </div>
+                
                 {book.image?.gatsbyImageData && (
                     <ImageBlock
                         image={book.image.gatsbyImageData}
@@ -97,11 +158,42 @@ export const Book: React.FC<BookProps> = ({ book, onClick, style, showStatus = f
                 )}
             </BookContent>
 
-            {book.isbn && (
-                <BookFooter>
-                    <Text variant="caption">ISBN: {book.isbn}</Text>
-                </BookFooter>
-            )}
+            <BookFooter>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.xs }}>
+                    {book.isbn && (
+                        <Text variant="caption">ISBN: {book.isbn}</Text>
+                    )}
+                    
+                    {/* Rating */}
+                    {book.rating && (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                            <Text variant="caption">Rating:</Text>
+                            <div style={{ display: 'flex' }}>
+                                {[...Array(5)].map((_, i) => (
+                                    <span key={i} style={{ 
+                                        color: i < book.rating! ? '#FFD700' : theme.colors.muted,
+                                        fontSize: '14px'
+                                    }}>
+                                        ★
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                    
+                    {/* Dates */}
+                    {book.dateStarted && (
+                        <Text variant="caption">
+                            Started: {new Date(book.dateStarted).toLocaleDateString()}
+                        </Text>
+                    )}
+                    {book.dateFinished && (
+                        <Text variant="caption">
+                            Finished: {new Date(book.dateFinished).toLocaleDateString()}
+                        </Text>
+                    )}
+                </div>
+            </BookFooter>
         </StyledBook>
     );
 };
