@@ -10,20 +10,29 @@ const config: GatsbyConfig = {
   // If you use VSCode you can also use the GraphQL plugin
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
-  plugins: [{
-    resolve: 'gatsby-source-contentful',
-    options: {
-      "accessToken": process.env.CONTENTFUL_ACCESS_TOKEN,
-      "spaceId": process.env.CONTENTFUL_SPACE_ID,
+  plugins: [
+    // Only include Contentful plugin if environment variables are set
+    ...(process.env.CONTENTFUL_ACCESS_TOKEN && process.env.CONTENTFUL_SPACE_ID ? [{
+      resolve: 'gatsby-source-contentful',
+      options: {
+        "accessToken": process.env.CONTENTFUL_ACCESS_TOKEN,
+        "spaceId": process.env.CONTENTFUL_SPACE_ID,
+      }
+    }] : []),
+    "gatsby-plugin-image", 
+    "gatsby-plugin-sharp", 
+    "gatsby-transformer-sharp", 
+    "gatsby-plugin-styled-components", 
+    "gatsby-plugin-sitemap", 
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        "name": "images",
+        "path": "./src/images/"
+      },
+      __key: "images"
     }
-  }, "gatsby-plugin-image", "gatsby-plugin-sharp", "gatsby-transformer-sharp", "gatsby-plugin-styled-components", "gatsby-plugin-sitemap", {
-    resolve: 'gatsby-source-filesystem',
-    options: {
-      "name": "images",
-      "path": "./src/images/"
-    },
-    __key: "images"
-  }]
+  ]
 };
 
 export default config;
