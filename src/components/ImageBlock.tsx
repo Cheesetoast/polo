@@ -8,12 +8,12 @@ interface ImageBlockProps {
   style?: React.CSSProperties;
 }
 
-export const ImageBlock: React.FC<ImageBlockProps> = ({ 
+export const ImageBlock = ({ 
   image, 
   alt, 
   className,
   style 
-}) => {
+}: ImageBlockProps) => {
   const gatsbyImage = getImage(image);
   
   if (!gatsbyImage) {

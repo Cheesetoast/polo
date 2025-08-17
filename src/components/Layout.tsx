@@ -18,7 +18,7 @@ const MainContent = styled.main`
   }
 `;
 
-const Layout: React.FC<LayoutProps> = ({ children, transparentNavbar = false }) => (
+const Layout = ({ children, transparentNavbar = false }: LayoutProps) => (
   <>
     <GlobalStyle />
     <Navbar transparent={transparentNavbar} />

@@ -18,59 +18,6 @@ export interface BookBoardProps {
   style?: React.CSSProperties;
 }
 
-const BoardContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: ${theme.spacing.lg};
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: ${theme.spacing.md};
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: ${theme.spacing.md};
-  }
-`;
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${theme.spacing.md};
-  min-height: 400px;
-`;
-
-const ColumnHeader = styled.div`
-  background: ${theme.colors.primary};
-  color: white;
-  padding: ${theme.spacing.md};
-  border-radius: ${theme.borderRadius.md};
-  text-align: center;
-  font-weight: ${theme.fontWeights.semibold};
-  font-size: ${theme.fontSizes.lg};
-`;
-
-const ColumnContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${theme.spacing.md};
-  flex: 1;
-  padding: ${theme.spacing.sm};
-  background: ${theme.colors.muted}20;
-  border-radius: ${theme.borderRadius.md};
-  border: 2px dashed ${theme.colors.muted}40;
-`;
-
-const EmptyState = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 200px;
-  color: ${theme.colors.muted};
-  font-style: italic;
-  text-align: center;
-`;
-
 const defaultColumns = [
   {
     id: 'want-to-read',
@@ -89,7 +36,7 @@ const defaultColumns = [
   },
 ] as const;
 
-export const BookBoard: React.FC<BookBoardProps> = ({ books, onBookStatusChange, className, style }) => {
+export const BookBoard = ({ books, onBookStatusChange, className, style }: BookBoardProps) => {
   const getBooksByStatus = (status: ReadingStatus) => {
     return books.filter(book => book.status === status);
   };
@@ -142,3 +89,57 @@ export const BookBoard: React.FC<BookBoardProps> = ({ books, onBookStatusChange,
     </BoardContainer>
   );
 };
+
+// Styled Components
+const BoardContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: ${theme.spacing.lg};
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: ${theme.spacing.md};
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: ${theme.spacing.md};
+  }
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.md};
+  min-height: 400px;
+`;
+
+const ColumnHeader = styled.div`
+  background: ${theme.colors.primary};
+  color: white;
+  padding: ${theme.spacing.md};
+  border-radius: ${theme.borderRadius.md};
+  text-align: center;
+  font-weight: ${theme.fontWeights.semibold};
+  font-size: ${theme.fontSizes.lg};
+`;
+
+const ColumnContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.md};
+  flex: 1;
+  padding: ${theme.spacing.sm};
+  background: ${theme.colors.muted}20;
+  border-radius: ${theme.borderRadius.md};
+  border: 2px dashed ${theme.colors.muted}40;
+`;
+
+const EmptyState = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: ${theme.colors.muted};
+  font-style: italic;
+  text-align: center;
+`;

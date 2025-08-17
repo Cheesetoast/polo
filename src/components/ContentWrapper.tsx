@@ -21,11 +21,11 @@ const StyledContentWrapper = styled.div`
   }
 `;
 
-export const ContentWrapper: React.FC<ContentWrapperProps> = ({ 
+export const ContentWrapper = ({ 
   children, 
   className,
   as = 'div'
-}) => {
+}: ContentWrapperProps) => {
   return (
     <StyledContentWrapper as={as} className={className}>
       {children}

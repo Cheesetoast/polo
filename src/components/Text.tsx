@@ -116,7 +116,7 @@ const StyledText = styled.div<TextProps>`
   }}
 `;
 
-export const Text: React.FC<TextProps> = ({
+export const Text = ({
   children,
   variant = 'p',
   size,
@@ -128,7 +128,7 @@ export const Text: React.FC<TextProps> = ({
   as,
   style,
   ...props
-}) => {
+}: TextProps) => {
   // Determine the HTML element to render
   const getElement = () => {
     if (as) return as;

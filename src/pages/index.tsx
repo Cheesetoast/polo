@@ -8,7 +8,6 @@ import { ContentWrapper } from "../components/ContentWrapper"
 import { SITE_CONFIG } from "../constants"
 import { BookBoardContainer } from "../components/BookBoardContainer"
 import { ButtonContainer } from "../components/ButtonContainer"
-import { theme } from "../styles/theme"
 import booksData from "../data/books.json"
 
 interface Book {
@@ -32,8 +31,6 @@ interface Book {
 
 const IndexPage: React.FC<PageProps> = () => {
   const books: Book[] = booksData;
-  
-
 
   return (
     <Layout>
@@ -49,10 +46,7 @@ const IndexPage: React.FC<PageProps> = () => {
             <Button>Click me</Button>
           </ButtonContainer>
 
-          {/* Books Section */}
-          {books.length > 0 && (
-            <BookBoardContainer books={books} title="My Reading List" />
-          )}
+          <BookBoardContainer books={books} title="My Reading List" />
 
         </ContentWrapper>
 

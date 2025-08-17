@@ -53,11 +53,11 @@ const StatusContainer = styled.div`
   gap: ${theme.spacing.xs};
 `;
 
-export const StatusIndicator: React.FC<StatusIndicatorProps> = ({ 
+export const StatusIndicator = ({ 
   status, 
   size = 'medium', 
   showLabel = true 
-}) => {
+}: StatusIndicatorProps) => {
   const getStatusLabel = (status: ReadingStatus): string => {
     switch (status) {
       case 'want-to-read':

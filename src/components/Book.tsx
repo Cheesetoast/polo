@@ -33,45 +33,7 @@ export interface BookProps {
     showStatus?: boolean;
 }
 
-const StyledBook = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${theme.spacing.sm};
-  border: 1px solid ${theme.colors.muted};
-  border-radius: ${theme.borderRadius.md};
-  padding: ${theme.spacing.md};
-  width: 100%;
-  max-width: 300px;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-`;
-
-const BookHeader = styled.div`
-  margin-bottom: ${theme.spacing.sm};
-`;
-
-const BookContent = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: ${theme.spacing.xs};
-`;
-
-const BookFooter = styled.div`
-  margin-top: auto;
-  padding-top: ${theme.spacing.sm};
-  border-top: 1px solid ${theme.colors.muted};
-`;
-
-export const Book: React.FC<BookProps> = ({ book, onClick, style, showStatus = false }) => {
-
-    
+export const Book = ({ book, onClick, style, showStatus = false }: BookProps) => {
     return (
         <StyledBook onClick={onClick} style={style}>
             <BookHeader>
@@ -199,3 +161,40 @@ export const Book: React.FC<BookProps> = ({ book, onClick, style, showStatus = f
 };
 
 export default Book;
+
+// Styled Components
+const StyledBook = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.sm};
+  border: 1px solid ${theme.colors.muted};
+  border-radius: ${theme.borderRadius.md};
+  padding: ${theme.spacing.md};
+  width: 100%;
+  max-width: 300px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+`;
+
+const BookHeader = styled.div`
+  margin-bottom: ${theme.spacing.sm};
+`;
+
+const BookContent = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.xs};
+`;
+
+const BookFooter = styled.div`
+  margin-top: auto;
+  padding-top: ${theme.spacing.sm};
+  border-top: 1px solid ${theme.colors.muted};
+`;

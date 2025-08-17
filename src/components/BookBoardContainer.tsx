@@ -5,6 +5,7 @@ import { Book } from './Book';
 import { Button } from './Button';
 import { Text } from './Text';
 import { theme } from '../styles/theme';
+import { Dashboard } from './Dashboard';
 
 interface BookBoardContainerProps {
   books: Book[];
@@ -14,13 +15,13 @@ interface BookBoardContainerProps {
   style?: React.CSSProperties;
 }
 
-export const BookBoardContainer: React.FC<BookBoardContainerProps> = ({
+export const BookBoardContainer = ({
   books,
   title = 'My Reading List',
   showResetButton = true,
   className,
   style,
-}) => {
+}: BookBoardContainerProps) => {
   const { booksWithStatus, updateBookStatus, updateBookProgress, resetStatuses, clearLocalStorage, isLoading } = useBookStatus(books);
 
   // Calculate statistics
@@ -83,53 +84,7 @@ export const BookBoardContainer: React.FC<BookBoardContainerProps> = ({
         )}
       </div>
       
-      {/* Statistics Section */}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-        gap: theme.spacing.md, 
-        marginBottom: theme.spacing.lg,
-        padding: theme.spacing.md,
-        backgroundColor: theme.colors.muted + '20',
-        borderRadius: theme.borderRadius.md
-      }}>
-        <div style={{ textAlign: 'center' }}>
-          <Text variant="h3" style={{ color: theme.colors.primary, marginBottom: theme.spacing.xs }}>
-            {stats.totalBooks}
-          </Text>
-          <Text variant="caption">Total Books</Text>
-        </div>
-        <div style={{ textAlign: 'center' }}>
-          <Text variant="h3" style={{ color: theme.colors.success, marginBottom: theme.spacing.xs }}>
-            {stats.finishedBooks}
-          </Text>
-          <Text variant="caption">Finished</Text>
-        </div>
-        <div style={{ textAlign: 'center' }}>
-          <Text variant="h3" style={{ color: theme.colors.warning, marginBottom: theme.spacing.xs }}>
-            {stats.currentlyReading}
-          </Text>
-          <Text variant="caption">Currently Reading</Text>
-        </div>
-        <div style={{ textAlign: 'center' }}>
-          <Text variant="h3" style={{ color: theme.colors.blue?.[500] || '#3b82f6', marginBottom: theme.spacing.xs }}>
-            {stats.wantToRead}
-          </Text>
-          <Text variant="caption">Want to Read</Text>
-        </div>
-        <div style={{ textAlign: 'center' }}>
-          <Text variant="h3" style={{ color: theme.colors.secondary, marginBottom: theme.spacing.xs }}>
-            {stats.averageRating}
-          </Text>
-          <Text variant="caption">Avg Rating</Text>
-        </div>
-        <div style={{ textAlign: 'center' }}>
-          <Text variant="h3" style={{ color: theme.colors.primary, marginBottom: theme.spacing.xs }}>
-            {stats.topGenres[0]?.split(' (')[0] || 'N/A'}
-          </Text>
-          <Text variant="caption">Top Genre</Text>
-        </div>
-      </div>
+      <Dashboard stats={stats} />
       
       <BookBoard 
         books={booksWithStatus} 

@@ -59,14 +59,14 @@ const StyledButtonContainer = styled.div<Omit<ButtonContainerProps, 'children' |
   }
 `;
 
-export const ButtonContainer: React.FC<ButtonContainerProps> = ({
+export const ButtonContainer = ({
   children,
   direction = 'horizontal',
   spacing = 'md',
   alignment = 'center',
   className,
   style,
-}) => {
+}: ButtonContainerProps) => {
   return (
     <StyledButtonContainer
       direction={direction}

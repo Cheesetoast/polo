@@ -13,7 +13,7 @@ interface NavbarProps {
   transparent?: boolean;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ transparent = false }) => {
+const Navbar = ({ transparent = false }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
