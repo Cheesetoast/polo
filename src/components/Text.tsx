@@ -70,7 +70,9 @@ export const Text = ({
 export default Text;
 
 // Styled Components
-const StyledText = styled.div<TextProps>`
+const StyledText = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['variant', 'size', 'weight', 'color', 'align', 'truncate'].includes(prop),
+})<TextProps>`
   margin: 0;
   line-height: 1.5;
   

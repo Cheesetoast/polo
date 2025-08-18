@@ -35,7 +35,9 @@ export const StatusIndicator = ({
 };
 
 // Styled Components
-const StatusDot = styled.div<{ status: ReadingStatus; size: string }>`
+const StatusDot = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['status', 'size'].includes(prop),
+})<{ status: ReadingStatus; size: string }>`
   width: ${props => props.size === 'small' ? '8px' : props.size === 'large' ? '16px' : '12px'};
   height: ${props => props.size === 'small' ? '8px' : props.size === 'large' ? '16px' : '12px'};
   border-radius: 50%;
@@ -55,7 +57,9 @@ const StatusDot = styled.div<{ status: ReadingStatus; size: string }>`
   margin-right: ${props => props.size === 'small' ? '4px' : '8px'};
 `;
 
-const StatusLabel = styled.span<{ status: ReadingStatus }>`
+const StatusLabel = styled.span.withConfig({
+  shouldForwardProp: (prop) => prop !== 'status',
+})<{ status: ReadingStatus }>`
   font-size: ${theme.fontSizes.sm};
   font-weight: ${theme.fontWeights.medium};
   color: ${props => {

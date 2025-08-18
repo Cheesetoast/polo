@@ -48,9 +48,11 @@ const ProgressBarTrack = styled.div`
     overflow: hidden;
 `;
 
-const ProgressBarFill = styled.div<{ progress: number }>`
-    width: ${props => props.progress}%;
-    height: 100%;
-    background-color: ${theme.colors.primary};
-    transition: width 0.3s ease;
+const ProgressBarFill = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'progress',
+})<{ progress: number }>`
+  width: ${props => props.progress}%;
+  height: 100%;
+  background-color: ${theme.colors.primary};
+  transition: width 0.3s ease;
 `;

@@ -81,7 +81,9 @@ const Navbar = ({ transparent = false }: NavbarProps) => {
 };
 
 // Styled Components
-const NavContainer = styled.nav<{ transparent: boolean; scrolled: boolean }>`
+const NavContainer = styled.nav.withConfig({
+  shouldForwardProp: (prop) => !['transparent', 'scrolled'].includes(prop),
+})<{ transparent: boolean; scrolled: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -132,7 +134,9 @@ const LogoLink = styled(Link)`
   }
 `;
 
-const NavLinks = styled.ul<{ isOpen: boolean }>`
+const NavLinks = styled.ul.withConfig({
+  shouldForwardProp: (prop) => prop !== 'isOpen',
+})<{ isOpen: boolean }>`
   display: flex;
   list-style: none;
   margin: 0;
@@ -234,7 +238,9 @@ const NavLinkGatsby = styled(Link)`
   }
 `;
 
-const HamburgerButton = styled.button<{ isOpen: boolean }>`
+const HamburgerButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => prop !== 'isOpen',
+})<{ isOpen: boolean }>`
   display: none;
   flex-direction: column;
   justify-content: space-around;
@@ -255,7 +261,9 @@ const HamburgerButton = styled.button<{ isOpen: boolean }>`
   }
 `;
 
-const HamburgerLine = styled.span<{ isOpen?: boolean }>`
+const HamburgerLine = styled.span.withConfig({
+  shouldForwardProp: (prop) => prop !== 'isOpen',
+})<{ isOpen?: boolean }>`
   width: 2rem;
   height: 0.25rem;
   background: #333;

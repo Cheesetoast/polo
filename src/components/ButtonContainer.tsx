@@ -33,7 +33,9 @@ export const ButtonContainer = ({
 };
 
 // Styled Components
-const StyledButtonContainer = styled.div<Omit<ButtonContainerProps, 'children' | 'className' | 'style'>>`
+const StyledButtonContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['direction', 'spacing', 'alignment'].includes(prop),
+})<Omit<ButtonContainerProps, 'children' | 'className' | 'style'>>`
   display: flex;
   flex-direction: ${props => props.direction === 'vertical' ? 'column' : 'row'};
   gap: ${props => {
