@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
-import { ImageBlock } from './ImageBlock';
 import { Text } from './Text';
+import { ImageBlock } from './ImageBlock';
 import { StatusIndicator } from './StatusIndicator';
+import { BookProgressBar } from './BookProgressBar';
 import { ReadingStatus } from './BookBoard';
 import { DEFAULTS } from '../constants';
 
@@ -85,31 +86,9 @@ export const Book = ({ book, onClick, style, showStatus = false }: BookProps) =>
                 </div>
 
                 {/* Progress Bar */}
-                <div style={{ marginTop: theme.spacing.xs }}>
-                    <div style={{ 
-                        display: 'flex', 
-                        justifyContent: 'space-between', 
-                        alignItems: 'center',
-                        marginBottom: '4px'
-                    }}>
-                        <Text variant="caption">Progress</Text>
-                        <Text variant="caption">{book.progress !== undefined ? book.progress : 0}%</Text>
-                    </div>
-                    <div style={{
-                        width: '100%',
-                        height: '6px',
-                        backgroundColor: theme.colors.muted,
-                        borderRadius: theme.borderRadius.sm,
-                        overflow: 'hidden'
-                    }}>
-                        <div style={{
-                            width: `${book.progress !== undefined ? book.progress : 0}%`,
-                            height: '100%',
-                            backgroundColor: theme.colors.primary,
-                            transition: 'width 0.3s ease'
-                        }} />
-                    </div>
-                </div>
+                {book.progress !== undefined && (
+                    <BookProgressBar progress={book.progress} />
+                )}
                 
                 {book.image?.gatsbyImageData && (
                     <ImageBlock
