@@ -1,11 +1,10 @@
-import React from 'react';
 import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
 
 interface ImageBlockProps {
   image: IGatsbyImageData;
   alt: string;
   className?: string;
-  style?: React.CSSProperties;
+  style?: Record<string, any>; // Generic CSS properties
 }
 
 export const ImageBlock = ({ 

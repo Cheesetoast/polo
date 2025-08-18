@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { BookBoard } from './BookBoard';
 import { useBookStatus } from '../hooks/useBookStatus';
 import { Book } from './Book';
@@ -12,7 +12,7 @@ interface BookBoardContainerProps {
   title?: string;
   showResetButton?: boolean;
   className?: string;
-  style?: React.CSSProperties;
+  style?: Record<string, any>; // Generic CSS properties
 }
 
 export const BookBoardContainer = ({
@@ -25,7 +25,7 @@ export const BookBoardContainer = ({
   const { booksWithStatus, updateBookStatus, updateBookProgress, resetStatuses, clearLocalStorage, isLoading } = useBookStatus(books);
 
   // Calculate statistics
-  const stats = React.useMemo(() => {
+  const stats = useMemo(() => {
     const totalBooks = booksWithStatus.length;
     const finishedBooks = booksWithStatus.filter(book => book.status === 'finished').length;
     const currentlyReading = booksWithStatus.filter(book => book.status === 'currently-reading').length;

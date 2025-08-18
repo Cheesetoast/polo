@@ -1,14 +1,14 @@
-import React from 'react';
+import { type ReactNode } from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
 
 export interface ButtonContainerProps {
-  children: React.ReactNode;
+  children: ReactNode;
   direction?: 'horizontal' | 'vertical';
   spacing?: 'xs' | 'sm' | 'md' | 'lg';
   alignment?: 'start' | 'center' | 'end' | 'stretch';
   className?: string;
-  style?: React.CSSProperties;
+  style?: Record<string, any>; // Generic CSS properties
 }
 
 const StyledButtonContainer = styled.div<Omit<ButtonContainerProps, 'children' | 'className' | 'style'>>`

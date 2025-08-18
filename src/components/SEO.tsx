@@ -1,4 +1,3 @@
-import React from 'react';
 import type { HeadFC } from 'gatsby';
 
 interface SEOProps {
@@ -13,7 +12,7 @@ interface SEOProps {
   modifiedTime?: string;
 }
 
-const SEO: React.FC<SEOProps> = ({
+const SEO = ({
   title = 'Polo - Portfolio',
   description = 'Welcome to my portfolio showcasing my work and projects.',
   keywords = ['portfolio', 'web development', 'design'],
@@ -23,7 +22,7 @@ const SEO: React.FC<SEOProps> = ({
   author,
   publishedTime,
   modifiedTime,
-}) => {
+}: SEOProps) => {
   const siteTitle = 'Polo';
   const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
 

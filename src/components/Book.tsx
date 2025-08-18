@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import { ImageBlock } from './ImageBlock';
@@ -29,7 +28,7 @@ export interface Book {
 export interface BookProps {
     book: Book & { status?: ReadingStatus };
     onClick?: () => void;
-    style?: React.CSSProperties;
+    style?: Record<string, any>; // Generic CSS properties
     showStatus?: boolean;
 }
 

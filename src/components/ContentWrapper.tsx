@@ -1,10 +1,11 @@
-import React from 'react';
+import { type ReactNode } from 'react';
 import styled from 'styled-components';
+import { theme } from '../styles/theme';
 
-interface ContentWrapperProps {
-  children: React.ReactNode;
+export interface ContentWrapperProps {
+  children: ReactNode;
+  as?: 'div' | 'section' | 'article' | 'main';
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
 }
 
 const StyledContentWrapper = styled.div`

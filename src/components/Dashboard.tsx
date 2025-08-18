@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import { Text } from './Text';
@@ -16,7 +15,7 @@ interface DashboardStats {
 interface DashboardProps {
   stats: DashboardStats;
   className?: string;
-  style?: React.CSSProperties;
+  style?: Record<string, any>; // Generic CSS properties
 }
 
 export const Dashboard = ({ stats, className, style }: DashboardProps) => {

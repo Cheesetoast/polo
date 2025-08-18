@@ -1,9 +1,9 @@
-import React from 'react';
+import { type ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 import { theme } from '../styles/theme';
 
 export interface ButtonProps {
-  children: React.ReactNode;
+  children: ReactNode;
   variant?: 'primary' | 'secondary' | 'outline';
   size?: 'small' | 'medium' | 'large';
   disabled?: boolean;

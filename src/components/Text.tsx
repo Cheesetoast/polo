@@ -1,9 +1,9 @@
-import React from 'react';
+import { type ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 import { theme, type FontSize, type FontWeight, type Color } from '../styles/theme';
 
 export interface TextProps {
-  children: React.ReactNode;
+  children: ReactNode;
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'label' | 'caption';
   size?: FontSize;
   weight?: FontWeight;
@@ -12,7 +12,7 @@ export interface TextProps {
   truncate?: boolean;
   className?: string;
   as?: keyof JSX.IntrinsicElements;
-  style?: React.CSSProperties;
+  style?: Record<string, any>; // Generic CSS properties
 }
 
 const StyledText = styled.div<TextProps>`

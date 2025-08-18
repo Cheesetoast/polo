@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import { Book } from './Book';
@@ -15,7 +14,7 @@ export interface BookBoardProps {
   books: BookWithReadingStatus[];
   onBookStatusChange?: (isbn: string, status: ReadingStatus) => void;
   className?: string;
-  style?: React.CSSProperties;
+  style?: Record<string, any>; // Generic CSS properties
 }
 
 const defaultColumns = [

@@ -1,10 +1,10 @@
-import React from 'react';
+import { type ReactNode } from 'react';
 import styled from 'styled-components';
 import GlobalStyle from '../styles/globalStyles';
 import Navbar from './Navbar';
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
   transparentNavbar?: boolean;
 }
 

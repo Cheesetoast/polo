@@ -1,4 +1,3 @@
-import * as React from "react"
 import type { HeadFC, PageProps } from "gatsby"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
@@ -29,7 +28,7 @@ interface Book {
   type?: string;
 }
 
-const IndexPage: React.FC<PageProps> = () => {
+const IndexPage = () => {
   const books: Book[] = booksData;
 
   return (

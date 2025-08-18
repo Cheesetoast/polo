@@ -1,14 +1,20 @@
-import * as React from "react"
 import type { HeadFC, PageProps } from "gatsby"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
+import { Text } from "../components/Text"
+import { ContentWrapper } from "../components/ContentWrapper"
+import { SITE_CONFIG } from "../constants"
 
-const ProjectPage: React.FC<PageProps> = () => {
+const ProjectPage = () => {
   return (
     <Layout>
       <main>
-        <h1>Project Details</h1>
-        <p>This is an example project page showing how to use the SEO component.</p>
+        <ContentWrapper>
+          <Text variant="h1">Projects</Text>
+          <Text variant="p">
+            This is where I showcase my projects and work.
+          </Text>
+        </ContentWrapper>
       </main>
     </Layout>
   )
