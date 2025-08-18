@@ -8,16 +8,6 @@ interface LayoutProps {
   transparentNavbar?: boolean;
 }
 
-const MainContent = styled.main`
-  padding-top: 100px;
-  min-height: calc(100vh - 100px);
-  
-  @media (min-width: 768px) {
-    padding-top: 120px;
-    min-height: calc(100vh - 120px);
-  }
-`;
-
 const Layout = ({ children, transparentNavbar = false }: LayoutProps) => (
   <>
     <GlobalStyle />
@@ -29,3 +19,14 @@ const Layout = ({ children, transparentNavbar = false }: LayoutProps) => (
 );
 
 export default Layout;
+
+// Styled Components
+const MainContent = styled.main`
+  padding-top: 100px;
+  min-height: calc(100vh - 100px);
+  
+  @media (min-width: 768px) {
+    padding-top: 120px;
+    min-height: calc(100vh - 120px);
+  }
+`;

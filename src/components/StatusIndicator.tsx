@@ -8,6 +8,33 @@ interface StatusIndicatorProps {
   showLabel?: boolean;
 }
 
+export const StatusIndicator = ({ 
+  status, 
+  size = 'medium', 
+  showLabel = true 
+}: StatusIndicatorProps) => {
+  const getStatusLabel = (status: ReadingStatus): string => {
+    switch (status) {
+      case 'want-to-read':
+        return 'Want to Read';
+      case 'currently-reading':
+        return 'Currently Reading';
+      case 'finished':
+        return 'Finished';
+      default:
+        return status;
+    }
+  };
+
+  return (
+    <StatusContainer>
+      <StatusDot status={status} size={size} />
+      {showLabel && <StatusLabel status={status}>{getStatusLabel(status)}</StatusLabel>}
+    </StatusContainer>
+  );
+};
+
+// Styled Components
 const StatusDot = styled.div<{ status: ReadingStatus; size: string }>`
   width: ${props => props.size === 'small' ? '8px' : props.size === 'large' ? '16px' : '12px'};
   height: ${props => props.size === 'small' ? '8px' : props.size === 'large' ? '16px' : '12px'};
@@ -51,29 +78,3 @@ const StatusContainer = styled.div`
   align-items: center;
   gap: ${theme.spacing.xs};
 `;
-
-export const StatusIndicator = ({ 
-  status, 
-  size = 'medium', 
-  showLabel = true 
-}: StatusIndicatorProps) => {
-  const getStatusLabel = (status: ReadingStatus): string => {
-    switch (status) {
-      case 'want-to-read':
-        return 'Want to Read';
-      case 'currently-reading':
-        return 'Currently Reading';
-      case 'finished':
-        return 'Finished';
-      default:
-        return status;
-    }
-  };
-
-  return (
-    <StatusContainer>
-      <StatusDot status={status} size={size} />
-      {showLabel && <StatusLabel status={status}>{getStatusLabel(status)}</StatusLabel>}
-    </StatusContainer>
-  );
-};

@@ -13,6 +13,36 @@ export interface ButtonProps {
   className?: string;
 }
 
+export const Button = ({
+  children,
+  variant = 'primary',
+  size = 'medium',
+  disabled = false,
+  onClick,
+  type = 'button',
+  fullWidth = false,
+  className,
+  ...props
+}: ButtonProps) => {
+  return (
+    <StyledButton
+      variant={variant}
+      size={size}
+      disabled={disabled}
+      onClick={onClick}
+      type={type}
+      fullWidth={fullWidth}
+      className={className}
+      {...props}
+    >
+      {children}
+    </StyledButton>
+  );
+};
+
+export default Button;
+
+// Styled Components
 const StyledButton = styled.button<ButtonProps>`
   display: inline-flex;
   align-items: center;
@@ -101,32 +131,3 @@ const StyledButton = styled.button<ButtonProps>`
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
   }
 `;
-
-export const Button = ({
-  children,
-  variant = 'primary',
-  size = 'medium',
-  disabled = false,
-  onClick,
-  type = 'button',
-  fullWidth = false,
-  className,
-  ...props
-}: ButtonProps) => {
-  return (
-    <StyledButton
-      variant={variant}
-      size={size}
-      disabled={disabled}
-      onClick={onClick}
-      type={type}
-      fullWidth={fullWidth}
-      className={className}
-      {...props}
-    >
-      {children}
-    </StyledButton>
-  );
-};
-
-export default Button;

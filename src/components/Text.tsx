@@ -15,6 +15,61 @@ export interface TextProps {
   style?: Record<string, any>; // Generic CSS properties
 }
 
+export const Text = ({
+  children,
+  variant = 'p',
+  size,
+  weight,
+  color,
+  align,
+  truncate = false,
+  className,
+  as,
+  style,
+  ...props
+}: TextProps) => {
+  // Determine the HTML element to render
+  const getElement = () => {
+    if (as) return as;
+    
+    switch (variant) {
+      case 'h1':
+      case 'h2':
+      case 'h3':
+      case 'h4':
+      case 'h5':
+      case 'h6':
+      case 'p':
+      case 'label':
+        return variant;
+      case 'caption':
+        return 'span';
+      default:
+        return 'span';
+    }
+  };
+
+  return (
+    <StyledText
+      as={getElement()}
+      variant={variant}
+      size={size}
+      weight={weight}
+      color={color}
+      align={align}
+      truncate={truncate}
+      className={className}
+      style={style}
+      {...props}
+    >
+      {children}
+    </StyledText>
+  );
+};
+
+export default Text;
+
+// Styled Components
 const StyledText = styled.div<TextProps>`
   margin: 0;
   line-height: 1.5;
@@ -115,57 +170,3 @@ const StyledText = styled.div<TextProps>`
     }
   }}
 `;
-
-export const Text = ({
-  children,
-  variant = 'p',
-  size,
-  weight,
-  color,
-  align,
-  truncate = false,
-  className,
-  as,
-  style,
-  ...props
-}: TextProps) => {
-  // Determine the HTML element to render
-  const getElement = () => {
-    if (as) return as;
-    
-    switch (variant) {
-      case 'h1':
-      case 'h2':
-      case 'h3':
-      case 'h4':
-      case 'h5':
-      case 'h6':
-      case 'p':
-      case 'label':
-        return variant;
-      case 'caption':
-        return 'span';
-      default:
-        return 'span';
-    }
-  };
-
-  return (
-    <StyledText
-      as={getElement()}
-      variant={variant}
-      size={size}
-      weight={weight}
-      color={color}
-      align={align}
-      truncate={truncate}
-      className={className}
-      style={style}
-      {...props}
-    >
-      {children}
-    </StyledText>
-  );
-};
-
-export default Text;

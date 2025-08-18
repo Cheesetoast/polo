@@ -11,6 +11,28 @@ export interface ButtonContainerProps {
   style?: Record<string, any>; // Generic CSS properties
 }
 
+export const ButtonContainer = ({
+  children,
+  direction = 'horizontal',
+  spacing = 'md',
+  alignment = 'center',
+  className,
+  style,
+}: ButtonContainerProps) => {
+  return (
+    <StyledButtonContainer
+      direction={direction}
+      spacing={spacing}
+      alignment={alignment}
+      className={className}
+      style={style}
+    >
+      {children}
+    </StyledButtonContainer>
+  );
+};
+
+// Styled Components
 const StyledButtonContainer = styled.div<Omit<ButtonContainerProps, 'children' | 'className' | 'style'>>`
   display: flex;
   flex-direction: ${props => props.direction === 'vertical' ? 'column' : 'row'};
@@ -58,24 +80,3 @@ const StyledButtonContainer = styled.div<Omit<ButtonContainerProps, 'children' |
     gap: ${theme.spacing.sm};
   }
 `;
-
-export const ButtonContainer = ({
-  children,
-  direction = 'horizontal',
-  spacing = 'md',
-  alignment = 'center',
-  className,
-  style,
-}: ButtonContainerProps) => {
-  return (
-    <StyledButtonContainer
-      direction={direction}
-      spacing={spacing}
-      alignment={alignment}
-      className={className}
-      style={style}
-    >
-      {children}
-    </StyledButtonContainer>
-  );
-};

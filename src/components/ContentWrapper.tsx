@@ -8,6 +8,19 @@ export interface ContentWrapperProps {
   className?: string;
 }
 
+export const ContentWrapper = ({ 
+  children, 
+  className,
+  as = 'div'
+}: ContentWrapperProps) => {
+  return (
+    <StyledContentWrapper as={as} className={className}>
+      {children}
+    </StyledContentWrapper>
+  );
+};
+
+// Styled Components
 const StyledContentWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
@@ -21,15 +34,3 @@ const StyledContentWrapper = styled.div`
     padding: 0 64px;
   }
 `;
-
-export const ContentWrapper = ({ 
-  children, 
-  className,
-  as = 'div'
-}: ContentWrapperProps) => {
-  return (
-    <StyledContentWrapper as={as} className={className}>
-      {children}
-    </StyledContentWrapper>
-  );
-};
