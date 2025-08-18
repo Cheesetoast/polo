@@ -3,7 +3,7 @@ import { ImageBlock } from './ImageBlock';
 
 // Mock Gatsby image data for stories
 const mockGatsbyImageData = {
-  layout: 'constrained',
+  layout: 'constrained' as const,
   width: 400,
   height: 300,
   images: {

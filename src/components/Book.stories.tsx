@@ -62,6 +62,9 @@ const mockBookWithoutImage = {
 const mockBookWithoutDescription = {
   title: '1984',
   author: 'George Orwell',
+  description: {
+    description: 'A dystopian novel about totalitarian surveillance and control.',
+  },
   image: {
     gatsbyImageData: {
       images: {
@@ -72,7 +75,7 @@ const mockBookWithoutDescription = {
           sizes: '(max-width: 300px) 100vw, 300px',
         },
       },
-      layout: 'constrained',
+      layout: 'constrained' as const,
       width: 300,
       height: 400,
     },
@@ -97,12 +100,13 @@ const mockBookWithoutISBN = {
           sizes: '(max-width: 300px) 100vw, 300px',
         },
       },
-      layout: 'constrained',
+      layout: 'constrained' as const,
       width: 300,
       height: 400,
     },
     title: 'Pride and Prejudice Cover',
   },
+  isbn: '978-0141439518',
 };
 
 // Stories
@@ -159,6 +163,7 @@ export const MinimalData: Story = {
       description: {
         description: '',
       },
+      isbn: '978-0000000000',
     },
   },
   parameters: {
