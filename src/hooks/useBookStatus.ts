@@ -67,11 +67,23 @@ export const useBookStatus = (books: Book[]) => {
         finalProgress = storedData.progress; // Override only if stored progress exists
       }
       
-
+      // Determine initial status based on book data
+      const determineInitialStatus = (): ReadingStatus => {
+        // If book has a finish date, it should be marked as finished
+        if (book.dateFinished) {
+          return 'finished';
+        }
+        // If book has progress > 0, it should be marked as currently reading
+        if (book.progress && book.progress > 0) {
+          return 'currently-reading';
+        }
+        // Otherwise, default to want-to-read
+        return DEFAULT_STATUS;
+      };
       
       return {
         ...book,
-        status: storedData?.status || DEFAULT_STATUS,
+        status: storedData?.status || determineInitialStatus(),
         progress: finalProgress,
       };
     });

@@ -18,12 +18,14 @@ export interface Book {
         title?: string;
     } | null;
     isbn: string;
-    rating?: number;
+    communityRating?: number; // Average rating from the community
+    userRating?: number; // User's personal rating (only available after finishing)
     genre?: string;
     progress?: number;
     dateStarted?: string | null;
     dateFinished?: string | null;
     type?: string;
+    pages?: number;
 }
 
 export interface BookProps {
@@ -104,22 +106,48 @@ export const Book = ({ book, onClick, style, showStatus = false }: BookProps) =>
                         <Text variant="caption">ISBN: {book.isbn}</Text>
                     )}
                     
-                    {/* Rating */}
-                    {book.rating && (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                            <Text variant="caption">Rating:</Text>
-                            <div style={{ display: 'flex' }}>
-                                {[...Array(5)].map((_, i) => (
-                                    <span key={i} style={{ 
-                                        color: i < book.rating! ? '#FFD700' : theme.colors.muted,
-                                        fontSize: '14px'
-                                    }}>
-                                        ★
-                                    </span>
-                                ))}
+                    {/* Ratings */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                        {/* Community Rating */}
+                        {book.communityRating && (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                <Text variant="caption">Community:</Text>
+                                <div style={{ display: 'flex' }}>
+                                    {[...Array(5)].map((_, i) => (
+                                        <span key={i} style={{ 
+                                            color: i < book.communityRating! ? '#FFD700' : theme.colors.muted,
+                                            fontSize: '12px'
+                                        }}>
+                                            ★
+                                        </span>
+                                    ))}
+                                </div>
+                                <Text variant="caption" style={{ marginLeft: '4px' }}>
+                                    ({book.communityRating.toFixed(1)})
+                                </Text>
                             </div>
-                        </div>
-                    )}
+                        )}
+                        
+                        {/* User Rating - only show if book is finished */}
+                        {book.dateFinished && book.userRating && (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                <Text variant="caption">Your Rating:</Text>
+                                <div style={{ display: 'flex' }}>
+                                    {[...Array(5)].map((_, i) => (
+                                        <span key={i} style={{ 
+                                            color: i < book.userRating! ? '#FF6B6B' : theme.colors.muted,
+                                            fontSize: '12px'
+                                        }}>
+                                            ★
+                                        </span>
+                                    ))}
+                                </div>
+                                <Text variant="caption" style={{ marginLeft: '4px' }}>
+                                    ({book.userRating.toFixed(1)})
+                                </Text>
+                            </div>
+                        )}
+                    </div>
                     
                     {/* Dates */}
                     {book.dateStarted && (

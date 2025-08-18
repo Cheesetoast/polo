@@ -7,12 +7,14 @@
     },
     "isbn": "978-0451524935",
     "image": null,
-    "rating": 5,
+    "communityRating": 4.2,
+    "userRating": 5,
     "genre": "Philosophy",
     "progress": 2,
-    "dateStarted": "2023-05-19",
-    "dateFinished": null,
-    "type": "digital"
+    "dateStarted": "2025-05-19",
+    "dateFinished": "2025-05-29",
+    "type": "digital",
+    "pages": 328
   },
   {
     "title": "The Great Gatsby",
@@ -22,12 +24,13 @@
     },
     "isbn": "978-0743273565",
     "image": null,
-    "rating": 5,
+    "communityRating": 3.9,
     "genre": "Adventure",
     "progress": 0,
     "dateStarted": "2023-12-25",
     "dateFinished": null,
-    "type": "paper"
+    "type": "paper",
+    "pages": 180
   },
   {
     "title": "To Kill a Mockingbird",
@@ -37,12 +40,14 @@
     },
     "isbn": "978-0446310789",
     "image": null,
-    "rating": 4,
+    "communityRating": 4.3,
+    "userRating": 4,
     "genre": "Fiction",
     "progress": 0,
     "dateStarted": "2023-01-02",
     "dateFinished": null,
-    "type": "audio"
+    "type": "audio",
+    "pages": 281
   },
   {
     "title": "Pride and Prejudice",
@@ -262,12 +267,14 @@
     },
     "isbn": "978-0307588364",
     "image": null,
-    "rating": 3,
+    "communityRating": 3.8,
+    "userRating": 3,
     "genre": "Romance",
     "progress": 0,
     "dateStarted": "2023-08-30",
     "dateFinished": "2023-09-09",
-    "type": "audio"
+    "type": "audio",
+    "pages": 415
   },
   {
     "title": "The Girl on the Train",
@@ -622,12 +629,14 @@
     },
     "isbn": "978-0743477109",
     "image": null,
-    "rating": 1,
+    "communityRating": 4.0,
+    "userRating": 1,
     "genre": "Drama",
     "progress": 0,
     "dateStarted": "2023-06-20",
     "dateFinished": "2023-07-14",
-    "type": "paper"
+    "type": "paper",
+    "pages": 342
   },
   {
     "title": "Macbeth",

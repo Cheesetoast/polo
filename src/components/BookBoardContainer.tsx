@@ -5,7 +5,6 @@ import { Book } from './Book';
 import { Button } from './Button';
 import { Text } from './Text';
 import { theme } from '../styles/theme';
-import { Dashboard } from './Dashboard';
 
 interface BookBoardContainerProps {
   books: Book[];
@@ -44,10 +43,14 @@ export const BookBoardContainer = ({
       .slice(0, 3)
       .map(([genre, count]) => `${genre} (${count})`);
     
-    // Average rating
-    const ratedBooks = booksWithStatus.filter(book => book.rating);
+    // Average rating (use user rating if available, otherwise community rating)
+    const ratedBooks = booksWithStatus.filter(book => book.userRating !== undefined || book.communityRating !== undefined);
     const averageRating = ratedBooks.length > 0 
-      ? (ratedBooks.reduce((sum, book) => sum + (book.rating || 0), 0) / ratedBooks.length).toFixed(1)
+      ? (ratedBooks.reduce((sum, book) => {
+          // Prefer user rating if available, otherwise use community rating
+          const rating = book.userRating !== undefined ? book.userRating : (book.communityRating || 0);
+          return sum + rating;
+        }, 0) / ratedBooks.length).toFixed(1)
       : 'N/A';
     
     // Book type distribution
@@ -83,8 +86,6 @@ export const BookBoardContainer = ({
           </Button>
         )}
       </div>
-      
-      <Dashboard stats={stats} />
       
       <BookBoard 
         books={booksWithStatus} 
