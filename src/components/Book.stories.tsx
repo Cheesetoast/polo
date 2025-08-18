@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Book } from './Book';
 
@@ -62,6 +63,9 @@ const mockBookWithoutImage = {
 const mockBookWithoutDescription = {
   title: '1984',
   author: 'George Orwell',
+  description: {
+    description: 'A dystopian novel about totalitarian surveillance and control.',
+  },
   image: {
     gatsbyImageData: {
       images: {
@@ -103,6 +107,7 @@ const mockBookWithoutISBN = {
     },
     title: 'Pride and Prejudice Cover',
   },
+  isbn: '978-0141439518',
 };
 
 // Stories
@@ -159,6 +164,7 @@ export const MinimalData: Story = {
       description: {
         description: '',
       },
+      isbn: '978-0000000000',
     },
   },
   parameters: {

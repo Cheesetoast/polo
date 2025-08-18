@@ -1,20 +1,21 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ImageBlock } from './ImageBlock';
 
-// Mock Gatsby image data for stories
+// Mock Gatsby image data
 const mockGatsbyImageData = {
-  layout: 'constrained',
-  width: 400,
-  height: 300,
+  layout: 'constrained' as const,
+  width: 300,
+  height: 400,
   images: {
     fallback: {
-      src: 'https://via.placeholder.com/400x300/4A90E2/FFFFFF?text=Mock+Image',
-      srcSet: 'https://via.placeholder.com/400x300/4A90E2/FFFFFF?text=Mock+Image 400w',
-      sizes: '(min-width: 400px) 400px, 100vw',
+      src: 'https://via.placeholder.com/300x400/4A5568/FFFFFF?text=Image',
+      srcSet: 'https://via.placeholder.com/300x400/4A5568/FFFFFF?text=Image',
+      sizes: '(max-width: 300px) 100vw, 300px',
     },
     sources: [],
   },
-  backgroundColor: '#4A90E2',
+  backgroundColor: '#4A5568',
 };
 
 const meta: Meta<typeof ImageBlock> = {
