@@ -14,18 +14,20 @@ const config: GatsbyConfig = {
     FAST_DEV: true,
   },
   plugins: [
-    {
+    // Only include Contentful plugin if credentials are provided
+    ...(process.env.CONTENTFUL_SPACE_ID && process.env.CONTENTFUL_ACCESS_TOKEN && 
+        process.env.CONTENTFUL_SPACE_ID !== 'your_space_id_here' && 
+        process.env.CONTENTFUL_ACCESS_TOKEN !== 'your_access_token_here' ? [{
       resolve: 'gatsby-source-contentful',
       options: {
-        spaceId: process.env.CONTENTFUL_SPACE_ID || '',
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || '',
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
         environment: process.env.CONTENTFUL_ENVIRONMENT || 'master',
         downloadLocal: true,
-        forceFullSync: false,
         pageLimit: 1000,
         useNameForId: false,
       }
-    },
+    }] : []),
     "gatsby-plugin-image", 
     "gatsby-plugin-sharp", 
     "gatsby-transformer-sharp", 

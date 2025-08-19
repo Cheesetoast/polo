@@ -41,7 +41,7 @@ const IndexPage = () => {
     }
   `);
 
-  const homepageTitle = data.contentfulHomepage?.title;
+  const homepageTitle = data?.contentfulHomepage?.title;
   
   // Fallback to local data if Contentful is not available
   const books: Book[] = booksData;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'gatsby';
 import { theme } from '../styles/theme';
 import { Text } from './Text';
 import { StatusIndicator } from './StatusIndicator';
@@ -86,7 +87,9 @@ export const BookTable = ({ books, onBookClick, onAuthorClick, pageSize = 10 }: 
             >
               <BookCell>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <Text variant="p" weight="medium" style={{ wordBreak: 'break-word' }}>{book.title}</Text>
+                  <BookTitleLink to={`/book/${book.isbn.replace(/-/g, '')}`}>
+                    <Text variant="p" weight="medium" style={{ wordBreak: 'break-word' }}>{book.title}</Text>
+                  </BookTitleLink>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                     <Text variant="caption" color="secondary" style={{ wordBreak: 'break-word' }}>By</Text>
                     <AuthorLink
@@ -298,6 +301,16 @@ const PaginationNumber = styled.button.withConfig({
   &:hover:not([disabled]) {
     background-color: ${props => props.active ? theme.colors.primary : theme.colors.gray?.[50] || '#f9fafb'};
     border-color: ${props => props.active ? theme.colors.primary : theme.colors.gray?.[300] || '#d1d5db'};
+  }
+`;
+
+const BookTitleLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: ${theme.colors.primary};
   }
 `;
 

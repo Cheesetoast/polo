@@ -1,5 +1,6 @@
 import type { HeadFC, PageProps } from "gatsby"
 import { useLocation } from "@gatsbyjs/reach-router"
+import { navigate } from "gatsby"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import { Text } from "../components/Text"
@@ -123,8 +124,8 @@ const SearchResultsPage = () => {
   };
 
   const handleBookClick = (book: any) => {
-    // Navigate to book detail page or show modal
-    console.log("Book clicked:", book);
+    // Navigate to book detail page
+    navigate(`/book/${book.isbn.replace(/-/g, '')}`);
   };
 
   // Generate page title based on filters
