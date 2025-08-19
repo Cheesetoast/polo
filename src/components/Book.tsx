@@ -24,7 +24,7 @@ export interface Book {
     progress?: number;
     dateStarted?: string | null;
     dateFinished?: string | null;
-    type?: string;
+  
     pages?: number;
 }
 
@@ -74,17 +74,7 @@ export const Book = ({ book, onClick, style, showStatus = false }: BookProps) =>
                             {book.genre}
                         </span>
                     )}
-                    {book.type && (
-                        <span style={{ 
-                            backgroundColor: theme.colors.secondary, 
-                            color: 'white', 
-                            padding: '2px 8px', 
-                            borderRadius: theme.borderRadius.sm,
-                            fontSize: '12px'
-                        }}>
-                            {book.type}
-                        </span>
-                    )}
+
                 </div>
 
                 {/* Progress Bar */}

@@ -3,7 +3,7 @@ import { theme } from '../styles/theme';
 import { Book } from './Book';
 
 // Define the status type separately for reuse
-export type ReadingStatus = 'want-to-read' | 'currently-reading' | 'finished';
+export type ReadingStatus = 'want-to-read' | 'currently-reading' | 'finished' | null;
 
 export interface BookWithReadingStatus extends Book {
   status: ReadingStatus;
@@ -38,6 +38,10 @@ const defaultColumns = [
 export const BookBoard = ({ books, onBookStatusChange, className, style }: BookBoardProps) => {
   const getBooksByStatus = (status: ReadingStatus) => {
     return books.filter(book => book.status === status);
+  };
+
+  const getBooksWithStatus = () => {
+    return books.filter(book => book.status !== null);
   };
 
   const handleBookClick = (book: BookWithReadingStatus) => {

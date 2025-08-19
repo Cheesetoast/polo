@@ -12,7 +12,7 @@ const mockBooks: Book[] = [
     genre: 'Fiction',
     pages: 300,
     dateFinished: '2023-03-15',
-    type: 'paper'
+
   },
   {
     title: 'Book 2',
@@ -24,7 +24,7 @@ const mockBooks: Book[] = [
     genre: 'Non-Fiction',
     pages: 250,
     dateFinished: '2023-05-20',
-    type: 'digital'
+
   },
   {
     title: 'Book 3',
@@ -35,7 +35,7 @@ const mockBooks: Book[] = [
     genre: 'Fiction',
     pages: 400,
     dateFinished: '2022-12-31', // Different year
-    type: 'audio'
+
   },
   {
     title: 'Book 4',
@@ -46,7 +46,7 @@ const mockBooks: Book[] = [
     genre: 'Fiction',
     pages: 200,
     // No dateFinished - not finished
-    type: 'paper'
+
   }
 ];
 
@@ -99,7 +99,7 @@ describe('calculateYearInBooksStats', () => {
         genre: 'Fiction',
         pages: 300,
         dateFinished: '2023-06-15',
-        type: 'paper'
+    
       },
       {
         title: 'Book B',
@@ -110,7 +110,7 @@ describe('calculateYearInBooksStats', () => {
         genre: 'Non-Fiction',
         pages: 250,
         dateFinished: '2023-07-20',
-        type: 'digital'
+    
       }
     ];
     
@@ -130,7 +130,7 @@ describe('calculateYearInBooksStats', () => {
         genre: 'Fiction',
         pages: 300,
         dateFinished: '2023-06-15', // Use a date in the middle of the year
-        type: 'paper'
+    
       }
     ];
     

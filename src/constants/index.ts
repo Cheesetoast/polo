@@ -30,5 +30,5 @@ export const DEFAULTS = {
   FALLBACK_TITLE: SITE_CONFIG.SITE_NAME,
   FALLBACK_IMAGE_ALT: 'Image',
   FALLBACK_BOOK_COVER: 'Book cover',
-  DEFAULT_BOOK_STATUS: 'want-to-read' satisfies ReadingStatus,
+  DEFAULT_BOOK_STATUS: null as ReadingStatus | null,
 } as const;

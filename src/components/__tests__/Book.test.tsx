@@ -15,7 +15,7 @@ const mockBook = {
   progress: 75,
   dateStarted: '2023-01-01',
   dateFinished: '2023-01-15',
-  type: 'paper',
+  
   pages: 300
 };
 
@@ -56,7 +56,7 @@ describe('Book Component', () => {
     render(<Book book={mockBook} />);
     
     expect(screen.getByText('Fiction')).toBeInTheDocument();
-    expect(screen.getByText('paper')).toBeInTheDocument();
+
   });
 
   it('renders progress bar when progress is defined', () => {

@@ -25,13 +25,14 @@ export const BookBoardContainer = ({
 
   // Calculate statistics
   const stats = useMemo(() => {
-    const totalBooks = booksWithStatus.length;
-    const finishedBooks = booksWithStatus.filter(book => book.status === 'finished').length;
-    const currentlyReading = booksWithStatus.filter(book => book.status === 'currently-reading').length;
-    const wantToRead = booksWithStatus.filter(book => book.status === 'want-to-read').length;
+    const booksWithAssignedStatus = booksWithStatus.filter(book => book.status !== null);
+    const totalBooks = booksWithAssignedStatus.length;
+    const finishedBooks = booksWithAssignedStatus.filter(book => book.status === 'finished').length;
+    const currentlyReading = booksWithAssignedStatus.filter(book => book.status === 'currently-reading').length;
+    const wantToRead = booksWithAssignedStatus.filter(book => book.status === 'want-to-read').length;
     
     // Genre distribution
-    const genreCounts = booksWithStatus.reduce((acc, book) => {
+    const genreCounts = booksWithAssignedStatus.reduce((acc, book) => {
       if (book.genre) {
         acc[book.genre] = (acc[book.genre] || 0) + 1;
       }
@@ -44,7 +45,7 @@ export const BookBoardContainer = ({
       .map(([genre, count]) => `${genre} (${count})`);
     
     // Average rating (use user rating if available, otherwise community rating)
-    const ratedBooks = booksWithStatus.filter(book => book.userRating !== undefined || book.communityRating !== undefined);
+    const ratedBooks = booksWithAssignedStatus.filter(book => book.userRating !== undefined || book.communityRating !== undefined);
     const averageRating = ratedBooks.length > 0 
       ? (ratedBooks.reduce((sum, book) => {
           // Prefer user rating if available, otherwise use community rating
@@ -53,22 +54,13 @@ export const BookBoardContainer = ({
         }, 0) / ratedBooks.length).toFixed(1)
       : 'N/A';
     
-    // Book type distribution
-    const typeCounts = booksWithStatus.reduce((acc, book) => {
-      if (book.type) {
-        acc[book.type] = (acc[book.type] || 0) + 1;
-      }
-      return acc;
-    }, {} as Record<string, number>);
-    
     return {
       totalBooks,
       finishedBooks,
       currentlyReading,
       wantToRead,
       topGenres,
-      averageRating,
-      typeCounts
+      averageRating
     };
   }, [booksWithStatus]);
 
@@ -88,7 +80,7 @@ export const BookBoardContainer = ({
       </div>
       
       <BookBoard 
-        books={booksWithStatus} 
+        books={booksWithStatus.filter(book => book.status !== null)} 
         onBookStatusChange={updateBookStatus}
       />
     </div>

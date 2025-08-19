@@ -9,11 +9,6 @@ const mockStats = {
   wantToRead: 5,
   topGenres: ['Fiction', 'Non-Fiction', 'Science Fiction'],
   averageRating: '4.2',
-  typeCounts: {
-    paper: 10,
-    digital: 10,
-    audio: 5,
-  },
 };
 
 const mockYearInBooksStats = {
@@ -31,7 +26,7 @@ const mockYearInBooksStats = {
       genre: 'Fiction',
       pages: 300,
       dateFinished: '2023-06-15',
-      type: 'paper',
+
     },
     {
       title: 'Test Book 2',
@@ -43,7 +38,7 @@ const mockYearInBooksStats = {
       genre: 'Non-Fiction',
       pages: 250,
       dateFinished: '2023-07-20',
-      type: 'digital',
+
     },
   ],
   favoriteGenre: 'Fiction',
@@ -70,7 +65,6 @@ describe('Dashboard Component', () => {
       wantToRead: 0,
       topGenres: [],
       averageRating: '0.0',
-      typeCounts: {},
     };
     const { container } = render(<Dashboard stats={emptyStats} />);
     expect(container.firstChild).toBeTruthy();

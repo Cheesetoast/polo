@@ -17,7 +17,7 @@ export const useBookStatus = (books: Book[]) => {
   const [isLoading, setIsLoading] = useState(true);
 
   // Default status constant
-  const DEFAULT_STATUS: ReadingStatus = DEFAULTS.DEFAULT_BOOK_STATUS;
+  const DEFAULT_STATUS: ReadingStatus | null = DEFAULTS.DEFAULT_BOOK_STATUS;
 
   // Load statuses from localStorage on mount
   useEffect(() => {
@@ -77,13 +77,13 @@ export const useBookStatus = (books: Book[]) => {
         if (book.progress && book.progress > 0) {
           return 'currently-reading';
         }
-        // Otherwise, default to want-to-read
+        // Otherwise, default to null (no status assigned yet)
         return DEFAULT_STATUS;
       };
       
       return {
         ...book,
-        status: storedData?.status || determineInitialStatus(),
+        status: storedData?.status ?? determineInitialStatus(),
         progress: finalProgress,
       };
     });

@@ -21,6 +21,8 @@ export const StatusIndicator = ({
         return 'Currently Reading';
       case 'finished':
         return 'Finished';
+      case null:
+        return 'No Status';
       default:
         return status;
     }
@@ -49,6 +51,8 @@ const StatusDot = styled.div.withConfig({
         return theme.colors.warning || '#f59e0b';
       case 'finished':
         return theme.colors.success || '#10b981';
+      case null:
+        return theme.colors.gray?.[400] || '#9ca3af';
       default:
         return theme.colors.muted;
     }
@@ -70,6 +74,8 @@ const StatusLabel = styled.span.withConfig({
         return theme.colors.warning || '#f59e0b';
       case 'finished':
         return theme.colors.success || '#10b981';
+      case null:
+        return theme.colors.gray?.[500] || '#6b7280';
       default:
         return theme.colors.muted;
     }

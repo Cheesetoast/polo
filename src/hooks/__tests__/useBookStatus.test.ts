@@ -12,7 +12,7 @@ const mockBooks: Book[] = [
     genre: 'Fiction',
     pages: 300,
     dateFinished: '2023-03-15',
-    type: 'paper'
+
   },
   {
     title: 'Book 2',
@@ -23,7 +23,7 @@ const mockBooks: Book[] = [
     genre: 'Non-Fiction',
     pages: 250,
     progress: 50,
-    type: 'digital'
+
   },
   {
     title: 'Book 3',
@@ -33,7 +33,7 @@ const mockBooks: Book[] = [
     communityRating: 4.5,
     genre: 'Fiction',
     pages: 400,
-    type: 'audio'
+
   }
 ];
 
@@ -54,8 +54,8 @@ describe('useBookStatus', () => {
     // Book 2 should be 'currently-reading' (has progress > 0)
     expect(result.current.booksWithStatus[1].status).toBe('currently-reading');
     
-    // Book 3 should be 'want-to-read' (default)
-    expect(result.current.booksWithStatus[2].status).toBe('want-to-read');
+    // Book 3 should be null (default)
+    expect(result.current.booksWithStatus[2].status).toBe(null);
   });
 
   it('updates book status when updateBookStatus is called', () => {
@@ -132,7 +132,7 @@ describe('useBookStatus', () => {
         isbn: '', // Empty ISBN
         communityRating: 4.0,
         genre: 'Fiction',
-        type: 'paper'
+    
       }
     ];
     
@@ -140,7 +140,7 @@ describe('useBookStatus', () => {
     
     // Should not crash and should assign default status
     expect(result.current.booksWithStatus).toHaveLength(1);
-    expect(result.current.booksWithStatus[0].status).toBe('want-to-read');
+    expect(result.current.booksWithStatus[0].status).toBe(null);
   });
 
   it('clears localStorage when clearLocalStorage is called', () => {

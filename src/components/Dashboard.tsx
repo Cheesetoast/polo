@@ -11,7 +11,6 @@ interface DashboardStats {
   wantToRead: number;
   topGenres: string[];
   averageRating: string;
-  typeCounts: Record<string, number>;
 }
 
 interface YearInBooksStats {
@@ -87,22 +86,7 @@ export const Dashboard = ({ stats, yearInBooksStats, className, style }: Dashboa
           </Text>
         </StatSection>
         
-        <StatSection>
-          <Text variant="h4" style={{ marginBottom: theme.spacing.sm }}>
-            Book Types
-          </Text>
-          {Object.keys(stats.typeCounts).length > 0 ? (
-            <TypeList>
-              {Object.entries(stats.typeCounts).map(([type, count]) => (
-                <TypeTag key={type}>
-                  {type}: {count}
-                </TypeTag>
-              ))}
-            </TypeList>
-          ) : (
-            <Text variant="p" color="secondary">No type data available</Text>
-          )}
-        </StatSection>
+
       </StatsDetails>
     </DashboardContainer>
   );
@@ -172,17 +156,3 @@ const GenreTag = styled.span`
   font-weight: ${theme.fontWeights.medium};
 `;
 
-const TypeList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${theme.spacing.xs};
-`;
-
-const TypeTag = styled.span`
-  background: ${theme.colors.secondary};
-  color: white;
-  padding: ${theme.spacing.xs} ${theme.spacing.sm};
-  border-radius: ${theme.borderRadius.sm};
-  font-size: ${theme.fontSizes.sm};
-  font-weight: ${theme.fontWeights.medium};
-`;

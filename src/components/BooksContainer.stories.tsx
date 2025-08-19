@@ -35,7 +35,7 @@ const mockBooks = [
     progress: 100,
     dateStarted: '2023-01-15',
     dateFinished: '2023-02-20',
-    type: 'paper',
+
   },
   {
     title: '1984',
@@ -47,7 +47,7 @@ const mockBooks = [
     progress: 2,
     dateStarted: '2023-03-01',
     dateFinished: null,
-    type: 'digital',
+
   },
   {
     title: 'To Kill a Mockingbird',
@@ -59,7 +59,7 @@ const mockBooks = [
     progress: 75,
     dateStarted: '2023-04-10',
     dateFinished: null,
-    type: 'audio',
+
   },
 ];
 
@@ -89,7 +89,7 @@ export const ManyBooks: Story = {
         progress: 0,
         dateStarted: null,
         dateFinished: null,
-        type: 'paper',
+    
       },
       {
         title: 'The Hobbit',
@@ -101,7 +101,7 @@ export const ManyBooks: Story = {
         progress: 50,
         dateStarted: '2023-05-01',
         dateFinished: null,
-        type: 'digital',
+    
       },
     ],
   },

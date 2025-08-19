@@ -28,7 +28,6 @@ interface Book {
   progress?: number;
   dateStarted?: string | null;
   dateFinished?: string | null;
-  type?: string;
   pages?: number;
 }
 
@@ -63,13 +62,7 @@ const IndexPage = () => {
       }, 0) / booksWithRatings.length).toFixed(1)
     : '0.0';
 
-  // Calculate type counts
-  const typeCounts: Record<string, number> = {};
-  books.forEach(book => {
-    if (book.type) {
-      typeCounts[book.type] = (typeCounts[book.type] || 0) + 1;
-    }
-  });
+
 
   // Calculate year-in-books statistics
   const yearInBooksStats = calculateYearInBooksStats(books);
@@ -80,8 +73,7 @@ const IndexPage = () => {
     currentlyReading,
     wantToRead,
     topGenres,
-    averageRating,
-    typeCounts
+    averageRating
   };
 
   return (

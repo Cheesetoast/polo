@@ -46,7 +46,7 @@ const mockBooks: Book[] = [
     genre: "Science Fiction",
     pages: 328,
     dateFinished: "2023-03-15",
-    type: "paper"
+
   },
   {
     title: "The Great Gatsby",
@@ -58,7 +58,7 @@ const mockBooks: Book[] = [
     genre: "Classic Literature",
     pages: 180,
     dateFinished: "2023-05-20",
-    type: "digital"
+
   },
   {
     title: "To Kill a Mockingbird",
@@ -70,7 +70,7 @@ const mockBooks: Book[] = [
     genre: "Fiction",
     pages: 281,
     dateFinished: "2023-07-10",
-    type: "audio"
+
   }
 ];
 
@@ -145,7 +145,7 @@ export const ManyTopBooks: Story = {
           genre: "Romance",
           pages: 432,
           dateFinished: "2023-08-15",
-          type: "paper"
+      
         },
         {
           title: "The Hobbit",
@@ -157,7 +157,7 @@ export const ManyTopBooks: Story = {
           genre: "Fantasy",
           pages: 366,
           dateFinished: "2023-09-20",
-          type: "digital"
+      
         }
       ],
       favoriteGenre: "Fantasy"
