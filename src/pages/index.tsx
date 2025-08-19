@@ -1,4 +1,5 @@
 import type { HeadFC, PageProps } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import { Text } from "../components/Text"
@@ -8,6 +9,7 @@ import { BookBoardContainer } from "../components/BookBoardContainer"
 import { Dashboard } from "../components/Dashboard"
 import { calculateYearInBooksStats } from "../utils/yearInBooksStats"
 import booksData from "../data/books.json"
+import type { ContentfulHomepage } from "../types/contentful"
 
 interface Book {
   title: string;
@@ -30,6 +32,18 @@ interface Book {
 }
 
 const IndexPage = () => {
+  // Fetch homepage title from Contentful
+  const data = useStaticQuery(graphql`
+    query HomepageQuery {
+      contentfulHomepage {
+        title
+      }
+    }
+  `);
+
+  const homepageTitle = data.contentfulHomepage?.title;
+  
+  // Fallback to local data if Contentful is not available
   const books: Book[] = booksData;
 
   // Calculate dashboard statistics
@@ -80,7 +94,7 @@ const IndexPage = () => {
         <ContentWrapper>
           <div>
             <Text variant="h1">
-              {SITE_CONFIG.SITE_NAME}
+              {homepageTitle || SITE_CONFIG.SITE_NAME}
             </Text>
           </div>
 
