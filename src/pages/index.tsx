@@ -5,11 +5,13 @@ import SEO from "../components/SEO"
 import { Text } from "../components/Text"
 import { ContentWrapper } from "../components/ContentWrapper"
 import { SITE_CONFIG } from "../constants"
-import { BookBoardContainer } from "../components/BookBoardContainer"
 import { Dashboard } from "../components/Dashboard"
 import { calculateYearInBooksStats } from "../utils/yearInBooksStats"
 import booksData from "../data/books.json"
-import type { ContentfulHomepage } from "../types/contentful"
+import { useState } from "react"
+import { navigate } from "gatsby"
+import styled from "styled-components"
+import { theme } from "../styles/theme"
 
 interface Book {
   title: string;
@@ -32,6 +34,8 @@ interface Book {
 }
 
 const IndexPage = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+
   // Fetch homepage title from Contentful
   const data = useStaticQuery(graphql`
     query HomepageQuery {
@@ -98,9 +102,33 @@ const IndexPage = () => {
             </Text>
           </div>
 
-          <Dashboard stats={dashboardStats} yearInBooksStats={yearInBooksStats} />
+          <HomepageSearchSection>
+            <Text variant="h2" align="center">
+              Find Your Next Great Read
+            </Text>
+            <Text variant="p" color="secondary" align="center">
+              Search through our collection of books by title, author, or description
+            </Text>
+            
+            <SearchForm onSubmit={(e) => {
+              e.preventDefault();
+              if (searchQuery.trim()) {
+                navigate(`/search-results?search=${encodeURIComponent(searchQuery.trim())}`);
+              }
+            }}>
+              <SearchInput
+                type="text"
+                placeholder="Search by title, author, or description..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <SearchButton type="submit">
+                Search
+              </SearchButton>
+            </SearchForm>
+          </HomepageSearchSection>
 
-          <BookBoardContainer books={books} title="My Reading List" />
+          <Dashboard stats={dashboardStats} yearInBooksStats={yearInBooksStats} />
 
         </ContentWrapper>
 
@@ -118,3 +146,66 @@ export const Head: HeadFC = () => (
     keywords={['portfolio', 'web development', 'design', 'react', 'gatsby']}
   />
 )
+
+// Styled Components
+const HomepageSearchSection = styled.section`
+  text-align: center;
+  margin: ${theme.spacing.xl} 0;
+  padding: ${theme.spacing.xl};
+  background: linear-gradient(135deg, ${theme.colors.primary}05 0%, ${theme.colors.primary}10 100%);
+  border-radius: ${theme.borderRadius.lg};
+  border: 1px solid ${theme.colors.primary}10;
+`;
+
+const SearchForm = styled.form`
+  display: flex;
+  gap: ${theme.spacing.md};
+  max-width: 600px;
+  margin: ${theme.spacing.lg} auto 0;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+`;
+
+const SearchInput = styled.input`
+  flex: 1;
+  padding: ${theme.spacing.md};
+  border: 2px solid ${theme.colors.muted};
+  border-radius: ${theme.borderRadius.md};
+  font-size: ${theme.fontSizes.base};
+  transition: border-color 0.2s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: ${theme.colors.primary};
+    box-shadow: 0 0 0 3px ${theme.colors.primary}20;
+  }
+  
+  &::placeholder {
+    color: ${theme.colors.muted};
+  }
+`;
+
+const SearchButton = styled.button`
+  padding: ${theme.spacing.md} ${theme.spacing.lg};
+  background-color: ${theme.colors.primary};
+  color: white;
+  border: none;
+  border-radius: ${theme.borderRadius.md};
+  font-size: ${theme.fontSizes.base};
+  font-weight: ${theme.fontWeights.medium};
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: ${theme.colors.primary}dd;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px ${theme.colors.primary}40;
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+`;
