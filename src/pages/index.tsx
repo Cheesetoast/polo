@@ -1,12 +1,10 @@
 import type { HeadFC, PageProps } from "gatsby"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
-import { Button } from "../components/Button"
 import { Text } from "../components/Text"
 import { ContentWrapper } from "../components/ContentWrapper"
 import { SITE_CONFIG } from "../constants"
 import { BookBoardContainer } from "../components/BookBoardContainer"
-import { ButtonContainer } from "../components/ButtonContainer"
 import { Dashboard } from "../components/Dashboard"
 import { calculateYearInBooksStats } from "../utils/yearInBooksStats"
 import booksData from "../data/books.json"
@@ -85,10 +83,6 @@ const IndexPage = () => {
               {SITE_CONFIG.SITE_NAME}
             </Text>
           </div>
-
-          <ButtonContainer alignment="start">
-            <Button>Click me</Button>
-          </ButtonContainer>
 
           <Dashboard stats={dashboardStats} yearInBooksStats={yearInBooksStats} />
 
