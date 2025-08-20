@@ -9,6 +9,7 @@ import { BookProgressBar } from "../../components/BookProgressBar"
 import { StatusIndicator } from "../../components/StatusIndicator"
 import { ImageBlock } from "../../components/ImageBlock"
 import { useBookStatus } from "../../hooks/useBookStatus"
+import { ReadingStatus } from "../../components/BookBoard"
 import booksData from "../../data/books.json"
 import { navigate } from "gatsby"
 import styled from "styled-components"
@@ -46,7 +47,7 @@ const BookPage = ({ params }: BookPageProps) => {
   // Find the book by slug (clean ISBN without dashes)
   const books: Book[] = booksData;
   const book = books.find(b => b.isbn.replace(/-/g, '') === slug);
-  const { booksWithStatus } = useBookStatus(books);
+  const { booksWithStatus, updateBookStatus, updateBookProgress } = useBookStatus(books);
   const bookWithStatus = booksWithStatus.find(b => b.isbn.replace(/-/g, '') === slug);
 
   if (!book) {
@@ -104,10 +105,60 @@ const BookPage = ({ params }: BookPageProps) => {
                   By {book.author}
                 </Text>
               </div>
-              <StatusIndicator 
-                status={getBookStatus(bookWithStatus || book) || 'want-to-read'} 
-                size="large" 
-              />
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                <StatusIndicator 
+                  status={getBookStatus(bookWithStatus || book)} 
+                  size="large" 
+                />
+                <Text variant="caption" color="secondary" style={{ marginTop: '4px' }}>
+                  Update Status:
+                </Text>
+                <StatusSelector
+                  value={getBookStatus(bookWithStatus || book) || ""}
+                  onChange={(e) => {
+                    const newStatus = e.target.value === "" ? null : e.target.value as ReadingStatus;
+                    if (bookWithStatus) {
+                      updateBookStatus(book.isbn, newStatus);
+                    }
+                  }}
+                >
+                  <option value="">No Status</option>
+                  <option value="want-to-read">Want to Read</option>
+                  <option value="currently-reading">Currently Reading</option>
+                  <option value="finished">Finished</option>
+                </StatusSelector>
+                
+                {/* Progress Input */}
+                {(getBookStatus(bookWithStatus || book) === 'currently-reading' || 
+                  getBookStatus(bookWithStatus || book) === 'finished') && (
+                  <ProgressInput
+                    type="number"
+                    min="0"
+                    max="100"
+                    placeholder="Progress %"
+                    value={bookWithStatus?.progress || book.progress || 0}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      const progress = parseInt(e.target.value) || 0;
+                      if (bookWithStatus) {
+                        updateBookProgress(book.isbn, progress);
+                      }
+                    }}
+                  />
+                )}
+                
+                {/* Date Finished Input */}
+                {getBookStatus(bookWithStatus || book) === 'finished' && (
+                  <DateInput
+                    type="date"
+                    value={bookWithStatus?.dateFinished || book.dateFinished || ''}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      const dateFinished = e.target.value || null;
+                      // Note: This would require extending the useBookStatus hook to handle dates
+                      // For now, we'll just show the input but not save the date
+                    }}
+                  />
+                )}
+              </div>
             </BookHeader>
 
             <BookContent>
@@ -195,6 +246,63 @@ export const Head: HeadFC<BookPageProps> = ({ params }) => {
 };
 
 // Styled Components
+const StatusSelector = styled.select`
+  padding: ${theme.spacing.xs} ${theme.spacing.sm};
+  border: 1px solid ${theme.colors.muted};
+  border-radius: ${theme.borderRadius.sm};
+  background: white;
+  font-size: ${theme.fontSizes.sm};
+  cursor: pointer;
+  min-width: 140px;
+  
+  &:focus {
+    outline: none;
+    border-color: ${theme.colors.primary};
+    box-shadow: 0 0 0 2px ${theme.colors.primary}20;
+  }
+`;
+
+const ProgressInput = styled.input`
+  padding: ${theme.spacing.xs} ${theme.spacing.sm};
+  border: 1px solid ${theme.colors.muted};
+  border-radius: ${theme.borderRadius.sm};
+  background: white;
+  font-size: ${theme.fontSizes.sm};
+  width: 80px;
+  text-align: center;
+  
+  &:focus {
+    outline: none;
+    border-color: ${theme.colors.primary};
+    box-shadow: 0 0 0 2px ${theme.colors.primary}20;
+  }
+  
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  &[type=number] {
+    -moz-appearance: textfield;
+  }
+`;
+
+const DateInput = styled.input`
+  padding: ${theme.spacing.xs} ${theme.spacing.sm};
+  border: 1px solid ${theme.colors.muted};
+  border-radius: ${theme.borderRadius.sm};
+  background: white;
+  font-size: ${theme.fontSizes.sm};
+  width: 120px;
+  
+  &:focus {
+    outline: none;
+    border-color: ${theme.colors.primary};
+    box-shadow: 0 0 0 2px ${theme.colors.primary}20;
+  }
+`;
+
 const BackButton = styled.button`
   background: none;
   border: none;
