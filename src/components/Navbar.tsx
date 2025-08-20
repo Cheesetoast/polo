@@ -19,11 +19,7 @@ const Navbar = ({ transparent = false }: NavbarProps) => {
 
   const navItems: NavItem[] = [
     { label: 'Home', href: '/' },
-    { label: 'Search', href: '/search' },
-    { label: 'About', href: '/about' },
-    { label: 'Projects', href: '/projects' },
-    { label: 'Contact', href: '/contact' },
-    { label: 'Blog', href: 'https://blog.example.com', external: true },
+    { label: 'Search', href: '/search' }
   ];
 
   useEffect(() => {
