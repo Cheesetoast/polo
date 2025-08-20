@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 import styled from 'styled-components';
 import GlobalStyle from '../styles/globalStyles';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 interface LayoutProps {
   children: ReactNode;
@@ -15,6 +16,7 @@ const Layout = ({ children, transparentNavbar = false }: LayoutProps) => (
     <MainContent>
       {children}
     </MainContent>
+    <Footer />
   </>
 );
 
