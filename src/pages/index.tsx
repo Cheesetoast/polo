@@ -12,6 +12,7 @@ import { useState } from "react"
 import { navigate } from "gatsby"
 import styled from "styled-components"
 import { theme } from "../styles/theme"
+import { Button } from "../components/Button"
 
 interface Book {
   title: string;
@@ -128,6 +129,18 @@ const IndexPage = () => {
             </SearchForm>
           </HomepageSearchSection>
 
+          <BookshelfSection>
+            <Text variant="h2" align="center">
+              Organize Your Reading
+            </Text>
+            <Text variant="p" color="secondary" align="center">
+              Use our visual Kanban board to track your reading progress and organize your bookshelf
+            </Text>
+            <Button onClick={() => navigate('/bookshelf')} variant="primary" size="large">
+              View My Bookshelf
+            </Button>
+          </BookshelfSection>
+
           <Dashboard stats={dashboardStats} yearInBooksStats={yearInBooksStats} />
 
         </ContentWrapper>
@@ -208,4 +221,13 @@ const SearchButton = styled.button`
   &:active {
     transform: translateY(0);
   }
+`;
+
+const BookshelfSection = styled.section`
+  text-align: center;
+  margin: ${theme.spacing.xl} 0;
+  padding: ${theme.spacing.xl};
+  background: linear-gradient(135deg, ${theme.colors.secondary}05 0%, ${theme.colors.secondary}10 100%);
+  border-radius: ${theme.borderRadius.lg};
+  border: 1px solid ${theme.colors.secondary}10;
 `;

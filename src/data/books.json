@@ -13,7 +13,6 @@
     "progress": 2,
     "dateStarted": "2025-05-19",
     "dateFinished": "2025-05-29",
-    "type": "digital",
     "pages": 328
   },
   {
@@ -25,11 +24,11 @@
     "isbn": "978-0743273565",
     "image": null,
     "communityRating": 3.9,
+    "userRating": null,
     "genre": "Adventure",
     "progress": 0,
     "dateStarted": "2023-12-25",
     "dateFinished": null,
-    "type": "paper",
     "pages": 180
   },
   {
@@ -46,7 +45,6 @@
     "progress": 0,
     "dateStarted": "2023-01-02",
     "dateFinished": null,
-    "type": "audio",
     "pages": 281
   },
   {
@@ -57,12 +55,13 @@
     },
     "isbn": "978-0141439518",
     "image": null,
-    "rating": 3,
+    "communityRating": 3,
+    "userRating": null,
     "genre": "Mystery",
     "progress": 0,
     "dateStarted": "2023-02-16",
     "dateFinished": null,
-    "type": "audio"
+    "pages": 432
   },
   {
     "title": "The Catcher in the Rye",
@@ -72,12 +71,12 @@
     },
     "isbn": "978-0316769488",
     "image": null,
-    "rating": 5,
     "genre": "Science Fiction",
     "progress": 0,
     "dateStarted": "2023-03-15",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "Lord of the Flies",
@@ -87,12 +86,12 @@
     },
     "isbn": "978-0399501487",
     "image": null,
-    "rating": 2,
     "genre": "Non-Fiction",
     "progress": 0,
     "dateStarted": "2023-06-26",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "Animal Farm",
@@ -102,12 +101,12 @@
     },
     "isbn": "978-0451526342",
     "image": null,
-    "rating": 5,
     "genre": "Drama",
     "progress": 0,
     "dateStarted": "2023-07-25",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "The Hobbit",
@@ -117,12 +116,12 @@
     },
     "isbn": "978-0547928247",
     "image": null,
-    "rating": 4,
     "genre": "Adventure",
     "progress": 0,
     "dateStarted": "2023-07-25",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 4,
+    "userRating": null
   },
   {
     "title": "The Lord of the Rings",
@@ -132,12 +131,12 @@
     },
     "isbn": "978-0547928210",
     "image": null,
-    "rating": 3,
     "genre": "Mystery",
     "progress": 0,
     "dateStarted": "2023-01-06",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 3,
+    "userRating": null
   },
   {
     "title": "Brave New World",
@@ -147,12 +146,12 @@
     },
     "isbn": "978-0060850524",
     "image": null,
-    "rating": 3,
     "genre": "Thriller",
     "progress": 0,
     "dateStarted": "2023-02-11",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 3,
+    "userRating": null
   },
   {
     "title": "Fahrenheit 451",
@@ -162,12 +161,12 @@
     },
     "isbn": "978-1451673319",
     "image": null,
-    "rating": 1,
     "genre": "Thriller",
     "progress": 0,
     "dateStarted": "2023-01-26",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 1,
+    "userRating": null
   },
   {
     "title": "The Alchemist",
@@ -177,27 +176,27 @@
     },
     "isbn": "978-0062315007",
     "image": null,
-    "rating": 1,
     "genre": "Biography",
     "progress": 0,
     "dateStarted": "2023-07-16",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 1,
+    "userRating": null
   },
   {
     "title": "The Little Prince",
-    "author": "Antoine de Saint-Exupéry",
+    "author": "Antoine de Saint-Exup\u00e9ry",
     "description": {
       "description": "A poetic tale about a young prince who visits various planets in space, exploring themes of love, loss, and the meaning of life."
     },
     "isbn": "978-0156013987",
     "image": null,
-    "rating": 1,
     "genre": "Self-Help",
     "progress": 0,
     "dateStarted": "2023-07-23",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 1,
+    "userRating": null
   },
   {
     "title": "The Kite Runner",
@@ -207,12 +206,12 @@
     },
     "isbn": "978-1594631931",
     "image": null,
-    "rating": 3,
     "genre": "Romance",
     "progress": 0,
     "dateStarted": "2023-04-27",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 3,
+    "userRating": null
   },
   {
     "title": "The Book Thief",
@@ -222,12 +221,12 @@
     },
     "isbn": "978-0375842207",
     "image": null,
-    "rating": 1,
     "genre": "Fiction",
     "progress": 0,
     "dateStarted": "2023-09-30",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 1,
+    "userRating": null
   },
   {
     "title": "The Hunger Games",
@@ -237,12 +236,12 @@
     },
     "isbn": "978-0439023481",
     "image": null,
-    "rating": 5,
     "genre": "Fantasy",
     "progress": 0,
     "dateStarted": "2023-11-22",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "The Fault in Our Stars",
@@ -252,12 +251,12 @@
     },
     "isbn": "978-0142424179",
     "image": null,
-    "rating": 3,
     "genre": "Self-Help",
     "progress": 0,
     "dateStarted": "2023-06-11",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 3,
+    "userRating": null
   },
   {
     "title": "Gone Girl",
@@ -273,7 +272,6 @@
     "progress": 0,
     "dateStarted": "2023-08-30",
     "dateFinished": "2023-09-09",
-    "type": "audio",
     "pages": 415
   },
   {
@@ -284,12 +282,12 @@
     },
     "isbn": "978-1594634024",
     "image": null,
-    "rating": 3,
     "genre": "History",
     "progress": 0,
     "dateStarted": "2023-10-05",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 3,
+    "userRating": null
   },
   {
     "title": "Big Little Lies",
@@ -299,12 +297,12 @@
     },
     "isbn": "978-0399158665",
     "image": null,
-    "rating": 2,
     "genre": "Historical Fiction",
     "progress": 0,
     "dateStarted": "2023-09-30",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "The Silent Patient",
@@ -314,12 +312,12 @@
     },
     "isbn": "978-1250301697",
     "image": null,
-    "rating": 5,
     "genre": "Mystery",
     "progress": 0,
     "dateStarted": "2023-04-09",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "Educated",
@@ -329,12 +327,12 @@
     },
     "isbn": "978-0399590504",
     "image": null,
-    "rating": 5,
     "genre": "Self-Help",
     "progress": 0,
     "dateStarted": "2023-05-18",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "Becoming",
@@ -344,12 +342,12 @@
     },
     "isbn": "978-1524763138",
     "image": null,
-    "rating": 4,
     "genre": "Mystery",
     "progress": 0,
     "dateStarted": "2023-02-23",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 4,
+    "userRating": null
   },
   {
     "title": "Sapiens",
@@ -359,12 +357,12 @@
     },
     "isbn": "978-0062316097",
     "image": null,
-    "rating": 5,
     "genre": "Biography",
     "progress": 0,
     "dateStarted": "2023-06-21",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "Atomic Habits",
@@ -374,12 +372,12 @@
     },
     "isbn": "978-0735211292",
     "image": null,
-    "rating": 1,
     "genre": "Non-Fiction",
     "progress": 0,
     "dateStarted": "2023-05-14",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 1,
+    "userRating": null
   },
   {
     "title": "The Power of Habit",
@@ -389,12 +387,12 @@
     },
     "isbn": "978-0812981605",
     "image": null,
-    "rating": 5,
     "genre": "Drama",
     "progress": 0,
     "dateStarted": "2023-05-08",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "Thinking, Fast and Slow",
@@ -404,12 +402,12 @@
     },
     "isbn": "978-0374533557",
     "image": null,
-    "rating": 2,
     "genre": "Non-Fiction",
     "progress": 0,
     "dateStarted": "2023-06-17",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "Outliers",
@@ -419,12 +417,12 @@
     },
     "isbn": "978-0316017923",
     "image": null,
-    "rating": 3,
     "genre": "Adventure",
     "progress": 0,
     "dateStarted": "2023-05-16",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 3,
+    "userRating": null
   },
   {
     "title": "Blink",
@@ -434,12 +432,12 @@
     },
     "isbn": "978-0316010665",
     "image": null,
-    "rating": 5,
     "genre": "Psychology",
     "progress": 0,
     "dateStarted": "2023-01-02",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "The Tipping Point",
@@ -449,12 +447,12 @@
     },
     "isbn": "978-0316346627",
     "image": null,
-    "rating": 3,
     "genre": "Romance",
     "progress": 0,
     "dateStarted": "2023-09-23",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 3,
+    "userRating": null
   },
   {
     "title": "Freakonomics",
@@ -464,12 +462,12 @@
     },
     "isbn": "978-0060731335",
     "image": null,
-    "rating": 2,
     "genre": "Romance",
     "progress": 0,
     "dateStarted": "2023-07-04",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "Predictably Irrational",
@@ -479,12 +477,12 @@
     },
     "isbn": "978-0061353246",
     "image": null,
-    "rating": 2,
     "genre": "Science Fiction",
     "progress": 0,
     "dateStarted": "2023-09-12",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "Nudge",
@@ -494,12 +492,12 @@
     },
     "isbn": "978-0143115267",
     "image": null,
-    "rating": 4,
     "genre": "Romance",
     "progress": 0,
     "dateStarted": "2023-01-07",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 4,
+    "userRating": null
   },
   {
     "title": "The Art of War",
@@ -509,27 +507,27 @@
     },
     "isbn": "978-0140439199",
     "image": null,
-    "rating": 5,
     "genre": "Adventure",
     "progress": 0,
     "dateStarted": "2023-09-12",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "The Prince",
-    "author": "Niccolò Machiavelli",
+    "author": "Niccol\u00f2 Machiavelli",
     "description": {
       "description": "A political treatise that offers advice to rulers on how to gain and maintain power, often considered a manual for political manipulation."
     },
     "isbn": "978-0140449150",
     "image": null,
-    "rating": 5,
     "genre": "Classic Literature",
     "progress": 0,
     "dateStarted": "2023-05-10",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "Meditations",
@@ -539,12 +537,12 @@
     },
     "isbn": "978-0812968255",
     "image": null,
-    "rating": 5,
     "genre": "Fantasy",
     "progress": 0,
     "dateStarted": "2023-02-25",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "The Republic",
@@ -554,12 +552,12 @@
     },
     "isbn": "978-0872201361",
     "image": null,
-    "rating": 2,
     "genre": "History",
     "progress": 0,
     "dateStarted": "2023-09-27",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "The Nicomachean Ethics",
@@ -569,12 +567,12 @@
     },
     "isbn": "978-0872204645",
     "image": null,
-    "rating": 3,
     "genre": "Philosophy",
     "progress": 0,
     "dateStarted": "2023-09-07",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 3,
+    "userRating": null
   },
   {
     "title": "Confessions",
@@ -584,12 +582,12 @@
     },
     "isbn": "978-0192817793",
     "image": null,
-    "rating": 3,
     "genre": "Psychology",
     "progress": 0,
     "dateStarted": "2023-04-10",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 3,
+    "userRating": null
   },
   {
     "title": "The Divine Comedy",
@@ -599,12 +597,12 @@
     },
     "isbn": "978-0142437223",
     "image": null,
-    "rating": 1,
     "genre": "Science Fiction",
     "progress": 0,
     "dateStarted": "2023-07-13",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 1,
+    "userRating": null
   },
   {
     "title": "Don Quixote",
@@ -614,12 +612,12 @@
     },
     "isbn": "978-0060934347",
     "image": null,
-    "rating": 1,
     "genre": "Drama",
     "progress": 0,
     "dateStarted": "2023-07-01",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 1,
+    "userRating": null
   },
   {
     "title": "Hamlet",
@@ -635,7 +633,6 @@
     "progress": 0,
     "dateStarted": "2023-06-20",
     "dateFinished": "2023-07-14",
-    "type": "paper",
     "pages": 342
   },
   {
@@ -644,14 +641,14 @@
     "description": {
       "description": "A tragedy about a Scottish general who receives a prophecy that he will become King of Scotland and commits regicide to fulfill it."
     },
-    "isbn": "978-0743477109",
+    "isbn": "978-000000-0042",
     "image": null,
-    "rating": 2,
     "genre": "Comedy",
     "progress": 0,
     "dateStarted": "2023-01-08",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "Romeo and Juliet",
@@ -659,14 +656,14 @@
     "description": {
       "description": "A tragedy about two young lovers whose deaths ultimately unite their feuding families, exploring themes of love, fate, and family conflict."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0043",
     "image": null,
-    "rating": 2,
     "genre": "Mystery",
     "progress": 0,
     "dateStarted": "2023-03-10",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "A Midsummer Night's Dream",
@@ -676,12 +673,12 @@
     },
     "isbn": "978-0743477543",
     "image": null,
-    "rating": 4,
     "genre": "Non-Fiction",
     "progress": 0,
     "dateStarted": "2023-12-08",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 4,
+    "userRating": null
   },
   {
     "title": "The Tempest",
@@ -691,12 +688,12 @@
     },
     "isbn": "978-0743482776",
     "image": null,
-    "rating": 4,
     "genre": "Non-Fiction",
     "progress": 0,
     "dateStarted": "2023-09-19",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 4,
+    "userRating": null
   },
   {
     "title": "King Lear",
@@ -706,12 +703,12 @@
     },
     "isbn": "978-0743482769",
     "image": null,
-    "rating": 4,
     "genre": "Fantasy",
     "progress": 0,
     "dateStarted": "2023-11-16",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 4,
+    "userRating": null
   },
   {
     "title": "Othello",
@@ -721,12 +718,12 @@
     },
     "isbn": "978-0743477550",
     "image": null,
-    "rating": 1,
     "genre": "Drama",
     "progress": 0,
     "dateStarted": "2023-01-09",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 1,
+    "userRating": null
   },
   {
     "title": "The Merchant of Venice",
@@ -734,14 +731,14 @@
     "description": {
       "description": "A comedy about a merchant who borrows money from a Jewish moneylender, exploring themes of justice, mercy, and prejudice."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0048",
     "image": null,
-    "rating": 5,
     "genre": "Classic Literature",
     "progress": 0,
     "dateStarted": "2023-03-05",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "Much Ado About Nothing",
@@ -749,14 +746,14 @@
     "description": {
       "description": "A comedy about two pairs of lovers, exploring themes of love, deception, and the battle of the sexes."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0049",
     "image": null,
-    "rating": 4,
     "genre": "Psychology",
     "progress": 0,
     "dateStarted": "2023-01-24",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 4,
+    "userRating": null
   },
   {
     "title": "Twelfth Night",
@@ -764,14 +761,14 @@
     "description": {
       "description": "A comedy about twins separated in a shipwreck and the romantic complications that ensue, exploring themes of love, identity, and gender."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0050",
     "image": null,
-    "rating": 4,
     "genre": "Historical Fiction",
     "progress": 0,
     "dateStarted": "2023-01-31",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 4,
+    "userRating": null
   },
   {
     "title": "As You Like It",
@@ -779,14 +776,14 @@
     "description": {
       "description": "A pastoral comedy about love, exile, and reconciliation, set in the Forest of Arden."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0051",
     "image": null,
-    "rating": 5,
     "genre": "Adventure",
     "progress": 0,
     "dateStarted": "2023-06-22",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "The Taming of the Shrew",
@@ -794,14 +791,14 @@
     "description": {
       "description": "A comedy about the courtship of Petruchio and Katherina, exploring themes of marriage, gender roles, and power dynamics."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0052",
     "image": null,
-    "rating": 3,
     "genre": "Fantasy",
     "progress": 0,
     "dateStarted": "2023-02-10",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 3,
+    "userRating": null
   },
   {
     "title": "The Comedy of Errors",
@@ -811,12 +808,12 @@
     },
     "isbn": "978-0743477567",
     "image": null,
-    "rating": 1,
     "genre": "Comedy",
     "progress": 0,
     "dateStarted": "2023-12-06",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 1,
+    "userRating": null
   },
   {
     "title": "The Two Gentlemen of Verona",
@@ -824,14 +821,14 @@
     "description": {
       "description": "A comedy about two friends who fall in love with the same woman, exploring themes of friendship, love, and loyalty."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0054",
     "image": null,
-    "rating": 3,
     "genre": "Comedy",
     "progress": 0,
     "dateStarted": "2023-03-15",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 3,
+    "userRating": null
   },
   {
     "title": "Love's Labour's Lost",
@@ -839,14 +836,14 @@
     "description": {
       "description": "A comedy about a king and three lords who swear to avoid women for three years, only to fall in love with a princess and her ladies."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0055",
     "image": null,
-    "rating": 1,
     "genre": "History",
     "progress": 0,
     "dateStarted": "2023-04-16",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 1,
+    "userRating": null
   },
   {
     "title": "All's Well That Ends Well",
@@ -854,14 +851,14 @@
     "description": {
       "description": "A comedy about a young woman who cures a king and wins the hand of a count, exploring themes of love, class, and gender."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0056",
     "image": null,
-    "rating": 2,
     "genre": "Science Fiction",
     "progress": 0,
     "dateStarted": "2023-05-19",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "Measure for Measure",
@@ -869,14 +866,14 @@
     "description": {
       "description": "A comedy about a duke who leaves his deputy in charge and disguises himself to observe the deputy's strict enforcement of morality laws."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0057",
     "image": null,
-    "rating": 4,
     "genre": "Mystery",
     "progress": 0,
     "dateStarted": "2023-08-17",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 4,
+    "userRating": null
   },
   {
     "title": "The Winter's Tale",
@@ -884,14 +881,14 @@
     "description": {
       "description": "A romance about a king who becomes jealous of his wife and abandons their daughter, leading to a series of events that eventually bring about reconciliation."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0058",
     "image": null,
-    "rating": 2,
     "genre": "Non-Fiction",
     "progress": 0,
     "dateStarted": "2023-12-07",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "Cymbeline",
@@ -899,14 +896,14 @@
     "description": {
       "description": "A romance about a king who banishes his daughter's husband and the various adventures and misunderstandings that follow."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0059",
     "image": null,
-    "rating": 3,
     "genre": "History",
     "progress": 0,
     "dateStarted": "2023-06-06",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 3,
+    "userRating": null
   },
   {
     "title": "Pericles, Prince of Tyre",
@@ -914,14 +911,14 @@
     "description": {
       "description": "A romance about a prince who flees his homeland and experiences various adventures, including shipwrecks and family separation."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0060",
     "image": null,
-    "rating": 2,
     "genre": "Classic Literature",
     "progress": 0,
     "dateStarted": "2023-09-15",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "The Two Noble Kinsmen",
@@ -929,14 +926,14 @@
     "description": {
       "description": "A tragicomedy about two friends who fall in love with the same woman, leading to a duel and tragic consequences."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0061",
     "image": null,
-    "rating": 2,
     "genre": "History",
     "progress": 0,
     "dateStarted": "2023-11-02",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "Henry V",
@@ -944,14 +941,14 @@
     "description": {
       "description": "A history play about King Henry V's military campaign in France, culminating in the Battle of Agincourt."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0062",
     "image": null,
-    "rating": 2,
     "genre": "Psychology",
     "progress": 0,
     "dateStarted": "2023-08-15",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "Richard III",
@@ -959,14 +956,14 @@
     "description": {
       "description": "A history play about the rise and fall of Richard III, exploring themes of power, ambition, and the consequences of evil."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0063",
     "image": null,
-    "rating": 2,
     "genre": "Mystery",
     "progress": 0,
     "dateStarted": "2023-09-06",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "Henry IV, Part 1",
@@ -974,14 +971,14 @@
     "description": {
       "description": "A history play about King Henry IV's struggle to maintain his throne and his son Prince Hal's journey from irresponsible youth to responsible leader."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0064",
     "image": null,
-    "rating": 3,
     "genre": "Science Fiction",
     "progress": 0,
     "dateStarted": "2023-11-04",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 3,
+    "userRating": null
   },
   {
     "title": "Henry IV, Part 2",
@@ -989,14 +986,14 @@
     "description": {
       "description": "A continuation of the story of King Henry IV and Prince Hal, exploring themes of power, responsibility, and the transition of leadership."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0065",
     "image": null,
-    "rating": 3,
     "genre": "Drama",
     "progress": 0,
     "dateStarted": "2023-04-09",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 3,
+    "userRating": null
   },
   {
     "title": "Richard II",
@@ -1004,14 +1001,14 @@
     "description": {
       "description": "A history play about the deposition of King Richard II by his cousin Henry Bolingbroke, exploring themes of kingship, power, and divine right."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0066",
     "image": null,
-    "rating": 5,
     "genre": "Classic Literature",
     "progress": 0,
     "dateStarted": "2023-05-15",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "Henry VI, Part 1",
@@ -1019,14 +1016,14 @@
     "description": {
       "description": "A history play about the early reign of King Henry VI and the beginning of the Wars of the Roses."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0067",
     "image": null,
-    "rating": 4,
     "genre": "Mystery",
     "progress": 0,
     "dateStarted": "2023-01-11",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 4,
+    "userRating": null
   },
   {
     "title": "Henry VI, Part 2",
@@ -1034,14 +1031,14 @@
     "description": {
       "description": "A continuation of the story of King Henry VI and the escalating conflict between the houses of Lancaster and York."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0068",
     "image": null,
-    "rating": 2,
     "genre": "Thriller",
     "progress": 0,
     "dateStarted": "2023-11-19",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "Henry VI, Part 3",
@@ -1049,14 +1046,14 @@
     "description": {
       "description": "The final part of the Henry VI trilogy, depicting the climax of the Wars of the Roses and the rise of the Yorkist faction."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0069",
     "image": null,
-    "rating": 5,
     "genre": "Romance",
     "progress": 0,
     "dateStarted": "2023-01-11",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "Edward III",
@@ -1064,14 +1061,14 @@
     "description": {
       "description": "A history play about King Edward III's military campaigns in France and Scotland, exploring themes of kingship and military leadership."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0070",
     "image": null,
-    "rating": 5,
     "genre": "Adventure",
     "progress": 0,
     "dateStarted": "2023-11-16",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "The Merry Wives of Windsor",
@@ -1079,29 +1076,14 @@
     "description": {
       "description": "A comedy about Sir John Falstaff and his attempts to seduce two married women, who turn the tables on him."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0071",
     "image": null,
-    "rating": 5,
     "genre": "History",
     "progress": 0,
     "dateStarted": "2023-08-14",
     "dateFinished": null,
-    "type": "paper"
-  },
-  {
-    "title": "The Merry Wives of Windsor",
-    "author": "William Shakespeare",
-    "description": {
-      "description": "A comedy about Sir John Falstaff and his attempts to seduce two married women, who turn the tables on him."
-    },
-    "isbn": "978-0743477567",
-    "image": null,
-    "rating": 2,
-    "genre": "Fantasy",
-    "progress": 0,
-    "dateStarted": "2023-07-21",
-    "dateFinished": null,
-    "type": "digital"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "Troilus and Cressida",
@@ -1109,14 +1091,14 @@
     "description": {
       "description": "A tragicomedy set during the Trojan War, exploring themes of love, war, and the futility of conflict."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0073",
     "image": null,
-    "rating": 3,
     "genre": "History",
     "progress": 0,
     "dateStarted": "2023-12-02",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 3,
+    "userRating": null
   },
   {
     "title": "Coriolanus",
@@ -1124,14 +1106,14 @@
     "description": {
       "description": "A tragedy about a Roman general who is banished from Rome and allies with his former enemies, exploring themes of pride, politics, and military leadership."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0074",
     "image": null,
-    "rating": 5,
     "genre": "Poetry",
     "progress": 0,
     "dateStarted": "2023-02-03",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "Titus Andronicus",
@@ -1139,14 +1121,14 @@
     "description": {
       "description": "A revenge tragedy about a Roman general who seeks vengeance for the crimes committed against his family, featuring extreme violence and bloodshed."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0075",
     "image": null,
-    "rating": 5,
     "genre": "Fantasy",
     "progress": 0,
     "dateStarted": null,
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "Timon of Athens",
@@ -1154,14 +1136,14 @@
     "description": {
       "description": "A tragedy about a wealthy Athenian who gives away his fortune and is abandoned by his friends, leading to his misanthropy and eventual death."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0076",
     "image": null,
-    "rating": 1,
     "genre": "Poetry",
     "progress": 0,
     "dateStarted": "2023-03-25",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 1,
+    "userRating": null
   },
   {
     "title": "Julius Caesar",
@@ -1169,14 +1151,14 @@
     "description": {
       "description": "A tragedy about the conspiracy to assassinate Julius Caesar and the consequences that follow, exploring themes of power, betrayal, and political ambition."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0077",
     "image": null,
-    "rating": 2,
     "genre": "Non-Fiction",
     "progress": 0,
     "dateStarted": "2023-03-16",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "Antony and Cleopatra",
@@ -1184,14 +1166,14 @@
     "description": {
       "description": "A tragedy about the love affair between Mark Antony and Cleopatra, and their eventual downfall, exploring themes of love, power, and political intrigue."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0078",
     "image": null,
-    "rating": 5,
     "genre": "Romance",
     "progress": 0,
     "dateStarted": "2023-01-20",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "The Life and Death of King John",
@@ -1199,14 +1181,14 @@
     "description": {
       "description": "A history play about King John's struggle to maintain his throne against various challengers, exploring themes of kingship and political legitimacy."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0079",
     "image": null,
-    "rating": 2,
     "genre": "Poetry",
     "progress": 0,
     "dateStarted": "2023-11-13",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "The Famous History of the Life of King Henry VIII",
@@ -1214,14 +1196,14 @@
     "description": {
       "description": "A history play about the reign of King Henry VIII, focusing on his marriages and the political and religious changes of his reign."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0080",
     "image": null,
-    "rating": 2,
     "genre": "Romance",
     "progress": 0,
     "dateStarted": "2023-01-30",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "The Life of King Henry V",
@@ -1229,14 +1211,14 @@
     "description": {
       "description": "A history play about King Henry V's military campaign in France, culminating in the Battle of Agincourt and his marriage to Catherine of Valois."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0081",
     "image": null,
-    "rating": 2,
     "genre": "Fantasy",
     "progress": 0,
     "dateStarted": "2023-09-20",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 2,
+    "userRating": null
   },
   {
     "title": "The First Part of King Henry IV",
@@ -1244,14 +1226,14 @@
     "description": {
       "description": "A history play about King Henry IV's struggle to maintain his throne and his son Prince Hal's journey from irresponsible youth to responsible leader."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0082",
     "image": null,
-    "rating": 4,
     "genre": "Adventure",
     "progress": 0,
     "dateStarted": "2023-12-19",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 4,
+    "userRating": null
   },
   {
     "title": "The Second Part of King Henry IV",
@@ -1259,14 +1241,14 @@
     "description": {
       "description": "A continuation of the story of King Henry IV and Prince Hal, exploring themes of power, responsibility, and the transition of leadership."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0083",
     "image": null,
-    "rating": 5,
     "genre": "Historical Fiction",
     "progress": 0,
     "dateStarted": "2023-06-09",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "The Tragedy of King Richard the Second",
@@ -1274,14 +1256,14 @@
     "description": {
       "description": "A history play about the deposition of King Richard II by his cousin Henry Bolingbroke, exploring themes of kingship, power, and divine right."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0084",
     "image": null,
-    "rating": 5,
     "genre": "Fiction",
     "progress": 0,
     "dateStarted": "2023-06-23",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "The First Part of Henry the Sixth",
@@ -1289,14 +1271,14 @@
     "description": {
       "description": "A history play about the early reign of King Henry VI and the beginning of the Wars of the Roses."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0085",
     "image": null,
-    "rating": 1,
     "genre": "Adventure",
     "progress": 0,
     "dateStarted": "2023-03-29",
     "dateFinished": null,
-    "type": "audio"
+    "communityRating": 1,
+    "userRating": null
   },
   {
     "title": "The Second Part of Henry the Sixth",
@@ -1304,14 +1286,14 @@
     "description": {
       "description": "A continuation of the story of King Henry VI and the escalating conflict between the houses of Lancaster and York."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0086",
     "image": null,
-    "rating": 5,
     "genre": "Comedy",
     "progress": 0,
     "dateStarted": "2023-05-05",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 5,
+    "userRating": null
   },
   {
     "title": "The Third Part of Henry the Sixth",
@@ -1319,14 +1301,14 @@
     "description": {
       "description": "The final part of the Henry VI trilogy, depicting the climax of the Wars of the Roses and the rise of the Yorkist faction."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0087",
     "image": null,
-    "rating": 1,
     "genre": "Philosophy",
     "progress": 0,
     "dateStarted": "2023-01-09",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 1,
+    "userRating": null
   },
   {
     "title": "The Life and Death of King Richard the Third",
@@ -1334,14 +1316,14 @@
     "description": {
       "description": "A history play about the rise and fall of Richard III, exploring themes of power, ambition, and the consequences of evil."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0088",
     "image": null,
-    "rating": 3,
     "genre": "Fantasy",
     "progress": 0,
     "dateStarted": "2023-03-15",
     "dateFinished": null,
-    "type": "digital"
+    "communityRating": 3,
+    "userRating": null
   },
   {
     "title": "The Life of King Henry the Fifth",
@@ -1349,223 +1331,1069 @@
     "description": {
       "description": "A history play about King Henry V's military campaign in France, culminating in the Battle of Agincourt and his marriage to Catherine of Valois."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-000000-0089",
     "image": null,
-    "rating": 3,
     "genre": "Historical Fiction",
     "progress": 0,
     "dateStarted": "2023-04-16",
     "dateFinished": null,
-    "type": "paper"
+    "communityRating": 3,
+    "userRating": null
   },
   {
-    "title": "The Merry Wives of Windsor",
-    "author": "William Shakespeare",
+    "title": "The Midnight Library",
+    "author": "Matt Haig",
     "description": {
-      "description": "A comedy about Sir John Falstaff and his attempts to seduce two married women, who turn the tables on him."
+      "description": "A novel about a library between life and death where each book represents a different life the protagonist could have lived."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-0525559474",
     "image": null,
-    "rating": 2,
-    "genre": "Classic Literature",
+    "communityRating": 4.1,
+    "userRating": null,
+    "genre": "Contemporary Fiction",
     "progress": 0,
-    "dateStarted": "2023-12-21",
+    "dateStarted": null,
     "dateFinished": null,
-    "type": "paper"
+    "pages": 288
   },
   {
-    "title": "Much Ado About Nothing",
-    "author": "William Shakespeare",
+    "title": "Project Hail Mary",
+    "author": "Andy Weir",
     "description": {
-      "description": "A comedy about two pairs of lovers, exploring themes of love, deception, and the battle of the sexes."
+      "description": "A science fiction novel about an astronaut who wakes up alone on a spaceship with no memory of how he got there."
     },
-    "isbn": "978-0743477567",
+    "isbn": "978-0593135204",
     "image": null,
-    "rating": 3,
-    "genre": "Tragedy",
-    "progress": 0,
-    "dateStarted": "2023-11-09",
-    "dateFinished": null,
-    "type": "digital"
-  },
-  {
-    "title": "Love's Labour's Lost",
-    "author": "William Shakespeare",
-    "description": {
-      "description": "A comedy about a king and three lords who swear to avoid women for three years, only to fall in love with a princess and her ladies."
-    },
-    "isbn": "978-0743477567",
-    "image": null,
-    "rating": 2,
-    "genre": "Thriller",
-    "progress": 0,
-    "dateStarted": "2023-08-06",
-    "dateFinished": null,
-    "type": "audio"
-  },
-  {
-    "title": "A Midsummer Night's Dream",
-    "author": "William Shakespeare",
-    "description": {
-      "description": "A comedy about the events surrounding the marriage of Theseus and Hippolyta, including the adventures of four young Athenian lovers and a group of amateur actors."
-    },
-    "isbn": "978-0743477567",
-    "image": null,
-    "rating": 4,
-    "genre": "Tragedy",
-    "progress": 0,
-    "dateStarted": "2023-04-15",
-    "dateFinished": null,
-    "type": "digital"
-  },
-  {
-    "title": "The Merchant of Venice",
-    "author": "William Shakespeare",
-    "description": {
-      "description": "A comedy about a merchant who borrows money from a Jewish moneylender, exploring themes of justice, mercy, and prejudice."
-    },
-    "isbn": "978-0743477567",
-    "image": null,
-    "rating": 1,
-    "genre": "Romance",
-    "progress": 0,
-    "dateStarted": "2023-01-17",
-    "dateFinished": null,
-    "type": "paper"
-  },
-  {
-    "title": "As You Like It",
-    "author": "William Shakespeare",
-    "description": {
-      "description": "A pastoral comedy about love, exile, and reconciliation, set in the Forest of Arden."
-    },
-    "isbn": "978-0743477567",
-    "image": null,
-    "rating": 5,
-    "genre": "Historical Fiction",
-    "progress": 0,
-    "dateStarted": "2023-05-12",
-    "dateFinished": null,
-    "type": "audio"
-  },
-  {
-    "title": "The Taming of the Shrew",
-    "author": "William Shakespeare",
-    "description": {
-      "description": "A comedy about the courtship of Petruchio and Katherina, exploring themes of marriage, gender roles, and power dynamics."
-    },
-    "isbn": "978-0743477567",
-    "image": null,
-    "rating": 3,
-    "genre": "Fiction",
-    "progress": 0,
-    "dateStarted": "2023-12-01",
-    "dateFinished": null,
-    "type": "digital"
-  },
-  {
-    "title": "All's Well That Ends Well",
-    "author": "William Shakespeare",
-    "description": {
-      "description": "A comedy about a young woman who cures a king and wins the hand of a count, exploring themes of love, class, and gender."
-    },
-    "isbn": "978-0743477567",
-    "image": null,
-    "rating": 5,
-    "genre": "Thriller",
-    "progress": 0,
-    "dateStarted": "2023-09-09",
-    "dateFinished": null,
-    "type": "audio"
-  },
-  {
-    "title": "Twelfth Night",
-    "author": "William Shakespeare",
-    "description": {
-      "description": "A comedy about twins separated in a shipwreck and the romantic complications that ensue, exploring themes of love, identity, and gender."
-    },
-    "isbn": "978-0743477567",
-    "image": null,
-    "rating": 1,
-    "genre": "Classic Literature",
-    "progress": 0,
-    "dateStarted": "2023-07-06",
-    "dateFinished": null,
-    "type": "digital"
-  },
-  {
-    "title": "The Winter's Tale",
-    "author": "William Shakespeare",
-    "description": {
-      "description": "A romance about a king who becomes jealous of his wife and abandons their daughter, leading to a series of events that eventually bring about reconciliation."
-    },
-    "isbn": "978-0743477567",
-    "image": null,
-    "rating": 3,
-    "genre": "Thriller",
-    "progress": 0,
-    "dateStarted": "2023-07-15",
-    "dateFinished": null,
-    "type": "digital"
-  },
-  {
-    "title": "The Tempest",
-    "author": "William Shakespeare",
-    "description": {
-      "description": "A play about a sorcerer who uses his magic to restore his daughter to power and deal with his enemies, exploring themes of power, betrayal, and forgiveness."
-    },
-    "isbn": "978-0743477567",
-    "image": null,
-    "rating": 2,
-    "genre": "Adventure",
-    "progress": 0,
-    "dateStarted": "2023-02-06",
-    "dateFinished": null,
-    "type": "paper"
-  },
-  {
-    "title": "Cymbeline",
-    "author": "William Shakespeare",
-    "description": {
-      "description": "A romance about a king who banishes his daughter's husband and the various adventures and misunderstandings that follow."
-    },
-    "isbn": "978-0743477567",
-    "image": null,
-    "rating": 3,
-    "genre": "Tragedy",
-    "progress": 0,
-    "dateStarted": "2023-11-03",
-    "dateFinished": null,
-    "type": "paper"
-  },
-  {
-    "title": "Pericles, Prince of Tyre",
-    "author": "William Shakespeare",
-    "description": {
-      "description": "A romance about a prince who flees his homeland and experiences various adventures, including shipwrecks and family separation."
-    },
-    "isbn": "978-0743477567",
-    "image": null,
-    "rating": 4,
-    "genre": "Comedy",
-    "progress": 0,
-    "dateStarted": "2023-05-04",
-    "dateFinished": null,
-    "type": "audio"
-  },
-  {
-    "title": "The Two Noble Kinsmen",
-    "author": "William Shakespeare & John Fletcher",
-    "description": {
-      "description": "A tragicomedy about two friends who fall in love with the same woman, leading to a duel and tragic consequences."
-    },
-    "isbn": "978-0743477567",
-    "image": null,
-    "rating": 3,
+    "communityRating": 4.4,
+    "userRating": null,
     "genre": "Science Fiction",
     "progress": 0,
-    "dateStarted": "2023-02-10",
+    "dateStarted": null,
     "dateFinished": null,
-    "type": "paper"
+    "pages": 496
+  },
+  {
+    "title": "Klara and the Sun",
+    "author": "Kazuo Ishiguro",
+    "description": {
+      "description": "A novel about an artificial friend who observes the world around her with curiosity and wonder."
+    },
+    "isbn": "978-0593318171",
+    "image": null,
+    "communityRating": 3.8,
+    "userRating": null,
+    "genre": "Literary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 304
+  },
+  {
+    "title": "The Four Winds",
+    "author": "Kristin Hannah",
+    "description": {
+      "description": "A historical novel about a woman's struggle to survive during the Great Depression and Dust Bowl era."
+    },
+    "isbn": "978-0312577236",
+    "image": null,
+    "communityRating": 4.3,
+    "userRating": null,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 464
+  },
+  {
+    "title": "The Sanatorium",
+    "author": "Sarah Pearse",
+    "description": {
+      "description": "A thriller about a detective who must solve a murder at a remote hotel in the Swiss Alps."
+    },
+    "isbn": "978-0593296677",
+    "image": null,
+    "communityRating": 3.6,
+    "userRating": null,
+    "genre": "Thriller",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 400
+  },
+  {
+    "title": "The Push",
+    "author": "Ashley Audrain",
+    "description": {
+      "description": "A psychological thriller about a woman who questions her relationship with her daughter and her own motherhood."
+    },
+    "isbn": "978-0593081471",
+    "image": null,
+    "communityRating": 3.9,
+    "userRating": null,
+    "genre": "Psychological Thriller",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 320
+  },
+  {
+    "title": "The Invisible Life of Addie LaRue",
+    "author": "V.E. Schwab",
+    "description": {
+      "description": "A fantasy novel about a woman who makes a Faustian bargain to live forever but is cursed to be forgotten by everyone she meets."
+    },
+    "isbn": "978-0765387561",
+    "image": null,
+    "communityRating": 4.2,
+    "userRating": null,
+    "genre": "Fantasy",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 448
+  },
+  {
+    "title": "The House in the Cerulean Sea",
+    "author": "TJ Klune",
+    "description": {
+      "description": "A fantasy novel about a caseworker who investigates an orphanage for magical children and finds love and acceptance."
+    },
+    "isbn": "978-1250217288",
+    "image": null,
+    "communityRating": 4.5,
+    "userRating": null,
+    "genre": "Fantasy",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 398
+  },
+  {
+    "title": "The Seven Husbands of Evelyn Hugo",
+    "author": "Taylor Jenkins Reid",
+    "description": {
+      "description": "A novel about an aging Hollywood starlet who finally tells the truth about her scandalous life and her seven marriages."
+    },
+    "isbn": "978-1501161939",
+    "image": null,
+    "communityRating": 4.4,
+    "userRating": null,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 400
+  },
+  {
+    "title": "Verity",
+    "author": "Colleen Hoover",
+    "description": {
+      "description": "A psychological thriller about a struggling writer who discovers the manuscript of a bestselling author with a dark secret."
+    },
+    "isbn": "978-1538724736",
+    "image": null,
+    "communityRating": 4.3,
+    "userRating": null,
+    "genre": "Psychological Thriller",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 336
+  },
+  {
+    "title": "Lessons in Chemistry",
+    "author": "Bonnie Garmus",
+    "description": {
+      "description": "A novel about a female scientist in the 1960s who becomes a cooking show host and challenges gender norms."
+    },
+    "isbn": "978-0385547345",
+    "image": null,
+    "communityRating": 4.4,
+    "userRating": null,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 400
+  },
+  {
+    "title": "Tomorrow, and Tomorrow, and Tomorrow",
+    "author": "Gabrielle Zevin",
+    "description": {
+      "description": "A novel about two friends who create video games together and navigate their complex relationship over decades."
+    },
+    "isbn": "978-0593321201",
+    "image": null,
+    "communityRating": 4.2,
+    "userRating": null,
+    "genre": "Contemporary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 416
+  },
+  {
+    "title": "Book Lovers",
+    "author": "Emily Henry",
+    "description": {
+      "description": "A romantic comedy about a literary agent and an editor who find themselves in a small town together."
+    },
+    "isbn": "978-0593336830",
+    "image": null,
+    "communityRating": 4.1,
+    "userRating": null,
+    "genre": "Romance",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 384
+  },
+  {
+    "title": "The Maid",
+    "author": "Nita Prose",
+    "description": {
+      "description": "A mystery novel about a hotel maid who becomes a suspect in a murder investigation."
+    },
+    "isbn": "978-0593466330",
+    "image": null,
+    "communityRating": 3.8,
+    "userRating": null,
+    "genre": "Mystery",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 304
+  },
+  {
+    "title": "The Lincoln Highway",
+    "author": "Amor Towles",
+    "description": {
+      "description": "A novel about two brothers who embark on a cross-country journey in 1950s America."
+    },
+    "isbn": "978-0735222359",
+    "image": null,
+    "communityRating": 4.3,
+    "userRating": null,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 592
+  },
+  {
+    "title": "Cloud Cuckoo Land",
+    "author": "Anthony Doerr",
+    "description": {
+      "description": "A novel that weaves together the stories of five characters across time and space, connected by an ancient Greek text."
+    },
+    "isbn": "978-1982168438",
+    "image": null,
+    "communityRating": 4.1,
+    "userRating": null,
+    "genre": "Literary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 640
+  },
+  {
+    "title": "Matrix",
+    "author": "Lauren Groff",
+    "description": {
+      "description": "A historical novel about a 17-year-old girl who is sent to a convent and eventually becomes its prioress."
+    },
+    "isbn": "978-0593299962",
+    "image": null,
+    "communityRating": 3.9,
+    "userRating": null,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 272
+  },
+  {
+    "title": "The Sentence",
+    "author": "Louise Erdrich",
+    "description": {
+      "description": "A novel about a Native American woman who works in a bookstore haunted by the ghost of a customer."
+    },
+    "isbn": "978-0062671127",
+    "image": null,
+    "communityRating": 4.0,
+    "userRating": null,
+    "genre": "Literary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 400
+  },
+  {
+    "title": "Trust",
+    "author": "Hernan Diaz",
+    "description": {
+      "description": "A novel about wealth and power in 1920s New York, told through multiple perspectives and narrative forms."
+    },
+    "isbn": "978-0593535178",
+    "image": null,
+    "communityRating": 4.2,
+    "userRating": null,
+    "genre": "Literary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 416
+  },
+  {
+    "title": "Demon Copperhead",
+    "author": "Barbara Kingsolver",
+    "description": {
+      "description": "A modern retelling of David Copperfield set in the opioid crisis of rural Virginia."
+    },
+    "isbn": "978-0063251922",
+    "image": null,
+    "communityRating": 4.4,
+    "userRating": null,
+    "genre": "Literary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 560
+  },
+  {
+    "title": "The Candy House",
+    "author": "Jennifer Egan",
+    "description": {
+      "description": "A novel about technology that allows people to access and share their memories, exploring the consequences of this innovation."
+    },
+    "isbn": "978-1476716763",
+    "image": null,
+    "communityRating": 3.8,
+    "userRating": null,
+    "genre": "Literary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 368
+  },
+  {
+    "title": "Sea of Tranquility",
+    "author": "Emily St. John Mandel",
+    "description": {
+      "description": "A novel that spans centuries and planets, exploring themes of time, art, and human connection."
+    },
+    "isbn": "978-0593466408",
+    "image": null,
+    "communityRating": 4.0,
+    "userRating": null,
+    "genre": "Science Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 272
+  },
+  {
+    "title": "The Kaiju Preservation Society",
+    "author": "John Scalzi",
+    "description": {
+      "description": "A science fiction novel about a group of people who work to protect giant monsters in an alternate dimension."
+    },
+    "isbn": "978-0765389121",
+    "image": null,
+    "communityRating": 4.1,
+    "userRating": null,
+    "genre": "Science Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 264
+  },
+  {
+    "title": "The Daughter of Doctor Moreau",
+    "author": "Silvia Moreno-Garcia",
+    "description": {
+      "description": "A gothic science fiction novel inspired by H.G. Wells' The Island of Doctor Moreau, set in 19th-century Mexico."
+    },
+    "isbn": "978-0593467672",
+    "image": null,
+    "communityRating": 3.9,
+    "userRating": null,
+    "genre": "Science Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 320
+  },
+  {
+    "title": "The Atlas Six",
+    "author": "Olivie Blake",
+    "description": {
+      "description": "A fantasy novel about six magicians who compete for a place in a secret society of magical scholars."
+    },
+    "isbn": "978-1250772806",
+    "image": null,
+    "communityRating": 3.7,
+    "userRating": null,
+    "genre": "Fantasy",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 400
+  },
+  {
+    "title": "A Marvellous Light",
+    "author": "Freya Marske",
+    "description": {
+      "description": "A historical fantasy novel about a civil servant who discovers a world of magic and becomes entangled in a magical mystery."
+    },
+    "isbn": "978-1250783376",
+    "image": null,
+    "communityRating": 4.0,
+    "userRating": null,
+    "genre": "Fantasy",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 384
+  },
+  {
+    "title": "The Jasmine Throne",
+    "author": "Tasha Suri",
+    "description": {
+      "description": "A fantasy novel about a princess and a maidservant who form an alliance to overthrow a tyrannical regime."
+    },
+    "isbn": "978-0316538513",
+    "image": null,
+    "communityRating": 4.2,
+    "userRating": null,
+    "genre": "Fantasy",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 544
+  },
+  {
+    "title": "The Unbroken",
+    "author": "C.L. Clark",
+    "description": {
+      "description": "A fantasy novel about a soldier and a princess who must work together to prevent a rebellion and save their empire."
+    },
+    "isbn": "978-0316542602",
+    "image": null,
+    "communityRating": 3.8,
+    "userRating": null,
+    "genre": "Fantasy",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 480
+  },
+  {
+    "title": "The Chosen and the Beautiful",
+    "author": "Nghi Vo",
+    "description": {
+      "description": "A fantasy retelling of The Great Gatsby from the perspective of Jordan Baker, who is a Vietnamese adoptee and a magician."
+    },
+    "isbn": "978-1250784786",
+    "image": null,
+    "communityRating": 4.1,
+    "userRating": null,
+    "genre": "Fantasy",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 272
+  },
+  {
+    "title": "The Memory Police",
+    "author": "Yoko Ogawa",
+    "description": {
+      "description": "A dystopian novel about an island where objects and memories are systematically erased by the Memory Police."
+    },
+    "isbn": "978-1101911819",
+    "image": null,
+    "communityRating": 4.0,
+    "userRating": null,
+    "genre": "Dystopian",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 288
+  },
+  {
+    "title": "The Testaments",
+    "author": "Margaret Atwood",
+    "description": {
+      "description": "A sequel to The Handmaid's Tale, revealing the inner workings of Gilead and the lives of three women."
+    },
+    "isbn": "978-0385543781",
+    "image": null,
+    "communityRating": 4.1,
+    "userRating": null,
+    "genre": "Dystopian",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 432
+  },
+  {
+    "title": "The Power",
+    "author": "Naomi Alderman",
+    "description": {
+      "description": "A novel about women developing the ability to generate electric shocks, leading to a global power shift."
+    },
+    "isbn": "978-0316547607",
+    "image": null,
+    "communityRating": 4.0,
+    "userRating": null,
+    "genre": "Dystopian",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 400
+  },
+  {
+    "title": "The Water Dancer",
+    "author": "Ta-Nehisi Coates",
+    "description": {
+      "description": "A novel about a young man born into slavery who discovers he has a mysterious power that could help him escape."
+    },
+    "isbn": "978-0399590597",
+    "image": null,
+    "communityRating": 4.2,
+    "userRating": null,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 416
+  },
+  {
+    "title": "The Nickel Boys",
+    "author": "Colson Whitehead",
+    "description": {
+      "description": "A novel about two boys sentenced to a hellish reform school in Jim Crow-era Florida."
+    },
+    "isbn": "978-0385537070",
+    "image": null,
+    "communityRating": 4.1,
+    "userRating": null,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 224
+  },
+  {
+    "title": "The Underground Railroad",
+    "author": "Colson Whitehead",
+    "description": {
+      "description": "A novel about a young slave who escapes via a literal underground railroad, encountering different versions of America."
+    },
+    "isbn": "978-0385542364",
+    "image": null,
+    "communityRating": 4.1,
+    "userRating": null,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 320
+  },
+  {
+    "title": "Homegoing",
+    "author": "Yaa Gyasi",
+    "description": {
+      "description": "A novel that traces the descendants of two half-sisters from 18th-century Ghana to present-day America."
+    },
+    "isbn": "978-1101947139",
+    "image": null,
+    "communityRating": 4.4,
+    "userRating": null,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 320
+  },
+  {
+    "title": "The Night Watchman",
+    "author": "Louise Erdrich",
+    "description": {
+      "description": "A novel based on the life of the author's grandfather, a night watchman who fought against Native American dispossession."
+    },
+    "isbn": "978-0062671189",
+    "image": null,
+    "communityRating": 4.1,
+    "userRating": null,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 464
+  },
+  {
+    "title": "The Prophets",
+    "author": "Robert Jones Jr.",
+    "description": {
+      "description": "A novel about two enslaved men who find love on a plantation and the consequences of their relationship."
+    },
+    "isbn": "978-0593085684",
+    "image": null,
+    "communityRating": 4.3,
+    "userRating": null,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 400
+  },
+  {
+    "title": "The Vanishing Half",
+    "author": "Brit Bennett",
+    "description": {
+      "description": "A novel about twin sisters who choose to live in different worlds, one black and one white, in 1950s America."
+    },
+    "isbn": "978-0525536291",
+    "image": null,
+    "communityRating": 4.2,
+    "userRating": null,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 352
+  },
+  {
+    "title": "The Mothers",
+    "author": "Brit Bennett",
+    "description": {
+      "description": "A novel about a young woman's coming-of-age and the choices that shape her life in a small California town."
+    },
+    "isbn": "978-0399184512",
+    "image": null,
+    "communityRating": 4.0,
+    "userRating": null,
+    "genre": "Contemporary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 288
+  },
+  {
+    "title": "Such a Fun Age",
+    "author": "Kiley Reid",
+    "description": {
+      "description": "A novel about race and privilege in America, following a young black babysitter and her white employer."
+    },
+    "isbn": "978-0525541905",
+    "image": null,
+    "communityRating": 4.0,
+    "userRating": null,
+    "genre": "Contemporary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 320
+  },
+  {
+    "title": "The New Wilderness",
+    "author": "Diane Cook",
+    "description": {
+      "description": "A novel about a mother and daughter who join a group of people living in the wilderness to escape environmental destruction."
+    },
+    "isbn": "978-0062698162",
+    "image": null,
+    "communityRating": 3.8,
+    "userRating": null,
+    "genre": "Dystopian",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 416
+  },
+  {
+    "title": "Leave the World Behind",
+    "author": "Rumaan Alam",
+    "description": {
+      "description": "A novel about two families who find themselves together in a remote house during a mysterious blackout."
+    },
+    "isbn": "978-0062667632",
+    "image": null,
+    "communityRating": 3.7,
+    "userRating": null,
+    "genre": "Literary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 256
+  },
+  {
+    "title": "The Lying Life of Adults",
+    "author": "Elena Ferrante",
+    "description": {
+      "description": "A novel about a teenage girl who discovers the truth about her family and herself in 1990s Naples."
+    },
+    "isbn": "978-1609456090",
+    "image": null,
+    "communityRating": 4.1,
+    "userRating": null,
+    "genre": "Literary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 432
+  },
+  {
+    "title": "The Death of Vivek Oji",
+    "author": "Akwaeke Emezi",
+    "description": {
+      "description": "A novel about a Nigerian family coming to terms with the death of their son and the secrets he kept."
+    },
+    "isbn": "978-0525541608",
+    "image": null,
+    "communityRating": 4.2,
+    "userRating": null,
+    "genre": "Literary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 256
+  },
+  {
+    "title": "Transcendent Kingdom",
+    "author": "Yaa Gyasi",
+    "description": {
+      "description": "A novel about a Ghanaian-American neuroscientist studying addiction and depression while dealing with her own family's struggles."
+    },
+    "isbn": "978-0525658184",
+    "image": null,
+    "communityRating": 4.1,
+    "userRating": null,
+    "genre": "Literary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 288
+  },
+  {
+    "title": "The Glass Hotel",
+    "author": "Emily St. John Mandel",
+    "description": {
+      "description": "A novel about a luxury hotel, a Ponzi scheme, and the interconnected lives of those affected by both."
+    },
+    "isbn": "978-0525529453",
+    "image": null,
+    "communityRating": 4.0,
+    "userRating": null,
+    "genre": "Literary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 320
+  },
+  {
+    "title": "The Dutch House",
+    "author": "Ann Patchett",
+    "description": {
+      "description": "A novel about a brother and sister whose lives are shaped by their childhood home and their father's second marriage."
+    },
+    "isbn": "978-0062963673",
+    "image": null,
+    "communityRating": 4.2,
+    "userRating": null,
+    "genre": "Literary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 352
+  },
+  {
+    "title": "The Topeka School",
+    "author": "Ben Lerner",
+    "description": {
+      "description": "A novel about a high school debate champion in 1990s Kansas and the social forces that shape his identity."
+    },
+    "isbn": "978-0374272349",
+    "image": null,
+    "communityRating": 3.9,
+    "userRating": null,
+    "genre": "Literary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 304
+  },
+  {
+    "title": "The Need",
+    "author": "Helen Phillips",
+    "description": {
+      "description": "A novel about a mother who encounters a mysterious intruder in her home, leading to questions about reality and identity."
+    },
+    "isbn": "978-1982113162",
+    "image": null,
+    "communityRating": 3.8,
+    "userRating": null,
+    "genre": "Literary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 272
+  },
+  {
+    "title": "The Thursday Murder Club",
+    "author": "Richard Osman",
+    "description": {
+      "description": "A mystery novel about four septuagenarians who meet weekly to solve cold cases and find themselves investigating a real murder."
+    },
+    "isbn": "978-0241425442",
+    "image": null,
+    "communityRating": 4.1,
+    "userRating": null,
+    "genre": "Mystery",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 384
+  },
+  {
+    "title": "The Husband's Secret",
+    "author": "Liane Moriarty",
+    "description": {
+      "description": "A novel about a woman who discovers a letter from her husband to be opened only after his death, revealing a devastating secret."
+    },
+    "isbn": "978-0399159343",
+    "image": null,
+    "communityRating": 4.0,
+    "userRating": null,
+    "genre": "Contemporary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 416
+  },
+  {
+    "title": "Nine Perfect Strangers",
+    "author": "Liane Moriarty",
+    "description": {
+      "description": "A novel about nine strangers who gather at a remote health resort for a ten-day retreat, only to discover that things are not what they seem."
+    },
+    "isbn": "978-1250069825",
+    "image": null,
+    "communityRating": 3.8,
+    "userRating": null,
+    "genre": "Contemporary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 464
+  },
+  {
+    "title": "The Last Thing He Told Me",
+    "author": "Laura Dave",
+    "description": {
+      "description": "A novel about a woman who must protect her stepdaughter after her husband disappears, leaving behind only a cryptic note."
+    },
+    "isbn": "978-1501171345",
+    "image": null,
+    "communityRating": 4.0,
+    "userRating": null,
+    "genre": "Thriller",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 320
+  },
+  {
+    "title": "The Paper Palace",
+    "author": "Miranda Cowley Heller",
+    "description": {
+      "description": "A novel about a woman who must choose between the life she has built and the life she could have had with her childhood love."
+    },
+    "isbn": "978-0593329825",
+    "image": null,
+    "communityRating": 4.1,
+    "userRating": null,
+    "genre": "Contemporary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 400
+  },
+  {
+    "title": "Malibu Rising",
+    "author": "Taylor Jenkins Reid",
+    "description": {
+      "description": "A novel about four famous siblings who throw an epic party to celebrate the end of summer, only to have their lives changed forever."
+    },
+    "isbn": "978-1524791259",
+    "image": null,
+    "communityRating": 4.2,
+    "userRating": null,
+    "genre": "Contemporary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 384
+  },
+  {
+    "title": "Daisy Jones & The Six",
+    "author": "Taylor Jenkins Reid",
+    "description": {
+      "description": "A novel about the rise and fall of a fictional 1970s rock band, told through interviews with the band members and their associates."
+    },
+    "isbn": "978-1524798622",
+    "image": null,
+    "communityRating": 4.2,
+    "userRating": null,
+    "genre": "Historical Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 368
+  },
+  {
+    "title": "Carrie Soto Is Back",
+    "author": "Taylor Jenkins Reid",
+    "description": {
+      "description": "A novel about a retired tennis champion who comes out of retirement to reclaim her record from the player who broke it."
+    },
+    "isbn": "978-0593443015",
+    "image": null,
+    "communityRating": 4.1,
+    "userRating": null,
+    "genre": "Contemporary Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 384
+  },
+  {
+    "title": "The Humans",
+    "author": "Matt Haig",
+    "description": {
+      "description": "A novel about an alien who comes to Earth to kill a mathematician, but instead falls in love with humanity."
+    },
+    "isbn": "978-1476739007",
+    "image": null,
+    "communityRating": 4.0,
+    "userRating": null,
+    "genre": "Science Fiction",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 304
+  },
+  {
+    "title": "How to Stop Time",
+    "author": "Matt Haig",
+    "description": {
+      "description": "A novel about a man who has lived for centuries and must decide whether to continue his isolated existence or risk everything for love."
+    },
+    "isbn": "978-1782118646",
+    "image": null,
+    "communityRating": 3.9,
+    "userRating": null,
+    "genre": "Fantasy",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 336
+  },
+  {
+    "title": "The Radleys",
+    "author": "Matt Haig",
+    "description": {
+      "description": "A novel about a family of vampires who try to live normal lives in a small English town."
+    },
+    "isbn": "978-1439172566",
+    "image": null,
+    "communityRating": 3.8,
+    "userRating": null,
+    "genre": "Fantasy",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 368
+  },
+  {
+    "title": "The Dead Romantics",
+    "author": "Ashley Poston",
+    "description": {
+      "description": "A romantic comedy about a ghostwriter who can see ghosts and falls in love with her editor's ghost."
+    },
+    "isbn": "978-0593336489",
+    "image": null,
+    "communityRating": 4.0,
+    "userRating": null,
+    "genre": "Romance",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 352
+  },
+  {
+    "title": "The Love Hypothesis",
+    "author": "Ali Hazelwood",
+    "description": {
+      "description": "A romantic comedy about a scientist who agrees to fake date a colleague to prove a point, only to find herself falling for him."
+    },
+    "isbn": "978-0593336823",
+    "image": null,
+    "communityRating": 4.1,
+    "userRating": null,
+    "genre": "Romance",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 384
+  },
+  {
+    "title": "Beach Read",
+    "author": "Emily Henry",
+    "description": {
+      "description": "A romantic comedy about two writers who agree to swap genres for the summer, leading to unexpected romance."
+    },
+    "isbn": "978-1984806734",
+    "image": null,
+    "communityRating": 4.0,
+    "userRating": null,
+    "genre": "Romance",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 384
+  },
+  {
+    "title": "People We Meet on Vacation",
+    "author": "Emily Henry",
+    "description": {
+      "description": "A romantic comedy about two best friends who take a vacation together every year, until one trip changes everything."
+    },
+    "isbn": "978-1984806758",
+    "image": null,
+    "communityRating": 4.1,
+    "userRating": null,
+    "genre": "Romance",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 400
+  },
+  {
+    "title": "Happy Place",
+    "author": "Emily Henry",
+    "description": {
+      "description": "A romantic comedy about a couple who pretend to still be together during their annual vacation with friends."
+    },
+    "isbn": "978-0593441271",
+    "image": null,
+    "communityRating": 4.0,
+    "userRating": null,
+    "genre": "Romance",
+    "progress": 0,
+    "dateStarted": null,
+    "dateFinished": null,
+    "pages": 400
   }
 ]

@@ -25,8 +25,8 @@ interface Book {
     title?: string;
   } | null;
   isbn: string;
-  communityRating?: number;
-  userRating?: number;
+  communityRating?: number | null;
+  userRating?: number | null;
   genre?: string;
   progress?: number;
   dateStarted?: string | null;
@@ -68,10 +68,10 @@ const BookPage = ({ params }: BookPageProps) => {
   }
 
   const getRatingDisplay = (book: Book) => {
-    if (book.userRating !== undefined) {
+    if (book.userRating !== undefined && book.userRating !== null) {
       return `${book.userRating.toFixed(1)} (your rating)`;
     }
-    if (book.communityRating !== undefined) {
+    if (book.communityRating !== undefined && book.communityRating !== null) {
       return `${book.communityRating.toFixed(1)} (community)`;
     }
     return 'No rating';
@@ -105,7 +105,7 @@ const BookPage = ({ params }: BookPageProps) => {
                 </Text>
               </div>
               <StatusIndicator 
-                status={getBookStatus(bookWithStatus || book)} 
+                status={getBookStatus(bookWithStatus || book) || 'want-to-read'} 
                 size="large" 
               />
             </BookHeader>
@@ -199,7 +199,7 @@ const BackButton = styled.button`
   background: none;
   border: none;
   color: ${theme.colors.primary};
-  font-size: ${theme.fontSizes.md};
+  font-size: ${theme.fontSizes.base};
   cursor: pointer;
   padding: ${theme.spacing.sm} 0;
   margin-bottom: ${theme.spacing.lg};

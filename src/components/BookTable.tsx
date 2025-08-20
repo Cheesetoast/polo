@@ -56,10 +56,10 @@ export const BookTable = ({ books, onBookClick, onAuthorClick, pageSize = 10 }: 
   };
 
   const getRatingDisplay = (book: Book) => {
-    if (book.userRating !== undefined) {
+    if (book.userRating !== undefined && book.userRating !== null) {
       return `${book.userRating.toFixed(1)} (your rating)`;
     }
-    if (book.communityRating !== undefined) {
+    if (book.communityRating !== undefined && book.communityRating !== null) {
       return `${book.communityRating.toFixed(1)} (community)`;
     }
     return '-';

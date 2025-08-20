@@ -18,8 +18,8 @@ export interface Book {
         title?: string;
     } | null;
     isbn: string;
-    communityRating?: number; // Average rating from the community
-    userRating?: number; // User's personal rating (only available after finishing)
+    communityRating?: number | null; // Average rating from the community
+    userRating?: number | null; // User's personal rating (only available after finishing)
     genre?: string;
     progress?: number;
     dateStarted?: string | null;
@@ -113,7 +113,7 @@ export const Book = ({ book, onClick, style, showStatus = false }: BookProps) =>
                                     ))}
                                 </div>
                                 <Text variant="caption" style={{ marginLeft: '4px' }}>
-                                    ({book.communityRating.toFixed(1)})
+                                    ({book.communityRating?.toFixed(1) || '0.0'})
                                 </Text>
                             </div>
                         )}
@@ -133,7 +133,7 @@ export const Book = ({ book, onClick, style, showStatus = false }: BookProps) =>
                                     ))}
                                 </div>
                                 <Text variant="caption" style={{ marginLeft: '4px' }}>
-                                    ({book.userRating.toFixed(1)})
+                                    ({book.userRating?.toFixed(1) || '0.0'})
                                 </Text>
                             </div>
                         )}
