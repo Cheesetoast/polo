@@ -1,6 +1,8 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 
+// Note: @dnd-kit mocks are handled locally in individual test files that need them
+
 // Mock Gatsby's Link component
 jest.mock('gatsby', () => ({
   Link: ({ children, to, ...rest }) => (

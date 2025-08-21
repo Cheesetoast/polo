@@ -6,6 +6,9 @@ import { StatusIndicator } from './StatusIndicator';
 import { BookProgressBar } from './BookProgressBar';
 import { ReadingStatus } from './BookBoard';
 import { DEFAULTS } from '../constants';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { navigate } from 'gatsby';
 
 export interface Book {
     title: string;
@@ -33,24 +36,51 @@ export interface BookProps {
     onClick?: () => void;
     style?: Record<string, any>; // Generic CSS properties
     showStatus?: boolean;
+    dragHandleProps?: any; // Props for the drag handle
+    isDragging?: boolean;
 }
 
-export const Book = ({ book, onClick, style, showStatus = false }: BookProps) => {
+export const Book = ({ book, onClick, style, showStatus = false, dragHandleProps, isDragging = false }: BookProps) => {
+    const handleTitleClick = (e: React.MouseEvent) => {
+        e.stopPropagation(); // Prevent triggering the card's onClick
+        navigate(`/book/${book.isbn.replace(/-/g, '')}`);
+    };
+
+    const handleAuthorClick = (e: React.MouseEvent) => {
+        e.stopPropagation(); // Prevent triggering the card's onClick
+        navigate(`/search-results?author=${encodeURIComponent(book.author)}`);
+    };
+
     return (
-        <StyledBook onClick={onClick} style={style}>
+        <StyledBook 
+            onClick={onClick} 
+            style={style}
+            $isDragging={isDragging}
+        >
             <BookHeader>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: theme.spacing.xs }}>
                     <div style={{ flex: 1 }}>
-                        <Text variant="h3" style={{ marginBottom: theme.spacing.xs }}>
+                        <BookTitle 
+                            onClick={handleTitleClick}
+                        >
                             {book.title}
-                        </Text>
-                        <Text variant="p" color="secondary">
+                        </BookTitle>
+                        <AuthorName onClick={handleAuthorClick}>
                             By {book.author}
-                        </Text>
+                        </AuthorName>
                     </div>
-                    {showStatus && book.status && (
-                        <StatusIndicator status={book.status} size="small" showLabel={false} />
-                    )}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.xs }}>
+                        {showStatus && book.status && (
+                            <StatusIndicator status={book.status} size="small" showLabel={false} />
+                        )}
+                        {dragHandleProps && (
+                            <DragHandle {...dragHandleProps}>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M4 6h8v1H4V6zm0 3h8v1H4V9z"/>
+                                </svg>
+                            </DragHandle>
+                        )}
+                    </div>
                 </div>
             </BookHeader>
 
@@ -159,7 +189,7 @@ export const Book = ({ book, onClick, style, showStatus = false }: BookProps) =>
 export default Book;
 
 // Styled Components
-const StyledBook = styled.div`
+const StyledBook = styled.div<{ $isDragging?: boolean }>`
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing.sm};
@@ -171,6 +201,8 @@ const StyledBook = styled.div`
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transform: ${props => props.$isDragging ? 'scale(1.05)' : 'scale(1)'};
+  box-shadow: ${props => props.$isDragging ? '0 4px 8px rgba(0, 0, 0, 0.15)' : '0 2px 4px rgba(0, 0, 0, 0.1)'};
 
   &:hover {
     transform: translateY(-2px);
@@ -193,4 +225,57 @@ const BookFooter = styled.div`
   margin-top: auto;
   padding-top: ${theme.spacing.sm};
   border-top: 1px solid ${theme.colors.muted};
+`;
+
+const BookTitle = styled.div`
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-size: ${theme.fontSizes.lg};
+  font-weight: ${theme.fontWeights.semibold};
+  color: ${theme.colors.primary};
+  margin-bottom: ${theme.spacing.xs};
+  
+  &:hover {
+    color: ${theme.colors.primary};
+    text-decoration: underline;
+  }
+`;
+
+const AuthorName = styled.div`
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-size: ${theme.fontSizes.sm};
+  color: ${theme.colors.secondary};
+  margin-top: ${theme.spacing.xs};
+  
+  &:hover {
+    color: ${theme.colors.secondary};
+    text-decoration: underline;
+  }
+`;
+
+const DragHandle = styled.div`
+  cursor: grab;
+  color: ${theme.colors.muted};
+  padding: ${theme.spacing.xs};
+  border-radius: ${theme.borderRadius.sm};
+  transition: all 0.2s ease;
+  background-color: ${theme.colors.muted}10;
+  border: 1px solid ${theme.colors.muted}20;
+  
+  &:hover {
+    color: ${theme.colors.primary};
+    background-color: ${theme.colors.primary}10;
+    border-color: ${theme.colors.primary}30;
+    transform: scale(1.05);
+  }
+  
+  &:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+  }
+  
+  svg {
+    display: block;
+  }
 `;
