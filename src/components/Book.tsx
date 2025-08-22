@@ -23,7 +23,7 @@ export interface Book {
     isbn: string;
     communityRating?: number | null; // Average rating from the community
     userRating?: number | null; // User's personal rating (only available after finishing)
-    genre?: string;
+    genres?: string[];
     progress?: number;
     dateStarted?: string | null;
     dateFinished?: string | null;
@@ -94,10 +94,25 @@ export const Book = ({ book, onClick, style, showStatus = false, dragHandleProps
                 
                 {/* Book Metadata */}
                 <MetadataContainer>
-                    {book.genre && (
-                        <GenreTag>
-                            {book.genre}
-                        </GenreTag>
+                    {book.genres && book.genres.length > 0 && (
+                        <>
+                            {book.genres.slice(0, 2).map((genre, index) => (
+                                <GenreTag
+                                    key={index}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        navigate(`/genre/${encodeURIComponent(genre)}`);
+                                    }}
+                                >
+                                    {genre}
+                                </GenreTag>
+                            ))}
+                            {book.genres.length > 2 && (
+                                <span style={{ fontSize: '0.7rem', color: '#9ca3af' }}>
+                                    +{book.genres.length - 2} more
+                                </span>
+                            )}
+                        </>
                     )}
                     
                     {book.communityRating && (
@@ -252,6 +267,12 @@ const GenreTag = styled.span`
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #0056b3;
+  }
 `;
 
 const RatingTag = styled.span`

@@ -112,7 +112,12 @@ const AuthorPage = ({ params }: AuthorPageProps) => {
             <SectionTitle>Genres</SectionTitle>
             <GenresList>
               {author.genres.map(genre => (
-                <GenreTag key={genre}>{genre}</GenreTag>
+                <GenreTag 
+                  key={genre}
+                  onClick={() => navigate(`/genre/${encodeURIComponent(genre)}`)}
+                >
+                  {genre}
+                </GenreTag>
               ))}
             </GenresList>
           </GenresSection>
@@ -333,26 +338,15 @@ const GenreTag = styled.span`
   border-radius: 20px;
   font-size: 1rem;
   font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: #0056b3;
+  }
 `;
 
-const NotableWorksSection = styled.section`
-  margin-bottom: 48px;
-`;
 
-const NotableWorksList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-`;
-
-const NotableWork = styled.span`
-  background: #f8f9fa;
-  color: #007bff;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 1rem;
-  border: 2px solid #007bff;
-`;
 
 const BooksSection = styled.section`
   margin-bottom: 48px;

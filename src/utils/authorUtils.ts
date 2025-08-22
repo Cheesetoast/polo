@@ -25,7 +25,7 @@ export interface BookWithAuthorId {
   image: string | null;
   communityRating: number;
   userRating: number | null;
-  genre: string;
+  genres: string[];
   progress: number;
   dateStarted: string | null;
   dateFinished: string | null;
@@ -119,4 +119,41 @@ export const getAllNationalities = (): string[] => {
 export const getAllAuthorGenres = (): string[] => {
   const allGenres = authors.flatMap(author => author.genres);
   return [...new Set(allGenres)].sort();
+};
+
+/**
+ * Get all unique genres from books
+ */
+export const getAllBookGenres = (): string[] => {
+  const allGenres = books.flatMap(book => book.genres);
+  return [...new Set(allGenres)].sort();
+};
+
+/**
+ * Get all books by genre
+ */
+export const getBooksByGenre = (genre: string): BookWithAuthorId[] => {
+  return books.filter(book => book.genres.includes(genre));
+};
+
+/**
+ * Get all books by author genre (with fuzzy matching)
+ */
+export const getBooksByAuthorGenre = (authorGenre: string): BookWithAuthorId[] => {
+  // First try exact match
+  let matchingBooks = books.filter(book => book.genres.includes(authorGenre));
+  
+  // If no exact match, try fuzzy matching
+  if (matchingBooks.length === 0) {
+    const lowerAuthorGenre = authorGenre.toLowerCase();
+    matchingBooks = books.filter(book => {
+      return book.genres.some(bookGenre => {
+        const lowerBookGenre = bookGenre.toLowerCase();
+        return lowerBookGenre.includes(lowerAuthorGenre) || 
+               lowerAuthorGenre.includes(lowerBookGenre);
+      });
+    });
+  }
+  
+  return matchingBooks;
 };

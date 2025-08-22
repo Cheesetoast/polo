@@ -182,7 +182,22 @@ const AuthorsPage = () => {
               {author.genres.length > 0 && (
                 <GenresContainer>
                   {author.genres.slice(0, 3).map(genre => (
-                    <GenreTag key={genre}>
+                    <GenreTag 
+                      key={genre}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        console.log('Genre clicked:', genre);
+                        console.log('Navigating to:', `/genre/${encodeURIComponent(genre)}`);
+                        try {
+                          console.log('Attempting to navigate to genre page...');
+                          navigate(`/genre/${encodeURIComponent(genre)}`);
+                        } catch (error) {
+                          console.error('Navigate error:', error);
+                          console.log('Falling back to window.location...');
+                          window.location.href = `/genre/${encodeURIComponent(genre)}`;
+                        }
+                      }}
+                    >
                       {genre}
                     </GenreTag>
                   ))}
@@ -413,6 +428,12 @@ const GenreTag = styled.span`
   padding: 4px 8px;
   border-radius: 12px;
   font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: #374151;
+  }
 `;
 
 const MoreGenres = styled.span`
