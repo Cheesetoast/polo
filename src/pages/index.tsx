@@ -6,7 +6,7 @@ import { Text } from "../components/Text"
 import { ContentWrapper } from "../components/ContentWrapper"
 import { SITE_CONFIG } from "../constants"
 import { Dashboard } from "../components/Dashboard"
-import { calculateYearInBooksStats } from "../utils/yearInBooksStats"
+
 import booksData from "../data/books.json"
 import { useState, useMemo } from "react"
 import { useBookStatus } from "../hooks/useBookStatus"
@@ -100,8 +100,7 @@ const IndexPage = () => {
     };
   }, [books, booksWithStatus]);
 
-  // Calculate year-in-books statistics
-  const yearInBooksStats = useMemo(() => calculateYearInBooksStats(BOOKS_DATA), []);
+
 
   return (
     <Layout>
@@ -151,7 +150,7 @@ const IndexPage = () => {
             </Button>
           </BookshelfSection>
 
-          <Dashboard stats={dashboardStats} yearInBooksStats={yearInBooksStats} />
+          <Dashboard stats={dashboardStats} />
 
         </ContentWrapper>
 

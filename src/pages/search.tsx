@@ -34,15 +34,20 @@ const SearchPage = () => {
   const books: Book[] = booksData;
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGenre, setSelectedGenre] = useState<string>("");
+  
+  // Ensure books data is available before rendering
+  const isDataReady = books && books.length > 0;
 
   // Get unique genres and authors for filters
   const genres = useMemo(() => {
+    if (!books || books.length === 0) return [];
     const allGenres = books.flatMap(book => book.genres || []).filter(Boolean);
     const uniqueGenres = [...new Set(allGenres)];
     return uniqueGenres.sort();
   }, [books]);
 
   const authors = useMemo(() => {
+    if (!books || books.length === 0) return [];
     const uniqueAuthors = [...new Set(books.map(book => book.author).filter(Boolean))];
     return uniqueAuthors.sort();
   }, [books]);
@@ -65,74 +70,78 @@ const SearchPage = () => {
             </Text>
           </div>
 
-          <SearchForm onSubmit={(e) => {
-            e.preventDefault();
-            const params = new URLSearchParams();
-            if (searchQuery) params.set('search', searchQuery);
-            if (selectedGenre) params.set('genre', selectedGenre);
-            
-            const queryString = params.toString();
-            navigate(`/search-results${queryString ? `?${queryString}` : ''}`);
-          }}>
-            <SearchInput
-              type="text"
-              placeholder="Search by title, author, or description..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            
-            <FiltersContainer>
-              <FilterGroup>
-                <Text variant="caption" weight="medium">Genre:</Text>
-                <FilterSelect
-                  value={selectedGenre}
-                  onChange={(e) => setSelectedGenre(e.target.value)}
+          {isDataReady && (
+            <SearchForm onSubmit={(e) => {
+              e.preventDefault();
+              const params = new URLSearchParams();
+              if (searchQuery) params.set('search', searchQuery);
+              if (selectedGenre) params.set('genre', selectedGenre);
+              
+              const queryString = params.toString();
+              navigate(`/search-results${queryString ? `?${queryString}` : ''}`);
+            }}>
+              <SearchInput
+                type="text"
+                placeholder="Search by title, author, or description..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              
+              <FiltersContainer>
+                <FilterGroup>
+                  <Text variant="caption" weight="medium">Genre:</Text>
+                  <FilterSelect
+                    value={selectedGenre}
+                    onChange={(e) => setSelectedGenre(e.target.value)}
+                  >
+                    <option value="">All Genres</option>
+                    {genres && genres.length > 0 && genres.map(genre => (
+                      <option key={genre} value={genre}>{genre}</option>
+                    ))}
+                  </FilterSelect>
+                </FilterGroup>
+
+
+
+
+
+                <Button 
+                  type="submit"
+                  variant="primary"
+                  size="small"
                 >
-                  <option value="">All Genres</option>
-                  {genres.map(genre => (
-                    <option key={genre} value={genre}>{genre}</option>
-                  ))}
-                </FilterSelect>
-              </FilterGroup>
+                  Search
+                </Button>
 
-
-
-
-
-              <Button 
-                type="submit"
-                variant="primary"
-                size="small"
-              >
-                Search
-              </Button>
-
-              <Button 
-                onClick={handleClearFilters} 
-                variant="outline" 
-                size="small"
-                type="button"
-              >
-                Clear Filters
-              </Button>
-            </FiltersContainer>
-          </SearchForm>
-
-          <QuickSearchSection>
-            <Text variant="h3">Quick Search</Text>
-            <Text variant="p" color="secondary">Click on any author name to see all their books</Text>
-            
-            <AuthorsGrid>
-              {authors.slice(0, 12).map(author => (
-                <AuthorButton
-                  key={author}
-                  onClick={() => navigate(`/search-results?author=${encodeURIComponent(author)}`)}
+                <Button 
+                  onClick={handleClearFilters} 
+                  variant="outline" 
+                  size="small"
+                  type="button"
                 >
-                  {author}
-                </AuthorButton>
-              ))}
-            </AuthorsGrid>
-          </QuickSearchSection>
+                  Clear Filters
+                </Button>
+              </FiltersContainer>
+            </SearchForm>
+          )}
+
+          {isDataReady && (
+            <QuickSearchSection>
+              <Text variant="h3">Quick Search</Text>
+              <Text variant="p" color="secondary">Click on any author name to see all their books</Text>
+              
+              <AuthorsGrid>
+                {authors && authors.length > 0 && authors.slice(0, 12).map(author => (
+                  <AuthorButton
+                    key={author}
+                    onClick={() => navigate(`/search-results?author=${encodeURIComponent(author)}`)}
+                  >
+                    {author}
+                  </AuthorButton>
+                ))}
+              </AuthorsGrid>
+            </QuickSearchSection>
+          )}
 
         </ContentWrapper>
       </main>

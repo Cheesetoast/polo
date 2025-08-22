@@ -11,38 +11,7 @@ const mockStats = {
   averageRating: '4.2',
 };
 
-const mockYearInBooksStats = {
-  booksRead: 12,
-  pagesRead: 3500,
-  averageRating: 4.3,
-  topBooks: [
-    {
-      title: 'Test Book 1',
-      author: 'Test Author 1',
-      description: { description: 'Test description 1' },
-      isbn: '978-1',
-      communityRating: 4.5,
-      userRating: 5,
-      genre: 'Fiction',
-      pages: 300,
-      dateFinished: '2023-06-15',
 
-    },
-    {
-      title: 'Test Book 2',
-      author: 'Test Author 2',
-      description: { description: 'Test description 2' },
-      isbn: '978-2',
-      communityRating: 4.0,
-      userRating: 4,
-      genre: 'Non-Fiction',
-      pages: 250,
-      dateFinished: '2023-07-20',
-
-    },
-  ],
-  favoriteGenre: 'Fiction',
-};
 
 describe('Dashboard Component', () => {
   it('renders without crashing', () => {
@@ -50,9 +19,9 @@ describe('Dashboard Component', () => {
     expect(container.firstChild).toBeTruthy();
   });
 
-  it('renders with year-in-books stats without crashing', () => {
+  it('renders dashboard stats correctly', () => {
     const { container } = render(
-      <Dashboard stats={mockStats} yearInBooksStats={mockYearInBooksStats} />
+      <Dashboard stats={mockStats} />
     );
     expect(container.firstChild).toBeTruthy();
   });
@@ -67,20 +36,6 @@ describe('Dashboard Component', () => {
       averageRating: '0.0',
     };
     const { container } = render(<Dashboard stats={emptyStats} />);
-    expect(container.firstChild).toBeTruthy();
-  });
-
-  it('handles empty year-in-books stats gracefully', () => {
-    const emptyYearStats = {
-      booksRead: 0,
-      pagesRead: 0,
-      averageRating: 0,
-      topBooks: [],
-      favoriteGenre: 'None',
-    };
-    const { container } = render(
-      <Dashboard stats={mockStats} yearInBooksStats={emptyYearStats} />
-    );
     expect(container.firstChild).toBeTruthy();
   });
 });

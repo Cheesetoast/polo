@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import { Text } from './Text';
-import { YearInBooksDash } from './YearInBooksDash';
-import { Book } from './Book';
 
 interface DashboardStats {
   totalBooks: number;
@@ -13,31 +11,18 @@ interface DashboardStats {
   averageRating: string;
 }
 
-interface YearInBooksStats {
-  booksRead: number;
-  pagesRead: number;
-  averageRating: number;
-  topBooks: Book[];
-  favoriteGenre: string;
-}
-
 interface DashboardProps {
   stats: DashboardStats;
-  yearInBooksStats?: YearInBooksStats;
   className?: string;
   style?: Record<string, any>; // Generic CSS properties
 }
 
-export const Dashboard = ({ stats, yearInBooksStats, className, style }: DashboardProps) => {
+export const Dashboard = ({ stats, className, style }: DashboardProps) => {
   return (
     <DashboardContainer className={className} style={style}>
       <DashboardTitle variant="h3">
         Reading Statistics
       </DashboardTitle>
-
-      {yearInBooksStats && (
-        <YearInBooksDash stats={yearInBooksStats} />
-      )}
       
       <StatsGrid>
         <StatCard>
