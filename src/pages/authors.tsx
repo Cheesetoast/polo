@@ -6,7 +6,8 @@ import {
   getAllAuthorGenres, 
   searchAuthors, 
   getAuthorsByNationality, 
-  getAuthorsByGenre 
+  getAuthorsByGenre,
+  getBooksByAuthor
 } from '../utils/authorUtils';
 import { Author } from '../utils/authorUtils';
 
@@ -193,25 +194,37 @@ const AuthorsPage = () => {
                 </GenresContainer>
               )}
 
-              {author.notableWorks.length > 0 && (
-                <NotableWorksContainer>
-                  <NotableWorksLabel>
-                    Notable Works:
-                  </NotableWorksLabel>
-                  <NotableWorksList>
-                    {author.notableWorks.slice(0, 2).map(work => (
-                      <NotableWork key={work}>
-                        {work}
-                      </NotableWork>
-                    ))}
-                    {author.notableWorks.length > 2 && (
-                      <MoreWorks>
-                        +{author.notableWorks.length - 2} more
-                      </MoreWorks>
-                    )}
-                  </NotableWorksList>
-                </NotableWorksContainer>
-              )}
+              {(() => {
+                const authorBooks = getBooksByAuthor(author.id);
+                if (authorBooks.length > 0) {
+                  return (
+                    <BooksContainer>
+                      <BooksLabel>
+                        Books ({authorBooks.length}):
+                      </BooksLabel>
+                      <BooksList>
+                        {authorBooks.slice(0, 3).map(book => (
+                          <BookLink 
+                            key={book.isbn}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigate(`/book/${book.isbn}`);
+                            }}
+                          >
+                            {book.title}
+                          </BookLink>
+                        ))}
+                        {authorBooks.length > 3 && (
+                          <MoreBooks>
+                            +{authorBooks.length - 3} more
+                          </MoreBooks>
+                        )}
+                      </BooksList>
+                    </BooksContainer>
+                  );
+                }
+                return null;
+              })()}
             </AuthorCard>
           ))}
         </AuthorsGrid>
@@ -408,28 +421,34 @@ const MoreGenres = styled.span`
   font-style: italic;
 `;
 
-const NotableWorksContainer = styled.div`
+const BooksContainer = styled.div`
   margin-bottom: 0;
 `;
 
-const NotableWorksLabel = styled.span`
+const BooksLabel = styled.span`
   font-weight: 600;
   color: #6b7280;
   font-size: 0.9rem;
   margin-right: 8px;
 `;
 
-const NotableWorksList = styled.span`
+const BooksList = styled.span`
   display: inline;
 `;
 
-const NotableWork = styled.span`
-  color: #111827;
+const BookLink = styled.span`
+  color: #007bff;
   font-size: 0.9rem;
   margin-right: 8px;
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    color: #0056b3;
+  }
 `;
 
-const MoreWorks = styled.span`
+const MoreBooks = styled.span`
   color: #9ca3af;
   font-size: 0.8rem;
   font-style: italic;

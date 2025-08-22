@@ -12,7 +12,6 @@ export interface Author {
   bio: string | null;
   website: string | null;
   image: string | null;
-  notableWorks: string[];
 }
 
 export interface BookWithAuthorId {

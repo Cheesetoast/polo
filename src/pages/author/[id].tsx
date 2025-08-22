@@ -118,16 +118,7 @@ const AuthorPage = ({ params }: AuthorPageProps) => {
           </GenresSection>
         )}
 
-        {author.notableWorks.length > 0 && (
-          <NotableWorksSection>
-            <SectionTitle>Notable Works</SectionTitle>
-            <NotableWorksList>
-              {author.notableWorks.map(work => (
-                <NotableWork key={work}>{work}</NotableWork>
-              ))}
-            </NotableWorksList>
-          </NotableWorksSection>
-        )}
+
 
         <BooksSection>
           <SectionTitle>
