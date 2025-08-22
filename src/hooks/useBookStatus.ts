@@ -6,6 +6,7 @@ import { DEFAULTS } from '../constants';
 interface BookWithReadingStatus extends Book {
   status: ReadingStatus | null;
   progress?: number;
+  userRating?: number | null;
 }
 
 const STORAGE_KEY = 'book-status-data';
@@ -14,6 +15,7 @@ interface BookStatusData {
   [isbn: string]: {
     status: ReadingStatus | null;
     progress?: number;
+    userRating?: number | null;
   };
 }
 
@@ -72,6 +74,12 @@ export const useBookStatus = (books: Book[]) => {
         finalProgress = storedData.progress; // Override only if stored progress exists
       }
       
+      // For userRating: use stored rating if it exists, otherwise use book's original rating
+      let finalUserRating = book.userRating; // Start with book's original rating
+      if (storedData?.userRating !== undefined) {
+        finalUserRating = storedData.userRating; // Override only if stored rating exists
+      }
+      
       // Determine initial status based on book data
       const determineInitialStatus = (): ReadingStatus | null => {
         // If book has progress = 100, it should be marked as finished
@@ -90,6 +98,7 @@ export const useBookStatus = (books: Book[]) => {
         ...book,
         status: storedData?.status ?? determineInitialStatus(),
         progress: finalProgress,
+        userRating: finalUserRating,
       };
     });
   }, [books, readingStatusData]);
@@ -107,6 +116,7 @@ export const useBookStatus = (books: Book[]) => {
         [isbn]: {
           status,
           progress: prev[isbn]?.progress ?? book?.progress ?? 0, // Use stored progress, then book progress, then default to 0
+          userRating: prev[isbn]?.userRating,
         },
       };
       console.log('useBookStatus setReadingStatusData:', { 
@@ -140,6 +150,21 @@ export const useBookStatus = (books: Book[]) => {
       [isbn]: {
         status: prev[isbn]?.status || DEFAULT_STATUS,
         progress: Math.max(0, Math.min(100, progress)), // Ensure progress is between 0-100
+        userRating: prev[isbn]?.userRating,
+      },
+    }));
+  }, []);
+
+  // Update a book's user rating
+  const updateBookRating = useCallback((isbn: string | undefined, rating: number | null) => {
+    if (!isbn) return; // Skip books without ISBN
+    
+    setReadingStatusData(prev => ({
+      ...prev,
+      [isbn]: {
+        status: prev[isbn]?.status || DEFAULT_STATUS,
+        progress: prev[isbn]?.progress ?? 0,
+        userRating: rating,
       },
     }));
   }, []);
@@ -169,6 +194,7 @@ export const useBookStatus = (books: Book[]) => {
     booksWithStatus,
     updateBookStatus,
     updateBookProgress,
+    updateBookRating,
     clearBookStatus,
     resetStatuses,
     clearLocalStorage,

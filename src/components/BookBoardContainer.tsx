@@ -48,11 +48,11 @@ export const BookBoardContainer = ({
       .map(([genre, count]) => `${genre} (${count})`);
     
     // Average rating (use user rating if available, otherwise community rating)
-    const ratedBooks = booksWithAssignedStatus.filter(book => book.userRating !== undefined || book.communityRating !== undefined);
+    const ratedBooks = booksWithAssignedStatus.filter(book => book.userRating !== undefined && book.userRating !== null || book.communityRating !== undefined && book.communityRating !== null);
     const averageRating = ratedBooks.length > 0 
       ? (ratedBooks.reduce((sum, book) => {
-                  // Prefer user rating if available, otherwise use community rating
-        const rating = book.userRating !== undefined ? book.userRating : (book.communityRating || 0);
+                  // Prefer user rating if available, otherwise community rating
+        const rating = book.userRating !== undefined && book.userRating !== null ? book.userRating : (book.communityRating || 0);
         return sum + (rating || 0);
         }, 0) / ratedBooks.length).toFixed(1)
       : 'N/A';

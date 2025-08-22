@@ -70,7 +70,7 @@ export const YearInBooksDash = ({ stats, className, style }: YearInBooksDashProp
                        {book.title}
                      </BookTitleText>
                      <Text variant="caption" color="secondary">
-                       {book.author} • {(book.userRating || book.communityRating || 0).toFixed(1)}/5
+                       {book.author} • {((book.userRating !== undefined && book.userRating !== null ? book.userRating : book.communityRating) || 0).toFixed(1)}/5
                      </Text>
                    </BookInfo>
                 </TopBookItem>

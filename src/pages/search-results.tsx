@@ -26,11 +26,9 @@ interface Book {
   } | null;
   isbn: string;
   communityRating?: number;
-  userRating?: number;
-  genre?: string;
+  userRating?: number | null;
+  genres?: string[];
   progress?: number;
-  dateStarted?: string | null;
-  dateFinished?: string | null;
   pages?: number;
 }
 
@@ -89,7 +87,8 @@ const SearchResultsPage = () => {
 
   // Get unique genres for filters
   const genres = useMemo(() => {
-    const uniqueGenres = [...new Set(books.map(book => book.genre).filter(Boolean))];
+    const allGenres = books.flatMap(book => book.genres || []).filter(Boolean);
+    const uniqueGenres = [...new Set(allGenres)];
     return uniqueGenres.sort();
   }, [books]);
 
@@ -103,7 +102,7 @@ const SearchResultsPage = () => {
         book.author.toLowerCase().includes(debouncedSearchQuery.toLowerCase()) ||
         book.description.description.toLowerCase().includes(debouncedSearchQuery.toLowerCase());
 
-      const matchesGenre = selectedGenre === "" || book.genre === selectedGenre;
+      const matchesGenre = selectedGenre === "" || (book.genres && book.genres.includes(selectedGenre));
       const matchesAuthor = selectedAuthor === "" || book.author === selectedAuthor;
 
       return matchesSearch && matchesGenre && matchesAuthor;
@@ -222,7 +221,7 @@ const SearchInput = styled.input`
   padding: ${theme.spacing.md};
   border: 1px solid ${theme.colors.muted};
   border-radius: ${theme.borderRadius.md};
-  font-size: ${theme.fontSizes.md};
+  font-size: ${theme.fontSizes.base};
   margin-bottom: ${theme.spacing.md};
   
   &:focus {

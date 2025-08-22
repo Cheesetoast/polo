@@ -24,11 +24,9 @@ interface Book {
   } | null;
   isbn: string;
   communityRating?: number;
-  userRating?: number;
-  genre?: string;
+  userRating?: number | null;
+  genres?: string[];
   progress?: number;
-  dateStarted?: string | null;
-  dateFinished?: string | null;
   pages?: number;
 }
 
@@ -39,7 +37,8 @@ const SearchPage = () => {
 
   // Get unique genres and authors for filters
   const genres = useMemo(() => {
-    const uniqueGenres = [...new Set(books.map(book => book.genre).filter(Boolean))];
+    const allGenres = books.flatMap(book => book.genres || []).filter(Boolean);
+    const uniqueGenres = [...new Set(allGenres)];
     return uniqueGenres.sort();
   }, [books]);
 
@@ -166,7 +165,7 @@ const SearchInput = styled.input`
   padding: ${theme.spacing.md};
   border: 2px solid ${theme.colors.muted};
   border-radius: ${theme.borderRadius.md};
-  font-size: ${theme.fontSizes.md};
+  font-size: ${theme.fontSizes.base};
   margin-bottom: ${theme.spacing.md};
   
   &:focus {
@@ -223,7 +222,7 @@ const AuthorButton = styled.button`
   border: 1px solid ${theme.colors.muted};
   border-radius: ${theme.borderRadius.md};
   background-color: white;
-  color: ${theme.colors.gray?.[700] || '#374151'};
+  color: ${theme.colors.gray?.[600] || '#374151'};
   font-size: ${theme.fontSizes.sm};
   cursor: pointer;
   transition: all 0.2s ease;

@@ -29,10 +29,8 @@ interface Book {
   isbn: string;
   communityRating?: number | null;
   userRating?: number | null;
-  genre?: string;
+  genres?: string[];
   progress?: number;
-  dateStarted?: string | null;
-  dateFinished?: string | null;
   pages?: number;
 }
 
@@ -48,7 +46,7 @@ const BookPage = ({ params }: BookPageProps) => {
   // Find the book by slug (clean ISBN without dashes)
   const books: Book[] = booksData;
   const book = books.find(b => b.isbn.replace(/-/g, '') === slug);
-  const { booksWithStatus, updateBookStatus, updateBookProgress, clearBookStatus } = useBookStatus(books);
+  const { booksWithStatus, updateBookStatus, updateBookProgress, updateBookRating, clearBookStatus } = useBookStatus(books);
   const bookWithStatus = booksWithStatus.find(b => b.isbn === book?.isbn);
   
   // Monitor when booksWithStatus changes
@@ -74,9 +72,9 @@ const BookPage = ({ params }: BookPageProps) => {
     );
   }
 
-  const getRatingDisplay = (book: Book) => {
-    if (book.userRating !== undefined && book.userRating !== null) {
-      return `${book.userRating.toFixed(1)} (your rating)`;
+  const getRatingDisplay = (book: Book, bookWithStatus?: any) => {
+    if (bookWithStatus?.userRating !== undefined && bookWithStatus?.userRating !== null) {
+      return `${bookWithStatus.userRating.toFixed(1)} (your rating)`;
     }
     if (book.communityRating !== undefined && book.communityRating !== null) {
       return `${book.communityRating.toFixed(1)} (community)`;
@@ -153,6 +151,25 @@ const BookPage = ({ params }: BookPageProps) => {
                     }}
                   />
                 )}
+
+                {/* User Rating Input */}
+                {bookWithStatus?.status === 'finished' && (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'center' }}>
+                    <Text variant="caption" weight="medium">Your Rating:</Text>
+                    <RatingInput
+                      type="number"
+                      min="1"
+                      max="5"
+                      step="0.5"
+                      placeholder="Rate 1-5"
+                      value={bookWithStatus?.userRating || ''}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        const rating = e.target.value ? parseFloat(e.target.value) : null;
+                        updateBookRating(book.isbn, rating);
+                      }}
+                    />
+                  </div>
+                )}
                 
 
               </StatusContainer>
@@ -179,8 +196,8 @@ const BookPage = ({ params }: BookPageProps) => {
 
                   <BookMetadata>
                     <MetadataItem>
-                      <Text variant="caption" weight="medium">Genre:</Text>
-                      <Text variant="p">{book.genre || 'Not specified'}</Text>
+                      <Text variant="caption" weight="medium">Genres:</Text>
+                      <Text variant="p">{book.genres && book.genres.length > 0 ? book.genres.join(', ') : 'Not specified'}</Text>
                     </MetadataItem>
 
                     <MetadataItem>
@@ -197,7 +214,7 @@ const BookPage = ({ params }: BookPageProps) => {
 
                     <MetadataItem>
                       <Text variant="caption" weight="medium">Rating:</Text>
-                      <Text variant="p">{getRatingDisplay(book)}</Text>
+                      <Text variant="p">{getRatingDisplay(book, bookWithStatus)}</Text>
                     </MetadataItem>
 
                     {book.progress !== undefined && (
@@ -229,7 +246,7 @@ export const Head: HeadFC<BookPageProps> = ({ params }) => {
     <SEO
       title={book ? `${book.title} by ${book.author}` : 'Book Not Found'}
       description={book?.description?.description || 'Book details'}
-      keywords={['book', 'reading', book?.genre || '', book?.author || '']}
+      keywords={['book', 'reading', book?.genres?.join(', ') || '', book?.author || '']}
     />
   );
 };
@@ -252,6 +269,32 @@ const StatusSelector = styled.select`
 `;
 
 const ProgressInput = styled.input`
+  padding: ${theme.spacing.xs} ${theme.spacing.sm};
+  border: 1px solid ${theme.colors.muted};
+  border-radius: ${theme.borderRadius.sm};
+  background: white;
+  font-size: ${theme.fontSizes.sm};
+  width: 80px;
+  text-align: center;
+  
+  &:focus {
+    outline: none;
+    border-color: ${theme.colors.primary};
+    box-shadow: 0 0 0 2px ${theme.colors.primary}20;
+  }
+  
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  &[type=number] {
+    -moz-appearance: textfield;
+  }
+`;
+
+const RatingInput = styled.input`
   padding: ${theme.spacing.xs} ${theme.spacing.sm};
   border: 1px solid ${theme.colors.muted};
   border-radius: ${theme.borderRadius.sm};

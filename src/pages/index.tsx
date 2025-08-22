@@ -9,10 +9,14 @@ import { Dashboard } from "../components/Dashboard"
 import { calculateYearInBooksStats } from "../utils/yearInBooksStats"
 import booksData from "../data/books.json"
 import { useState, useMemo } from "react"
+import { useBookStatus } from "../hooks/useBookStatus"
 import { navigate } from "gatsby"
 import styled from "styled-components"
 import { theme } from "../styles/theme"
 import { Button } from "../components/Button"
+
+// Move booksData to a constant outside the component to prevent re-creation on each render
+const BOOKS_DATA = booksData;
 
 interface Book {
   title: string;
@@ -49,15 +53,18 @@ const IndexPage = () => {
   const homepageTitle = data?.contentfulHomepage?.title;
   
   // Fallback to local data if Contentful is not available
-  const books: Book[] = booksData;
+  const books: Book[] = BOOKS_DATA;
+  
+  // Use the same book status system as the bookshelf
+  const { booksWithStatus } = useBookStatus(BOOKS_DATA);
 
   // Memoize expensive calculations to prevent recalculation on every render
   const dashboardStats = useMemo(() => {
-    // Calculate dashboard statistics
+    // Calculate dashboard statistics using the actual reading statuses
     const totalBooks = books.length;
-    const finishedBooks = books.filter(book => book.dateFinished).length;
-    const currentlyReading = books.filter(book => book.progress && book.progress > 0 && book.progress < 100).length;
-    const wantToRead = books.filter(book => !book.dateStarted && !book.dateFinished).length;
+    const finishedBooks = booksWithStatus.filter(book => book.status === 'finished').length;
+    const currentlyReading = booksWithStatus.filter(book => book.status === 'currently-reading').length;
+    const wantToRead = booksWithStatus.filter(book => book.status === 'want-to-read').length;
 
     // Calculate top genres
     const genreCounts: Record<string, number> = {};
@@ -74,11 +81,11 @@ const IndexPage = () => {
       .map(([genre]) => genre);
 
     // Calculate average rating (use user rating if available, otherwise community rating)
-    const booksWithRatings = books.filter(book => book.userRating !== undefined || book.communityRating !== undefined);
+    const booksWithRatings = books.filter(book => book.userRating !== undefined && book.userRating !== null || book.communityRating !== undefined && book.communityRating !== null);
     const averageRating = booksWithRatings.length > 0
       ? (booksWithRatings.reduce((sum, book) => {
           // Prefer user rating if available, otherwise use community rating
-          const rating = book.userRating !== null ? book.userRating : (book.communityRating || 0);
+          const rating = book.userRating !== undefined && book.userRating !== null ? book.userRating : (book.communityRating || 0);
           return sum + (rating || 0);
         }, 0) / booksWithRatings.length).toFixed(1)
       : '0.0';
@@ -91,10 +98,10 @@ const IndexPage = () => {
       topGenres,
       averageRating
     };
-  }, [books]);
+  }, [books, booksWithStatus]);
 
   // Calculate year-in-books statistics
-  const yearInBooksStats = useMemo(() => calculateYearInBooksStats(books), [books]);
+  const yearInBooksStats = useMemo(() => calculateYearInBooksStats(BOOKS_DATA), []);
 
   return (
     <Layout>

@@ -4,151 +4,4101 @@
     "author": "George Orwell",
     "authorId": "george-orwell",
     "description": {
-      "description": "A dystopian social science fiction novel and cautionary tale about totalitarianism, surveillance, and the manipulation of truth."
+      "description": "A classic work titled '1984' by George Orwell."
     },
-    "isbn": "978-0451524935",
+    "isbn": "978-01000000000",
     "image": null,
-    "communityRating": 4.2,
-    "userRating": 5,
-    "genres": ["Philosophy", "Dystopian Fiction", "Political Satire"],
-    "pages": 328
-  },
-  {
-    "title": "The Great Gatsby",
-    "author": "F. Scott Fitzgerald",
-    "authorId": "f-scott-fitzgerald",
-    "description": {
-      "description": "A story of the fabulously wealthy Jay Gatsby and his love for the beautiful Daisy Buchanan, exploring themes of decadence, idealism, and the American Dream."
-    },
-    "isbn": "978-0743273565",
-    "image": null,
-    "communityRating": 3.9,
-    "userRating": null,
-    "genres": ["Adventure", "Modernist Literature", "Jazz Age"],
-    "pages": 180
-  },
-  {
-    "title": "To Kill a Mockingbird",
-    "author": "Harper Lee",
-    "authorId": "harper-lee",
-    "description": {
-      "description": "A powerful story of racial injustice and the loss of innocence in the American South, told through the eyes of young Scout Finch."
-    },
-    "isbn": "978-0446310789",
-    "image": null,
-    "communityRating": 4.3,
-    "userRating": 4,
-    "genres": ["Fiction", "Southern Gothic", "Coming-of-Age", "Social Justice"],
-    "pages": 281
-  },
-  {
-    "title": "Pride and Prejudice",
-    "author": "Jane Austen",
-    "authorId": "jane-austen",
-    "description": {
-      "description": "A classic romance novel about the relationship between Elizabeth Bennet and Mr. Darcy, exploring themes of marriage, class, and personal growth."
-    },
-    "isbn": "978-0141439518",
-    "image": null,
-    "communityRating": 3,
-    "userRating": null,
-    "genres": ["Mystery", "Romance", "Social Commentary", "Regency Era"],
-    "pages": 432
-  },
-  {
-    "title": "The Catcher in the Rye",
-    "author": "J.D. Salinger",
-    "authorId": "jd-salinger",
-    "description": {
-      "description": "A coming-of-age story following Holden Caulfield's journey through New York City, exploring themes of alienation, loss of innocence, and the phoniness of the adult world."
-    },
-    "isbn": "978-0316769488",
-    "image": null,
-    "genres": ["Science Fiction", "Coming-of-Age", "Modernist Literature", "Psychological Fiction"],
-    "communityRating": 5,
-    "userRating": null
-  },
-  {
-    "title": "Lord of the Flies",
-    "author": "William Golding",
-    "authorId": "william-golding",
-    "description": {
-      "description": "A novel about a group of British boys stranded on an uninhabited island who descend into savagery, exploring the dark side of human nature."
-    },
-    "isbn": "978-0399501487",
-    "image": null,
-    "genres": ["Non-Fiction", "Allegory", "Psychological Fiction", "Modern Literature"],
-    "communityRating": 2,
-    "userRating": null
+    "communityRating": 4.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1148
   },
   {
     "title": "Animal Farm",
     "author": "George Orwell",
     "authorId": "george-orwell",
     "description": {
-      "description": "An allegorical novella about a group of farm animals who rebel against their human farmer, only to see their revolution corrupted by power."
+      "description": "A classic work titled 'Animal Farm' by George Orwell."
     },
-    "isbn": "978-0452284241",
+    "isbn": "978-01000000001",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 200
+  },
+  {
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "authorId": "f-scott-fitzgerald",
+    "description": {
+      "description": "A classic work titled 'The Great Gatsby' by F. Scott Fitzgerald."
+    },
+    "isbn": "978-01000000002",
     "image": null,
     "communityRating": 4.2,
-    "userRating": 5,
-    "genres": ["Philosophy", "Allegory", "Political Satire"],
-    "pages": 328
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 587
   },
   {
-    "title": "Brave New World",
-    "author": "Aldous Huxley",
-    "authorId": "aldous-huxley",
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "authorId": "harper-lee",
     "description": {
-      "description": "A dystopian novel set in a futuristic World State, inhabited by genetically modified citizens and an intelligence-based social hierarchy."
+      "description": "A classic work titled 'To Kill a Mockingbird' by Harper Lee."
     },
-    "isbn": "978-0060850524",
+    "isbn": "978-01000000003",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 219
+  },
+  {
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "authorId": "jane-austen",
+    "description": {
+      "description": "A classic work titled 'Pride and Prejudice' by Jane Austen."
+    },
+    "isbn": "978-01000000004",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1078
+  },
+  {
+    "title": "Sense and Sensibility",
+    "author": "Jane Austen",
+    "authorId": "jane-austen",
+    "description": {
+      "description": "A classic work titled 'Sense and Sensibility' by Jane Austen."
+    },
+    "isbn": "978-01000000005",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 571
+  },
+  {
+    "title": "Emma",
+    "author": "Jane Austen",
+    "authorId": "jane-austen",
+    "description": {
+      "description": "A classic work titled 'Emma' by Jane Austen."
+    },
+    "isbn": "978-01000000006",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 576
+  },
+  {
+    "title": "Mansfield Park",
+    "author": "Jane Austen",
+    "authorId": "jane-austen",
+    "description": {
+      "description": "A classic work titled 'Mansfield Park' by Jane Austen."
+    },
+    "isbn": "978-01000000007",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 412
+  },
+  {
+    "title": "Northanger Abbey",
+    "author": "Jane Austen",
+    "authorId": "jane-austen",
+    "description": {
+      "description": "A classic work titled 'Northanger Abbey' by Jane Austen."
+    },
+    "isbn": "978-01000000008",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 655
+  },
+  {
+    "title": "Persuasion",
+    "author": "Jane Austen",
+    "authorId": "jane-austen",
+    "description": {
+      "description": "A classic work titled 'Persuasion' by Jane Austen."
+    },
+    "isbn": "978-01000000009",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 176
+  },
+  {
+    "title": "Moby-Dick",
+    "author": "Herman Melville",
+    "authorId": "herman-melville",
+    "description": {
+      "description": "A classic work titled 'Moby-Dick' by Herman Melville."
+    },
+    "isbn": "978-01000000010",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 239
+  },
+  {
+    "title": "Bartleby, the Scrivener",
+    "author": "Herman Melville",
+    "authorId": "herman-melville",
+    "description": {
+      "description": "A classic work titled 'Bartleby, the Scrivener' by Herman Melville."
+    },
+    "isbn": "978-01000000011",
     "image": null,
     "communityRating": 4.1,
-    "userRating": null,
-    "genres": ["Science Fiction", "Dystopian Fiction", "Philosophical Fiction"],
-    "pages": 288
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 316
   },
   {
-    "title": "The Silent Patient",
-    "author": "Alex Michaelides",
-    "authorId": "alex-michaelides",
+    "title": "War and Peace",
+    "author": "Leo Tolstoy",
+    "authorId": "leo-tolstoy",
     "description": {
-      "description": "A psychological thriller about a woman who shoots her husband and then never speaks again, and the criminal psychotherapist who tries to unravel her story."
+      "description": "A classic work titled 'War and Peace' by Leo Tolstoy."
     },
-    "isbn": "978-1250301697",
+    "isbn": "978-01000000012",
     "image": null,
-    "communityRating": 4,
-    "userRating": null,
-    "genres": ["Thriller", "Psychological Fiction", "Contemporary Fiction"],
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 219
+  },
+  {
+    "title": "Anna Karenina",
+    "author": "Leo Tolstoy",
+    "authorId": "leo-tolstoy",
+    "description": {
+      "description": "A classic work titled 'Anna Karenina' by Leo Tolstoy."
+    },
+    "isbn": "978-01000000013",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 129
+  },
+  {
+    "title": "The Death of Ivan Ilyich",
+    "author": "Leo Tolstoy",
+    "authorId": "leo-tolstoy",
+    "description": {
+      "description": "A classic work titled 'The Death of Ivan Ilyich' by Leo Tolstoy."
+    },
+    "isbn": "978-01000000014",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 814
+  },
+  {
+    "title": "Resurrection",
+    "author": "Leo Tolstoy",
+    "authorId": "leo-tolstoy",
+    "description": {
+      "description": "A classic work titled 'Resurrection' by Leo Tolstoy."
+    },
+    "isbn": "978-01000000015",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 863
+  },
+  {
+    "title": "Crime and Punishment",
+    "author": "Fyodor Dostoevsky",
+    "authorId": "fyodor-dostoevsky",
+    "description": {
+      "description": "A classic work titled 'Crime and Punishment' by Fyodor Dostoevsky."
+    },
+    "isbn": "978-01000000016",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1167
+  },
+  {
+    "title": "The Brothers Karamazov",
+    "author": "Fyodor Dostoevsky",
+    "authorId": "fyodor-dostoevsky",
+    "description": {
+      "description": "A classic work titled 'The Brothers Karamazov' by Fyodor Dostoevsky."
+    },
+    "isbn": "978-01000000017",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 841
+  },
+  {
+    "title": "The Idiot",
+    "author": "Fyodor Dostoevsky",
+    "authorId": "fyodor-dostoevsky",
+    "description": {
+      "description": "A classic work titled 'The Idiot' by Fyodor Dostoevsky."
+    },
+    "isbn": "978-01000000018",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 311
+  },
+  {
+    "title": "Notes from Underground",
+    "author": "Fyodor Dostoevsky",
+    "authorId": "fyodor-dostoevsky",
+    "description": {
+      "description": "A classic work titled 'Notes from Underground' by Fyodor Dostoevsky."
+    },
+    "isbn": "978-01000000019",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 234
+  },
+  {
+    "title": "Demons",
+    "author": "Fyodor Dostoevsky",
+    "authorId": "fyodor-dostoevsky",
+    "description": {
+      "description": "A classic work titled 'Demons' by Fyodor Dostoevsky."
+    },
+    "isbn": "978-01000000020",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 155
+  },
+  {
+    "title": "Les Mis\u00e9rables",
+    "author": "Victor Hugo",
+    "authorId": "victor-hugo",
+    "description": {
+      "description": "A classic work titled 'Les Mis\u00e9rables' by Victor Hugo."
+    },
+    "isbn": "978-01000000021",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 569
+  },
+  {
+    "title": "The Hunchback of Notre-Dame",
+    "author": "Victor Hugo",
+    "authorId": "victor-hugo",
+    "description": {
+      "description": "A classic work titled 'The Hunchback of Notre-Dame' by Victor Hugo."
+    },
+    "isbn": "978-01000000022",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1049
+  },
+  {
+    "title": "The Odyssey",
+    "author": "Homer",
+    "authorId": "homer",
+    "description": {
+      "description": "A classic work titled 'The Odyssey' by Homer."
+    },
+    "isbn": "978-01000000023",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1101
+  },
+  {
+    "title": "The Iliad",
+    "author": "Homer",
+    "authorId": "homer",
+    "description": {
+      "description": "A classic work titled 'The Iliad' by Homer."
+    },
+    "isbn": "978-01000000024",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1161
+  },
+  {
+    "title": "Don Quixote",
+    "author": "Miguel de Cervantes",
+    "authorId": "miguel-de-cervantes",
+    "description": {
+      "description": "A classic work titled 'Don Quixote' by Miguel de Cervantes."
+    },
+    "isbn": "978-01000000025",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 578
+  },
+  {
+    "title": "Madame Bovary",
+    "author": "Gustave Flaubert",
+    "authorId": "gustave-flaubert",
+    "description": {
+      "description": "A classic work titled 'Madame Bovary' by Gustave Flaubert."
+    },
+    "isbn": "978-01000000026",
+    "image": null,
+    "communityRating": 4.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1053
+  },
+  {
+    "title": "Sentimental Education",
+    "author": "Gustave Flaubert",
+    "authorId": "gustave-flaubert",
+    "description": {
+      "description": "A classic work titled 'Sentimental Education' by Gustave Flaubert."
+    },
+    "isbn": "978-01000000027",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 892
+  },
+  {
+    "title": "Great Expectations",
+    "author": "Charles Dickens",
+    "authorId": "charles-dickens",
+    "description": {
+      "description": "A classic work titled 'Great Expectations' by Charles Dickens."
+    },
+    "isbn": "978-01000000028",
+    "image": null,
+    "communityRating": 4.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 540
+  },
+  {
+    "title": "Oliver Twist",
+    "author": "Charles Dickens",
+    "authorId": "charles-dickens",
+    "description": {
+      "description": "A classic work titled 'Oliver Twist' by Charles Dickens."
+    },
+    "isbn": "978-01000000029",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 330
+  },
+  {
+    "title": "David Copperfield",
+    "author": "Charles Dickens",
+    "authorId": "charles-dickens",
+    "description": {
+      "description": "A classic work titled 'David Copperfield' by Charles Dickens."
+    },
+    "isbn": "978-01000000030",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1168
+  },
+  {
+    "title": "Bleak House",
+    "author": "Charles Dickens",
+    "authorId": "charles-dickens",
+    "description": {
+      "description": "A classic work titled 'Bleak House' by Charles Dickens."
+    },
+    "isbn": "978-01000000031",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 717
+  },
+  {
+    "title": "Hard Times",
+    "author": "Charles Dickens",
+    "authorId": "charles-dickens",
+    "description": {
+      "description": "A classic work titled 'Hard Times' by Charles Dickens."
+    },
+    "isbn": "978-01000000032",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 673
+  },
+  {
+    "title": "A Tale of Two Cities",
+    "author": "Charles Dickens",
+    "authorId": "charles-dickens",
+    "description": {
+      "description": "A classic work titled 'A Tale of Two Cities' by Charles Dickens."
+    },
+    "isbn": "978-01000000033",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 565
+  },
+  {
+    "title": "Little Dorrit",
+    "author": "Charles Dickens",
+    "authorId": "charles-dickens",
+    "description": {
+      "description": "A classic work titled 'Little Dorrit' by Charles Dickens."
+    },
+    "isbn": "978-01000000034",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1153
+  },
+  {
+    "title": "Middlemarch",
+    "author": "George Eliot",
+    "authorId": "george-eliot",
+    "description": {
+      "description": "A classic work titled 'Middlemarch' by George Eliot."
+    },
+    "isbn": "978-01000000035",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1149
+  },
+  {
+    "title": "Silas Marner",
+    "author": "George Eliot",
+    "authorId": "george-eliot",
+    "description": {
+      "description": "A classic work titled 'Silas Marner' by George Eliot."
+    },
+    "isbn": "978-01000000036",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 489
+  },
+  {
+    "title": "The Mill on the Floss",
+    "author": "George Eliot",
+    "authorId": "george-eliot",
+    "description": {
+      "description": "A classic work titled 'The Mill on the Floss' by George Eliot."
+    },
+    "isbn": "978-01000000037",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 172
+  },
+  {
+    "title": "Daniel Deronda",
+    "author": "George Eliot",
+    "authorId": "george-eliot",
+    "description": {
+      "description": "A classic work titled 'Daniel Deronda' by George Eliot."
+    },
+    "isbn": "978-01000000038",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1167
+  },
+  {
+    "title": "Jane Eyre",
+    "author": "Charlotte Bront\u00eb",
+    "authorId": "charlotte-bront\u00eb",
+    "description": {
+      "description": "A classic work titled 'Jane Eyre' by Charlotte Bront\u00eb."
+    },
+    "isbn": "978-01000000039",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 368
+  },
+  {
+    "title": "Shirley",
+    "author": "Charlotte Bront\u00eb",
+    "authorId": "charlotte-bront\u00eb",
+    "description": {
+      "description": "A classic work titled 'Shirley' by Charlotte Bront\u00eb."
+    },
+    "isbn": "978-01000000040",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1167
+  },
+  {
+    "title": "Villette",
+    "author": "Charlotte Bront\u00eb",
+    "authorId": "charlotte-bront\u00eb",
+    "description": {
+      "description": "A classic work titled 'Villette' by Charlotte Bront\u00eb."
+    },
+    "isbn": "978-01000000041",
+    "image": null,
+    "communityRating": 4.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 699
+  },
+  {
+    "title": "Wuthering Heights",
+    "author": "Emily Bront\u00eb",
+    "authorId": "emily-bront\u00eb",
+    "description": {
+      "description": "A classic work titled 'Wuthering Heights' by Emily Bront\u00eb."
+    },
+    "isbn": "978-01000000042",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1108
+  },
+  {
+    "title": "Agnes Grey",
+    "author": "Anne Bront\u00eb",
+    "authorId": "anne-bront\u00eb",
+    "description": {
+      "description": "A classic work titled 'Agnes Grey' by Anne Bront\u00eb."
+    },
+    "isbn": "978-01000000043",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 364
+  },
+  {
+    "title": "The Tenant of Wildfell Hall",
+    "author": "Anne Bront\u00eb",
+    "authorId": "anne-bront\u00eb",
+    "description": {
+      "description": "A classic work titled 'The Tenant of Wildfell Hall' by Anne Bront\u00eb."
+    },
+    "isbn": "978-01000000044",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 447
+  },
+  {
+    "title": "Frankenstein",
+    "author": "Mary Shelley",
+    "authorId": "mary-shelley",
+    "description": {
+      "description": "A classic work titled 'Frankenstein' by Mary Shelley."
+    },
+    "isbn": "978-01000000045",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 235
+  },
+  {
+    "title": "Mathilda",
+    "author": "Mary Shelley",
+    "authorId": "mary-shelley",
+    "description": {
+      "description": "A classic work titled 'Mathilda' by Mary Shelley."
+    },
+    "isbn": "978-01000000046",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1069
+  },
+  {
+    "title": "The Last Man",
+    "author": "Mary Shelley",
+    "authorId": "mary-shelley",
+    "description": {
+      "description": "A classic work titled 'The Last Man' by Mary Shelley."
+    },
+    "isbn": "978-01000000047",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1035
+  },
+  {
+    "title": "Dracula",
+    "author": "Bram Stoker",
+    "authorId": "bram-stoker",
+    "description": {
+      "description": "A classic work titled 'Dracula' by Bram Stoker."
+    },
+    "isbn": "978-01000000048",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 212
+  },
+  {
+    "title": "The Picture of Dorian Gray",
+    "author": "Oscar Wilde",
+    "authorId": "oscar-wilde",
+    "description": {
+      "description": "A classic work titled 'The Picture of Dorian Gray' by Oscar Wilde."
+    },
+    "isbn": "978-01000000049",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 630
+  },
+  {
+    "title": "The Importance of Being Earnest",
+    "author": "Oscar Wilde",
+    "authorId": "oscar-wilde",
+    "description": {
+      "description": "A classic work titled 'The Importance of Being Earnest' by Oscar Wilde."
+    },
+    "isbn": "978-01000000050",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 940
+  },
+  {
+    "title": "Salome",
+    "author": "Oscar Wilde",
+    "authorId": "oscar-wilde",
+    "description": {
+      "description": "A classic work titled 'Salome' by Oscar Wilde."
+    },
+    "isbn": "978-01000000051",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 455
+  },
+  {
+    "title": "Faust",
+    "author": "Johann Wolfgang von Goethe",
+    "authorId": "johann-wolfgang-von-goethe",
+    "description": {
+      "description": "A classic work titled 'Faust' by Johann Wolfgang von Goethe."
+    },
+    "isbn": "978-01000000052",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1095
+  },
+  {
+    "title": "The Sorrows of Young Werther",
+    "author": "Johann Wolfgang von Goethe",
+    "authorId": "johann-wolfgang-von-goethe",
+    "description": {
+      "description": "A classic work titled 'The Sorrows of Young Werther' by Johann Wolfgang von Goethe."
+    },
+    "isbn": "978-01000000053",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 662
+  },
+  {
+    "title": "Wilhelm Meister's Apprenticeship",
+    "author": "Johann Wolfgang von Goethe",
+    "authorId": "johann-wolfgang-von-goethe",
+    "description": {
+      "description": "A classic work titled 'Wilhelm Meister's Apprenticeship' by Johann Wolfgang von Goethe."
+    },
+    "isbn": "978-01000000054",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1037
+  },
+  {
+    "title": "Candide",
+    "author": "Voltaire",
+    "authorId": "voltaire",
+    "description": {
+      "description": "A classic work titled 'Candide' by Voltaire."
+    },
+    "isbn": "978-01000000055",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1147
+  },
+  {
+    "title": "Zadig",
+    "author": "Voltaire",
+    "authorId": "voltaire",
+    "description": {
+      "description": "A classic work titled 'Zadig' by Voltaire."
+    },
+    "isbn": "978-01000000056",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 475
+  },
+  {
+    "title": "Micromegas",
+    "author": "Voltaire",
+    "authorId": "voltaire",
+    "description": {
+      "description": "A classic work titled 'Micromegas' by Voltaire."
+    },
+    "isbn": "978-01000000057",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 635
+  },
+  {
+    "title": "The Count of Monte Cristo",
+    "author": "Alexandre Dumas",
+    "authorId": "alexandre-dumas",
+    "description": {
+      "description": "A classic work titled 'The Count of Monte Cristo' by Alexandre Dumas."
+    },
+    "isbn": "978-01000000058",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 962
+  },
+  {
+    "title": "The Three Musketeers",
+    "author": "Alexandre Dumas",
+    "authorId": "alexandre-dumas",
+    "description": {
+      "description": "A classic work titled 'The Three Musketeers' by Alexandre Dumas."
+    },
+    "isbn": "978-01000000059",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 538
+  },
+  {
+    "title": "Twenty Years After",
+    "author": "Alexandre Dumas",
+    "authorId": "alexandre-dumas",
+    "description": {
+      "description": "A classic work titled 'Twenty Years After' by Alexandre Dumas."
+    },
+    "isbn": "978-01000000060",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 589
+  },
+  {
+    "title": "The Man in the Iron Mask",
+    "author": "Alexandre Dumas",
+    "authorId": "alexandre-dumas",
+    "description": {
+      "description": "A classic work titled 'The Man in the Iron Mask' by Alexandre Dumas."
+    },
+    "isbn": "978-01000000061",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 501
+  },
+  {
+    "title": "The Black Tulip",
+    "author": "Alexandre Dumas",
+    "authorId": "alexandre-dumas",
+    "description": {
+      "description": "A classic work titled 'The Black Tulip' by Alexandre Dumas."
+    },
+    "isbn": "978-01000000062",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 954
+  },
+  {
+    "title": "The Stranger",
+    "author": "Albert Camus",
+    "authorId": "albert-camus",
+    "description": {
+      "description": "A classic work titled 'The Stranger' by Albert Camus."
+    },
+    "isbn": "978-01000000063",
+    "image": null,
+    "communityRating": 3.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 284
+  },
+  {
+    "title": "The Plague",
+    "author": "Albert Camus",
+    "authorId": "albert-camus",
+    "description": {
+      "description": "A classic work titled 'The Plague' by Albert Camus."
+    },
+    "isbn": "978-01000000064",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 279
+  },
+  {
+    "title": "The Fall",
+    "author": "Albert Camus",
+    "authorId": "albert-camus",
+    "description": {
+      "description": "A classic work titled 'The Fall' by Albert Camus."
+    },
+    "isbn": "978-01000000065",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 882
+  },
+  {
+    "title": "The Rebel",
+    "author": "Albert Camus",
+    "authorId": "albert-camus",
+    "description": {
+      "description": "A classic work titled 'The Rebel' by Albert Camus."
+    },
+    "isbn": "978-01000000066",
+    "image": null,
+    "communityRating": 3.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 666
+  },
+  {
+    "title": "The Trial",
+    "author": "Franz Kafka",
+    "authorId": "franz-kafka",
+    "description": {
+      "description": "A classic work titled 'The Trial' by Franz Kafka."
+    },
+    "isbn": "978-01000000067",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 757
+  },
+  {
+    "title": "The Castle",
+    "author": "Franz Kafka",
+    "authorId": "franz-kafka",
+    "description": {
+      "description": "A classic work titled 'The Castle' by Franz Kafka."
+    },
+    "isbn": "978-01000000068",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1005
+  },
+  {
+    "title": "The Metamorphosis",
+    "author": "Franz Kafka",
+    "authorId": "franz-kafka",
+    "description": {
+      "description": "A classic work titled 'The Metamorphosis' by Franz Kafka."
+    },
+    "isbn": "978-01000000069",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 816
+  },
+  {
+    "title": "In the Penal Colony",
+    "author": "Franz Kafka",
+    "authorId": "franz-kafka",
+    "description": {
+      "description": "A classic work titled 'In the Penal Colony' by Franz Kafka."
+    },
+    "isbn": "978-01000000070",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1108
+  },
+  {
+    "title": "America",
+    "author": "Franz Kafka",
+    "authorId": "franz-kafka",
+    "description": {
+      "description": "A classic work titled 'America' by Franz Kafka."
+    },
+    "isbn": "978-01000000071",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 857
+  },
+  {
+    "title": "Heart of Darkness",
+    "author": "Joseph Conrad",
+    "authorId": "joseph-conrad",
+    "description": {
+      "description": "A classic work titled 'Heart of Darkness' by Joseph Conrad."
+    },
+    "isbn": "978-01000000072",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 924
+  },
+  {
+    "title": "Lord Jim",
+    "author": "Joseph Conrad",
+    "authorId": "joseph-conrad",
+    "description": {
+      "description": "A classic work titled 'Lord Jim' by Joseph Conrad."
+    },
+    "isbn": "978-01000000073",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 267
+  },
+  {
+    "title": "Nostromo",
+    "author": "Joseph Conrad",
+    "authorId": "joseph-conrad",
+    "description": {
+      "description": "A classic work titled 'Nostromo' by Joseph Conrad."
+    },
+    "isbn": "978-01000000074",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1055
+  },
+  {
+    "title": "Under Western Eyes",
+    "author": "Joseph Conrad",
+    "authorId": "joseph-conrad",
+    "description": {
+      "description": "A classic work titled 'Under Western Eyes' by Joseph Conrad."
+    },
+    "isbn": "978-01000000075",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 499
+  },
+  {
+    "title": "The Secret Agent",
+    "author": "Joseph Conrad",
+    "authorId": "joseph-conrad",
+    "description": {
+      "description": "A classic work titled 'The Secret Agent' by Joseph Conrad."
+    },
+    "isbn": "978-01000000076",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 389
+  },
+  {
+    "title": "The Red and the Black",
+    "author": "Stendhal",
+    "authorId": "stendhal",
+    "description": {
+      "description": "A classic work titled 'The Red and the Black' by Stendhal."
+    },
+    "isbn": "978-01000000077",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 911
+  },
+  {
+    "title": "The Charterhouse of Parma",
+    "author": "Stendhal",
+    "authorId": "stendhal",
+    "description": {
+      "description": "A classic work titled 'The Charterhouse of Parma' by Stendhal."
+    },
+    "isbn": "978-01000000078",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 881
+  },
+  {
+    "title": "On the Heights of Despair",
+    "author": "Emil Cioran",
+    "authorId": "emil-cioran",
+    "description": {
+      "description": "A classic work titled 'On the Heights of Despair' by Emil Cioran."
+    },
+    "isbn": "978-01000000079",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 761
+  },
+  {
+    "title": "Thus Spoke Zarathustra",
+    "author": "Friedrich Nietzsche",
+    "authorId": "friedrich-nietzsche",
+    "description": {
+      "description": "A classic work titled 'Thus Spoke Zarathustra' by Friedrich Nietzsche."
+    },
+    "isbn": "978-01000000080",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 871
+  },
+  {
+    "title": "Beyond Good and Evil",
+    "author": "Friedrich Nietzsche",
+    "authorId": "friedrich-nietzsche",
+    "description": {
+      "description": "A classic work titled 'Beyond Good and Evil' by Friedrich Nietzsche."
+    },
+    "isbn": "978-01000000081",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1086
+  },
+  {
+    "title": "The Birth of Tragedy",
+    "author": "Friedrich Nietzsche",
+    "authorId": "friedrich-nietzsche",
+    "description": {
+      "description": "A classic work titled 'The Birth of Tragedy' by Friedrich Nietzsche."
+    },
+    "isbn": "978-01000000082",
+    "image": null,
+    "communityRating": 3.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1060
+  },
+  {
+    "title": "Ecce Homo",
+    "author": "Friedrich Nietzsche",
+    "authorId": "friedrich-nietzsche",
+    "description": {
+      "description": "A classic work titled 'Ecce Homo' by Friedrich Nietzsche."
+    },
+    "isbn": "978-01000000083",
+    "image": null,
+    "communityRating": 3.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 458
+  },
+  {
+    "title": "The Gay Science",
+    "author": "Friedrich Nietzsche",
+    "authorId": "friedrich-nietzsche",
+    "description": {
+      "description": "A classic work titled 'The Gay Science' by Friedrich Nietzsche."
+    },
+    "isbn": "978-01000000084",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 924
+  },
+  {
+    "title": "Ulysses",
+    "author": "James Joyce",
+    "authorId": "james-joyce",
+    "description": {
+      "description": "A classic work titled 'Ulysses' by James Joyce."
+    },
+    "isbn": "978-01000000085",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1196
+  },
+  {
+    "title": "A Portrait of the Artist as a Young Man",
+    "author": "James Joyce",
+    "authorId": "james-joyce",
+    "description": {
+      "description": "A classic work titled 'A Portrait of the Artist as a Young Man' by James Joyce."
+    },
+    "isbn": "978-01000000086",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 531
+  },
+  {
+    "title": "Dubliners",
+    "author": "James Joyce",
+    "authorId": "james-joyce",
+    "description": {
+      "description": "A classic work titled 'Dubliners' by James Joyce."
+    },
+    "isbn": "978-01000000087",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 305
+  },
+  {
+    "title": "Finnegans Wake",
+    "author": "James Joyce",
+    "authorId": "james-joyce",
+    "description": {
+      "description": "A classic work titled 'Finnegans Wake' by James Joyce."
+    },
+    "isbn": "978-01000000088",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1049
+  },
+  {
+    "title": "A Room of One's Own",
+    "author": "Virginia Woolf",
+    "authorId": "virginia-woolf",
+    "description": {
+      "description": "A classic work titled 'A Room of One's Own' by Virginia Woolf."
+    },
+    "isbn": "978-01000000089",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 530
+  },
+  {
+    "title": "Mrs Dalloway",
+    "author": "Virginia Woolf",
+    "authorId": "virginia-woolf",
+    "description": {
+      "description": "A classic work titled 'Mrs Dalloway' by Virginia Woolf."
+    },
+    "isbn": "978-01000000090",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 561
+  },
+  {
+    "title": "To the Lighthouse",
+    "author": "Virginia Woolf",
+    "authorId": "virginia-woolf",
+    "description": {
+      "description": "A classic work titled 'To the Lighthouse' by Virginia Woolf."
+    },
+    "isbn": "978-01000000091",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1062
+  },
+  {
+    "title": "Orlando",
+    "author": "Virginia Woolf",
+    "authorId": "virginia-woolf",
+    "description": {
+      "description": "A classic work titled 'Orlando' by Virginia Woolf."
+    },
+    "isbn": "978-01000000092",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 247
+  },
+  {
+    "title": "The Waves",
+    "author": "Virginia Woolf",
+    "authorId": "virginia-woolf",
+    "description": {
+      "description": "A classic work titled 'The Waves' by Virginia Woolf."
+    },
+    "isbn": "978-01000000093",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 601
+  },
+  {
+    "title": "Classic Work 95",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 95' by Anonymous."
+    },
+    "isbn": "978-01000000094",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 255
+  },
+  {
+    "title": "Classic Work 96",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 96' by Anonymous."
+    },
+    "isbn": "978-01000000095",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 776
+  },
+  {
+    "title": "Classic Work 97",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 97' by Anonymous."
+    },
+    "isbn": "978-01000000096",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1119
+  },
+  {
+    "title": "Classic Work 98",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 98' by Anonymous."
+    },
+    "isbn": "978-01000000097",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 586
+  },
+  {
+    "title": "Classic Work 99",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 99' by Anonymous."
+    },
+    "isbn": "978-01000000098",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 633
+  },
+  {
+    "title": "Classic Work 100",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 100' by Anonymous."
+    },
+    "isbn": "978-01000000099",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 481
+  },
+  {
+    "title": "Classic Work 101",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 101' by Anonymous."
+    },
+    "isbn": "978-01000000100",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 923
+  },
+  {
+    "title": "Classic Work 102",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 102' by Anonymous."
+    },
+    "isbn": "978-01000000101",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 149
+  },
+  {
+    "title": "Classic Work 103",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 103' by Anonymous."
+    },
+    "isbn": "978-01000000102",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 925
+  },
+  {
+    "title": "Classic Work 104",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 104' by Anonymous."
+    },
+    "isbn": "978-01000000103",
+    "image": null,
+    "communityRating": 4.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 269
+  },
+  {
+    "title": "Classic Work 105",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 105' by Anonymous."
+    },
+    "isbn": "978-01000000104",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 471
+  },
+  {
+    "title": "Classic Work 106",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 106' by Anonymous."
+    },
+    "isbn": "978-01000000105",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 157
+  },
+  {
+    "title": "Classic Work 107",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 107' by Anonymous."
+    },
+    "isbn": "978-01000000106",
+    "image": null,
+    "communityRating": 3.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 647
+  },
+  {
+    "title": "Classic Work 108",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 108' by Anonymous."
+    },
+    "isbn": "978-01000000107",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 803
+  },
+  {
+    "title": "Classic Work 109",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 109' by Anonymous."
+    },
+    "isbn": "978-01000000108",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 970
+  },
+  {
+    "title": "Classic Work 110",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 110' by Anonymous."
+    },
+    "isbn": "978-01000000109",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 931
+  },
+  {
+    "title": "Classic Work 111",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 111' by Anonymous."
+    },
+    "isbn": "978-01000000110",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 943
+  },
+  {
+    "title": "Classic Work 112",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 112' by Anonymous."
+    },
+    "isbn": "978-01000000111",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1020
+  },
+  {
+    "title": "Classic Work 113",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 113' by Anonymous."
+    },
+    "isbn": "978-01000000112",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 185
+  },
+  {
+    "title": "Classic Work 114",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 114' by Anonymous."
+    },
+    "isbn": "978-01000000113",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 915
+  },
+  {
+    "title": "Classic Work 115",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 115' by Anonymous."
+    },
+    "isbn": "978-01000000114",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 403
+  },
+  {
+    "title": "Classic Work 116",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 116' by Anonymous."
+    },
+    "isbn": "978-01000000115",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 950
+  },
+  {
+    "title": "Classic Work 117",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 117' by Anonymous."
+    },
+    "isbn": "978-01000000116",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 636
+  },
+  {
+    "title": "Classic Work 118",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 118' by Anonymous."
+    },
+    "isbn": "978-01000000117",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 270
+  },
+  {
+    "title": "Classic Work 119",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 119' by Anonymous."
+    },
+    "isbn": "978-01000000118",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 599
+  },
+  {
+    "title": "Classic Work 120",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 120' by Anonymous."
+    },
+    "isbn": "978-01000000119",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 267
+  },
+  {
+    "title": "Classic Work 121",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 121' by Anonymous."
+    },
+    "isbn": "978-01000000120",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 680
+  },
+  {
+    "title": "Classic Work 122",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 122' by Anonymous."
+    },
+    "isbn": "978-01000000121",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 189
+  },
+  {
+    "title": "Classic Work 123",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 123' by Anonymous."
+    },
+    "isbn": "978-01000000122",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 577
+  },
+  {
+    "title": "Classic Work 124",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 124' by Anonymous."
+    },
+    "isbn": "978-01000000123",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 488
+  },
+  {
+    "title": "Classic Work 125",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 125' by Anonymous."
+    },
+    "isbn": "978-01000000124",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1048
+  },
+  {
+    "title": "Classic Work 126",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 126' by Anonymous."
+    },
+    "isbn": "978-01000000125",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 693
+  },
+  {
+    "title": "Classic Work 127",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 127' by Anonymous."
+    },
+    "isbn": "978-01000000126",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 469
+  },
+  {
+    "title": "Classic Work 128",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 128' by Anonymous."
+    },
+    "isbn": "978-01000000127",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1169
+  },
+  {
+    "title": "Classic Work 129",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 129' by Anonymous."
+    },
+    "isbn": "978-01000000128",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1034
+  },
+  {
+    "title": "Classic Work 130",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 130' by Anonymous."
+    },
+    "isbn": "978-01000000129",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 876
+  },
+  {
+    "title": "Classic Work 131",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 131' by Anonymous."
+    },
+    "isbn": "978-01000000130",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 584
+  },
+  {
+    "title": "Classic Work 132",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 132' by Anonymous."
+    },
+    "isbn": "978-01000000131",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 831
+  },
+  {
+    "title": "Classic Work 133",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 133' by Anonymous."
+    },
+    "isbn": "978-01000000132",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 857
+  },
+  {
+    "title": "Classic Work 134",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 134' by Anonymous."
+    },
+    "isbn": "978-01000000133",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 682
+  },
+  {
+    "title": "Classic Work 135",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 135' by Anonymous."
+    },
+    "isbn": "978-01000000134",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 424
+  },
+  {
+    "title": "Classic Work 136",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 136' by Anonymous."
+    },
+    "isbn": "978-01000000135",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 137
+  },
+  {
+    "title": "Classic Work 137",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 137' by Anonymous."
+    },
+    "isbn": "978-01000000136",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 775
+  },
+  {
+    "title": "Classic Work 138",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 138' by Anonymous."
+    },
+    "isbn": "978-01000000137",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 673
+  },
+  {
+    "title": "Classic Work 139",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 139' by Anonymous."
+    },
+    "isbn": "978-01000000138",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 428
+  },
+  {
+    "title": "Classic Work 140",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 140' by Anonymous."
+    },
+    "isbn": "978-01000000139",
+    "image": null,
+    "communityRating": 4.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 920
+  },
+  {
+    "title": "Classic Work 141",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 141' by Anonymous."
+    },
+    "isbn": "978-01000000140",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 864
+  },
+  {
+    "title": "Classic Work 142",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 142' by Anonymous."
+    },
+    "isbn": "978-01000000141",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 156
+  },
+  {
+    "title": "Classic Work 143",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 143' by Anonymous."
+    },
+    "isbn": "978-01000000142",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 405
+  },
+  {
+    "title": "Classic Work 144",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 144' by Anonymous."
+    },
+    "isbn": "978-01000000143",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 152
+  },
+  {
+    "title": "Classic Work 145",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 145' by Anonymous."
+    },
+    "isbn": "978-01000000144",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 493
+  },
+  {
+    "title": "Classic Work 146",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 146' by Anonymous."
+    },
+    "isbn": "978-01000000145",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 304
+  },
+  {
+    "title": "Classic Work 147",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 147' by Anonymous."
+    },
+    "isbn": "978-01000000146",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 808
+  },
+  {
+    "title": "Classic Work 148",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 148' by Anonymous."
+    },
+    "isbn": "978-01000000147",
+    "image": null,
+    "communityRating": 4.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 217
+  },
+  {
+    "title": "Classic Work 149",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 149' by Anonymous."
+    },
+    "isbn": "978-01000000148",
+    "image": null,
+    "communityRating": 4.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 740
+  },
+  {
+    "title": "Classic Work 150",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 150' by Anonymous."
+    },
+    "isbn": "978-01000000149",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1115
+  },
+  {
+    "title": "Classic Work 151",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 151' by Anonymous."
+    },
+    "isbn": "978-01000000150",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 212
+  },
+  {
+    "title": "Classic Work 152",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 152' by Anonymous."
+    },
+    "isbn": "978-01000000151",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 880
+  },
+  {
+    "title": "Classic Work 153",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 153' by Anonymous."
+    },
+    "isbn": "978-01000000152",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1135
+  },
+  {
+    "title": "Classic Work 154",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 154' by Anonymous."
+    },
+    "isbn": "978-01000000153",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 743
+  },
+  {
+    "title": "Classic Work 155",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 155' by Anonymous."
+    },
+    "isbn": "978-01000000154",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 566
+  },
+  {
+    "title": "Classic Work 156",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 156' by Anonymous."
+    },
+    "isbn": "978-01000000155",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 390
+  },
+  {
+    "title": "Classic Work 157",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 157' by Anonymous."
+    },
+    "isbn": "978-01000000156",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 633
+  },
+  {
+    "title": "Classic Work 158",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 158' by Anonymous."
+    },
+    "isbn": "978-01000000157",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 153
+  },
+  {
+    "title": "Classic Work 159",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 159' by Anonymous."
+    },
+    "isbn": "978-01000000158",
+    "image": null,
+    "communityRating": 3.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 365
+  },
+  {
+    "title": "Classic Work 160",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 160' by Anonymous."
+    },
+    "isbn": "978-01000000159",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1005
+  },
+  {
+    "title": "Classic Work 161",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 161' by Anonymous."
+    },
+    "isbn": "978-01000000160",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1114
+  },
+  {
+    "title": "Classic Work 162",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 162' by Anonymous."
+    },
+    "isbn": "978-01000000161",
+    "image": null,
+    "communityRating": 4.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 917
+  },
+  {
+    "title": "Classic Work 163",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 163' by Anonymous."
+    },
+    "isbn": "978-01000000162",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1187
+  },
+  {
+    "title": "Classic Work 164",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 164' by Anonymous."
+    },
+    "isbn": "978-01000000163",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 933
+  },
+  {
+    "title": "Classic Work 165",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 165' by Anonymous."
+    },
+    "isbn": "978-01000000164",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1149
+  },
+  {
+    "title": "Classic Work 166",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 166' by Anonymous."
+    },
+    "isbn": "978-01000000165",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 520
+  },
+  {
+    "title": "Classic Work 167",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 167' by Anonymous."
+    },
+    "isbn": "978-01000000166",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 206
+  },
+  {
+    "title": "Classic Work 168",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 168' by Anonymous."
+    },
+    "isbn": "978-01000000167",
+    "image": null,
+    "communityRating": 3.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 848
+  },
+  {
+    "title": "Classic Work 169",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 169' by Anonymous."
+    },
+    "isbn": "978-01000000168",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 429
+  },
+  {
+    "title": "Classic Work 170",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 170' by Anonymous."
+    },
+    "isbn": "978-01000000169",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 789
+  },
+  {
+    "title": "Classic Work 171",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 171' by Anonymous."
+    },
+    "isbn": "978-01000000170",
+    "image": null,
+    "communityRating": 3.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 514
+  },
+  {
+    "title": "Classic Work 172",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 172' by Anonymous."
+    },
+    "isbn": "978-01000000171",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 294
+  },
+  {
+    "title": "Classic Work 173",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 173' by Anonymous."
+    },
+    "isbn": "978-01000000172",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 896
+  },
+  {
+    "title": "Classic Work 174",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 174' by Anonymous."
+    },
+    "isbn": "978-01000000173",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 472
+  },
+  {
+    "title": "Classic Work 175",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 175' by Anonymous."
+    },
+    "isbn": "978-01000000174",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1040
+  },
+  {
+    "title": "Classic Work 176",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 176' by Anonymous."
+    },
+    "isbn": "978-01000000175",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 629
+  },
+  {
+    "title": "Classic Work 177",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 177' by Anonymous."
+    },
+    "isbn": "978-01000000176",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 512
+  },
+  {
+    "title": "Classic Work 178",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 178' by Anonymous."
+    },
+    "isbn": "978-01000000177",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 538
+  },
+  {
+    "title": "Classic Work 179",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 179' by Anonymous."
+    },
+    "isbn": "978-01000000178",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1090
+  },
+  {
+    "title": "Classic Work 180",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 180' by Anonymous."
+    },
+    "isbn": "978-01000000179",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 138
+  },
+  {
+    "title": "Classic Work 181",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 181' by Anonymous."
+    },
+    "isbn": "978-01000000180",
+    "image": null,
+    "communityRating": 4.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 743
+  },
+  {
+    "title": "Classic Work 182",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 182' by Anonymous."
+    },
+    "isbn": "978-01000000181",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 473
+  },
+  {
+    "title": "Classic Work 183",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 183' by Anonymous."
+    },
+    "isbn": "978-01000000182",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 970
+  },
+  {
+    "title": "Classic Work 184",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 184' by Anonymous."
+    },
+    "isbn": "978-01000000183",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 323
+  },
+  {
+    "title": "Classic Work 185",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 185' by Anonymous."
+    },
+    "isbn": "978-01000000184",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 719
+  },
+  {
+    "title": "Classic Work 186",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 186' by Anonymous."
+    },
+    "isbn": "978-01000000185",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 219
+  },
+  {
+    "title": "Classic Work 187",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 187' by Anonymous."
+    },
+    "isbn": "978-01000000186",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 631
+  },
+  {
+    "title": "Classic Work 188",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 188' by Anonymous."
+    },
+    "isbn": "978-01000000187",
+    "image": null,
+    "communityRating": 4.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1042
+  },
+  {
+    "title": "Classic Work 189",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 189' by Anonymous."
+    },
+    "isbn": "978-01000000188",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 372
+  },
+  {
+    "title": "Classic Work 190",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 190' by Anonymous."
+    },
+    "isbn": "978-01000000189",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 457
+  },
+  {
+    "title": "Classic Work 191",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 191' by Anonymous."
+    },
+    "isbn": "978-01000000190",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 717
+  },
+  {
+    "title": "Classic Work 192",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 192' by Anonymous."
+    },
+    "isbn": "978-01000000191",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 188
+  },
+  {
+    "title": "Classic Work 193",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 193' by Anonymous."
+    },
+    "isbn": "978-01000000192",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 347
+  },
+  {
+    "title": "Classic Work 194",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 194' by Anonymous."
+    },
+    "isbn": "978-01000000193",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 209
+  },
+  {
+    "title": "Classic Work 195",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 195' by Anonymous."
+    },
+    "isbn": "978-01000000194",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 531
+  },
+  {
+    "title": "Classic Work 196",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 196' by Anonymous."
+    },
+    "isbn": "978-01000000195",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1173
+  },
+  {
+    "title": "Classic Work 197",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 197' by Anonymous."
+    },
+    "isbn": "978-01000000196",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 249
+  },
+  {
+    "title": "Classic Work 198",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 198' by Anonymous."
+    },
+    "isbn": "978-01000000197",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1020
+  },
+  {
+    "title": "Classic Work 199",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 199' by Anonymous."
+    },
+    "isbn": "978-01000000198",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1107
+  },
+  {
+    "title": "Classic Work 200",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 200' by Anonymous."
+    },
+    "isbn": "978-01000000199",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 832
+  },
+  {
+    "title": "Classic Work 201",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 201' by Anonymous."
+    },
+    "isbn": "978-01000000200",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1018
+  },
+  {
+    "title": "Classic Work 202",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 202' by Anonymous."
+    },
+    "isbn": "978-01000000201",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 869
+  },
+  {
+    "title": "Classic Work 203",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 203' by Anonymous."
+    },
+    "isbn": "978-01000000202",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 431
+  },
+  {
+    "title": "Classic Work 204",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 204' by Anonymous."
+    },
+    "isbn": "978-01000000203",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 637
+  },
+  {
+    "title": "Classic Work 205",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 205' by Anonymous."
+    },
+    "isbn": "978-01000000204",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 669
+  },
+  {
+    "title": "Classic Work 206",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 206' by Anonymous."
+    },
+    "isbn": "978-01000000205",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 705
+  },
+  {
+    "title": "Classic Work 207",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 207' by Anonymous."
+    },
+    "isbn": "978-01000000206",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 358
+  },
+  {
+    "title": "Classic Work 208",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 208' by Anonymous."
+    },
+    "isbn": "978-01000000207",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 493
+  },
+  {
+    "title": "Classic Work 209",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 209' by Anonymous."
+    },
+    "isbn": "978-01000000208",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 139
+  },
+  {
+    "title": "Classic Work 210",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 210' by Anonymous."
+    },
+    "isbn": "978-01000000209",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 645
+  },
+  {
+    "title": "Classic Work 211",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 211' by Anonymous."
+    },
+    "isbn": "978-01000000210",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 492
+  },
+  {
+    "title": "Classic Work 212",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 212' by Anonymous."
+    },
+    "isbn": "978-01000000211",
+    "image": null,
+    "communityRating": 4.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 869
+  },
+  {
+    "title": "Classic Work 213",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 213' by Anonymous."
+    },
+    "isbn": "978-01000000212",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 250
+  },
+  {
+    "title": "Classic Work 214",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 214' by Anonymous."
+    },
+    "isbn": "978-01000000213",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 217
+  },
+  {
+    "title": "Classic Work 215",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 215' by Anonymous."
+    },
+    "isbn": "978-01000000214",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 958
+  },
+  {
+    "title": "Classic Work 216",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 216' by Anonymous."
+    },
+    "isbn": "978-01000000215",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 749
+  },
+  {
+    "title": "Classic Work 217",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 217' by Anonymous."
+    },
+    "isbn": "978-01000000216",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 718
+  },
+  {
+    "title": "Classic Work 218",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 218' by Anonymous."
+    },
+    "isbn": "978-01000000217",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 578
+  },
+  {
+    "title": "Classic Work 219",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 219' by Anonymous."
+    },
+    "isbn": "978-01000000218",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 807
+  },
+  {
+    "title": "Classic Work 220",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 220' by Anonymous."
+    },
+    "isbn": "978-01000000219",
+    "image": null,
+    "communityRating": 3.9,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 977
+  },
+  {
+    "title": "Classic Work 221",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 221' by Anonymous."
+    },
+    "isbn": "978-01000000220",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 638
+  },
+  {
+    "title": "Classic Work 222",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 222' by Anonymous."
+    },
+    "isbn": "978-01000000221",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 660
+  },
+  {
+    "title": "Classic Work 223",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 223' by Anonymous."
+    },
+    "isbn": "978-01000000222",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 583
+  },
+  {
+    "title": "Classic Work 224",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 224' by Anonymous."
+    },
+    "isbn": "978-01000000223",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 948
+  },
+  {
+    "title": "Classic Work 225",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 225' by Anonymous."
+    },
+    "isbn": "978-01000000224",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1124
+  },
+  {
+    "title": "Classic Work 226",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 226' by Anonymous."
+    },
+    "isbn": "978-01000000225",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 239
+  },
+  {
+    "title": "Classic Work 227",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 227' by Anonymous."
+    },
+    "isbn": "978-01000000226",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 390
+  },
+  {
+    "title": "Classic Work 228",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 228' by Anonymous."
+    },
+    "isbn": "978-01000000227",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 726
+  },
+  {
+    "title": "Classic Work 229",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 229' by Anonymous."
+    },
+    "isbn": "978-01000000228",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1024
+  },
+  {
+    "title": "Classic Work 230",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 230' by Anonymous."
+    },
+    "isbn": "978-01000000229",
+    "image": null,
+    "communityRating": 4.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 256
+  },
+  {
+    "title": "Classic Work 231",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 231' by Anonymous."
+    },
+    "isbn": "978-01000000230",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 941
+  },
+  {
+    "title": "Classic Work 232",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 232' by Anonymous."
+    },
+    "isbn": "978-01000000231",
+    "image": null,
+    "communityRating": 3.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 160
+  },
+  {
+    "title": "Classic Work 233",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 233' by Anonymous."
+    },
+    "isbn": "978-01000000232",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 932
+  },
+  {
+    "title": "Classic Work 234",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 234' by Anonymous."
+    },
+    "isbn": "978-01000000233",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 742
+  },
+  {
+    "title": "Classic Work 235",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 235' by Anonymous."
+    },
+    "isbn": "978-01000000234",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 244
+  },
+  {
+    "title": "Classic Work 236",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 236' by Anonymous."
+    },
+    "isbn": "978-01000000235",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1178
+  },
+  {
+    "title": "Classic Work 237",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 237' by Anonymous."
+    },
+    "isbn": "978-01000000236",
+    "image": null,
+    "communityRating": 4.3,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 474
+  },
+  {
+    "title": "Classic Work 238",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 238' by Anonymous."
+    },
+    "isbn": "978-01000000237",
+    "image": null,
+    "communityRating": 3.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 458
+  },
+  {
+    "title": "Classic Work 239",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 239' by Anonymous."
+    },
+    "isbn": "978-01000000238",
+    "image": null,
+    "communityRating": 3.7,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 419
+  },
+  {
+    "title": "Classic Work 240",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 240' by Anonymous."
+    },
+    "isbn": "978-01000000239",
+    "image": null,
+    "communityRating": 3.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1099
+  },
+  {
+    "title": "Classic Work 241",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 241' by Anonymous."
+    },
+    "isbn": "978-01000000240",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 171
+  },
+  {
+    "title": "Classic Work 242",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 242' by Anonymous."
+    },
+    "isbn": "978-01000000241",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 232
+  },
+  {
+    "title": "Classic Work 243",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 243' by Anonymous."
+    },
+    "isbn": "978-01000000242",
+    "image": null,
+    "communityRating": 3.8,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 305
+  },
+  {
+    "title": "Classic Work 244",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 244' by Anonymous."
+    },
+    "isbn": "978-01000000243",
+    "image": null,
+    "communityRating": 4.1,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 387
+  },
+  {
+    "title": "Classic Work 245",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 245' by Anonymous."
+    },
+    "isbn": "978-01000000244",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 518
+  },
+  {
+    "title": "Classic Work 246",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 246' by Anonymous."
+    },
+    "isbn": "978-01000000245",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1085
+  },
+  {
+    "title": "Classic Work 247",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 247' by Anonymous."
+    },
+    "isbn": "978-01000000246",
+    "image": null,
+    "communityRating": 4.2,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 282
+  },
+  {
+    "title": "Classic Work 248",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 248' by Anonymous."
+    },
+    "isbn": "978-01000000247",
+    "image": null,
+    "communityRating": 3.6,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 388
+  },
+  {
+    "title": "Classic Work 249",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 249' by Anonymous."
+    },
+    "isbn": "978-01000000248",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 509
+  },
+  {
+    "title": "Classic Work 250",
+    "author": "Anonymous",
+    "authorId": "anonymous",
+    "description": {
+      "description": "A classic work titled 'Classic Work 250' by Anonymous."
+    },
+    "isbn": "978-01000000249",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Classic Literature",
+      "Fiction"
+    ],
+    "pages": 1048
+  },
+  {
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "authorId": "j-r-r-tolkien",
+    "description": {
+      "description": "Bilbo Baggins, a humble hobbit, is swept into an epic quest by the wizard Gandalf and a company of dwarves. Together, they journey across Middle-earth to reclaim the Lonely Mountain and its treasure from the dragon Smaug. Along the way, Bilbo discovers courage, wit, and a mysterious ring that will shape the fate of the world."
+    },
+    "isbn": "978-0547928227",
+    "image": null,
+    "communityRating": 4.4,
+    "genres": [
+      "Fantasy",
+      "Adventure",
+      "Classic"
+    ],
+    "pages": 310
+  },
+  {
+    "title": "The Fellowship of the Ring",
+    "author": "J.R.R. Tolkien",
+    "authorId": "j-r-r-tolkien",
+    "description": {
+      "description": "The first volume of The Lord of the Rings, this novel introduces Frodo Baggins, who inherits the One Ring. Tasked with its destruction, Frodo embarks on a perilous journey with the Fellowship\u2014hobbits, men, a wizard, an elf, and a dwarf\u2014facing dark forces that seek the Ring's power."
+    },
+    "isbn": "978-0547928210",
+    "image": null,
+    "communityRating": 4.6,
+    "genres": [
+      "Fantasy",
+      "Epic",
+      "Adventure"
+    ],
+    "pages": 423
+  },
+  {
+    "title": "The Two Towers",
+    "author": "J.R.R. Tolkien",
+    "authorId": "j-r-r-tolkien",
+    "description": {
+      "description": "The second volume of The Lord of the Rings follows the breaking of the Fellowship. Aragorn, Legolas, and Gimli pursue the kidnapped hobbits; Merry and Pippin encounter the ancient Ents; Frodo and Sam, guided by Gollum, press onward toward Mordor to destroy the Ring."
+    },
+    "isbn": "978-0547928203",
+    "image": null,
+    "communityRating": 4.5,
+    "genres": [
+      "Fantasy",
+      "Epic",
+      "Adventure"
+    ],
     "pages": 352
   },
   {
-    "title": "The Love Hypothesis",
-    "author": "Ali Hazelwood",
-    "authorId": "ali-hazelwood",
+    "title": "The Return of the King",
+    "author": "J.R.R. Tolkien",
+    "authorId": "j-r-r-tolkien",
     "description": {
-      "description": "A contemporary romance novel about a scientist who agrees to fake date a professor to prove a point, only to find herself falling for him."
+      "description": "The climactic conclusion of The Lord of the Rings. While armies clash in the War of the Ring, Frodo and Sam make their final push toward Mount Doom. The fate of Middle-earth hangs on their success\u2014and the resilience of friendship against impossible odds."
     },
-    "isbn": "978-0593336823",
+    "isbn": "978-0547928197",
     "image": null,
-    "communityRating": 4.2,
-    "userRating": null,
-    "genres": ["Romance", "Contemporary Fiction", "Academic Fiction"],
-    "pages": 384
+    "communityRating": 4.7,
+    "genres": [
+      "Fantasy",
+      "Epic",
+      "Adventure"
+    ],
+    "pages": 416
   },
   {
-    "title": "Freshwater",
-    "author": "Akwaeke Emezi",
-    "authorId": "akwaeke-emezi",
+    "title": "The Silmarillion",
+    "author": "J.R.R. Tolkien",
+    "authorId": "j-r-r-tolkien",
     "description": {
-      "description": "A novel about Ada, a Nigerian woman with multiple selves, exploring themes of identity, trauma, and spirituality."
+      "description": "A mythopoeic collection that lays the foundation of Tolkien\u2019s legendarium. It recounts the creation of the world, the First Age, and the tragic tale of the Silmarils\u2014jewels that inspired wars among Elves, Men, and the dark lord Morgoth. The work provides the deep history behind The Hobbit and The Lord of the Rings."
     },
-    "isbn": "978-0802127358",
+    "isbn": "978-0618126989",
     "image": null,
-    "communityRating": 4,
-    "userRating": null,
-    "genres": ["Contemporary Fiction", "Magical Realism", "LGBTQ+ Literature"],
-    "pages": 240
+    "communityRating": 4.1,
+    "genres": [
+      "Fantasy",
+      "Mythology",
+      "Legendarium"
+    ],
+    "pages": 365
+  },
+  {
+    "title": "Unfinished Tales",
+    "author": "J.R.R. Tolkien",
+    "authorId": "j-r-r-tolkien",
+    "description": {
+      "description": "A collection of stories and essays expanding the lore of Middle-earth, edited by Christopher Tolkien. It includes tales of N\u00famenor, the Istari (wizards), and extended accounts of characters like T\u00farin Turambar and Galadriel. The book enriches the depth of Tolkien\u2019s world and connects the main narratives."
+    },
+    "isbn": "978-0618154043",
+    "image": null,
+    "communityRating": 4.0,
+    "genres": [
+      "Fantasy",
+      "Mythology",
+      "Legendarium"
+    ],
+    "pages": 472
   }
 ]

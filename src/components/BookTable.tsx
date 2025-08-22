@@ -113,7 +113,7 @@ export const BookTable = ({ books, onBookClick, onAuthorClick, pageSize = 10 }: 
                 </BookInfoContainer>
               </BookCell>
               <TableCell>
-                <Text variant="caption">{book.genre || '-'}</Text>
+                <Text variant="caption">{book.genres && book.genres.length > 0 ? book.genres.join(', ') : '-'}</Text>
               </TableCell>
               <TableCell>
                 <StatusIndicator status={getBookStatus(book)} size="small" />
