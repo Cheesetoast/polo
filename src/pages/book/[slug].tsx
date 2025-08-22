@@ -105,14 +105,14 @@ const BookPage = ({ params }: BookPageProps) => {
                   By {book.author}
                 </Text>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+              <StatusContainer>
                 <StatusIndicator 
                   status={getBookStatus(bookWithStatus || book)} 
                   size="large" 
                 />
-                <Text variant="caption" color="secondary" style={{ marginTop: '4px' }}>
+                <StatusCaption variant="caption" color="secondary">
                   Update Status:
-                </Text>
+                </StatusCaption>
                 <StatusSelector
                   value={getBookStatus(bookWithStatus || book) || ""}
                   onChange={(e) => {
@@ -123,13 +123,13 @@ const BookPage = ({ params }: BookPageProps) => {
                   }}
                 >
                   <option value="">No Status</option>
-                  <option value="want-to-read">Want to Read</option>
-                  <option value="currently-reading">Currently Reading</option>
+                  <option value="not-started">Want to Read</option>
+                  <option value="in-progress">Currently Reading</option>
                   <option value="finished">Finished</option>
                 </StatusSelector>
                 
                 {/* Progress Input */}
-                {(getBookStatus(bookWithStatus || book) === 'currently-reading' || 
+                {(getBookStatus(bookWithStatus || book) === 'in-progress' || 
                   getBookStatus(bookWithStatus || book) === 'finished') && (
                   <ProgressInput
                     type="number"
@@ -158,7 +158,7 @@ const BookPage = ({ params }: BookPageProps) => {
                     }}
                   />
                 )}
-              </div>
+              </StatusContainer>
             </BookHeader>
 
             <BookContent>
@@ -385,4 +385,15 @@ const MetadataItem = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing.xs};
+`;
+
+const StatusContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+`;
+
+const StatusCaption = styled(Text)`
+  margin-top: 4px;
 `;

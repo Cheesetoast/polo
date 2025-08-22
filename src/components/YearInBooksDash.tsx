@@ -23,9 +23,9 @@ export const YearInBooksDash = ({ stats, className, style }: YearInBooksDashProp
   
   return (
     <YearInBooksContainer className={className} style={style}>
-      <Text variant="h3" style={{ marginBottom: theme.spacing.md }}>
+      <YearInBooksTitle variant="h3">
         {currentYear} in Books
-      </Text>
+      </YearInBooksTitle>
       
       <StatsGrid>
         <StatCard>
@@ -48,27 +48,27 @@ export const YearInBooksDash = ({ stats, className, style }: YearInBooksDashProp
       
       <StatsDetails>
         <StatSection>
-          <Text variant="h4" style={{ marginBottom: theme.spacing.sm }}>
+          <SectionTitle variant="h4">
             Favorite Genre
-          </Text>
+          </SectionTitle>
           <Text variant="p" size="lg" weight="semibold">
             {stats.favoriteGenre}
           </Text>
         </StatSection>
         
         <StatSection>
-          <Text variant="h4" style={{ marginBottom: theme.spacing.sm }}>
+          <SectionTitle variant="h4">
             Top Books This Year
-          </Text>
+          </SectionTitle>
           {stats.topBooks.length > 0 ? (
             <TopBooksList>
               {stats.topBooks.slice(0, 3).map((book, index) => (
                 <TopBookItem key={book.isbn}>
                   <BookRank>#{index + 1}</BookRank>
                                      <BookInfo>
-                     <Text variant="p" weight="medium" style={{ marginBottom: '2px' }}>
+                     <BookTitleText variant="p" weight="medium">
                        {book.title}
-                     </Text>
+                     </BookTitleText>
                      <Text variant="caption" color="secondary">
                        {book.author} • {(book.userRating || book.communityRating || 0).toFixed(1)}/5
                      </Text>
@@ -116,6 +116,18 @@ const StatNumber = styled.div`
   font-weight: ${theme.fontWeights.bold};
   color: ${theme.colors.primary};
   margin-bottom: ${theme.spacing.xs};
+`;
+
+const YearInBooksTitle = styled(Text)`
+  margin-bottom: ${theme.spacing.md};
+`;
+
+const SectionTitle = styled(Text)`
+  margin-bottom: ${theme.spacing.sm};
+`;
+
+const BookTitleText = styled(Text)`
+  margin-bottom: 2px;
 `;
 
 const StatLabel = styled.div`

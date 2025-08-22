@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
-import { ReadingStatus } from './BookBoard';
+import { ReadingStatus } from '../types/reading';
 
 interface StatusIndicatorProps {
   status: ReadingStatus;
@@ -15,14 +15,12 @@ export const StatusIndicator = ({
 }: StatusIndicatorProps) => {
   const getStatusLabel = (status: ReadingStatus): string => {
     switch (status) {
-      case 'want-to-read':
-        return 'Want to Read';
-      case 'currently-reading':
-        return 'Currently Reading';
+      case 'not-started':
+        return 'Not Started';
+      case 'in-progress':
+        return 'In Progress';
       case 'finished':
         return 'Finished';
-      case null:
-        return 'No Status';
       default:
         return status;
     }
@@ -45,14 +43,12 @@ const StatusDot = styled.div.withConfig({
   border-radius: 50%;
   background-color: ${props => {
     switch (props.status) {
-      case 'want-to-read':
-        return theme.colors.blue?.[500] || '#3b82f6';
-      case 'currently-reading':
+      case 'not-started':
+        return theme.colors.error || '#ef4444';
+      case 'in-progress':
         return theme.colors.warning || '#f59e0b';
       case 'finished':
         return theme.colors.success || '#10b981';
-      case null:
-        return theme.colors.gray?.[400] || '#9ca3af';
       default:
         return theme.colors.muted;
     }
@@ -68,14 +64,12 @@ const StatusLabel = styled.span.withConfig({
   font-weight: ${theme.fontWeights.medium};
   color: ${props => {
     switch (props.status) {
-      case 'want-to-read':
-        return theme.colors.blue?.[600] || '#2563eb';
-      case 'currently-reading':
+      case 'not-started':
+        return theme.colors.error || '#ef4444';
+      case 'in-progress':
         return theme.colors.warning || '#f59e0b';
       case 'finished':
         return theme.colors.success || '#10b981';
-      case null:
-        return theme.colors.gray?.[500] || '#6b7280';
       default:
         return theme.colors.muted;
     }

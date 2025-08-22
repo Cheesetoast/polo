@@ -90,6 +90,36 @@ The bookshelf page features a Kanban-style board for organizing your reading jou
 2. **From Search Results**: Click on author names in search results
 3. **Direct URL**: Navigate to `/search-results?author=[author-name]` for any author
 
+### Author Discovery and Management
+The system now includes a comprehensive author management system:
+
+- **Authors Page**: Navigate to `/authors` to browse all authors in the collection
+- **Author Profiles**: Click on any author to view their detailed profile page
+- **Rich Author Data**: Each author includes:
+  - Biography and background information
+  - Nationality and birth/death years
+  - Genre specialties and notable works
+  - Personal website links
+  - Complete bibliography of their books
+- **Advanced Filtering**: Filter authors by:
+  - Nationality (American, British, Canadian, etc.)
+  - Genre (Fiction, Non-Fiction, Science Fiction, etc.)
+  - Search by name, bio, or genre content
+- **Sorting Options**: Sort authors by name, nationality, or genre
+- **Author Pages**: Individual author pages at `/author/[author-id]` showing:
+  - Author biography and metadata
+  - All books by that author
+  - Genre tags and notable works
+  - Professional information and links
+
+### How to Use the Authors System
+
+1. **Browse All Authors**: Visit `/authors` to see the complete author collection
+2. **Search and Filter**: Use the search bar and filter dropdowns to find specific authors
+3. **View Author Profiles**: Click on any author card to see their detailed profile
+4. **Discover New Books**: Browse all works by an author to find new reading material
+5. **Filter by Preferences**: Use nationality and genre filters to discover authors in your preferred categories
+
 ### Visual Indicators
 
 - **Drag Handle**: The ⋮⋮ icon in the top-right of each book card

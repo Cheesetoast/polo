@@ -31,9 +31,9 @@ interface DashboardProps {
 export const Dashboard = ({ stats, yearInBooksStats, className, style }: DashboardProps) => {
   return (
     <DashboardContainer className={className} style={style}>
-      <Text variant="h3" style={{ marginBottom: theme.spacing.md }}>
+      <DashboardTitle variant="h3">
         Reading Statistics
-      </Text>
+      </DashboardTitle>
 
       {yearInBooksStats && (
         <YearInBooksDash stats={yearInBooksStats} />
@@ -63,9 +63,9 @@ export const Dashboard = ({ stats, yearInBooksStats, className, style }: Dashboa
       
       <StatsDetails>
         <StatSection>
-          <Text variant="h4" style={{ marginBottom: theme.spacing.sm }}>
+          <SectionTitle variant="h4">
             Top Genres
-          </Text>
+          </SectionTitle>
           {stats.topGenres.length > 0 ? (
             <GenreList>
               {stats.topGenres.map((genre, index) => (
@@ -78,9 +78,9 @@ export const Dashboard = ({ stats, yearInBooksStats, className, style }: Dashboa
         </StatSection>
         
         <StatSection>
-          <Text variant="h4" style={{ marginBottom: theme.spacing.sm }}>
+          <SectionTitle variant="h4">
             Average Rating
-          </Text>
+          </SectionTitle>
           <Text variant="p" size="lg" weight="semibold">
             {stats.averageRating} / 5
           </Text>
@@ -127,6 +127,14 @@ const StatLabel = styled.div`
   font-size: ${theme.fontSizes.sm};
   color: ${theme.colors.secondary};
   font-weight: ${theme.fontWeights.medium};
+`;
+
+const DashboardTitle = styled(Text)`
+  margin-bottom: ${theme.spacing.md};
+`;
+
+const SectionTitle = styled(Text)`
+  margin-bottom: ${theme.spacing.sm};
 `;
 
 const StatsDetails = styled.div`

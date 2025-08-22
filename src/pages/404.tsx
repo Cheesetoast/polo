@@ -1,4 +1,5 @@
 import type { HeadFC, PageProps } from "gatsby"
+import styled from "styled-components"
 import { navigate } from "gatsby"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
@@ -15,30 +16,17 @@ const NotFoundPage = () => {
       <Navbar />
       <main>
         <ContentWrapper>
-          <div style={{ 
-            textAlign: 'center', 
-            padding: '4rem 0',
-            minHeight: '60vh',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
-            <Text variant="h1" style={{ fontSize: '6rem', marginBottom: '1rem', color: '#e74c3c' }}>
+          <NotFoundContainer>
+            <NotFoundTitle variant="h1">
               404
-            </Text>
-            <Text variant="h2" style={{ marginBottom: '1rem' }}>
+            </NotFoundTitle>
+            <NotFoundSubtitle variant="h2">
               Page Not Found
-            </Text>
-            <Text variant="p" style={{ 
-              marginBottom: '2rem', 
-              maxWidth: '500px',
-              fontSize: '1.1rem',
-              lineHeight: '1.6'
-            }}>
+            </NotFoundSubtitle>
+            <NotFoundDescription variant="p">
               Oops! Looks like this page took a detour to the fiction section when it should have been in non-fiction. 
               Maybe it's playing hide and seek with the other missing pages? 📚🔍
-            </Text>
+            </NotFoundDescription>
             
             <ButtonContainer direction="row" spacing="md">
               <Button 
@@ -61,14 +49,10 @@ const NotFoundPage = () => {
               </Button>
             </ButtonContainer>
             
-            <Text variant="caption" style={{ 
-              marginTop: '3rem',
-              color: '#666',
-              fontSize: '0.9rem'
-            }}>
+            <NotFoundCaption variant="caption">
               If you believe this page should exist, please check the URL or try navigating from the homepage.
-            </Text>
-          </div>
+            </NotFoundCaption>
+          </NotFoundContainer>
         </ContentWrapper>
       </main>
     </Layout>
@@ -83,3 +67,37 @@ export const Head: HeadFC = () => (
     description="The page you're looking for doesn't exist. Navigate back to our book collection."
   />
 )
+
+// Styled Components
+const NotFoundContainer = styled.div`
+  text-align: center;
+  padding: 4rem 0;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const NotFoundTitle = styled(Text)`
+  font-size: 6rem;
+  margin-bottom: 1rem;
+  color: #e74c3c;
+`;
+
+const NotFoundSubtitle = styled(Text)`
+  margin-bottom: 1rem;
+`;
+
+const NotFoundDescription = styled(Text)`
+  margin-bottom: 2rem;
+  max-width: 500px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+`;
+
+const NotFoundCaption = styled(Text)`
+  margin-top: 3rem;
+  color: #666;
+  font-size: 0.9rem;
+`;

@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import styled from 'styled-components';
 import { BookBoard } from './BookBoard';
 import { useBookStatus } from '../hooks/useBookStatus';
 import { Book } from './Book';
@@ -28,8 +29,8 @@ export const BookBoardContainer = ({
     const booksWithAssignedStatus = booksWithStatus.filter(book => book.status !== null);
     const totalBooks = booksWithAssignedStatus.length;
     const finishedBooks = booksWithAssignedStatus.filter(book => book.status === 'finished').length;
-    const currentlyReading = booksWithAssignedStatus.filter(book => book.status === 'currently-reading').length;
-    const wantToRead = booksWithAssignedStatus.filter(book => book.status === 'want-to-read').length;
+    const currentlyReading = booksWithAssignedStatus.filter(book => book.status === 'in-progress').length;
+    const wantToRead = booksWithAssignedStatus.filter(book => book.status === 'not-started').length;
     
     // Genre distribution
     const genreCounts = booksWithAssignedStatus.reduce((acc, book) => {
@@ -69,20 +70,33 @@ export const BookBoardContainer = ({
   }
 
   return (
-    <div className={className} style={style}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: theme.spacing.lg }}>
+    <Container className={className} style={style}>
+      <Header>
         <Text variant="h2">{title}</Text>
         {showResetButton && (
           <Button onClick={resetStatuses} variant="outline" size="small">
             Reset All
           </Button>
         )}
-      </div>
+      </Header>
       
       <BookBoard 
         books={booksWithStatus.filter(book => book.status !== null)} 
         onBookStatusChange={updateBookStatus}
       />
-    </div>
+    </Container>
   );
 };
+
+// Styled Components
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: ${theme.spacing.lg};
+`;

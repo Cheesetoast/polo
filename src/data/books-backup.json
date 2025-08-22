@@ -106,7 +106,7 @@
     "description": {
       "description": "An allegorical novella about a group of farm animals who rebel against their human farmer, only to see their revolution corrupted by power."
     },
-    "isbn": "978-0452284241",
+    "isbn": "978-0451524935",
     "image": null,
     "communityRating": 4.2,
     "userRating": 5,
@@ -115,73 +115,5 @@
     "dateStarted": "2025-05-19",
     "dateFinished": "2025-05-29",
     "pages": 328
-  },
-  {
-    "title": "Brave New World",
-    "author": "Aldous Huxley",
-    "authorId": "aldous-huxley",
-    "description": {
-      "description": "A dystopian novel set in a futuristic World State, inhabited by genetically modified citizens and an intelligence-based social hierarchy."
-    },
-    "isbn": "978-0060850524",
-    "image": null,
-    "communityRating": 4.1,
-    "userRating": null,
-    "genre": "Science Fiction",
-    "progress": 0,
-    "dateStarted": null,
-    "dateFinished": null,
-    "pages": 288
-  },
-  {
-    "title": "The Silent Patient",
-    "author": "Alex Michaelides",
-    "authorId": "alex-michaelides",
-    "description": {
-      "description": "A psychological thriller about a woman who shoots her husband and then never speaks again, and the criminal psychotherapist who tries to unravel her story."
-    },
-    "isbn": "978-1250301697",
-    "image": null,
-    "communityRating": 4,
-    "userRating": null,
-    "genre": "Thriller",
-    "progress": 0,
-    "dateStarted": null,
-    "dateFinished": null,
-    "pages": 352
-  },
-  {
-    "title": "The Love Hypothesis",
-    "author": "Ali Hazelwood",
-    "authorId": "ali-hazelwood",
-    "description": {
-      "description": "A contemporary romance novel about a scientist who agrees to fake date a professor to prove a point, only to find herself falling for him."
-    },
-    "isbn": "978-0593336823",
-    "image": null,
-    "communityRating": 4.2,
-    "userRating": null,
-    "genre": "Romance",
-    "progress": 0,
-    "dateStarted": null,
-    "dateFinished": null,
-    "pages": 384
-  },
-  {
-    "title": "Freshwater",
-    "author": "Akwaeke Emezi",
-    "authorId": "akwaeke-emezi",
-    "description": {
-      "description": "A novel about Ada, a Nigerian woman with multiple selves, exploring themes of identity, trauma, and spirituality."
-    },
-    "isbn": "978-0802127358",
-    "image": null,
-    "communityRating": 4,
-    "userRating": null,
-    "genre": "Contemporary Fiction",
-    "progress": 0,
-    "dateStarted": null,
-    "dateFinished": null,
-    "pages": 240
   }
 ]

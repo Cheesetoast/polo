@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
 
 interface ImageBlockProps {
@@ -20,18 +21,20 @@ export const ImageBlock = ({
   }
 
   return (
-    <div 
+    <ImageContainer 
       className={className}
-      style={{ 
-        display: 'block',
-        width: '100%',
-        ...style 
-      }}
+      style={style}
     >
       <GatsbyImage
         image={gatsbyImage}
         alt={alt}
       />
-    </div>
+    </ImageContainer>
   );
 };
+
+// Styled Components
+const ImageContainer = styled.div`
+  display: block;
+  width: 100%;
+`;

@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Link } from 'gatsby';
 import { Text } from './Text';
 
@@ -6,159 +7,187 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer style={{
-      backgroundColor: '#111827',
-      color: '#ffffff',
-      padding: '3rem 0 2rem',
-      marginTop: 'auto'
-    }}>
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: '0 2rem',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-        gap: '2rem'
-      }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <Text variant="h4" style={{ color: '#ffffff', fontWeight: 600, marginBottom: '0.5rem' }}>
+    <FooterContainer>
+      <FooterContent>
+        <FooterSection>
+          <FooterTitle variant="h4">
             About Polo
-          </Text>
-          <Text variant="p" style={{ lineHeight: '1.6' }}>
+          </FooterTitle>
+          <FooterText variant="p">
             A personal book collection and reading tracker. Discover new books, 
             track your reading progress, and organize your literary journey.
-          </Text>
-        </div>
+          </FooterText>
+        </FooterSection>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <Text variant="h4" style={{ color: '#ffffff', fontWeight: 600, marginBottom: '0.5rem' }}>
+        <FooterSection>
+          <FooterTitle variant="h4">
             Quick Links
-          </Text>
-          <Link to="/" style={{ color: '#ffffff', textDecoration: 'none', transition: 'color 0.2s ease' }}>
+          </FooterTitle>
+          <FooterLink to="/">
             Home
-          </Link>
-          <Link to="/search" style={{ color: '#ffffff', textDecoration: 'none', transition: 'color 0.2s ease' }}>
+          </FooterLink>
+          <FooterLink to="/search">
             Search Books
-          </Link>
-          <Link to="/bookshelf" style={{ color: '#ffffff', textDecoration: 'none', transition: 'color 0.2s ease' }}>
+          </FooterLink>
+          <FooterLink to="/bookshelf">
             My Bookshelf
-          </Link>
-          <Link to="/project" style={{ color: '#ffffff', textDecoration: 'none', transition: 'color 0.2s ease' }}>
+          </FooterLink>
+          <FooterLink to="/project">
             About
-          </Link>
-        </div>
+          </FooterLink>
+        </FooterSection>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <Text variant="h4" style={{ color: '#ffffff', fontWeight: 600, marginBottom: '0.5rem' }}>
+        <FooterSection>
+          <FooterTitle variant="h4">
             Resources
-          </Text>
-          <Link to="/search-results" style={{ color: '#ffffff', textDecoration: 'none', transition: 'color 0.2s ease' }}>
+          </FooterTitle>
+          <FooterLink to="/search-results">
             Browse All Books
-          </Link>
-          <Link to="/bookshelf" style={{ color: '#ffffff', textDecoration: 'none', transition: 'color 0.2s ease' }}>
+          </FooterLink>
+          <FooterLink to="/bookshelf">
             Reading Lists
-          </Link>
-          <a 
+          </FooterLink>
+          <FooterExternalLink 
             href="https://openlibrary.org" 
             target="_blank" 
             rel="noopener noreferrer"
-            style={{ color: '#ffffff', textDecoration: 'none', transition: 'color 0.2s ease' }}
           >
             Open Library
-          </a>
-          <a 
+          </FooterExternalLink>
+          <FooterExternalLink 
             href="https://goodreads.com" 
             target="_blank" 
             rel="noopener noreferrer"
-            style={{ color: '#ffffff', textDecoration: 'none', transition: 'color 0.2s ease' }}
           >
             Goodreads
-          </a>
-        </div>
+          </FooterExternalLink>
+        </FooterSection>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <Text variant="h4" style={{ color: '#ffffff', fontWeight: 600, marginBottom: '0.5rem' }}>
+        <FooterSection>
+          <FooterTitle variant="h4">
             Connect
-          </Text>
-          <Text variant="p">Follow us for reading recommendations and updates.</Text>
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
-            <a 
+          </FooterTitle>
+          <FooterText variant="p">Follow us for reading recommendations and updates.</FooterText>
+          <SocialLinks>
+            <SocialLink 
               href="https://github.com" 
               target="_blank" 
               rel="noopener noreferrer" 
               aria-label="GitHub"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '40px',
-                height: '40px',
-                backgroundColor: '#4b5563',
-                borderRadius: '50%',
-                transition: 'background-color 0.2s ease',
-                color: '#ffffff',
-                textDecoration: 'none'
-              }}
             >
               📚
-            </a>
-            <a 
+            </SocialLink>
+            <SocialLink 
               href="https://twitter.com" 
               target="_blank" 
               rel="noopener noreferrer" 
               aria-label="Twitter"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '40px',
-                height: '40px',
-                backgroundColor: '#4b5563',
-                borderRadius: '50%',
-                transition: 'background-color 0.2s ease',
-                color: '#ffffff',
-                textDecoration: 'none'
-              }}
             >
               🐦
-            </a>
-            <a 
+            </SocialLink>
+            <SocialLink 
               href="https://instagram.com" 
               target="_blank" 
               rel="noopener noreferrer" 
               aria-label="Instagram"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '40px',
-                height: '40px',
-                backgroundColor: '#4b5563',
-                borderRadius: '50%',
-                transition: 'background-color 0.2s ease',
-                color: '#ffffff',
-                textDecoration: 'none'
-              }}
             >
               📷
-            </a>
-          </div>
-        </div>
-      </div>
+            </SocialLink>
+          </SocialLinks>
+        </FooterSection>
+      </FooterContent>
 
-      <div style={{
-        textAlign: 'center',
-        marginTop: '2rem',
-        paddingTop: '2rem',
-        borderTop: '1px solid #4b5563',
-        color: '#4b5563'
-      }}>
+      <FooterBottom>
         <Text variant="caption">
           © {currentYear} Polo Book Collection. Built with Gatsby and ❤️
         </Text>
-      </div>
-    </footer>
+      </FooterBottom>
+    </FooterContainer>
   );
 };
 
 export default Footer;
+
+// Styled Components
+const FooterContainer = styled.footer`
+  background-color: #111827;
+  color: #ffffff;
+  padding: 3rem 0 2rem;
+  margin-top: auto;
+`;
+
+const FooterContent = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+`;
+
+const FooterSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const FooterTitle = styled(Text)`
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+`;
+
+const FooterText = styled(Text)`
+  line-height: 1.6;
+`;
+
+const FooterLink = styled(Link)`
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #9ca3af;
+  }
+`;
+
+const FooterExternalLink = styled.a`
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #9ca3af;
+  }
+`;
+
+const SocialLinks = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+`;
+
+const SocialLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #4b5563;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  color: #ffffff;
+  text-decoration: none;
+
+  &:hover {
+    background-color: #6b7280;
+  }
+`;
+
+const FooterBottom = styled.div`
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #4b5563;
+  color: #4b5563;
+`;

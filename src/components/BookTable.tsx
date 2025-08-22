@@ -6,7 +6,12 @@ import { Text } from './Text';
 import { StatusIndicator } from './StatusIndicator';
 import { BookProgressBar } from './BookProgressBar';
 import { Book } from './Book';
-import { BookWithReadingStatus } from './BookBoard';
+import { ReadingStatus } from '../types/reading';
+
+interface BookWithReadingStatus extends Book {
+  status?: ReadingStatus;
+  progress?: number;
+}
 
 interface BookTableProps {
   books: BookWithReadingStatus[];
@@ -46,8 +51,8 @@ export const BookTable = ({ books, onBookClick, onAuthorClick, pageSize = 10 }: 
     setCurrentPage(prev => Math.min(prev + 1, totalPages));
   };
 
-  const getBookStatus = (book: BookWithReadingStatus) => {
-    return book.status;
+  const getBookStatus = (book: BookWithReadingStatus): ReadingStatus => {
+    return book.status || 'not-started';
   };
 
   const formatDate = (dateString: string | null | undefined) => {
@@ -70,12 +75,12 @@ export const BookTable = ({ books, onBookClick, onAuthorClick, pageSize = 10 }: 
       <Table>
         <thead>
           <tr>
-            <TableHeader style={{ width: '35%' }}>Book</TableHeader>
-            <TableHeader style={{ width: '15%' }}>Genre</TableHeader>
-            <TableHeader style={{ width: '15%' }}>Status</TableHeader>
-            <TableHeader style={{ width: '15%' }}>Rating</TableHeader>
-            <TableHeader style={{ width: '10%' }}>Started</TableHeader>
-            <TableHeader style={{ width: '10%' }}>Finished</TableHeader>
+            <TableHeaderWithWidth width="35%">Book</TableHeaderWithWidth>
+            <TableHeaderWithWidth width="15%">Genre</TableHeaderWithWidth>
+            <TableHeaderWithWidth width="15%">Status</TableHeaderWithWidth>
+            <TableHeaderWithWidth width="15%">Rating</TableHeaderWithWidth>
+            <TableHeaderWithWidth width="10%">Started</TableHeaderWithWidth>
+            <TableHeaderWithWidth width="10%">Finished</TableHeaderWithWidth>
           </tr>
         </thead>
         <TableBody>
@@ -86,12 +91,12 @@ export const BookTable = ({ books, onBookClick, onAuthorClick, pageSize = 10 }: 
               clickable={!!onBookClick}
             >
               <BookCell>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <BookInfoContainer>
                   <BookTitleLink to={`/book/${book.isbn.replace(/-/g, '')}`}>
-                    <Text variant="p" weight="medium" style={{ wordBreak: 'break-word' }}>{book.title}</Text>
+                    <BookTitleText variant="p" weight="medium">{book.title}</BookTitleText>
                   </BookTitleLink>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <Text variant="caption" color="secondary" style={{ wordBreak: 'break-word' }}>By</Text>
+                  <AuthorInfoContainer>
+                    <AuthorLabel variant="caption" color="secondary">By</AuthorLabel>
                     <AuthorLink
                       onClick={(e) => {
                         e.stopPropagation(); // Prevent row click
@@ -101,11 +106,11 @@ export const BookTable = ({ books, onBookClick, onAuthorClick, pageSize = 10 }: 
                     >
                       {book.author}
                     </AuthorLink>
-                  </div>
+                  </AuthorInfoContainer>
                   {book.progress !== undefined && (
                     <BookProgressBar progress={book.progress} />
                   )}
-                </div>
+                </BookInfoContainer>
               </BookCell>
               <TableCell>
                 <Text variant="caption">{book.genre || '-'}</Text>
@@ -334,3 +339,28 @@ const AuthorLink = styled.span.withConfig({
 `;
 
 export default BookTable;
+
+// Additional styled components for inline styles
+const TableHeaderWithWidth = styled(TableHeader)<{ width: string }>`
+  width: ${props => props.width};
+`;
+
+const BookInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
+const BookTitleText = styled(Text)`
+  word-break: break-word;
+`;
+
+const AuthorInfoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`;
+
+const AuthorLabel = styled(Text)`
+  word-break: break-word;
+`;

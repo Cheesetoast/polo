@@ -51,22 +51,22 @@ describe('useBookStatus', () => {
     // Book 1 should be 'finished' (has dateFinished)
     expect(result.current.booksWithStatus[0].status).toBe('finished');
     
-    // Book 2 should be 'currently-reading' (has progress > 0)
-    expect(result.current.booksWithStatus[1].status).toBe('currently-reading');
+    // Book 2 should be 'in-progress' (has progress > 0)
+    expect(result.current.booksWithStatus[1].status).toBe('in-progress');
     
-    // Book 3 should be null (default)
-    expect(result.current.booksWithStatus[2].status).toBe(null);
+    // Book 3 should be 'not-started' (default)
+    expect(result.current.booksWithStatus[2].status).toBe('not-started');
   });
 
   it('updates book status when updateBookStatus is called', () => {
     const { result } = renderHook(() => useBookStatus(mockBooks));
     
     act(() => {
-      result.current.updateBookStatus('978-1', 'currently-reading');
+      result.current.updateBookStatus('978-1', 'in-progress');
     });
     
     const updatedBook = result.current.booksWithStatus.find(book => book.isbn === '978-1');
-    expect(updatedBook?.status).toBe('currently-reading');
+    expect(updatedBook?.status).toBe('in-progress');
   });
 
   it('updates book progress when updateBookProgress is called', () => {
@@ -85,7 +85,7 @@ describe('useBookStatus', () => {
     
     // First, update a book status
     act(() => {
-      result.current.updateBookStatus('978-1', 'currently-reading');
+      result.current.updateBookStatus('978-1', 'in-progress');
     });
     
     // Then reset
@@ -101,14 +101,14 @@ describe('useBookStatus', () => {
   it('loads statuses from localStorage on mount', () => {
     // Set up localStorage with some data
     const storedData = {
-      '978-1': { status: 'currently-reading', progress: 25 }
+      '978-1': { status: 'in-progress', progress: 25 }
     };
     localStorage.setItem('book-status-data', JSON.stringify(storedData));
     
     const { result } = renderHook(() => useBookStatus(mockBooks));
     
     const book1 = result.current.booksWithStatus.find(book => book.isbn === '978-1');
-    expect(book1?.status).toBe('currently-reading');
+    expect(book1?.status).toBe('in-progress');
     expect(book1?.progress).toBe(25);
   });
 
@@ -116,11 +116,11 @@ describe('useBookStatus', () => {
     const { result } = renderHook(() => useBookStatus(mockBooks));
     
     act(() => {
-      result.current.updateBookStatus('978-1', 'currently-reading');
+      result.current.updateBookStatus('978-1', 'in-progress');
     });
     
     const storedData = JSON.parse(localStorage.getItem('book-status-data') || '{}');
-    expect(storedData['978-1'].status).toBe('currently-reading');
+    expect(storedData['978-1'].status).toBe('in-progress');
   });
 
   it('handles books without ISBN gracefully', () => {
@@ -140,7 +140,7 @@ describe('useBookStatus', () => {
     
     // Should not crash and should assign default status
     expect(result.current.booksWithStatus).toHaveLength(1);
-    expect(result.current.booksWithStatus[0].status).toBe(null);
+    expect(result.current.booksWithStatus[0].status).toBe('not-started');
   });
 
   it('clears localStorage when clearLocalStorage is called', () => {
@@ -148,7 +148,7 @@ describe('useBookStatus', () => {
     
     // First, update a book status to create localStorage data
     act(() => {
-      result.current.updateBookStatus('978-1', 'currently-reading');
+      result.current.updateBookStatus('978-1', 'in-progress');
     });
     
     // Then clear localStorage

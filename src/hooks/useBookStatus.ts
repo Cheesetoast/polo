@@ -1,7 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Book } from '../components/Book';
-import { BookWithReadingStatus, ReadingStatus } from '../components/BookBoard';
+import { ReadingStatus } from '../types/reading';
 import { DEFAULTS } from '../constants';
+
+interface BookWithReadingStatus extends Book {
+  status: ReadingStatus;
+  progress?: number;
+}
 
 const STORAGE_KEY = 'book-status-data';
 
@@ -75,10 +80,10 @@ export const useBookStatus = (books: Book[]) => {
         }
         // If book has progress > 0, it should be marked as currently reading
         if (book.progress && book.progress > 0) {
-          return 'currently-reading';
+          return 'in-progress';
         }
         // Otherwise, default to null (no status assigned yet)
-        return DEFAULT_STATUS;
+        return DEFAULT_STATUS || 'not-started';
       };
       
       return {

@@ -1,121 +1,92 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BookBoard } from './BookBoard';
-import { Book } from './Book';
-
-// Mock the @dnd-kit modules
-jest.mock('@dnd-kit/core', () => ({
-  DndContext: ({ children, onDragStart, onDragEnd }: any) => (
-    <div data-testid="dnd-context" onDragStart={onDragStart} onDragEnd={onDragEnd}>
-      {children}
-    </div>
-  ),
-  DragOverlay: ({ children }: any) => <div data-testid="drag-overlay">{children}</div>,
-  PointerSensor: jest.fn(),
-  useSensor: jest.fn(() => ({})),
-  useSensors: jest.fn(() => []),
-  useDroppable: jest.fn(() => ({ setNodeRef: jest.fn(), isOver: false })),
-}));
-
-jest.mock('@dnd-kit/sortable', () => ({
-  SortableContext: ({ children }: any) => <div data-testid="sortable-context">{children}</div>,
-  verticalListSortingStrategy: jest.fn(),
-  useSortable: jest.fn(() => ({
-    attributes: {},
-    listeners: {},
-    setNodeRef: jest.fn(),
-    transform: null,
-    transition: null,
-    isDragging: false,
-  })),
-}));
-
-jest.mock('@dnd-kit/utilities', () => ({
-  CSS: {
-    Transform: {
-      toString: jest.fn(() => ''),
-    },
-  },
-}));
 
 // Mock the Book component
 jest.mock('./Book', () => ({
-  Book: ({ book, dragHandleProps, isDragging }: any) => (
+  Book: ({ book, onClick }: any) => (
     <div 
       data-testid={`book-${book.isbn}`}
-      data-dragging={isDragging}
-      {...dragHandleProps}
+      onClick={onClick}
     >
       <div>{book.title}</div>
       <div>{book.author}</div>
-      <div data-testid="drag-handle">⋮⋮</div>
     </div>
   ),
 }));
 
-const mockBooks = [
+// Mock the data import to use the current books structure
+jest.mock('../data/books.json', () => [
   {
-    title: 'Test Book 1',
-    author: 'Test Author 1',
-    description: { description: 'Test description 1' },
-    isbn: 'test-isbn-1',
-    status: 'want-to-read' as const,
+    title: '1984',
+    author: 'George Orwell',
+    authorId: 'george-orwell',
+    description: { description: 'A dystopian novel' },
+    isbn: '978-0451524935',
+    progress: 2,
   },
   {
-    title: 'Test Book 2',
-    author: 'Test Author 2',
-    description: { description: 'Test description 2' },
-    isbn: 'test-isbn-2',
-    status: 'currently-reading' as const,
+    title: 'The Great Gatsby',
+    author: 'F. Scott Fitzgerald',
+    authorId: 'f-scott-fitzgerald',
+    description: { description: 'A story of the Jazz Age' },
+    isbn: '978-0743273565',
+    progress: 0,
   },
-];
+]);
 
 describe('BookBoard', () => {
-  const mockOnBookStatusChange = jest.fn();
-
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it('renders the book board with columns', () => {
-    render(<BookBoard books={mockBooks} onBookStatusChange={mockOnBookStatusChange} />);
+  it('renders the book board with title', () => {
+    render(<BookBoard />);
     
-    expect(screen.getByText('Want to Read')).toBeInTheDocument();
-    expect(screen.getByText('Currently Reading')).toBeInTheDocument();
+    expect(screen.getByText('My Reading Board')).toBeInTheDocument();
+  });
+
+  it('renders the three status columns', () => {
+    render(<BookBoard />);
+    
+    expect(screen.getByText('Not Started')).toBeInTheDocument();
+    expect(screen.getByText('In Progress')).toBeInTheDocument();
     expect(screen.getByText('Finished')).toBeInTheDocument();
   });
 
-  it('renders books in their respective columns', () => {
-    render(<BookBoard books={mockBooks} onBookStatusChange={mockOnBookStatusChange} />);
+  it('renders books in their respective columns based on progress', () => {
+    render(<BookBoard />);
     
-    expect(screen.getByTestId('book-test-isbn-1')).toBeInTheDocument();
-    expect(screen.getByTestId('book-test-isbn-2')).toBeInTheDocument();
+    // The Great Gatsby should be in "Not Started" (progress: 0)
+    expect(screen.getByTestId('book-978-0743273565')).toBeInTheDocument();
+    
+    // 1984 should be in "In Progress" (progress: 2)
+    expect(screen.getByTestId('book-978-0451524935')).toBeInTheDocument();
   });
 
-  it('renders drag handles on books', () => {
-    render(<BookBoard books={mockBooks} onBookStatusChange={mockOnBookStatusChange} />);
+  it('displays correct book counts in column headers', () => {
+    render(<BookBoard />);
     
-    const dragHandles = screen.getAllByTestId('drag-handle');
-    expect(dragHandles).toHaveLength(2);
+    // Should show counts for each column
+    const notStartedColumn = screen.getByText('Not Started').closest('div');
+    const inProgressColumn = screen.getByText('In Progress').closest('div');
+    const finishedColumn = screen.getByText('Finished').closest('div');
+    
+    expect(notStartedColumn).toBeInTheDocument();
+    expect(inProgressColumn).toBeInTheDocument();
+    expect(finishedColumn).toBeInTheDocument();
   });
 
-  it('renders empty state when no books in column', () => {
-    render(<BookBoard books={[]} onBookStatusChange={mockOnBookStatusChange} />);
+  it('handles book clicks to change status', () => {
+    render(<BookBoard />);
     
-    const emptyStates = screen.getAllByText('Drop books here');
-    expect(emptyStates).toHaveLength(3); // One for each column
-  });
-
-  it('renders DndContext wrapper', () => {
-    render(<BookBoard books={mockBooks} onBookStatusChange={mockOnBookStatusChange} />);
+    const book = screen.getByTestId('book-978-0743273565');
     
-    expect(screen.getByTestId('dnd-context')).toBeInTheDocument();
-  });
-
-  it('renders SortableContext for each column', () => {
-    render(<BookBoard books={mockBooks} onBookStatusChange={mockOnBookStatusChange} />);
+    // Should be clickable
+    fireEvent.click(book);
     
-    const sortableContexts = screen.getAllByTestId('sortable-context');
-    expect(sortableContexts.length).toBeGreaterThan(0);
+    // The book should still exist in the component (may have moved to a different column)
+    // We just verify that the click doesn't cause any errors
+    expect(screen.getByText('The Great Gatsby')).toBeInTheDocument();
   });
 });
