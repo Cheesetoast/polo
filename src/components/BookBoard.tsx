@@ -18,10 +18,20 @@ import { theme } from '../styles/theme';
 import { Book } from './Book';
 import { ReadingStatus } from '../types/reading';
 import books from '../data/books.json';
-import { useBookStatus } from '../hooks/useBookStatus';
 
-export const BookBoard = () => {
-  const { booksWithStatus, updateBookStatus } = useBookStatus(books);
+interface BookBoardProps {
+  booksWithStatus: Array<{
+    isbn: string;
+    title: string;
+    author: string;
+    description: { description: string };
+    status: ReadingStatus | null;
+    [key: string]: any;
+  }>;
+  updateBookStatus: (isbn: string | undefined, status: ReadingStatus | null) => void;
+}
+
+export const BookBoard = ({ booksWithStatus, updateBookStatus }: BookBoardProps) => {
   const [activeBook, setActiveBook] = useState<any>(null);
 
   const sensors = useSensors(
@@ -64,6 +74,7 @@ export const BookBoard = () => {
       const bookId = active.id as string;
       const newStatus = over.id as ReadingStatus;
       
+      console.log('BookBoard drag end:', { bookId, newStatus, callingUpdate: true });
       updateBookStatus(bookId, newStatus);
     }
     
@@ -113,10 +124,9 @@ export const BookBoard = () => {
                   {getBooksByStatus(status).map(book => (
                     <Book
                       key={book.isbn}
-                      book={{ ...book, status }}
+                      book={{ ...book, status: book.status || undefined }}
                       onClick={() => handleBookClick(book.isbn)}
                       showStatus={false}
-
                     />
                   ))}
                 </SortableContext>
@@ -130,7 +140,7 @@ export const BookBoard = () => {
       <DragOverlay>
         {activeBook ? (
           <Book
-            book={{ ...activeBook, status: booksWithStatus.find(b => b.isbn === activeBook.isbn)?.status || null }}
+            book={{ ...activeBook, status: booksWithStatus.find(b => b.isbn === activeBook.isbn)?.status || undefined }}
             onClick={() => {}}
             showStatus={false}
           />

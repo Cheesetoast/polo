@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Book } from '../components/Book';
 import { ReadingStatus } from '../types/reading';
 import { DEFAULTS } from '../constants';
@@ -98,14 +98,26 @@ export const useBookStatus = (books: Book[]) => {
   const updateBookStatus = useCallback((isbn: string | undefined, status: ReadingStatus | null) => {
     if (!isbn) return; // Skip books without ISBN
     
+    console.log('useBookStatus updateBookStatus called:', { isbn, status });
+    
     const book = books.find(b => b.isbn === isbn);
-    setReadingStatusData(prev => ({
-      ...prev,
-      [isbn]: {
+    setReadingStatusData(prev => {
+      const newData = {
+        ...prev,
+        [isbn]: {
+          status,
+          progress: prev[isbn]?.progress ?? book?.progress ?? 0, // Use stored progress, then book progress, then default to 0
+        },
+      };
+      console.log('useBookStatus setReadingStatusData:', { 
+        oldData: prev, 
+        newData, 
+        isbn, 
         status,
-        progress: prev[isbn]?.progress ?? book?.progress ?? 0, // Use stored progress, then book progress, then default to 0
-      },
-    }));
+        timestamp: Date.now()
+      });
+      return newData;
+    });
   }, [books]);
 
   // Clear a book's status (remove it from localStorage)
@@ -148,8 +160,19 @@ export const useBookStatus = (books: Book[]) => {
     }
   }, []);
 
+  // Memoize booksWithStatus to ensure proper re-renders
+  const booksWithStatus = useMemo(() => {
+    const result = getBooksWithStatus();
+    console.log('useBookStatus booksWithStatus useMemo recalculated:', {
+      length: result.length,
+      statuses: result.map(book => ({ isbn: book.isbn, status: book.status })),
+      timestamp: Date.now()
+    });
+    return result;
+  }, [books, readingStatusData]); // Depend directly on the data, not the function
+
   return {
-    booksWithStatus: getBooksWithStatus(),
+    booksWithStatus,
     updateBookStatus,
     updateBookProgress,
     clearBookStatus,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { navigate } from 'gatsby';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
@@ -11,10 +11,40 @@ import booksData from '../data/books.json';
 import { theme } from '../styles/theme';
 
 const BookshelfPage = () => {
+  console.log('BookshelfPage render - booksData reference:', booksData);
   const { booksWithStatus, updateBookStatus, resetStatuses, clearLocalStorage } = useBookStatus(booksData);
+  
+  // Debug hook instance
+  console.log('BookshelfPage render - useBookStatus result:', {
+    booksWithStatusLength: booksWithStatus.length,
+    booksWithStatusReference: booksWithStatus,
+    updateBookStatusFunction: updateBookStatus,
+    timestamp: Date.now()
+  });
 
   // Filter out books with null status (unassigned books)
   const booksWithAssignedStatus = booksWithStatus.filter(book => book.status !== null);
+  
+  // Debug logging to see if stats are updating
+  console.log('Bookshelf stats update:', {
+    totalBooks: booksWithStatus.length,
+    assignedBooks: booksWithAssignedStatus.length,
+    wantToRead: booksWithAssignedStatus.filter(book => book.status === 'want-to-read').length,
+    currentlyReading: booksWithAssignedStatus.filter(book => book.status === 'currently-reading').length,
+    finished: booksWithAssignedStatus.filter(book => book.status === 'finished').length,
+    allStatuses: booksWithStatus.map(book => ({ isbn: book.isbn, status: book.status })),
+    booksWithStatusReference: booksWithStatus, // Log the actual array reference
+    timestamp: Date.now() // Add timestamp to see if this is re-rendering
+  });
+
+  // Monitor when booksWithStatus changes
+  useEffect(() => {
+    console.log('Bookshelf useEffect triggered - booksWithStatus changed:', {
+      length: booksWithStatus.length,
+      statuses: booksWithStatus.map(book => ({ isbn: book.isbn, status: book.status })),
+      timestamp: Date.now()
+    });
+  }, [booksWithStatus]);
 
   const handleBookStatusChange = (isbn: string, status: any) => {
     updateBookStatus(isbn, status);
@@ -73,7 +103,10 @@ const BookshelfPage = () => {
         </ActionSection>
 
         {booksWithAssignedStatus.length > 0 ? (
-          <BookBoard />
+          <BookBoard 
+            booksWithStatus={booksWithStatus}
+            updateBookStatus={updateBookStatus}
+          />
         ) : (
           <EmptyState>
             <Text variant="h2" align="center">No books organized yet</Text>

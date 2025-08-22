@@ -82,7 +82,10 @@ export const BookBoardContainer = ({
         )}
       </Header>
       
-      <BookBoard />
+      <BookBoard 
+        booksWithStatus={booksWithStatus}
+        updateBookStatus={updateBookStatus}
+      />
     </Container>
   );
 };

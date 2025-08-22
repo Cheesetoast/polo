@@ -1,14 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BookBoard } from './BookBoard';
-
-// Mock the useBookStatus hook
-jest.mock('../hooks/useBookStatus', () => ({
-  useBookStatus: () => ({
-    booksWithStatus: [],
-    updateBookStatus: jest.fn(),
-  }),
-}));
+import { ReadingStatus } from '../types/reading';
 
 // Mock the Book component
 jest.mock('./Book', () => ({
@@ -23,62 +16,87 @@ jest.mock('./Book', () => ({
   ),
 }));
 
-// Mock the data import to use the current books structure
-jest.mock('../data/books.json', () => [
-  {
-    title: '1984',
-    author: 'George Orwell',
-    authorId: 'george-orwell',
-    description: { description: 'A dystopian novel' },
-    isbn: '978-0451524935',
-    progress: 2,
-  },
-  {
-    title: 'The Great Gatsby',
-    author: 'F. Scott Fitzgerald',
-    authorId: 'f-scott-fitzgerald',
-    description: { description: 'A story of the Jazz Age' },
-    isbn: '978-0743273565',
-    progress: 0,
-  },
-]);
-
 describe('BookBoard', () => {
+  const mockBooksWithStatus = [
+    {
+      title: '1984',
+      author: 'George Orwell',
+      authorId: 'george-orwell',
+      description: { description: 'A dystopian novel' },
+      isbn: '978-0451524935',
+      status: 'finished' as ReadingStatus,
+    },
+    {
+      title: 'The Great Gatsby',
+      author: 'F. Scott Fitzgerald',
+      authorId: 'f-scott-fitzgerald',
+      description: { description: 'A story of the Jazz Age' },
+      isbn: '978-0743273565',
+      status: 'want-to-read' as ReadingStatus,
+    },
+  ];
+
+  const mockUpdateBookStatus = jest.fn();
+
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it('renders the book board with title', () => {
-    render(<BookBoard />);
+    render(
+      <BookBoard 
+        booksWithStatus={mockBooksWithStatus}
+        updateBookStatus={mockUpdateBookStatus}
+      />
+    );
     
     expect(screen.getByText('My Reading Board')).toBeInTheDocument();
   });
 
   it('renders empty state when no books are organized', () => {
-    render(<BookBoard />);
+    render(
+      <BookBoard 
+        booksWithStatus={[]}
+        updateBookStatus={mockUpdateBookStatus}
+      />
+    );
     
     expect(screen.getByText('No books organized yet')).toBeInTheDocument();
     expect(screen.getByText('Start by assigning a status to a book from the book detail page')).toBeInTheDocument();
   });
 
   it('shows no books when no statuses are assigned', () => {
-    render(<BookBoard />);
+    const booksWithNoStatus = mockBooksWithStatus.map(book => ({ ...book, status: null }));
     
-    // No books should be rendered since no statuses are assigned
-    expect(screen.queryByTestId('book-978-0743273565')).not.toBeInTheDocument();
-    expect(screen.queryByTestId('book-978-0451524935')).not.toBeInTheDocument();
+    render(
+      <BookBoard 
+        booksWithStatus={booksWithNoStatus}
+        updateBookStatus={mockUpdateBookStatus}
+      />
+    );
+    
+    expect(screen.getByText('No books organized yet')).toBeInTheDocument();
   });
 
   it('shows correct board title and subtitle', () => {
-    render(<BookBoard />);
+    render(
+      <BookBoard 
+        booksWithStatus={mockBooksWithStatus}
+        updateBookStatus={mockUpdateBookStatus}
+      />
+    );
     
     expect(screen.getByText('My Reading Board')).toBeInTheDocument();
-    // No subtitle should be shown when no books are organized
-    expect(screen.queryByText(/0 book.*organized/)).not.toBeInTheDocument();
+    expect(screen.getByText('2 books organized')).toBeInTheDocument();
   });
 
   it('handles empty state correctly', () => {
-    render(<BookBoard />);
+    render(
+      <BookBoard 
+        booksWithStatus={[]}
+        updateBookStatus={mockUpdateBookStatus}
+      />
+    );
     
     // Should show empty state message
     expect(screen.getByText('No books organized yet')).toBeInTheDocument();
