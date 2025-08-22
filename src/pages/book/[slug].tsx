@@ -1,6 +1,6 @@
 import type { HeadFC, PageProps } from "gatsby"
 import { useStaticQuery, graphql } from "gatsby"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Layout from "../../components/Layout"
 import SEO from "../../components/SEO"
 import { Text } from "../../components/Text"
@@ -48,6 +48,54 @@ const BookPage = ({ params }: BookPageProps) => {
   const book = books.find(b => b.isbn.replace(/-/g, '') === slug);
   const { booksWithStatus, updateBookStatus, updateBookProgress, updateBookRating, clearBookStatus } = useBookStatus(books);
   const bookWithStatus = booksWithStatus.find(b => b.isbn === book?.isbn);
+  
+  // Star Rating Component
+  const StarRating = ({ rating, onRatingChange }: { rating: number; onRatingChange: (rating: number) => void }) => {
+    const [hoverRating, setHoverRating] = useState(0);
+    
+    const handleStarClick = (starIndex: number) => {
+      const starValue = starIndex + 1;
+      
+      // If clicking the same star that's already active, toggle to half-star
+      if (rating === starValue) {
+        onRatingChange(starValue - 0.5);
+      } else {
+        onRatingChange(starValue);
+      }
+    };
+    
+    const handleStarHover = (starIndex: number) => {
+      setHoverRating(starIndex + 1);
+    };
+    
+    const handleMouseLeave = () => {
+      setHoverRating(0);
+    };
+    
+    const renderStar = (starIndex: number) => {
+      const starValue = starIndex + 1;
+      const isActive = hoverRating > 0 ? hoverRating >= starValue : rating >= starValue;
+      const isHalfStar = rating === starValue - 0.5;
+      
+      return (
+        <Star
+          key={starIndex}
+          className={`${isActive ? 'active' : ''} ${isHalfStar ? 'half-star' : ''}`}
+          onClick={() => handleStarClick(starIndex)}
+          onMouseEnter={() => handleStarHover(starIndex)}
+          onMouseLeave={handleMouseLeave}
+        >
+          ★
+        </Star>
+      );
+    };
+    
+    return (
+      <StarContainer>
+        {[0, 1, 2, 3, 4].map(renderStar)}
+      </StarContainer>
+    );
+  };
   
   // Monitor when booksWithStatus changes
 
@@ -144,7 +192,7 @@ const BookPage = ({ params }: BookPageProps) => {
                     min="0"
                     max="100"
                     placeholder="Progress %"
-                    value={book.progress || 0}
+                    value={bookWithStatus?.progress || 0}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       const progress = parseInt(e.target.value) || 0;
                       updateBookProgress(book.isbn, progress);
@@ -153,23 +201,16 @@ const BookPage = ({ params }: BookPageProps) => {
                 )}
 
                 {/* User Rating Input */}
-                {bookWithStatus?.status === 'finished' && (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'center' }}>
-                    <Text variant="caption" weight="medium">Your Rating:</Text>
-                    <RatingInput
-                      type="number"
-                      min="1"
-                      max="5"
-                      step="0.5"
-                      placeholder="Rate 1-5"
-                      value={bookWithStatus?.userRating || ''}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        const rating = e.target.value ? parseFloat(e.target.value) : null;
-                        updateBookRating(book.isbn, rating);
-                      }}
-                    />
-                  </div>
-                )}
+                <RatingSection>
+                  <Text variant="caption" weight="medium">Your Rating:</Text>
+                  <StarRating
+                    rating={bookWithStatus?.userRating || 0}
+                    onRatingChange={(rating) => updateBookRating(book.isbn, rating)}
+                  />
+                  <RatingNote variant="caption" color="secondary">
+                    Click stars to rate (optional)
+                  </RatingNote>
+                </RatingSection>
                 
 
               </StatusContainer>
@@ -217,10 +258,10 @@ const BookPage = ({ params }: BookPageProps) => {
                       <Text variant="p">{getRatingDisplay(book, bookWithStatus)}</Text>
                     </MetadataItem>
 
-                    {book.progress !== undefined && (
+                    {bookWithStatus?.progress !== undefined && (
                       <MetadataItem>
                         <Text variant="caption" weight="medium">Progress:</Text>
-                        <BookProgressBar progress={book.progress} />
+                        <BookProgressBar progress={bookWithStatus.progress} />
                       </MetadataItem>
                     )}
 
@@ -294,46 +335,9 @@ const ProgressInput = styled.input`
   }
 `;
 
-const RatingInput = styled.input`
-  padding: ${theme.spacing.xs} ${theme.spacing.sm};
-  border: 1px solid ${theme.colors.muted};
-  border-radius: ${theme.borderRadius.sm};
-  background: white;
-  font-size: ${theme.fontSizes.sm};
-  width: 80px;
-  text-align: center;
-  
-  &:focus {
-    outline: none;
-    border-color: ${theme.colors.primary};
-    box-shadow: 0 0 0 2px ${theme.colors.primary}20;
-  }
-  
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  
-  &[type=number] {
-    -moz-appearance: textfield;
-  }
-`;
 
-const DateInput = styled.input`
-  padding: ${theme.spacing.xs} ${theme.spacing.sm};
-  border: 1px solid ${theme.colors.muted};
-  border-radius: ${theme.borderRadius.sm};
-  background: white;
-  font-size: ${theme.fontSizes.sm};
-  width: 120px;
-  
-  &:focus {
-    outline: none;
-    border-color: ${theme.colors.primary};
-    box-shadow: 0 0 0 2px ${theme.colors.primary}20;
-  }
-`;
+
+
 
 const BackButton = styled.button`
   background: none;
@@ -428,4 +432,46 @@ const StatusContainer = styled.div`
 
 const StatusCaption = styled(Text)`
   margin-top: 4px;
+`;
+
+const RatingSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+`;
+
+const RatingNote = styled(Text)`
+  font-size: 0.75rem;
+  text-align: center;
+`;
+
+const StarContainer = styled.div`
+  display: flex;
+  gap: 2px;
+  align-items: center;
+`;
+
+const Star = styled.span`
+  font-size: 24px;
+  cursor: pointer;
+  color: ${theme.colors.muted};
+  transition: color 0.2s ease;
+  margin-right: 2px;
+  
+  &.active {
+    color: ${theme.colors.warning || '#f59e0b'};
+  }
+  
+  &.half-star {
+    background: linear-gradient(90deg, ${theme.colors.warning || '#f59e0b'} 50%, ${theme.colors.muted} 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  &:hover {
+    color: ${theme.colors.warning || '#f59e0b'};
+  }
 `;
