@@ -5,9 +5,8 @@ import { ImageBlock } from './ImageBlock';
 import { StatusIndicator } from './StatusIndicator';
 import { BookProgressBar } from './BookProgressBar';
 import { DEFAULTS } from '../constants';
-// Temporarily commented out to fix build issues
-// import { useSortable } from '@dnd-kit/sortable';
-// import { CSS } from '@dnd-kit/utilities';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import { navigate } from 'gatsby';
 
 export interface Book {
@@ -25,9 +24,6 @@ export interface Book {
     userRating?: number | null; // User's personal rating (only available after finishing)
     genres?: string[];
     progress?: number;
-    dateStarted?: string | null;
-    dateFinished?: string | null;
-  
     pages?: number;
 }
 
@@ -41,6 +37,21 @@ export interface BookProps {
 }
 
 export const Book = ({ book, onClick, style, showStatus = false, dragHandleProps, isDragging = false }: BookProps) => {
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition,
+        isDragging: sortableIsDragging,
+    } = useSortable({
+        id: book.isbn,
+        data: {
+            type: 'book',
+            book,
+        },
+    });
+
     const handleTitleClick = (e: React.MouseEvent) => {
         e.stopPropagation(); // Prevent triggering the card's onClick
         navigate(`/book/${book.isbn.replace(/-/g, '')}`);
@@ -53,9 +64,13 @@ export const Book = ({ book, onClick, style, showStatus = false, dragHandleProps
 
     return (
         <StyledBook 
-            onClick={onClick} 
-            style={style}
-            $isDragging={isDragging}
+            ref={setNodeRef}
+            style={{
+                ...style,
+                transform: CSS.Transform.toString(transform),
+                transition,
+            }}
+            $isDragging={sortableIsDragging || isDragging}
         >
             <BookHeader>
                 <BookHeaderContent>
@@ -74,13 +89,11 @@ export const Book = ({ book, onClick, style, showStatus = false, dragHandleProps
                         {/* {showStatus && book.status && (
                             <StatusIndicator status={book.status} size="small" showLabel={false} />
                         )} */}
-                        {dragHandleProps && (
-                            <DragHandle {...dragHandleProps}>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                    <path d="M4 6h8v1H4V6zm0 3h8v1H4V9z"/>
-                                </svg>
-                            </DragHandle>
-                        )}
+                        <DragHandle {...attributes} {...listeners}>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M4 6h8v1H4V6zm0 3h8v1H4V9z"/>
+                            </svg>
+                        </DragHandle>
                     </BookActions>
                 </BookHeaderContent>
             </BookHeader>
@@ -129,15 +142,7 @@ export const Book = ({ book, onClick, style, showStatus = false, dragHandleProps
                     />
                 )}
 
-                {/* Reading Dates */}
-                <ReadingDates>
-                    {book.dateStarted && (
-                        <div>Started: {new Date(book.dateStarted).toLocaleDateString()}</div>
-                    )}
-                    {book.dateFinished && (
-                        <div>Finished: {new Date(book.dateFinished).toLocaleDateString()}</div>
-                    )}
-                </ReadingDates>
+
             </BookContent>
         </StyledBook>
     );
@@ -157,9 +162,10 @@ const StyledBook = styled.div<{ $isDragging?: boolean }>`
   max-width: 300px;
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
   transform: ${props => props.$isDragging ? 'scale(1.05)' : 'scale(1)'};
   box-shadow: ${props => props.$isDragging ? '0 4px 8px rgba(0, 0, 0, 0.15)' : '0 2px 4px rgba(0, 0, 0, 0.1)'};
+  opacity: ${props => props.$isDragging ? '0' : '1'};
 
   &:hover {
     transform: translateY(-2px);
@@ -283,8 +289,4 @@ const RatingTag = styled.span`
   font-size: 0.75rem;
 `;
 
-const ReadingDates = styled.div`
-  margin-top: ${theme.spacing.xs};
-  font-size: 0.75rem;
-  color: ${theme.colors.muted};
-`;
+

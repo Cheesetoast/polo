@@ -1,69 +1,142 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import {
+  DndContext,
+  DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { useDroppable } from '@dnd-kit/core';
 import { theme } from '../styles/theme';
 import { Book } from './Book';
 import { ReadingStatus } from '../types/reading';
 import books from '../data/books.json';
+import { useBookStatus } from '../hooks/useBookStatus';
 
-// Temporarily simplified BookBoard without @dnd-kit to fix build issues
 export const BookBoard = () => {
-  const [bookStatuses, setBookStatuses] = useState<Record<string, ReadingStatus>>(() => {
-    const statuses: Record<string, ReadingStatus> = {};
-    books.forEach(book => {
-      if (book.progress === 0) statuses[book.isbn] = 'not-started';
-      else if (book.progress === 100) statuses[book.isbn] = 'finished';
-      else statuses[book.isbn] = 'in-progress';
-    });
-    return statuses;
-  });
+  const { booksWithStatus, updateBookStatus } = useBookStatus(books);
+  const [activeBook, setActiveBook] = useState<any>(null);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    })
+  );
 
   const handleBookClick = (isbn: string) => {
-    const currentStatus = bookStatuses[isbn];
-    const statusOrder: ReadingStatus[] = ['not-started', 'in-progress', 'finished'];
-    const currentIndex = statusOrder.indexOf(currentStatus);
+    const currentBook = booksWithStatus.find(book => book.isbn === isbn);
+    const currentStatus = currentBook?.status;
+    const statusOrder: ReadingStatus[] = ['want-to-read', 'currently-reading', 'finished'];
+    const currentIndex = statusOrder.indexOf(currentStatus as ReadingStatus);
     const nextIndex = (currentIndex + 1) % statusOrder.length;
     const newStatus = statusOrder[nextIndex];
     
-    setBookStatuses(prev => ({
-      ...prev,
-      [isbn]: newStatus
-    }));
+    updateBookStatus(isbn, newStatus);
   };
 
   const getBooksByStatus = (status: ReadingStatus) => {
-    return books.filter(book => bookStatuses[book.isbn] === status);
+    return booksWithStatus.filter(book => book.status === status);
+  };
+
+  const getTotalAssignedBooks = () => {
+    return booksWithStatus.filter(book => book.status !== null).length;
+  };
+
+  const handleDragStart = (event: DragStartEvent) => {
+    const { active } = event;
+    const book = books.find(b => b.isbn === active.id);
+    setActiveBook(book);
+  };
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    
+    if (over && active.id !== over.id) {
+      const bookId = active.id as string;
+      const newStatus = over.id as ReadingStatus;
+      
+      updateBookStatus(bookId, newStatus);
+    }
+    
+    setActiveBook(null);
   };
 
   const columns: { status: ReadingStatus; title: string; color: string }[] = [
-    { status: 'not-started', title: 'Not Started', color: '#e74c3c' },
-    { status: 'in-progress', title: 'In Progress', color: '#f39c12' },
+    { status: 'want-to-read', title: 'Want to Read', color: '#e74c3c' },
+    { status: 'currently-reading', title: 'Currently Reading', color: '#f39c12' },
     { status: 'finished', title: 'Finished', color: '#27ae60' }
   ];
 
   return (
-    <BoardContainer>
-      <BoardTitle>My Reading Board</BoardTitle>
-      <ColumnsContainer>
-        {columns.map(({ status, title, color }) => (
-          <Column key={status}>
-            <ColumnHeader backgroundColor={color}>
-              <ColumnTitle>{title}</ColumnTitle>
-              <BookCount>{getBooksByStatus(status).length}</BookCount>
-            </ColumnHeader>
-            <ColumnContent>
-              {getBooksByStatus(status).map(book => (
-                <Book
-                  key={book.isbn}
-                  book={{ ...book, status }}
-                  onClick={() => handleBookClick(book.isbn)}
-                  showStatus={false}
-                />
-              ))}
-            </ColumnContent>
-          </Column>
-        ))}
-      </ColumnsContainer>
-    </BoardContainer>
+    <DndContext
+      sensors={sensors}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+    >
+      <BoardContainer>
+        <BoardTitle>
+          My Reading Board
+          {getTotalAssignedBooks() > 0 && (
+            <BoardSubtitle>{getTotalAssignedBooks()} book{getTotalAssignedBooks() !== 1 ? 's' : ''} organized</BoardSubtitle>
+          )}
+        </BoardTitle>
+        
+        {getTotalAssignedBooks() === 0 ? (
+          <EmptyState>
+            <div>
+              <h3>No books organized yet</h3>
+              <p>Start by assigning a status to a book from the book detail page</p>
+            </div>
+          </EmptyState>
+        ) : (
+          <ColumnsContainer>
+          {columns.map(({ status, title, color }) => (
+            <Column key={status}>
+              <ColumnHeader backgroundColor={color}>
+                <ColumnTitle>{title}</ColumnTitle>
+                <BookCount>{getBooksByStatus(status).length}</BookCount>
+              </ColumnHeader>
+              <DroppableColumn id={status}>
+                <SortableContext
+                  items={getBooksByStatus(status).map(book => book.isbn)}
+                  strategy={verticalListSortingStrategy}
+                >
+                  {getBooksByStatus(status).map(book => (
+                    <Book
+                      key={book.isbn}
+                      book={{ ...book, status }}
+                      onClick={() => handleBookClick(book.isbn)}
+                      showStatus={false}
+
+                    />
+                  ))}
+                </SortableContext>
+              </DroppableColumn>
+            </Column>
+          ))}
+        </ColumnsContainer>
+        )}
+      </BoardContainer>
+      
+      <DragOverlay>
+        {activeBook ? (
+          <Book
+            book={{ ...activeBook, status: booksWithStatus.find(b => b.isbn === activeBook.isbn)?.status || null }}
+            onClick={() => {}}
+            showStatus={false}
+          />
+        ) : null}
+      </DragOverlay>
+    </DndContext>
   );
 };
 
@@ -83,6 +156,14 @@ const BoardTitle = styled.h2`
   font-weight: ${theme.fontWeights.bold};
   color: ${theme.colors.primary};
   margin-bottom: ${theme.spacing.md};
+`;
+
+const BoardSubtitle = styled.div`
+  text-align: center;
+  font-size: ${theme.fontSizes.sm};
+  font-weight: ${theme.fontWeights.normal};
+  color: ${theme.colors.secondary};
+  margin-top: ${theme.spacing.xs};
 `;
 
 const ColumnsContainer = styled.div`
@@ -106,6 +187,18 @@ const Column = styled.div`
   gap: ${theme.spacing.md};
   min-height: 400px;
 `;
+
+const DroppableColumn = ({ id, children }: { id: ReadingStatus; children: React.ReactNode }) => {
+  const { setNodeRef } = useDroppable({
+    id,
+  });
+
+  return (
+    <ColumnContent ref={setNodeRef}>
+      {children}
+    </ColumnContent>
+  );
+};
 
 const ColumnHeader = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== 'backgroundColor',

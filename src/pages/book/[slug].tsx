@@ -1,5 +1,6 @@
 import type { HeadFC, PageProps } from "gatsby"
 import { useStaticQuery, graphql } from "gatsby"
+import { useEffect } from "react"
 import Layout from "../../components/Layout"
 import SEO from "../../components/SEO"
 import { Text } from "../../components/Text"
@@ -9,7 +10,7 @@ import { BookProgressBar } from "../../components/BookProgressBar"
 import { StatusIndicator } from "../../components/StatusIndicator"
 import { ImageBlock } from "../../components/ImageBlock"
 import { useBookStatus } from "../../hooks/useBookStatus"
-import { ReadingStatus } from "../../components/BookBoard"
+import { ReadingStatus } from "../../types/reading"
 import booksData from "../../data/books.json"
 import { navigate } from "gatsby"
 import styled from "styled-components"
@@ -47,8 +48,13 @@ const BookPage = ({ params }: BookPageProps) => {
   // Find the book by slug (clean ISBN without dashes)
   const books: Book[] = booksData;
   const book = books.find(b => b.isbn.replace(/-/g, '') === slug);
-  const { booksWithStatus, updateBookStatus, updateBookProgress } = useBookStatus(books);
-  const bookWithStatus = booksWithStatus.find(b => b.isbn.replace(/-/g, '') === slug);
+  const { booksWithStatus, updateBookStatus, updateBookProgress, clearBookStatus } = useBookStatus(books);
+  const bookWithStatus = booksWithStatus.find(b => b.isbn === book?.isbn);
+  
+  // Monitor when booksWithStatus changes
+
+  
+
 
   if (!book) {
     return (
@@ -78,15 +84,13 @@ const BookPage = ({ params }: BookPageProps) => {
     return 'No rating';
   };
 
-  const formatDate = (dateString: string | null | undefined) => {
-    if (!dateString) return '-';
-    return new Date(dateString).toLocaleDateString();
-  };
 
-  const getBookStatus = (book: any) => {
-    if (book.dateFinished) return 'finished';
-    if (book.progress && book.progress > 0) return 'currently-reading';
-    return 'want-to-read';
+
+  const getBookStatus = (book: any): ReadingStatus | null => {
+    const status = book.progress && book.progress === 100 ? 'finished' : 
+                   book.progress && book.progress > 0 ? 'currently-reading' : 
+                   'want-to-read';
+    return status;
   };
 
   return (
@@ -107,57 +111,50 @@ const BookPage = ({ params }: BookPageProps) => {
               </div>
               <StatusContainer>
                 <StatusIndicator 
-                  status={getBookStatus(bookWithStatus || book)} 
+                  status={bookWithStatus?.status || null} 
                   size="large" 
                 />
                 <StatusCaption variant="caption" color="secondary">
                   Update Status:
                 </StatusCaption>
+
                 <StatusSelector
-                  value={getBookStatus(bookWithStatus || book) || ""}
+                  value={bookWithStatus?.status || ""}
                   onChange={(e) => {
-                    const newStatus = e.target.value === "" ? null : e.target.value as ReadingStatus;
-                    if (bookWithStatus) {
-                      updateBookStatus(book.isbn, newStatus);
+                    const newStatus = e.target.value;
+                    
+                    if (newStatus === "") {
+                      // Clear the status by setting it to null
+                      updateBookStatus(book.isbn, null);
+                    } else {
+                      // Update to the selected status
+                      updateBookStatus(book.isbn, newStatus as ReadingStatus);
                     }
                   }}
                 >
                   <option value="">No Status</option>
-                  <option value="not-started">Want to Read</option>
-                  <option value="in-progress">Currently Reading</option>
+                  <option value="want-to-read">Want to Read</option>
+                  <option value="currently-reading">Currently Reading</option>
                   <option value="finished">Finished</option>
                 </StatusSelector>
                 
                 {/* Progress Input */}
-                {(getBookStatus(bookWithStatus || book) === 'in-progress' || 
-                  getBookStatus(bookWithStatus || book) === 'finished') && (
+                {(bookWithStatus?.status === 'currently-reading' || 
+                  bookWithStatus?.status === 'finished') && (
                   <ProgressInput
                     type="number"
                     min="0"
                     max="100"
                     placeholder="Progress %"
-                    value={bookWithStatus?.progress || book.progress || 0}
+                    value={book.progress || 0}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       const progress = parseInt(e.target.value) || 0;
-                      if (bookWithStatus) {
-                        updateBookProgress(book.isbn, progress);
-                      }
+                      updateBookProgress(book.isbn, progress);
                     }}
                   />
                 )}
                 
-                {/* Date Finished Input */}
-                {getBookStatus(bookWithStatus || book) === 'finished' && (
-                  <DateInput
-                    type="date"
-                    value={bookWithStatus?.dateFinished || book.dateFinished || ''}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      const dateFinished = e.target.value || null;
-                      // Note: This would require extending the useBookStatus hook to handle dates
-                      // For now, we'll just show the input but not save the date
-                    }}
-                  />
-                )}
+
               </StatusContainer>
             </BookHeader>
 
@@ -210,15 +207,7 @@ const BookPage = ({ params }: BookPageProps) => {
                       </MetadataItem>
                     )}
 
-                    <MetadataItem>
-                      <Text variant="caption" weight="medium">Started:</Text>
-                      <Text variant="p">{formatDate(book.dateStarted)}</Text>
-                    </MetadataItem>
 
-                    <MetadataItem>
-                      <Text variant="caption" weight="medium">Finished:</Text>
-                      <Text variant="p">{formatDate(book.dateFinished)}</Text>
-                    </MetadataItem>
                   </BookMetadata>
                 </BookDetails>
               </BookMain>

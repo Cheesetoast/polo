@@ -11,9 +11,6 @@
     "communityRating": 4.2,
     "userRating": 5,
     "genres": ["Philosophy", "Dystopian Fiction", "Political Satire"],
-    "progress": 2,
-    "dateStarted": "2025-05-19",
-    "dateFinished": "2025-05-29",
     "pages": 328
   },
   {
@@ -28,9 +25,6 @@
     "communityRating": 3.9,
     "userRating": null,
     "genres": ["Adventure", "Modernist Literature", "Jazz Age"],
-    "progress": 0,
-    "dateStarted": "2023-12-25",
-    "dateFinished": null,
     "pages": 180
   },
   {
@@ -45,9 +39,6 @@
     "communityRating": 4.3,
     "userRating": 4,
     "genres": ["Fiction", "Southern Gothic", "Coming-of-Age", "Social Justice"],
-    "progress": 0,
-    "dateStarted": "2023-01-02",
-    "dateFinished": null,
     "pages": 281
   },
   {
@@ -62,9 +53,6 @@
     "communityRating": 3,
     "userRating": null,
     "genres": ["Mystery", "Romance", "Social Commentary", "Regency Era"],
-    "progress": 0,
-    "dateStarted": "2023-02-16",
-    "dateFinished": null,
     "pages": 432
   },
   {
@@ -77,9 +65,6 @@
     "isbn": "978-0316769488",
     "image": null,
     "genres": ["Science Fiction", "Coming-of-Age", "Modernist Literature", "Psychological Fiction"],
-    "progress": 0,
-    "dateStarted": "2023-03-15",
-    "dateFinished": null,
     "communityRating": 5,
     "userRating": null
   },
@@ -93,9 +78,6 @@
     "isbn": "978-0399501487",
     "image": null,
     "genres": ["Non-Fiction", "Allegory", "Psychological Fiction", "Modern Literature"],
-    "progress": 0,
-    "dateStarted": "2023-06-26",
-    "dateFinished": null,
     "communityRating": 2,
     "userRating": null
   },
@@ -111,9 +93,6 @@
     "communityRating": 4.2,
     "userRating": 5,
     "genres": ["Philosophy", "Allegory", "Political Satire"],
-    "progress": 2,
-    "dateStarted": "2025-05-19",
-    "dateFinished": "2025-05-29",
     "pages": 328
   },
   {
@@ -128,9 +107,6 @@
     "communityRating": 4.1,
     "userRating": null,
     "genres": ["Science Fiction", "Dystopian Fiction", "Philosophical Fiction"],
-    "progress": 0,
-    "dateStarted": null,
-    "dateFinished": null,
     "pages": 288
   },
   {
@@ -145,9 +121,6 @@
     "communityRating": 4,
     "userRating": null,
     "genres": ["Thriller", "Psychological Fiction", "Contemporary Fiction"],
-    "progress": 0,
-    "dateStarted": null,
-    "dateFinished": null,
     "pages": 352
   },
   {
@@ -162,9 +135,6 @@
     "communityRating": 4.2,
     "userRating": null,
     "genres": ["Romance", "Contemporary Fiction", "Academic Fiction"],
-    "progress": 0,
-    "dateStarted": null,
-    "dateFinished": null,
     "pages": 384
   },
   {
@@ -179,9 +149,6 @@
     "communityRating": 4,
     "userRating": null,
     "genres": ["Contemporary Fiction", "Magical Realism", "LGBTQ+ Literature"],
-    "progress": 0,
-    "dateStarted": null,
-    "dateFinished": null,
     "pages": 240
   }
 ]

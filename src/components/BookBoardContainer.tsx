@@ -29,13 +29,15 @@ export const BookBoardContainer = ({
     const booksWithAssignedStatus = booksWithStatus.filter(book => book.status !== null);
     const totalBooks = booksWithAssignedStatus.length;
     const finishedBooks = booksWithAssignedStatus.filter(book => book.status === 'finished').length;
-    const currentlyReading = booksWithAssignedStatus.filter(book => book.status === 'in-progress').length;
-    const wantToRead = booksWithAssignedStatus.filter(book => book.status === 'not-started').length;
+    const currentlyReading = booksWithAssignedStatus.filter(book => book.status === 'currently-reading').length;
+    const wantToRead = booksWithAssignedStatus.filter(book => book.status === 'want-to-read').length;
     
     // Genre distribution
     const genreCounts = booksWithAssignedStatus.reduce((acc, book) => {
-      if (book.genre) {
-        acc[book.genre] = (acc[book.genre] || 0) + 1;
+      if (book.genres && book.genres.length > 0) {
+        book.genres.forEach(genre => {
+          acc[genre] = (acc[genre] || 0) + 1;
+        });
       }
       return acc;
     }, {} as Record<string, number>);
@@ -49,9 +51,9 @@ export const BookBoardContainer = ({
     const ratedBooks = booksWithAssignedStatus.filter(book => book.userRating !== undefined || book.communityRating !== undefined);
     const averageRating = ratedBooks.length > 0 
       ? (ratedBooks.reduce((sum, book) => {
-          // Prefer user rating if available, otherwise use community rating
-          const rating = book.userRating !== undefined ? book.userRating : (book.communityRating || 0);
-          return sum + rating;
+                  // Prefer user rating if available, otherwise use community rating
+        const rating = book.userRating !== undefined ? book.userRating : (book.communityRating || 0);
+        return sum + (rating || 0);
         }, 0) / ratedBooks.length).toFixed(1)
       : 'N/A';
     
@@ -80,10 +82,7 @@ export const BookBoardContainer = ({
         )}
       </Header>
       
-      <BookBoard 
-        books={booksWithStatus.filter(book => book.status !== null)} 
-        onBookStatusChange={updateBookStatus}
-      />
+      <BookBoard />
     </Container>
   );
 };

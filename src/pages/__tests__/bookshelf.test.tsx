@@ -87,13 +87,10 @@ jest.mock('../../components/Button', () => ({
 }));
 
 jest.mock('../../components/BookBoard', () => ({
-  BookBoard: ({ books, onBookStatusChange }: any) => (
+  BookBoard: () => (
     <div data-testid="book-board">
       <h3>Book Board Component</h3>
-      <p>Books: {books.length}</p>
-      <button onClick={() => onBookStatusChange && onBookStatusChange('978-0451524935', 'currently-reading')}>
-        Change Status
-      </button>
+      <p>Mock BookBoard Component</p>
     </div>
   )
 }));
@@ -122,7 +119,7 @@ describe('BookshelfPage', () => {
     
     expect(screen.getByTestId('book-board')).toBeInTheDocument();
     expect(screen.getByText('Book Board Component')).toBeInTheDocument();
-    expect(screen.getByText('Books: 3')).toBeInTheDocument();
+    expect(screen.getByText('Mock BookBoard Component')).toBeInTheDocument();
   });
 
   it('navigates to search page when "Add More Books" button is clicked', () => {

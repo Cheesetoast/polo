@@ -73,17 +73,14 @@ const BookshelfPage = () => {
         </ActionSection>
 
         {booksWithAssignedStatus.length > 0 ? (
-          <BookBoard 
-            books={booksWithAssignedStatus}
-            onBookStatusChange={handleBookStatusChange}
-          />
+          <BookBoard />
         ) : (
           <EmptyState>
             <Text variant="h2" align="center">No books organized yet</Text>
             <Text variant="p" color="secondary" align="center">
               Start by adding books to your reading list from the search page
             </Text>
-            <Button onClick={handleGoToSearch} variant="primary" size="lg">
+            <Button onClick={handleGoToSearch} variant="primary" size="large">
               Find Your Next Book
             </Button>
           </EmptyState>
@@ -94,7 +91,7 @@ const BookshelfPage = () => {
           <Text variant="p" color="secondary">
             Manage your reading organization and reset statuses if needed
           </Text>
-          <ButtonContainer direction="row" spacing="md">
+          <ButtonContainer>
             <Button onClick={resetStatuses} variant="outline">
               Reset All Statuses
             </Button>
@@ -128,8 +125,8 @@ const StatsSection = styled.div`
 `;
 
 const StatCard = styled.div`
-  background: ${theme.colors.background};
-  border: 1px solid ${theme.colors.border};
+  background: ${theme.colors.white};
+  border: 1px solid ${theme.colors.gray[600]};
   border-radius: ${theme.borderRadius.md};
   padding: ${theme.spacing.md};
   text-align: center;

@@ -68,7 +68,7 @@ jest.mock('../../hooks/useBookStatus', () => ({
         communityRating: 4.5,
         userRating: 4.0,
         genre: 'Fiction',
-        progress: 75,
+        progress: 100,
         dateStarted: '2023-01-01',
         dateFinished: '2023-01-15',
         pages: 300,
@@ -87,9 +87,9 @@ jest.mock('../../data/books.json', () => [
     communityRating: 4.5,
     userRating: 4.0,
     genre: 'Fiction',
-    progress: 75,
-    dateStarted: '2023-01-01',
-    dateFinished: '2023-01-15',
+            progress: 100,
+        dateStarted: '2023-01-01',
+        dateFinished: '2023-01-15',
     pages: 300
   }
 ]);
@@ -115,7 +115,7 @@ describe('BookPage', () => {
     expect(screen.getByText('978-1234567890')).toBeInTheDocument();
     expect(screen.getByText('300')).toBeInTheDocument();
     expect(screen.getByText('4.0 (your rating)')).toBeInTheDocument();
-    expect(screen.getByText('75%')).toBeInTheDocument();
+    expect(screen.getByText('100%')).toBeInTheDocument();
   });
 
   it('renders not found page when book is not found', () => {
@@ -145,7 +145,7 @@ describe('BookPage', () => {
     render(<BookPage params={params} />);
 
     expect(screen.getByTestId('progress-bar')).toBeInTheDocument();
-    expect(screen.getByText('75%')).toBeInTheDocument();
+    expect(screen.getByText('100%')).toBeInTheDocument();
   });
 
   it('displays back button', () => {

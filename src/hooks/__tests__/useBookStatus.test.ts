@@ -11,7 +11,7 @@ const mockBooks: Book[] = [
     communityRating: 4.0,
     genre: 'Fiction',
     pages: 300,
-    dateFinished: '2023-03-15',
+    progress: 100, // Finished book
 
   },
   {
@@ -22,7 +22,7 @@ const mockBooks: Book[] = [
     communityRating: 3.5,
     genre: 'Non-Fiction',
     pages: 250,
-    progress: 50,
+    progress: 50, // Currently reading
 
   },
   {
@@ -33,6 +33,7 @@ const mockBooks: Book[] = [
     communityRating: 4.5,
     genre: 'Fiction',
     pages: 400,
+    // No progress - will be null status
 
   }
 ];
@@ -48,14 +49,14 @@ describe('useBookStatus', () => {
     
     expect(result.current.booksWithStatus).toHaveLength(3);
     
-    // Book 1 should be 'finished' (has dateFinished)
+    // Book 1 should be 'finished' (has progress = 100)
     expect(result.current.booksWithStatus[0].status).toBe('finished');
     
-    // Book 2 should be 'in-progress' (has progress > 0)
-    expect(result.current.booksWithStatus[1].status).toBe('in-progress');
+    // Book 2 should be 'currently-reading' (has progress > 0)
+    expect(result.current.booksWithStatus[1].status).toBe('currently-reading');
     
-    // Book 3 should be 'not-started' (default)
-    expect(result.current.booksWithStatus[2].status).toBe('not-started');
+    // Book 3 should be null (no progress)
+    expect(result.current.booksWithStatus[2].status).toBe(null);
   });
 
   it('updates book status when updateBookStatus is called', () => {
@@ -95,7 +96,7 @@ describe('useBookStatus', () => {
     
     // Should return to default statuses
     const book1 = result.current.booksWithStatus.find(book => book.isbn === '978-1');
-    expect(book1?.status).toBe('finished'); // Back to default based on dateFinished
+    expect(book1?.status).toBe('finished'); // Back to default based on progress = 100
   });
 
   it('loads statuses from localStorage on mount', () => {
@@ -138,9 +139,9 @@ describe('useBookStatus', () => {
     
     const { result } = renderHook(() => useBookStatus(booksWithoutISBN));
     
-    // Should not crash and should assign default status
+    // Should not crash and should assign null status
     expect(result.current.booksWithStatus).toHaveLength(1);
-    expect(result.current.booksWithStatus[0].status).toBe('not-started');
+    expect(result.current.booksWithStatus[0].status).toBe(null);
   });
 
   it('clears localStorage when clearLocalStorage is called', () => {

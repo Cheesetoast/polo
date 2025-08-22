@@ -1,2 +1,2 @@
 // Reading status types
-export type ReadingStatus = 'not-started' | 'in-progress' | 'finished';
+export type ReadingStatus = 'want-to-read' | 'currently-reading' | 'finished';

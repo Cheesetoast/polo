@@ -4,7 +4,7 @@ import { ReadingStatus } from '../types/reading';
 import { DEFAULTS } from '../constants';
 
 interface BookWithReadingStatus extends Book {
-  status: ReadingStatus;
+  status: ReadingStatus | null;
   progress?: number;
 }
 
@@ -12,7 +12,7 @@ const STORAGE_KEY = 'book-status-data';
 
 interface BookStatusData {
   [isbn: string]: {
-    status: ReadingStatus;
+    status: ReadingStatus | null;
     progress?: number;
   };
 }
@@ -73,17 +73,17 @@ export const useBookStatus = (books: Book[]) => {
       }
       
       // Determine initial status based on book data
-      const determineInitialStatus = (): ReadingStatus => {
-        // If book has a finish date, it should be marked as finished
-        if (book.dateFinished) {
+      const determineInitialStatus = (): ReadingStatus | null => {
+        // If book has progress = 100, it should be marked as finished
+        if (book.progress && book.progress === 100) {
           return 'finished';
         }
         // If book has progress > 0, it should be marked as currently reading
         if (book.progress && book.progress > 0) {
-          return 'in-progress';
+          return 'currently-reading';
         }
-        // Otherwise, default to null (no status assigned yet)
-        return DEFAULT_STATUS || 'not-started';
+        // Otherwise, return null (no status assigned yet)
+        return null;
       };
       
       return {
@@ -95,7 +95,7 @@ export const useBookStatus = (books: Book[]) => {
   }, [books, readingStatusData]);
 
   // Update a book's status
-  const updateBookStatus = useCallback((isbn: string | undefined, status: ReadingStatus) => {
+  const updateBookStatus = useCallback((isbn: string | undefined, status: ReadingStatus | null) => {
     if (!isbn) return; // Skip books without ISBN
     
     const book = books.find(b => b.isbn === isbn);
@@ -107,6 +107,17 @@ export const useBookStatus = (books: Book[]) => {
       },
     }));
   }, [books]);
+
+  // Clear a book's status (remove it from localStorage)
+  const clearBookStatus = useCallback((isbn: string | undefined) => {
+    if (!isbn) return; // Skip books without ISBN
+    
+    setReadingStatusData(prev => {
+      const newData = { ...prev };
+      delete newData[isbn];
+      return newData;
+    });
+  }, []);
 
   // Update a book's progress
   const updateBookProgress = useCallback((isbn: string | undefined, progress: number) => {
@@ -141,6 +152,7 @@ export const useBookStatus = (books: Book[]) => {
     booksWithStatus: getBooksWithStatus(),
     updateBookStatus,
     updateBookProgress,
+    clearBookStatus,
     resetStatuses,
     clearLocalStorage,
     isLoading,
