@@ -31,7 +31,7 @@ interface BookBoardProps {
   updateBookStatus: (isbn: string | undefined, status: ReadingStatus | null) => void;
 }
 
-export const BookBoard = ({ booksWithStatus, updateBookStatus }: BookBoardProps) => {
+export const BookBoard = React.memo(({ booksWithStatus, updateBookStatus }: BookBoardProps) => {
   const [activeBook, setActiveBook] = useState<any>(null);
 
   const sensors = useSensors(
@@ -148,7 +148,7 @@ export const BookBoard = ({ booksWithStatus, updateBookStatus }: BookBoardProps)
       </DragOverlay>
     </DndContext>
   );
-};
+});
 
 export default BookBoard;
 

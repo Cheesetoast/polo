@@ -1,9 +1,12 @@
+import React, { Suspense } from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import { Text } from './Text';
 import { ImageBlock } from './ImageBlock';
 import { StatusIndicator } from './StatusIndicator';
 import { BookProgressBar } from './BookProgressBar';
+import { AuthorLink } from './AuthorLink';
+import { GenreLink } from './GenreLink';
 import { DEFAULTS } from '../constants';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -57,10 +60,7 @@ export const Book = ({ book, onClick, style, showStatus = false, dragHandleProps
         navigate(`/book/${book.isbn.replace(/-/g, '')}`);
     };
 
-    const handleAuthorClick = (e: React.MouseEvent) => {
-        e.stopPropagation(); // Prevent triggering the card's onClick
-        navigate(`/search-results?author=${encodeURIComponent(book.author)}`);
-    };
+
 
     return (
         <StyledBook 
@@ -80,8 +80,8 @@ export const Book = ({ book, onClick, style, showStatus = false, dragHandleProps
                         >
                             {book.title}
                         </BookTitle>
-                        <AuthorName onClick={handleAuthorClick}>
-                            By {book.author}
+                        <AuthorName>
+                            By <AuthorLink authorName={book.author}>{book.author}</AuthorLink>
                         </AuthorName>
                     </BookInfo>
                     <BookActions>
@@ -110,15 +110,9 @@ export const Book = ({ book, onClick, style, showStatus = false, dragHandleProps
                     {book.genres && book.genres.length > 0 && (
                         <>
                             {book.genres.slice(0, 2).map((genre, index) => (
-                                <GenreTag
-                                    key={index}
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        navigate(`/genre/${encodeURIComponent(genre)}`);
-                                    }}
-                                >
+                                <GenreLink key={index} genre={genre}>
                                     {genre}
-                                </GenreTag>
+                                </GenreLink>
                             ))}
                             {book.genres.length > 2 && (
                                 <span style={{ fontSize: '0.7rem', color: '#9ca3af' }}>

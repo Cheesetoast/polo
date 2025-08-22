@@ -162,14 +162,8 @@ export const useBookStatus = (books: Book[]) => {
 
   // Memoize booksWithStatus to ensure proper re-renders
   const booksWithStatus = useMemo(() => {
-    const result = getBooksWithStatus();
-    console.log('useBookStatus booksWithStatus useMemo recalculated:', {
-      length: result.length,
-      statuses: result.map(book => ({ isbn: book.isbn, status: book.status })),
-      timestamp: Date.now()
-    });
-    return result;
-  }, [books, readingStatusData]); // Depend directly on the data, not the function
+    return getBooksWithStatus();
+  }, [readingStatusData]); // Only depend on readingStatusData, not the books array reference
 
   return {
     booksWithStatus,

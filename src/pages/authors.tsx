@@ -10,6 +10,9 @@ import {
   getBooksByAuthor
 } from '../utils/authorUtils';
 import { Author } from '../utils/authorUtils';
+import { BookLink } from '../components/BookLink';
+import { AuthorLink } from '../components/AuthorLink';
+import { GenreLink } from '../components/GenreLink';
 
 const AuthorsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -182,24 +185,9 @@ const AuthorsPage = () => {
               {author.genres.length > 0 && (
                 <GenresContainer>
                   {author.genres.slice(0, 3).map(genre => (
-                    <GenreTag 
-                      key={genre}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        console.log('Genre clicked:', genre);
-                        console.log('Navigating to:', `/genre/${encodeURIComponent(genre)}`);
-                        try {
-                          console.log('Attempting to navigate to genre page...');
-                          navigate(`/genre/${encodeURIComponent(genre)}`);
-                        } catch (error) {
-                          console.error('Navigate error:', error);
-                          console.log('Falling back to window.location...');
-                          window.location.href = `/genre/${encodeURIComponent(genre)}`;
-                        }
-                      }}
-                    >
+                    <GenreLink key={genre} genre={genre}>
                       {genre}
-                    </GenreTag>
+                    </GenreLink>
                   ))}
                   {author.genres.length > 3 && (
                     <MoreGenres>
@@ -221,10 +209,7 @@ const AuthorsPage = () => {
                         {authorBooks.slice(0, 3).map(book => (
                           <BookLink 
                             key={book.isbn}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              navigate(`/book/${book.isbn}`);
-                            }}
+                            isbn={book.isbn}
                           >
                             {book.title}
                           </BookLink>
@@ -422,19 +407,7 @@ const GenresContainer = styled.div`
   align-items: center;
 `;
 
-const GenreTag = styled.span`
-  background: #111827;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
 
-  &:hover {
-    background: #374151;
-  }
-`;
 
 const MoreGenres = styled.span`
   color: #9ca3af;
@@ -457,17 +430,7 @@ const BooksList = styled.span`
   display: inline;
 `;
 
-const BookLink = styled.span`
-  color: #007bff;
-  font-size: 0.9rem;
-  margin-right: 8px;
-  cursor: pointer;
-  text-decoration: underline;
 
-  &:hover {
-    color: #0056b3;
-  }
-`;
 
 const MoreBooks = styled.span`
   color: #9ca3af;
