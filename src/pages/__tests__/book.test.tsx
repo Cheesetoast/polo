@@ -109,7 +109,8 @@ describe('BookPage', () => {
     render(<BookPage params={params} />);
 
     expect(screen.getByText('Test Book')).toBeInTheDocument();
-    expect(screen.getByText('By Test Author')).toBeInTheDocument();
+    expect(screen.getByText('By')).toBeInTheDocument();
+    expect(screen.getByText('Test Author')).toBeInTheDocument();
     expect(screen.getByText('Test description')).toBeInTheDocument();
     expect(screen.getByText('Fiction')).toBeInTheDocument();
     expect(screen.getByText('978-1234567890')).toBeInTheDocument();

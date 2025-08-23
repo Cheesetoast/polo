@@ -237,6 +237,7 @@ const BookCount = styled.div`
 const ColumnContent = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: ${theme.spacing.md};
   flex: 1;
   padding: ${theme.spacing.sm};

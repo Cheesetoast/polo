@@ -61,7 +61,6 @@ const IndexPage = () => {
   // Memoize expensive calculations to prevent recalculation on every render
   const dashboardStats = useMemo(() => {
     // Calculate dashboard statistics using the actual reading statuses
-    const totalBooks = books.length;
     const finishedBooks = booksWithStatus.filter(book => book.status === 'finished').length;
     const currentlyReading = booksWithStatus.filter(book => book.status === 'currently-reading').length;
     const wantToRead = booksWithStatus.filter(book => book.status === 'want-to-read').length;
@@ -91,7 +90,6 @@ const IndexPage = () => {
       : '0.0';
 
     return {
-      totalBooks,
       finishedBooks,
       currentlyReading,
       wantToRead,

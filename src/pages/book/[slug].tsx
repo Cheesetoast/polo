@@ -9,6 +9,7 @@ import { Button } from "../../components/Button"
 import { BookProgressBar } from "../../components/BookProgressBar"
 import { StatusIndicator } from "../../components/StatusIndicator"
 import { ImageBlock } from "../../components/ImageBlock"
+import { AuthorLink } from "../../components/AuthorLink"
 import { useBookStatus } from "../../hooks/useBookStatus"
 import { ReadingStatus } from "../../types/reading"
 import booksData from "../../data/books.json"
@@ -152,7 +153,7 @@ const BookPage = ({ params }: BookPageProps) => {
               <div>
                 <Text variant="h1">{book.title}</Text>
                 <Text variant="h3" color="secondary">
-                  By {book.author}
+                  By <AuthorLink authorName={book.author}>{book.author}</AuthorLink>
                 </Text>
               </div>
               <StatusContainer>

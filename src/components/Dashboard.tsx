@@ -3,7 +3,6 @@ import { theme } from '../styles/theme';
 import { Text } from './Text';
 
 interface DashboardStats {
-  totalBooks: number;
   finishedBooks: number;
   currentlyReading: number;
   wantToRead: number;
@@ -23,29 +22,25 @@ export const Dashboard = ({ stats, className, style }: DashboardProps) => {
       <DashboardTitle variant="h3">
         Reading Statistics
       </DashboardTitle>
-      
+
       <StatsGrid>
-        <StatCard>
-          <StatNumber>{stats.totalBooks}</StatNumber>
-          <StatLabel>Total Books</StatLabel>
-        </StatCard>
-        
-        <StatCard>
-          <StatNumber>{stats.finishedBooks}</StatNumber>
-          <StatLabel>Finished</StatLabel>
-        </StatCard>
-        
-        <StatCard>
-          <StatNumber>{stats.currentlyReading}</StatNumber>
-          <StatLabel>Currently Reading</StatLabel>
-        </StatCard>
-        
+
         <StatCard>
           <StatNumber>{stats.wantToRead}</StatNumber>
           <StatLabel>Want to Read</StatLabel>
         </StatCard>
+
+        <StatCard>
+          <StatNumber>{stats.currentlyReading}</StatNumber>
+          <StatLabel>Currently Reading</StatLabel>
+        </StatCard>
+
+        <StatCard>
+          <StatNumber>{stats.finishedBooks}</StatNumber>
+          <StatLabel>Finished</StatLabel>
+        </StatCard>
       </StatsGrid>
-      
+
       <StatsDetails>
         <StatSection>
           <SectionTitle variant="h4">
@@ -61,7 +56,7 @@ export const Dashboard = ({ stats, className, style }: DashboardProps) => {
             <Text variant="p" color="secondary">No genre data available</Text>
           )}
         </StatSection>
-        
+
         <StatSection>
           <SectionTitle variant="h4">
             Average Rating
@@ -70,7 +65,7 @@ export const Dashboard = ({ stats, className, style }: DashboardProps) => {
             {stats.averageRating} / 5
           </Text>
         </StatSection>
-        
+
 
       </StatsDetails>
     </DashboardContainer>
