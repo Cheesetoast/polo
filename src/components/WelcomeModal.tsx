@@ -81,28 +81,52 @@ const ModalOverlay = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: ${theme.spacing.md};
+  padding: ${theme.spacing.sm};
   backdrop-filter: blur(4px);
 `;
 
 const ModalContent = styled.div`
   background: ${theme.colors.white};
   border-radius: ${theme.borderRadius.lg};
-  padding: ${theme.spacing.xl};
+  padding: ${theme.spacing.lg};
   max-width: 600px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   border: 1px solid ${theme.colors.muted};
+  
+  @media (max-width: 768px) {
+    padding: ${theme.spacing.md};
+    max-height: 95vh;
+    margin: ${theme.spacing.sm};
+  }
 `;
 
 const ModalHeader = styled.div`
   margin-bottom: ${theme.spacing.lg};
+  
+  @media (max-width: 768px) {
+    margin-bottom: ${theme.spacing.md};
+    
+    h2 {
+      font-size: 1.5rem !important;
+      line-height: 1.3 !important;
+    }
+  }
 `;
 
 const ModalBody = styled.div`
   margin-bottom: ${theme.spacing.lg};
+  
+  @media (max-width: 768px) {
+    margin-bottom: ${theme.spacing.md};
+    
+    p {
+      font-size: 0.9rem !important;
+      line-height: 1.4 !important;
+    }
+  }
 `;
 
 const FeatureList = styled.div`
@@ -110,6 +134,11 @@ const FeatureList = styled.div`
   flex-direction: column;
   gap: ${theme.spacing.md};
   margin-top: ${theme.spacing.lg};
+  
+  @media (max-width: 768px) {
+    gap: ${theme.spacing.sm};
+    margin-top: ${theme.spacing.md};
+  }
 `;
 
 const FeatureItem = styled.div`
@@ -120,11 +149,34 @@ const FeatureItem = styled.div`
   background: #f9fafb;
   border-radius: ${theme.borderRadius.md};
   border: 1px solid ${theme.colors.muted};
+  
+  @media (max-width: 768px) {
+    gap: ${theme.spacing.sm};
+    padding: ${theme.spacing.sm};
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    
+    h5 {
+      font-size: 1rem !important;
+      line-height: 1.3 !important;
+      margin-bottom: 0.25rem !important;
+    }
+    
+    p {
+      font-size: 0.8rem !important;
+      line-height: 1.4 !important;
+    }
+  }
 `;
 
 const FeatureIcon = styled.div`
   font-size: 2rem;
   flex-shrink: 0;
+  
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const FeatureText = styled.div`
@@ -132,6 +184,11 @@ const FeatureText = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing.xs};
+  
+  @media (max-width: 768px) {
+    align-items: flex-start;
+    text-align: left;
+  }
 `;
 
 const ModalFooter = styled.div`
@@ -139,4 +196,8 @@ const ModalFooter = styled.div`
   justify-content: center;
   padding-top: ${theme.spacing.lg};
   border-top: 1px solid ${theme.colors.muted};
+  
+  @media (max-width: 768px) {
+    padding-top: ${theme.spacing.md};
+  }
 `;

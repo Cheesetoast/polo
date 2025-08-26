@@ -21,7 +21,8 @@ const Navbar = ({ transparent = false }: NavbarProps) => {
     { label: 'Home', href: '/' },
     { label: 'Search', href: '/search' },
     { label: 'Bookshelf', href: '/bookshelf' },
-    { label: 'Authors', href: '/authors' }
+    { label: 'Authors', href: '/authors' },
+    { label: 'Genres', href: '/genres' }
   ];
 
   useEffect(() => {

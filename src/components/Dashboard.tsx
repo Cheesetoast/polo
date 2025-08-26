@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import { Text } from './Text';
+import { Button } from './Button';
+import { navigate } from 'gatsby';
+import { GenreLink } from './GenreLink';
 
 interface DashboardStats {
   finishedBooks: number;
@@ -47,11 +50,18 @@ export const Dashboard = ({ stats, className, style }: DashboardProps) => {
             Top Genres
           </SectionTitle>
           {stats.topGenres.length > 0 ? (
-            <GenreList>
-              {stats.topGenres.map((genre, index) => (
-                <GenreTag key={index}>{genre}</GenreTag>
-              ))}
-            </GenreList>
+            <>
+              <GenreList>
+                {stats.topGenres.map((genre, index) => (
+                  <GenreLink 
+                    key={index}
+                    genre={genre}
+                  >
+                    {genre}
+                  </GenreLink>
+                ))}
+              </GenreList>
+            </>
           ) : (
             <Text variant="p" color="secondary">No genre data available</Text>
           )}
@@ -144,3 +154,7 @@ const GenreTag = styled.span`
   font-weight: ${theme.fontWeights.medium};
 `;
 
+const ViewAllGenresButton = styled(Button)`
+  margin-top: ${theme.spacing.sm};
+  width: 100%;
+`;
