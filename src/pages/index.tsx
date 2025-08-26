@@ -108,6 +108,10 @@ const IndexPage = () => {
             <Text variant="h1">
               {homepageTitle || SITE_CONFIG.SITE_NAME}
             </Text>
+            <Text variant="h5">
+              A demo site by Graham Clark to demonstrate my skills in Gatsby, Contentful, and React.
+            </Text>
+            <Text variant="p" color="secondary">This site is built with Gatsby, React, and Typescript. It gets content from a headless CMS Contentful. The bookshelf is a Kanban board that uses local storage to store the reading status of the books.</Text>
           </div>
 
           <HomepageSearchSection>

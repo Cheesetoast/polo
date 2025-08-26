@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
 import { navigate } from 'gatsby';
+import Layout from '../components/Layout';
 import { 
   getAllNationalities, 
   getAllAuthorGenres, 
@@ -77,159 +78,161 @@ const AuthorsPage = () => {
   };
 
   return (
-    <PageContainer>
-      <Header>
-        <Title>Authors</Title>
-        <Subtitle>
-          Discover {filteredAuthors.length} authors and explore their works
-        </Subtitle>
-      </Header>
+    <Layout>
+      <PageContainer>
+        <Header>
+          <Title>Authors</Title>
+          <Subtitle>
+            Discover {filteredAuthors.length} authors and explore their works
+          </Subtitle>
+        </Header>
 
-      <FiltersContainer>
-        <SearchInput
-          type="text"
-          placeholder="Search authors by name, bio, or genre..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
+        <FiltersContainer>
+          <SearchInput
+            type="text"
+            placeholder="Search authors by name, bio, or genre..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
 
-        <FiltersRow>
-          <FilterGroup>
-            <FilterLabel>Nationality:</FilterLabel>
-            <FilterSelect
-              value={selectedNationality}
-              onChange={(e) => setSelectedNationality(e.target.value)}
-            >
-              <option value="">All Nationalities</option>
-              {nationalities.map(nationality => (
-                <option key={nationality} value={nationality}>{nationality}</option>
-              ))}
-            </FilterSelect>
-          </FilterGroup>
+          <FiltersRow>
+            <FilterGroup>
+              <FilterLabel>Nationality:</FilterLabel>
+              <FilterSelect
+                value={selectedNationality}
+                onChange={(e) => setSelectedNationality(e.target.value)}
+              >
+                <option value="">All Nationalities</option>
+                {nationalities.map(nationality => (
+                  <option key={nationality} value={nationality}>{nationality}</option>
+                ))}
+              </FilterSelect>
+            </FilterGroup>
 
-          <FilterGroup>
-            <FilterLabel>Genre:</FilterLabel>
-            <FilterSelect
-              value={selectedGenre}
-              onChange={(e) => setSelectedGenre(e.target.value)}
-            >
-              <option value="">All Genres</option>
-              {genres.map(genre => (
-                <option key={genre} value={genre}>{genre}</option>
-              ))}
-            </FilterSelect>
-          </FilterGroup>
+            <FilterGroup>
+              <FilterLabel>Genre:</FilterLabel>
+              <FilterSelect
+                value={selectedGenre}
+                onChange={(e) => setSelectedGenre(e.target.value)}
+              >
+                <option value="">All Genres</option>
+                {genres.map(genre => (
+                  <option key={genre} value={genre}>{genre}</option>
+                ))}
+              </FilterSelect>
+            </FilterGroup>
 
-          <FilterGroup>
-            <FilterLabel>Sort by:</FilterLabel>
-            <FilterSelect
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as 'name' | 'nationality' | 'genre')}
-            >
-              <option value="name">Name</option>
-              <option value="nationality">Nationality</option>
-              <option value="genre">Genre</option>
-            </FilterSelect>
-          </FilterGroup>
+            <FilterGroup>
+              <FilterLabel>Sort by:</FilterLabel>
+              <FilterSelect
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as 'name' | 'nationality' | 'genre')}
+              >
+                <option value="name">Name</option>
+                <option value="nationality">Nationality</option>
+                <option value="genre">Genre</option>
+              </FilterSelect>
+            </FilterGroup>
 
-          <ClearButton onClick={clearFilters}>
-            Clear Filters
-          </ClearButton>
-        </FiltersRow>
-      </FiltersContainer>
+            <ClearButton onClick={clearFilters}>
+              Clear Filters
+            </ClearButton>
+          </FiltersRow>
+        </FiltersContainer>
 
-      {filteredAuthors.length === 0 ? (
-        <ResultsInfo>
-          <p>No authors found matching your criteria.</p>
-          <ClearButton onClick={clearFilters}>
-            Clear All Filters
-          </ClearButton>
-        </ResultsInfo>
-      ) : (
-        <AuthorsGrid>
-          {filteredAuthors.map(author => (
-            <AuthorCard
-              key={author.id}
-              onClick={() => handleAuthorClick(author.id)}
-            >
-                              <AuthorHeader>
-                  <AuthorInfo>
-                    <AuthorName>
-                      {author.name}
-                    </AuthorName>
-                    {author.fullName !== author.name && (
-                      <AuthorFullName>
-                        {author.fullName}
-                      </AuthorFullName>
+        {filteredAuthors.length === 0 ? (
+          <ResultsInfo>
+            <p>No authors found matching your criteria.</p>
+            <ClearButton onClick={clearFilters}>
+              Clear All Filters
+            </ClearButton>
+          </ResultsInfo>
+        ) : (
+          <AuthorsGrid>
+            {filteredAuthors.map(author => (
+              <AuthorCard
+                key={author.id}
+                onClick={() => handleAuthorClick(author.id)}
+              >
+                                <AuthorHeader>
+                    <AuthorInfo>
+                      <AuthorName>
+                        {author.name}
+                      </AuthorName>
+                      {author.fullName !== author.name && (
+                        <AuthorFullName>
+                          {author.fullName}
+                        </AuthorFullName>
+                      )}
+                      {author.birthYear && (
+                        <AuthorYears>
+                          {author.birthYear} - {author.deathYear || 'Present'}
+                        </AuthorYears>
+                      )}
+                    </AuthorInfo>
+                  </AuthorHeader>
+
+                {author.bio && (
+                  <AuthorBio>
+                    {author.bio}
+                  </AuthorBio>
+                )}
+
+                {author.nationality && (
+                  <AuthorNationality>
+                    {author.nationality}
+                  </AuthorNationality>
+                )}
+
+                {author.genres.length > 0 && (
+                  <GenresContainer>
+                    {author.genres.slice(0, 3).map(genre => (
+                      <GenreLink key={genre} genre={genre}>
+                        {genre}
+                      </GenreLink>
+                    ))}
+                    {author.genres.length > 3 && (
+                      <MoreGenres>
+                        +{author.genres.length - 3} more
+                      </MoreGenres>
                     )}
-                    {author.birthYear && (
-                      <AuthorYears>
-                        {author.birthYear} - {author.deathYear || 'Present'}
-                      </AuthorYears>
-                    )}
-                  </AuthorInfo>
-                </AuthorHeader>
+                  </GenresContainer>
+                )}
 
-              {author.bio && (
-                <AuthorBio>
-                  {author.bio}
-                </AuthorBio>
-              )}
-
-              {author.nationality && (
-                <AuthorNationality>
-                  {author.nationality}
-                </AuthorNationality>
-              )}
-
-              {author.genres.length > 0 && (
-                <GenresContainer>
-                  {author.genres.slice(0, 3).map(genre => (
-                    <GenreLink key={genre} genre={genre}>
-                      {genre}
-                    </GenreLink>
-                  ))}
-                  {author.genres.length > 3 && (
-                    <MoreGenres>
-                      +{author.genres.length - 3} more
-                    </MoreGenres>
-                  )}
-                </GenresContainer>
-              )}
-
-              {(() => {
-                const authorBooks = getBooksByAuthor(author.id);
-                if (authorBooks.length > 0) {
-                  return (
-                    <BooksContainer>
-                      <BooksLabel>
-                        Books ({authorBooks.length}):
-                      </BooksLabel>
-                      <BooksList>
-                        {authorBooks.slice(0, 3).map(book => (
-                          <BookLink 
-                            key={book.isbn}
-                            isbn={book.isbn}
-                          >
-                            {book.title}
-                          </BookLink>
-                        ))}
-                        {authorBooks.length > 3 && (
-                          <MoreBooks>
-                            +{authorBooks.length - 3} more
-                          </MoreBooks>
-                        )}
-                      </BooksList>
-                    </BooksContainer>
-                  );
-                }
-                return null;
-              })()}
-            </AuthorCard>
-          ))}
-        </AuthorsGrid>
-      )}
-    </PageContainer>
+                {(() => {
+                  const authorBooks = getBooksByAuthor(author.id);
+                  if (authorBooks.length > 0) {
+                    return (
+                      <BooksContainer>
+                        <BooksLabel>
+                          Books ({authorBooks.length}):
+                        </BooksLabel>
+                        <BooksList>
+                          {authorBooks.slice(0, 3).map(book => (
+                            <BookLink 
+                              key={book.isbn}
+                              isbn={book.isbn}
+                            >
+                              {book.title}
+                            </BookLink>
+                          ))}
+                          {authorBooks.length > 3 && (
+                            <MoreBooks>
+                              +{authorBooks.length - 3} more
+                            </MoreBooks>
+                          )}
+                        </BooksList>
+                      </BooksContainer>
+                    );
+                  }
+                  return null;
+                })()}
+              </AuthorCard>
+            ))}
+          </AuthorsGrid>
+        )}
+      </PageContainer>
+    </Layout>
   );
 };
 
