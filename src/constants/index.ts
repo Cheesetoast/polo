@@ -27,7 +27,7 @@ export const DEV_SETTINGS = {
 
 // Modal Configuration
 export const MODAL_CONFIG = {
-  ENABLE_MODAL_DISMISS: true, // Set to false to disable localStorage and show modal every time
+  ENABLE_MODAL_DISMISS: false, // Set to false to disable localStorage and show modal every time
 } as const;
 
 // Default Values
