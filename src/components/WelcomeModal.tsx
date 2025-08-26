@@ -20,12 +20,12 @@ export const WelcomeModal = ({ isOpen, onClose }: WelcomeModalProps) => {
             Welcome to Graham's Demo Site 📚
           </Text>
         </ModalHeader>
-        
+
         <ModalBody>
           <Text variant="p" align="center" color="secondary">
-          This site is built with <b>Gatsby</b>, <b>React</b>, and <b>TypeScript</b>, with content managed through <b>Contentful</b>   as a headless CMS. The bookshelf section is an interactive Kanban board that saves your reading progress locally using browser storage.
+            This site is built with <strong>Gatsby</strong>, <strong>React</strong>, and <strong>TypeScript</strong>, with content managed through <strong>Contentful</strong> as a headless CMS. The project also includes unit tests written in <strong>Jest</strong> to ensure reliability and maintainable code. View on <StyledLink href="https://github.com/Cheesetoast/polo" target="_blank" rel="noopener noreferrer">GitHub</StyledLink>.
           </Text>
-          
+
           <FeatureList>
             <FeatureItem>
               <FeatureIcon>🔍</FeatureIcon>
@@ -36,7 +36,7 @@ export const WelcomeModal = ({ isOpen, onClose }: WelcomeModalProps) => {
                 </Text>
               </FeatureText>
             </FeatureItem>
-            
+
             <FeatureItem>
               <FeatureIcon>📊</FeatureIcon>
               <FeatureText>
@@ -46,7 +46,7 @@ export const WelcomeModal = ({ isOpen, onClose }: WelcomeModalProps) => {
                 </Text>
               </FeatureText>
             </FeatureItem>
-            
+
             <FeatureItem>
               <FeatureIcon>📈</FeatureIcon>
               <FeatureText>
@@ -58,7 +58,7 @@ export const WelcomeModal = ({ isOpen, onClose }: WelcomeModalProps) => {
             </FeatureItem>
           </FeatureList>
         </ModalBody>
-        
+
         <ModalFooter>
           <Button onClick={onClose} variant="primary" size="large">
             Get Started
@@ -199,5 +199,25 @@ const ModalFooter = styled.div`
   
   @media (max-width: 768px) {
     padding-top: ${theme.spacing.md};
+  }
+`;
+
+const StyledLink = styled.a`
+  color: ${theme.colors.primary};
+  text-decoration: none;
+  font-weight: bold;
+  padding: 2px 4px;
+  border-radius: 4px;
+  background: ${theme.colors.primary}10;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    text-decoration: underline;
+    background: ${theme.colors.primary}20;
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(0);
   }
 `;
