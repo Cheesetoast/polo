@@ -4,11 +4,12 @@ import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import { Text } from "../components/Text"
 import { ContentWrapper } from "../components/ContentWrapper"
-import { SITE_CONFIG } from "../constants"
+import { SITE_CONFIG, MODAL_CONFIG } from "../constants"
 import { Dashboard } from "../components/Dashboard"
+import { WelcomeModal } from "../components/WelcomeModal"
 
 import booksData from "../data/books.json"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { useBookStatus } from "../hooks/useBookStatus"
 import { navigate } from "gatsby"
 import styled from "styled-components"
@@ -40,6 +41,36 @@ interface Book {
 
 const IndexPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+
+  // Check localStorage on component mount
+  useEffect(() => {
+    if (MODAL_CONFIG.ENABLE_MODAL_DISMISS) {
+      const hasSeenWelcome = localStorage.getItem('hasSeenWelcome');
+      console.log('Welcome modal check:', { hasSeenWelcome, showWelcomeModal });
+      if (!hasSeenWelcome) {
+        console.log('Setting modal to show');
+        setShowWelcomeModal(true);
+      }
+    } else {
+      // If storage is disabled, always show the modal
+      console.log('Modal storage disabled, showing modal');
+      setShowWelcomeModal(true);
+    }
+  }, []);
+
+  const handleCloseWelcomeModal = () => {
+    console.log('Closing welcome modal');
+    setShowWelcomeModal(false);
+
+    // Only store in localStorage if enabled
+    if (MODAL_CONFIG.ENABLE_MODAL_DISMISS) {
+      localStorage.setItem('hasSeenWelcome', 'true');
+      console.log('Modal status stored in localStorage');
+    } else {
+      console.log('Modal status not stored (storage disabled)');
+    }
+  };
 
   // Fetch homepage title from Contentful
   const data = useStaticQuery(graphql`
@@ -51,10 +82,10 @@ const IndexPage = () => {
   `);
 
   const homepageTitle = data?.contentfulHomepage?.title;
-  
+
   // Fallback to local data if Contentful is not available
   const books: Book[] = BOOKS_DATA;
-  
+
   // Use the same book status system as the bookshelf
   const { booksWithStatus } = useBookStatus(BOOKS_DATA);
 
@@ -75,7 +106,7 @@ const IndexPage = () => {
       }
     });
     const topGenres = Object.entries(genreCounts)
-      .sort(([,a], [,b]) => b - a)
+      .sort(([, a], [, b]) => b - a)
       .slice(0, 5)
       .map(([genre]) => genre);
 
@@ -83,10 +114,10 @@ const IndexPage = () => {
     const booksWithRatings = books.filter(book => book.userRating !== undefined && book.userRating !== null || book.communityRating !== undefined && book.communityRating !== null);
     const averageRating = booksWithRatings.length > 0
       ? (booksWithRatings.reduce((sum, book) => {
-          // Prefer user rating if available, otherwise use community rating
-          const rating = book.userRating !== undefined && book.userRating !== null ? book.userRating : (book.communityRating || 0);
-          return sum + (rating || 0);
-        }, 0) / booksWithRatings.length).toFixed(1)
+        // Prefer user rating if available, otherwise use community rating
+        const rating = book.userRating !== undefined && book.userRating !== null ? book.userRating : (book.communityRating || 0);
+        return sum + (rating || 0);
+      }, 0) / booksWithRatings.length).toFixed(1)
       : '0.0';
 
     return {
@@ -98,20 +129,18 @@ const IndexPage = () => {
     };
   }, [books, booksWithStatus]);
 
-
-
   return (
     <Layout>
+      <WelcomeModal
+        isOpen={showWelcomeModal}
+        onClose={handleCloseWelcomeModal}
+      />
       <main>
         <ContentWrapper>
           <div>
             <Text variant="h1">
               {homepageTitle || SITE_CONFIG.SITE_NAME}
             </Text>
-            <Text variant="h5">
-              A demo site by Graham Clark to demonstrate my skills in Gatsby, Contentful, and React.
-            </Text>
-            <Text variant="p" color="secondary">This site is built with Gatsby, React, and Typescript. It gets content from a headless CMS Contentful. The bookshelf is a Kanban board that uses local storage to store the reading status of the books.</Text>
           </div>
 
           <HomepageSearchSection>
@@ -121,7 +150,7 @@ const IndexPage = () => {
             <Text variant="p" color="secondary" align="center">
               Search through our collection of books by title, author, or description
             </Text>
-            
+
             <SearchForm onSubmit={(e) => {
               e.preventDefault();
               if (searchQuery.trim()) {

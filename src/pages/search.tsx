@@ -101,10 +101,6 @@ const SearchPage = () => {
                   </FilterSelect>
                 </FilterGroup>
 
-
-
-
-
                 <Button 
                   type="submit"
                   variant="primary"
@@ -186,7 +182,7 @@ const SearchInput = styled.input`
 const FiltersContainer = styled.div`
   display: flex;
   gap: ${theme.spacing.md};
-  align-items: center;
+  align-items: flex-end;
   flex-wrap: wrap;
   margin-bottom: ${theme.spacing.md};
 `;

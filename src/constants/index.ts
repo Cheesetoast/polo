@@ -25,6 +25,11 @@ export const DEV_SETTINGS = {
   GRAPHQL_ENDPOINT: '/___graphql',
 } as const;
 
+// Modal Configuration
+export const MODAL_CONFIG = {
+  ENABLE_MODAL_DISMISS: true, // Set to false to disable localStorage and show modal every time
+} as const;
+
 // Default Values
 export const DEFAULTS = {
   FALLBACK_TITLE: SITE_CONFIG.SITE_NAME,
