@@ -158,14 +158,20 @@ const BookPage = ({ params }: BookPageProps) => {
                   By <AuthorLink authorName={book.author}>{book.author}</AuthorLink>
                 </Text>
               </div>
-              <StatusContainer>
-                <StatusIndicator 
-                  status={bookWithStatus?.status || null} 
-                  size="large" 
-                />
-                <StatusCaption variant="caption" color="secondary">
+            </BookHeader>
+
+            <StatusIndicatorRow>
+              <StatusIndicator 
+                status={bookWithStatus?.status || null} 
+                size="large" 
+              />
+            </StatusIndicatorRow>
+
+            <StatusContainer>
+              <StatusLabelGroup>
+                <FieldLabel variant="caption" color="secondary">
                   Update Status:
-                </StatusCaption>
+                </FieldLabel>
 
                 <StatusSelector
                   value={bookWithStatus?.status || ""}
@@ -193,42 +199,35 @@ const BookPage = ({ params }: BookPageProps) => {
                   <option value="currently-reading">Currently Reading</option>
                   <option value="finished">Finished</option>
                 </StatusSelector>
-                
-                {/* Progress Input */}
-                {(bookWithStatus?.status === 'currently-reading' || 
-                  bookWithStatus?.status === 'finished') && (
-                  <ProgressControl>
-                    <ProgressLabelRow>
-                      <Text variant="caption" weight="medium">Reading progress</Text>
-                      <ProgressValue variant="caption">
-                        {(bookWithStatus?.progress ?? 0)}%
-                      </ProgressValue>
-                    </ProgressLabelRow>
-                    <ProgressInput
-                      value={bookWithStatus?.progress ?? 0}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        const progress = parseInt(e.target.value) || 0;
-                        updateBookProgress(book.isbn, progress);
-                      }}
-                    />
-                  </ProgressControl>
-                )}
-
-                {/* User Rating Input */}
-                <RatingSection>
-                  <Text variant="caption" weight="medium">Your Rating:</Text>
-                  <StarRating
-                    rating={bookWithStatus?.userRating || 0}
-                    onRatingChange={(rating) => updateBookRating(book.isbn, rating)}
+              </StatusLabelGroup>
+              
+              {/* Progress Input */}
+              {(bookWithStatus?.status === 'currently-reading' || 
+                bookWithStatus?.status === 'finished') && (
+                <ProgressControl>
+                  <ProgressLabelRow>
+                    <Text variant="caption" weight="medium">
+                      Reading progress: {(bookWithStatus?.progress ?? 0)}%
+                    </Text>
+                  </ProgressLabelRow>
+                  <ProgressInput
+                    value={bookWithStatus?.progress ?? 0}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      const progress = parseInt(e.target.value) || 0;
+                      updateBookProgress(book.isbn, progress);
+                    }}
                   />
-                  <RatingNote variant="caption" color="secondary">
-                    Click stars to rate (optional)
-                  </RatingNote>
-                </RatingSection>
-                
+                </ProgressControl>
+              )}
 
-              </StatusContainer>
-            </BookHeader>
+              {/* User Rating Input */}
+              <RatingSection>
+                <StarRating
+                  rating={bookWithStatus?.userRating || 0}
+                  onRatingChange={(rating) => updateBookRating(book.isbn, rating)}
+                />
+              </RatingSection>
+            </StatusContainer>
 
             <BookContent>
               <BookMain>
@@ -271,13 +270,6 @@ const BookPage = ({ params }: BookPageProps) => {
                       <Text variant="caption" weight="medium">Rating:</Text>
                       <Text variant="p">{getRatingDisplay(book, bookWithStatus)}</Text>
                     </MetadataItem>
-
-                    {bookWithStatus?.progress !== undefined && (
-                      <MetadataItem>
-                        <Text variant="caption" weight="medium">Progress:</Text>
-                        <BookProgressBar progress={bookWithStatus.progress} />
-                      </MetadataItem>
-                    )}
 
 
                   </BookMetadata>
@@ -365,16 +357,9 @@ const ProgressControl = styled.div`
 
 const ProgressLabelRow = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
+  flex-direction: row;
+  align-items: center;
   width: 100%;
-`;
-
-const ProgressValue = styled(Text)`
-  font-variant-numeric: tabular-nums;
-  font-size: ${theme.fontSizes.sm};
-  font-weight: 600;
 `;
 
 const ProgressInput = styled.input.attrs({
@@ -440,15 +425,10 @@ const BookContainer = styled.div`
 
 const BookHeader = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: flex-start;
   margin-bottom: ${theme.spacing.xl};
-  gap: ${theme.spacing.lg};
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+  gap: ${theme.spacing.md};
 `;
 
 const BookContent = styled.div`
@@ -500,28 +480,39 @@ const MetadataItem = styled.div`
   gap: ${theme.spacing.xs};
 `;
 
-const StatusContainer = styled.div`
+const StatusIndicatorRow = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
+  align-items: flex-start;
+  gap: 4px;
+  margin-bottom: ${theme.spacing.xs};
 `;
 
-const StatusCaption = styled(Text)`
-  margin-top: 4px;
+const StatusContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: ${theme.spacing.md};
+  margin-top: ${theme.spacing.sm};
+  margin-bottom: ${theme.spacing.lg};
+`;
+
+const StatusLabelGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+`;
+
+const FieldLabel = styled(Text)`
+  font-weight: 500;
 `;
 
 const RatingSection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   align-items: center;
   margin-top: 8px;
-`;
-
-const RatingNote = styled(Text)`
-  font-size: 0.75rem;
-  text-align: center;
 `;
 
 const StarContainer = styled.div`

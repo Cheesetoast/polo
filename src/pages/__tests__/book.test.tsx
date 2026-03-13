@@ -39,12 +39,6 @@ jest.mock('../../components/Button', () => ({
   ),
 }));
 
-jest.mock('../../components/BookProgressBar', () => ({
-  BookProgressBar: ({ progress }: { progress: number }) => (
-    <div data-testid="progress-bar">{progress}%</div>
-  ),
-}));
-
 jest.mock('../../components/StatusIndicator', () => ({
   StatusIndicator: ({ status, size }: { status: string; size: string }) => (
     <div data-testid="status-indicator" data-status={status} data-size={size} />
@@ -116,10 +110,7 @@ describe('BookPage', () => {
     expect(screen.getByText('978-1234567890')).toBeInTheDocument();
     expect(screen.getByText('300')).toBeInTheDocument();
     expect(screen.getByText('4.0 (your rating)')).toBeInTheDocument();
-
-    const progressBar = screen.getByTestId('progress-bar');
-    expect(progressBar).toBeInTheDocument();
-    expect(progressBar).toHaveTextContent('100%');
+    expect(screen.getByText('Reading progress: 100%')).toBeInTheDocument();
   });
 
   it('renders not found page when book is not found', () => {
@@ -148,9 +139,7 @@ describe('BookPage', () => {
     
     render(<BookPage params={params} />);
 
-    const progressBar = screen.getByTestId('progress-bar');
-    expect(progressBar).toBeInTheDocument();
-    expect(progressBar).toHaveTextContent('100%');
+    expect(screen.getByText('Reading progress: 100%')).toBeInTheDocument();
   });
 
   it('displays back button', () => {
