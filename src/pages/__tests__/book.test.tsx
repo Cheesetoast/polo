@@ -116,7 +116,10 @@ describe('BookPage', () => {
     expect(screen.getByText('978-1234567890')).toBeInTheDocument();
     expect(screen.getByText('300')).toBeInTheDocument();
     expect(screen.getByText('4.0 (your rating)')).toBeInTheDocument();
-    expect(screen.getByText('100%')).toBeInTheDocument();
+
+    const progressBar = screen.getByTestId('progress-bar');
+    expect(progressBar).toBeInTheDocument();
+    expect(progressBar).toHaveTextContent('100%');
   });
 
   it('renders not found page when book is not found', () => {
@@ -145,8 +148,9 @@ describe('BookPage', () => {
     
     render(<BookPage params={params} />);
 
-    expect(screen.getByTestId('progress-bar')).toBeInTheDocument();
-    expect(screen.getByText('100%')).toBeInTheDocument();
+    const progressBar = screen.getByTestId('progress-bar');
+    expect(progressBar).toBeInTheDocument();
+    expect(progressBar).toHaveTextContent('100%');
   });
 
   it('displays back button', () => {

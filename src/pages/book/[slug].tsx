@@ -49,6 +49,8 @@ const BookPage = ({ params }: BookPageProps) => {
   const book = books.find(b => b.isbn.replace(/-/g, '') === slug);
   const { booksWithStatus, updateBookStatus, updateBookProgress, updateBookRating, clearBookStatus } = useBookStatus(books);
   const bookWithStatus = booksWithStatus.find(b => b.isbn === book?.isbn);
+
+  const [showFinishConfirm, setShowFinishConfirm] = useState(false);
   
   // Star Rating Component
   const StarRating = ({ rating, onRatingChange }: { rating: number; onRatingChange: (rating: number) => void }) => {
@@ -168,15 +170,22 @@ const BookPage = ({ params }: BookPageProps) => {
                 <StatusSelector
                   value={bookWithStatus?.status || ""}
                   onChange={(e) => {
-                    const newStatus = e.target.value;
-                    
+                    const newStatus = e.target.value as ReadingStatus | "";
+
                     if (newStatus === "") {
                       // Clear the status by setting it to null
                       updateBookStatus(book.isbn, null);
-                    } else {
-                      // Update to the selected status
-                      updateBookStatus(book.isbn, newStatus as ReadingStatus);
+                      return;
                     }
+
+                    if (newStatus === "finished") {
+                      // Show custom confirmation modal instead of using window.confirm
+                      setShowFinishConfirm(true);
+                      return;
+                    }
+
+                    // Update to the selected status for other options
+                    updateBookStatus(book.isbn, newStatus as ReadingStatus);
                   }}
                 >
                   <option value="">No Status</option>
@@ -276,6 +285,38 @@ const BookPage = ({ params }: BookPageProps) => {
               </BookMain>
             </BookContent>
           </BookContainer>
+
+          {showFinishConfirm && (
+            <ConfirmModalOverlay>
+              <ConfirmModalContent>
+                <Text variant="h4">Mark as finished?</Text>
+                <Text variant="p" color="secondary">
+                  Do you also want to set your reading progress for this book to 100%?
+                </Text>
+                <ConfirmModalActions>
+                  <Button
+                    variant="secondary"
+                    onClick={() => {
+                      // Just update the status to finished, keep existing progress
+                      updateBookStatus(book.isbn, "finished");
+                      setShowFinishConfirm(false);
+                    }}
+                  >
+                    No, keep current progress
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      updateBookProgress(book.isbn, 100);
+                      updateBookStatus(book.isbn, "finished");
+                      setShowFinishConfirm(false);
+                    }}
+                  >
+                    Yes, mark as 100%
+                  </Button>
+                </ConfirmModalActions>
+              </ConfirmModalContent>
+            </ConfirmModalOverlay>
+          )}
         </ContentWrapper>
       </main>
     </Layout>
@@ -345,6 +386,35 @@ const ProgressInput = styled.input.attrs({
   width: 160px;
   cursor: pointer;
   accent-color: ${theme.colors.primary};
+`;
+
+const ConfirmModalOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+`;
+
+const ConfirmModalContent = styled.div`
+  background: #ffffff;
+  padding: ${theme.spacing.lg};
+  border-radius: ${theme.borderRadius.md};
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.md};
+`;
+
+const ConfirmModalActions = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: ${theme.spacing.sm};
+  margin-top: ${theme.spacing.sm};
 `;
 const BackButton = styled.button`
   background: none;
