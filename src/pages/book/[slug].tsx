@@ -188,17 +188,21 @@ const BookPage = ({ params }: BookPageProps) => {
                 {/* Progress Input */}
                 {(bookWithStatus?.status === 'currently-reading' || 
                   bookWithStatus?.status === 'finished') && (
-                  <ProgressInput
-                    type="number"
-                    min="0"
-                    max="100"
-                    placeholder="Progress %"
-                    value={bookWithStatus?.progress || 0}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      const progress = parseInt(e.target.value) || 0;
-                      updateBookProgress(book.isbn, progress);
-                    }}
-                  />
+                  <ProgressControl>
+                    <ProgressLabelRow>
+                      <Text variant="caption" weight="medium">Reading progress</Text>
+                      <ProgressValue variant="caption">
+                        {(bookWithStatus?.progress ?? 0)}%
+                      </ProgressValue>
+                    </ProgressLabelRow>
+                    <ProgressInput
+                      value={bookWithStatus?.progress ?? 0}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        const progress = parseInt(e.target.value) || 0;
+                        updateBookProgress(book.isbn, progress);
+                      }}
+                    />
+                  </ProgressControl>
                 )}
 
                 {/* User Rating Input */}
@@ -310,36 +314,38 @@ const StatusSelector = styled.select`
   }
 `;
 
-const ProgressInput = styled.input`
-  padding: ${theme.spacing.xs} ${theme.spacing.sm};
-  border: 1px solid ${theme.colors.muted};
-  border-radius: ${theme.borderRadius.sm};
-  background: white;
-  font-size: ${theme.fontSizes.sm};
-  width: 80px;
-  text-align: center;
-  
-  &:focus {
-    outline: none;
-    border-color: ${theme.colors.primary};
-    box-shadow: 0 0 0 2px ${theme.colors.primary}20;
-  }
-  
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  
-  &[type=number] {
-    -moz-appearance: textfield;
-  }
+const ProgressControl = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  margin-top: 4px;
 `;
 
+const ProgressLabelRow = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+`;
 
+const ProgressValue = styled(Text)`
+  font-variant-numeric: tabular-nums;
+  font-size: ${theme.fontSizes.sm};
+  font-weight: 600;
+`;
 
-
-
+const ProgressInput = styled.input.attrs({
+  type: 'range',
+  min: 0,
+  max: 100,
+  step: 1,
+})`
+  width: 160px;
+  cursor: pointer;
+  accent-color: ${theme.colors.primary};
+`;
 const BackButton = styled.button`
   background: none;
   border: none;

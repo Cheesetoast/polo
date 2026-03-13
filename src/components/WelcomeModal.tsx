@@ -17,13 +17,13 @@ export const WelcomeModal = ({ isOpen, onClose }: WelcomeModalProps) => {
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <ModalHeader>
           <Text variant="h3" align="center">
-            Welcome to Graham's Demo Site 📚
+            Welcome to Graham's Demo Site 📚 (Work in progress)
           </Text>
         </ModalHeader>
 
         <ModalBody>
           <Text variant="p" align="center" color="secondary">
-            This site is built with <strong>Gatsby</strong>, <strong>React</strong>, and <strong>TypeScript</strong>, with content managed through <strong>Contentful</strong> as a headless CMS. The project also includes unit tests written in <strong>Jest</strong> to ensure reliability and maintainable code. View on <StyledLink href="https://github.com/Cheesetoast/polo" target="_blank" rel="noopener noreferrer">GitHub</StyledLink>.
+            Built with <strong>Gatsby</strong>, <strong>React</strong>, and <strong>TypeScript</strong>, with content managed through <strong>Contentful</strong> as a headless CMS. The project also includes unit tests written in <strong>Jest</strong> to ensure reliability and maintainable code. View on <StyledLink href="https://github.com/Cheesetoast/polo" target="_blank" rel="noopener noreferrer">GitHub</StyledLink>.
           </Text>
 
           <FeatureList>

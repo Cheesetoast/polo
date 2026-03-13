@@ -235,7 +235,7 @@ const FiltersContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: ${theme.spacing.md};
-  align-items: center;
+  align-items: end;
   margin-bottom: ${theme.spacing.md};
 `;
 

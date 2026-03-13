@@ -155,19 +155,22 @@ export const useBookStatus = (books: Book[]) => {
     }));
   }, []);
 
-  // Update a book's user rating
+  // Update a book's user rating without changing its progress
   const updateBookRating = useCallback((isbn: string | undefined, rating: number | null) => {
     if (!isbn) return; // Skip books without ISBN
-    
+
+    const book = books.find(b => b.isbn === isbn);
+
     setReadingStatusData(prev => ({
       ...prev,
       [isbn]: {
-        status: prev[isbn]?.status || DEFAULT_STATUS,
-        progress: prev[isbn]?.progress ?? 0,
+        status: prev[isbn]?.status ?? DEFAULT_STATUS,
+        // Preserve existing progress if present; otherwise fall back to the book's original progress.
+        progress: prev[isbn]?.progress ?? book?.progress,
         userRating: rating,
       },
     }));
-  }, []);
+  }, [books]);
 
   // Reset all statuses to default
   const resetStatuses = useCallback(() => {
