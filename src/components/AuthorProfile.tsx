@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Author, getBooksByAuthor } from '../utils/authorUtils';
-import { Book } from './Book';
+import { BookCard } from './BookCard';
 
 interface AuthorProfileProps {
   author: Author;
@@ -61,7 +61,7 @@ export const AuthorProfile = ({ author }: AuthorProfileProps) => {
         <h3>Books ({authorBooks.length})</h3>
         <BooksGrid>
           {authorBooks.map(book => (
-            <Book key={book.isbn} book={book} onClick={() => {}} />
+            <BookCard key={book.isbn} book={book} onClick={() => {}} />
           ))}
         </BooksGrid>
       </BooksSection>

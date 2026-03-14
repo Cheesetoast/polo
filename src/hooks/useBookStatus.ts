@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { Book } from '../components/Book';
+import { Book } from '../types/book';
 import { ReadingStatus } from '../types/reading';
 import { DEFAULTS } from '../constants';
 

@@ -4,7 +4,6 @@ import { navigate } from 'gatsby';
 import { getAuthorById, getBooksByAuthor } from '../../utils/authorUtils';
 import Layout from '../../components/Layout';
 import SEO from '../../components/SEO';
-import { Book } from '../../components/Book';
 
 interface AuthorPageProps {
   params: {

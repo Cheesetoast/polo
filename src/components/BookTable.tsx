@@ -5,7 +5,7 @@ import { theme } from '../styles/theme';
 import { Text } from './Text';
 import { StatusIndicator } from './StatusIndicator';
 import { BookProgressBar } from './BookProgressBar';
-import { Book } from './Book';
+import type { Book } from '../types/book';
 import { ReadingStatus } from '../types/reading';
 
 interface BookWithReadingStatus extends Book {

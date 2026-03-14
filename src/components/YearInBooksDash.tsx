@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import { Text } from './Text';
-import { Book } from './Book';
+import type { Book } from '../types/book';
 
 interface YearInBooksStats {
   booksRead: number;

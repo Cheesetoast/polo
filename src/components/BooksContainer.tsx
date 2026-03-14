@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
-import { Book } from './Book';
+import { BookCard } from './BookCard';
 
 export interface BooksContainerProps {
     books: Book[];
@@ -10,7 +10,7 @@ export const BooksContainer = ({ books }: BooksContainerProps) => {
     return (
         <StyledBooksContainer>
             {books.map((book) => (
-                <Book book={book} key={book.isbn} />
+                <BookCard book={book} key={book.isbn} />
             ))}
         </StyledBooksContainer>
     );

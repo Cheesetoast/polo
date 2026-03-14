@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import { useBookStatus } from '../useBookStatus';
-import { Book } from '../../components/Book';
+import type { Book } from '../../types/book';
 
 const mockBooks: Book[] = [
   {

@@ -1,4 +1,4 @@
-import { Book } from '../components/Book';
+import type { Book } from '../types/book';
 
 export interface YearInBooksStats {
   booksRead: number;

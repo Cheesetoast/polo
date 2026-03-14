@@ -13,25 +13,25 @@ import { CSS } from '@dnd-kit/utilities';
 import { navigate } from 'gatsby';
 
 export interface Book {
-    title: string;
-    author: string;
-    description: {
-        description: string;
-    };
-    image?: {
-        gatsbyImageData: any;
-        title?: string;
-    } | null;
-    isbn: string;
-    communityRating?: number | null; // Average rating from the community
-    userRating?: number | null; // User's personal rating (only available after finishing)
-    genres?: string[];
-    progress?: number;
-    pages?: number;
+  title: string;
+  author: string;
+  description: {
+    description: string;
+  };
+  image?: {
+    gatsbyImageData: any;
+    title?: string;
+  } | null;
+  isbn: string;
+  communityRating?: number | null;
+  userRating?: number | null;
+  genres?: string[];
+  progress?: number;
+  pages?: number;
 }
 
 export interface BookProps {
-    book: Book & { status?: string };
+  book: Book & { status?: string };
     onClick?: () => void;
     style?: Record<string, any>; // Generic CSS properties
     showStatus?: boolean;

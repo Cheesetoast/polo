@@ -36,13 +36,13 @@ interface Book {
 }
 
 interface BookPageProps extends PageProps {
-  params: {
+  params?: {
     slug: string;
   };
 }
 
 const BookPage = ({ params }: BookPageProps) => {
-  const { slug } = params;
+  const slug = params?.slug ?? '';
   
   // Find the book by slug (clean ISBN without dashes)
   const books: Book[] = booksData;
@@ -51,6 +51,17 @@ const BookPage = ({ params }: BookPageProps) => {
   const bookWithStatus = booksWithStatus.find(b => b.isbn === book?.isbn);
 
   const [showFinishConfirm, setShowFinishConfirm] = useState(false);
+  const [coverError, setCoverError] = useState(false);
+  
+  // Open Library Covers API (no key required): https://openlibrary.org/dev/docs/api/covers
+  const openLibraryCoverUrl = book
+    ? `https://covers.openlibrary.org/b/isbn/${book.isbn.replace(/-/g, '')}-L.jpg`
+    : '';
+  
+  // Reset cover error when navigating to a different book so fallback is tried again
+  useEffect(() => {
+    setCoverError(false);
+  }, [slug, book?.isbn]);
   
   // Star Rating Component
   const StarRating = ({ rating, onRatingChange }: { rating: number; onRatingChange: (rating: number) => void }) => {
@@ -231,14 +242,42 @@ const BookPage = ({ params }: BookPageProps) => {
 
             <BookContent>
               <BookMain>
-                {book.image?.gatsbyImageData && (
-                  <BookImage>
-                    <ImageBlock
-                      image={book.image.gatsbyImageData}
-                      alt={book.image.title || book.title}
-                    />
-                  </BookImage>
-                )}
+                {(() => {
+                  if (book.image?.gatsbyImageData) {
+                    return (
+                      <BookImage>
+                        <ImageBlock
+                          image={book.image.gatsbyImageData}
+                          alt={book.image.title || book.title}
+                        />
+                      </BookImage>
+                    );
+                  }
+                  if (openLibraryCoverUrl && !coverError) {
+                    return (
+                      <BookImage>
+                        <FallbackCover
+                          src={openLibraryCoverUrl}
+                          alt={`Cover: ${book.title}`}
+                          onError={() => setCoverError(true)}
+                          onLoad={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                            const img = e.currentTarget;
+                            if (img.naturalWidth <= 1 || img.naturalHeight <= 1) {
+                              setCoverError(true);
+                            }
+                          }}
+                          crossOrigin=""
+                          referrerPolicy="no-referrer"
+                        />
+                      </BookImage>
+                    );
+                  }
+                  return (
+                    <BookImage>
+                      <CoverPlaceholder>No cover</CoverPlaceholder>
+                    </BookImage>
+                  );
+                })()}
 
                 <BookDetails>
                   {book.description?.description && (
@@ -319,7 +358,8 @@ export default BookPage;
 
 export const Head: HeadFC<BookPageProps> = ({ params }) => {
   const books: Book[] = booksData;
-  const book = books.find(b => b.isbn.replace(/-/g, '') === params.slug);
+  const slug = params?.slug ?? '';
+  const book = books.find(b => b.isbn.replace(/-/g, '') === slug);
   
   return (
     <SEO
@@ -454,6 +494,26 @@ const BookImage = styled.div`
   border-radius: ${theme.borderRadius.md};
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const FallbackCover = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+`;
+
+const CoverPlaceholder = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${theme.colors.muted};
+  color: ${theme.colors.secondary};
+  font-size: ${theme.fontSizes.sm};
+  text-align: center;
+  padding: ${theme.spacing.sm};
 `;
 
 const BookDetails = styled.div`

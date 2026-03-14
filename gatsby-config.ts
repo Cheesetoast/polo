@@ -14,6 +14,12 @@ const config: GatsbyConfig = {
     FAST_DEV: true,
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-babel-exclude',
+      options: {
+        exclude: /node_modules[\\/](@dnd-kit|common-tags)/,
+      },
+    },
     // Only include Contentful plugin if credentials are provided
     ...(process.env.CONTENTFUL_SPACE_ID && process.env.CONTENTFUL_ACCESS_TOKEN && 
         process.env.CONTENTFUL_SPACE_ID !== 'your_space_id_here' && 
