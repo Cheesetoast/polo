@@ -1,16 +1,26 @@
 import styled, { css } from "styled-components"
 import { Link } from "gatsby"
-import { theme } from "../styles/theme"
+import { rgba, theme } from "../styles/theme"
 import { dashboardShell } from "../styles/surfaceStyles"
 import { ModuleInsetPanel } from "./ModuleInsetPanel"
 import { Text } from "./Text"
 import { Eyebrow } from "./Eyebrow"
 import { GenreLink } from "./GenreLink"
+import {
+  InsightBarRows,
+  GenreChartList,
+  GenreChartRow,
+  GenreChartLabel,
+  GenreChartTrack,
+  GenreChartValue,
+} from "./InsightChartBars"
 
 export interface DashboardStats {
   totalBooks: number
   averageRating: string
   topGenres: string[]
+  /** Top genres by book count; powers the insights bar chart. */
+  genreChart: { genre: string; count: number }[]
   totalPages: number
   distinctGenreCount: number
   topAuthor: {
@@ -19,6 +29,8 @@ export interface DashboardStats {
     authorId?: string
   } | null
   longestBook: { title: string; pages: number } | null
+  pageLengthChart: { label: string; count: number }[]
+  ratingHistogram: { stars: number; count: number }[]
 }
 
 interface DashboardProps {
@@ -93,6 +105,69 @@ export const Dashboard = ({
           )}
         </InsightCell>
       </InsightsGrid>
+
+      {stats.genreChart.length > 0 ? (
+        <GenreChartPanel
+          $fillHeight={fillHeight}
+          role="region"
+          aria-label="Top genres by number of books in the catalog"
+        >
+          <GenreChartTitle>Genre mix</GenreChartTitle>
+          <GenreChartCaption>
+            Share of tagged books across your top genres (by count).
+          </GenreChartCaption>
+          <GenreChartList role="list">
+            {(() => {
+              const max = Math.max(
+                ...stats.genreChart.map((g) => g.count),
+                1
+              );
+              return stats.genreChart.map(({ genre, count }, index) => (
+                <GenreChartRow
+                  key={genre}
+                  role="listitem"
+                  aria-label={`${genre}, ${count} ${
+                    count === 1 ? "book" : "books"
+                  }`}
+                >
+                  <GenreChartLabel title={genre}>{genre}</GenreChartLabel>
+                  <GenreChartTrack aria-hidden>
+                    <GenreChartBar
+                      $index={index}
+                      style={{ width: `${(count / max) * 100}%` }}
+                    />
+                  </GenreChartTrack>
+                  <GenreChartValue aria-hidden>{count}</GenreChartValue>
+                </GenreChartRow>
+              ));
+            })()}
+          </GenreChartList>
+        </GenreChartPanel>
+      ) : null}
+
+      {stats.pageLengthChart.some((row) => row.count > 0) ? (
+        <InsightBarChartPanel
+          $fillHeight={fillHeight}
+          role="region"
+          aria-label="Books in the catalog by page length"
+        >
+          <GenreChartTitle>Catalog by length</GenreChartTitle>
+          <GenreChartCaption>
+            Page-count buckets for books that list a length.
+          </GenreChartCaption>
+          <InsightBarRows
+            barPalette="slate"
+            items={stats.pageLengthChart.map((row) => ({
+              key: row.label,
+              label: row.label,
+              count: row.count,
+            }))}
+            ariaDescribe={(label, count) =>
+              `${label}: ${count} ${count === 1 ? "book" : "books"}`
+            }
+          />
+        </InsightBarChartPanel>
+      ) : null}
 
       <StatsDetails $fillHeight={fillHeight}>
         <CatalogSummaryPanel>
@@ -374,4 +449,81 @@ const GenreList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: ${theme.spacing.xs};
+`
+
+const GenreChartPanel = styled(ModuleInsetPanel).attrs({
+  $tone: "neutral" as const,
+  $size: "well" as const,
+})<{ $fillHeight: boolean }>`
+  margin: 0 0 ${theme.spacing.lg};
+  min-width: 0;
+  width: 100%;
+  text-align: left;
+
+  ${({ $fillHeight }) =>
+    $fillHeight &&
+    css`
+      flex-shrink: 0;
+    `}
+`
+
+const GenreChartTitle = styled.h3`
+  margin: 0 0 ${theme.spacing.xs};
+  font-size: ${theme.fontSizes.lg};
+  font-weight: ${theme.fontWeights.semibold};
+  line-height: ${theme.lineHeights.lg};
+  letter-spacing: -0.02em;
+  color: ${theme.colors.primary};
+`
+
+const GenreChartCaption = styled.p`
+  margin: 0 0 ${theme.spacing.md};
+  font-size: ${theme.fontSizes.xs};
+  line-height: ${theme.lineHeights.sm};
+  color: ${theme.colors.muted};
+`
+
+const GenreChartBar = styled.div<{ $index: number }>`
+  height: 100%;
+  min-width: 3px;
+  border-radius: ${theme.borderRadius.full};
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+
+  ${({ $index }) => {
+    const t = ($index % 6) / 5;
+    const a0 = 0.22 + t * 0.18
+    const a1 = 0.38 + t * 0.2
+    return css`
+      background: linear-gradient(
+        90deg,
+        ${rgba.indigo(a0)} 0%,
+        ${rgba.indigo(a1)} 100%
+      );
+    `
+  }}
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+`
+
+const VizPanel = styled(ModuleInsetPanel).attrs({
+  $tone: "neutral" as const,
+  $size: "well" as const,
+})<{ $fillHeight: boolean }>`
+  position: relative;
+  min-width: 0;
+  width: 100%;
+  text-align: left;
+
+  ${({ $fillHeight }) =>
+    $fillHeight &&
+    css`
+      flex-shrink: 0;
+    `}
+`
+
+const InsightBarChartPanel = styled(VizPanel)`
+  margin: 0 0 ${theme.spacing.lg};
 `

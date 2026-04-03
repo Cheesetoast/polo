@@ -6,6 +6,24 @@ const mockStats = {
   totalBooks: 25,
   averageRating: "4.2",
   topGenres: ["Fiction", "Non-Fiction", "Science Fiction"],
+  genreChart: [
+    { genre: "Fiction", count: 12 },
+    { genre: "Non-Fiction", count: 8 },
+    { genre: "Science Fiction", count: 5 },
+  ],
+  pageLengthChart: [
+    { label: "Under 200 pp", count: 3 },
+    { label: "200–399 pp", count: 10 },
+    { label: "400–699 pp", count: 8 },
+    { label: "700+ pp", count: 4 },
+  ],
+  ratingHistogram: [
+    { stars: 1, count: 0 },
+    { stars: 2, count: 1 },
+    { stars: 3, count: 4 },
+    { stars: 4, count: 12 },
+    { stars: 5, count: 8 },
+  ],
   totalPages: 12_400,
   distinctGenreCount: 8,
   topAuthor: {
@@ -32,6 +50,8 @@ describe("Dashboard Component", () => {
     )
     expect(screen.getByText("War and Peace")).toBeInTheDocument()
     expect(screen.getByText("8 distinct genres")).toBeInTheDocument()
+    expect(screen.getByText("Genre mix")).toBeInTheDocument()
+    expect(screen.getByText("Catalog by length")).toBeInTheDocument()
   })
 
   it("handles empty edge stats gracefully", () => {
@@ -39,6 +59,20 @@ describe("Dashboard Component", () => {
       totalBooks: 0,
       averageRating: "0.0",
       topGenres: [],
+      genreChart: [],
+      pageLengthChart: [
+        { label: "Under 200 pp", count: 0 },
+        { label: "200–399 pp", count: 0 },
+        { label: "400–699 pp", count: 0 },
+        { label: "700+ pp", count: 0 },
+      ],
+      ratingHistogram: [
+        { stars: 1, count: 0 },
+        { stars: 2, count: 0 },
+        { stars: 3, count: 0 },
+        { stars: 4, count: 0 },
+        { stars: 5, count: 0 },
+      ],
       totalPages: 0,
       distinctGenreCount: 0,
       topAuthor: null,

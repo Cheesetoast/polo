@@ -1,6 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 import { useBookStatus } from '../useBookStatus';
 import { Book } from '../../components/Book';
+import { localDateKey } from '../../utils/readingActivityHeatmap';
 
 const mockBooks: Book[] = [
   {
@@ -124,6 +125,21 @@ describe('useBookStatus', () => {
     expect(storedData['978-1'].status).toBe('in-progress');
   });
 
+  it('records reading activity when status updates', () => {
+    const { result } = renderHook(() => useBookStatus(mockBooks));
+    const key = localDateKey(new Date());
+
+    act(() => {
+      result.current.updateBookStatus('978-1', 'currently-reading');
+    });
+
+    const activity = JSON.parse(
+      localStorage.getItem('polo-reading-activity-by-day') || '{}'
+    );
+    expect(activity[key]).toBeGreaterThanOrEqual(1);
+    expect(result.current.activityByDay[key]).toBeGreaterThanOrEqual(1);
+  });
+
   it('handles books without ISBN gracefully', () => {
     const booksWithoutISBN = [
       {
@@ -160,5 +176,6 @@ describe('useBookStatus', () => {
     // localStorage should be empty or contain empty object
     const storedData = localStorage.getItem('book-status-data');
     expect(storedData).toBe('{}');
+    expect(localStorage.getItem('polo-reading-activity-by-day')).toBeNull();
   });
 });

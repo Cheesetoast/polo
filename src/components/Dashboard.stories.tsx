@@ -9,7 +9,7 @@ const meta: Meta<typeof Dashboard> = {
     docs: {
       description: {
         component:
-          "Homepage insights: catalog summary, pages, top author, longest book, and genres.",
+          "Homepage insights: genre mix, catalog by length, catalog summary, tiles, and genre tags. Rating spread and reading activity heatmap live in the Bookshelf module.",
       },
     },
   },
@@ -37,6 +37,26 @@ const mockStats = {
   totalBooks: 104,
   averageRating: "4.2",
   topGenres: ["Fiction", "Science Fiction", "Mystery"],
+  genreChart: [
+    { genre: "Fiction", count: 28 },
+    { genre: "Science Fiction", count: 18 },
+    { genre: "Mystery", count: 14 },
+    { genre: "Horror", count: 11 },
+    { genre: "Thriller", count: 9 },
+  ],
+  pageLengthChart: [
+    { label: "Under 200 pp", count: 12 },
+    { label: "200–399 pp", count: 38 },
+    { label: "400–699 pp", count: 35 },
+    { label: "700+ pp", count: 19 },
+  ],
+  ratingHistogram: [
+    { stars: 1, count: 2 },
+    { stars: 2, count: 5 },
+    { stars: 3, count: 18 },
+    { stars: 4, count: 42 },
+    { stars: 5, count: 37 },
+  ],
   totalPages: 248_900,
   distinctGenreCount: 14,
   topAuthor: {
@@ -59,6 +79,20 @@ export const EmptyStats: Story = {
       totalBooks: 0,
       averageRating: "N/A",
       topGenres: [],
+      genreChart: [],
+      pageLengthChart: [
+        { label: "Under 200 pp", count: 0 },
+        { label: "200–399 pp", count: 0 },
+        { label: "400–699 pp", count: 0 },
+        { label: "700+ pp", count: 0 },
+      ],
+      ratingHistogram: [
+        { stars: 1, count: 0 },
+        { stars: 2, count: 0 },
+        { stars: 3, count: 0 },
+        { stars: 4, count: 0 },
+        { stars: 5, count: 0 },
+      ],
       totalPages: 0,
       distinctGenreCount: 0,
       topAuthor: null,
@@ -73,6 +107,23 @@ export const FewBooks: Story = {
       totalBooks: 3,
       averageRating: "3.8",
       topGenres: ["Fiction", "Non-Fiction"],
+      genreChart: [
+        { genre: "Fiction", count: 2 },
+        { genre: "Non-Fiction", count: 1 },
+      ],
+      pageLengthChart: [
+        { label: "Under 200 pp", count: 0 },
+        { label: "200–399 pp", count: 2 },
+        { label: "400–699 pp", count: 1 },
+        { label: "700+ pp", count: 0 },
+      ],
+      ratingHistogram: [
+        { stars: 1, count: 0 },
+        { stars: 2, count: 0 },
+        { stars: 3, count: 1 },
+        { stars: 4, count: 2 },
+        { stars: 5, count: 0 },
+      ],
       totalPages: 890,
       distinctGenreCount: 2,
       topAuthor: { name: "George Orwell", count: 2, authorId: "george-orwell" },

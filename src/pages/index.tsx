@@ -27,6 +27,7 @@ import { Eyebrow } from "../components/Eyebrow"
 import { HomepageSection } from "../components/HomepageSection"
 import { HomepageAuthorQuote } from "../components/HomepageAuthorQuote"
 import { ModuleInsetPanel } from "../components/ModuleInsetPanel"
+import { BookshelfVizPanels } from "../components/BookshelfVizPanels"
 
 const BOOKS_DATA = booksData
 
@@ -165,7 +166,7 @@ const IndexPage = () => {
   const books: Book[] = BOOKS_DATA;
 
   // Use the same book status system as the bookshelf
-  const { booksWithStatus } = useBookStatus(BOOKS_DATA);
+  const { booksWithStatus, activityByDay } = useBookStatus(BOOKS_DATA);
 
   // Memoize expensive calculations to prevent recalculation on every render
   const dashboardStats = useMemo(() => {
@@ -184,9 +185,14 @@ const IndexPage = () => {
       }
     });
     /* All genres sorted by book count so the list matches `distinctGenreCount`. */
-    const topGenres = Object.entries(genreCounts)
-      .sort(([, a], [, b]) => b - a)
-      .map(([genre]) => genre);
+    const sortedGenreEntries = Object.entries(genreCounts).sort(
+      ([, a], [, b]) => b - a
+    );
+    const topGenres = sortedGenreEntries.map(([genre]) => genre);
+    const genreChart = sortedGenreEntries.slice(0, 8).map(([genre, count]) => ({
+      genre,
+      count,
+    }));
 
     // Calculate average rating (use user rating if available, otherwise community rating)
     const booksWithRatings = books.filter(book => book.userRating !== undefined && book.userRating !== null || book.communityRating !== undefined && book.communityRating !== null);
@@ -243,12 +249,51 @@ const IndexPage = () => {
       }
     });
 
+    let pageLenShort = 0;
+    let pageLenMed = 0;
+    let pageLenLong = 0;
+    let pageLenEpic = 0;
+    books.forEach((book) => {
+      const p = book.pages;
+      if (typeof p !== "number" || p <= 0) return;
+      if (p < 200) pageLenShort++;
+      else if (p < 400) pageLenMed++;
+      else if (p < 700) pageLenLong++;
+      else pageLenEpic++;
+    });
+    const pageLengthChart = [
+      { label: "Under 200 pp", count: pageLenShort },
+      { label: "200–399 pp", count: pageLenMed },
+      { label: "400–699 pp", count: pageLenLong },
+      { label: "700+ pp", count: pageLenEpic },
+    ];
+
+    const ratingBuckets = [0, 0, 0, 0, 0];
+    books.forEach((book) => {
+      const r =
+        book.userRating !== undefined && book.userRating !== null
+          ? book.userRating
+          : book.communityRating;
+      if (r === undefined || r === null || typeof r !== "number" || r <= 0) {
+        return;
+      }
+      const b = Math.min(5, Math.max(1, Math.round(r)));
+      ratingBuckets[b - 1]++;
+    });
+    const ratingHistogram = [1, 2, 3, 4, 5].map((stars, i) => ({
+      stars,
+      count: ratingBuckets[i],
+    }));
+
     return {
       totalBooks: books.length,
       finishedBooks,
       currentlyReading,
       wantToRead,
       topGenres,
+      genreChart,
+      pageLengthChart,
+      ratingHistogram,
       averageRating,
       totalPages,
       distinctGenreCount: genreSet.size,
@@ -340,6 +385,7 @@ const IndexPage = () => {
               </HomepageSection>
             </HomepageModuleSpan>
 
+            <HomepageModuleLeftStack>
             <HomepageModuleBookshelf $phase={moduleEntrancePhase}>
               <HomepageSection variant="prominent" inModuleGrid dense>
                 <BookshelfSectionSplit>
@@ -379,9 +425,15 @@ const IndexPage = () => {
                     <ShelfAsideList>
                       <li>Move books between columns with the status control</li>
                       <li>See rating and progress at a glance</li>
-                      <li>Next column: catalog insights (not shelf status)</li>
+                      <li>Below: rating spread and reading activity by day</li>
                     </ShelfAsideList>
                   </ShelfAside>
+                  <BookshelfChartsRow>
+                    <BookshelfVizPanels
+                      ratingHistogram={dashboardStats.ratingHistogram}
+                      activityByDay={activityByDay}
+                    />
+                  </BookshelfChartsRow>
                 </BookshelfSectionSplit>
               </HomepageSection>
             </HomepageModuleBookshelf>
@@ -391,6 +443,7 @@ const IndexPage = () => {
                 <HomepageAuthorQuote />
               </HomepageSection>
             </HomepageModuleQuote>
+            </HomepageModuleLeftStack>
 
             <HomepageModuleStats $phase={moduleEntrancePhase}>
               <Dashboard stats={dashboardStats} fillHeight />
@@ -575,7 +628,7 @@ const moduleEntranceCss = (delay: string, phase: ModuleEntrancePhase) => css`
   }
 `
 
-/** Homepage content below hero: one full-width row, then bookshelf + stats in two columns on large screens. */
+/** Homepage below hero: search; left column stacks bookshelf + literature; insights beside that column (large screens). */
 const HomepageModulesGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -596,8 +649,32 @@ const HomepageModulesGrid = styled.div`
 
   @media (min-width: 1024px) {
     grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.88fr);
-    grid-template-rows: auto 1fr;
-    align-items: stretch;
+    grid-template-rows: auto auto;
+    align-items: start;
+    column-gap: ${theme.spacing.md};
+    row-gap: ${theme.spacing.md};
+  }
+`
+
+/** Bookshelf + literature stacked; gap tracks the main module grid at each breakpoint. */
+const HomepageModuleLeftStack = styled.div`
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.md};
+
+  @media (min-width: 480px) {
+    gap: ${theme.spacing.lg};
+  }
+
+  @media (min-width: 768px) {
+    gap: ${theme.spacing.xl};
+  }
+
+  @media (min-width: 1024px) {
+    grid-column: 1;
+    grid-row: 2;
+    gap: ${theme.spacing.md};
   }
 `
 
@@ -613,21 +690,11 @@ const HomepageModuleSpan = styled.div<{ $phase: ModuleEntrancePhase }>`
 const HomepageModuleBookshelf = styled.div<{ $phase: ModuleEntrancePhase }>`
   min-width: 0;
   ${(p) => moduleEntranceCss("0.16s", p.$phase)}
-
-  @media (min-width: 1024px) {
-    grid-column: 1;
-    grid-row: 2;
-  }
 `
 
 const HomepageModuleQuote = styled.div<{ $phase: ModuleEntrancePhase }>`
   min-width: 0;
   ${(p) => moduleEntranceCss("0.28s", p.$phase)}
-
-  @media (min-width: 1024px) {
-    grid-column: 1;
-    grid-row: 3;
-  }
 `
 
 const HomepageModuleStats = styled.div<{ $phase: ModuleEntrancePhase }>`
@@ -638,12 +705,7 @@ const HomepageModuleStats = styled.div<{ $phase: ModuleEntrancePhase }>`
 
   @media (min-width: 1024px) {
     grid-column: 2;
-    grid-row: 2 / span 2;
-
-    > * {
-      flex: 1;
-      min-height: 0;
-    }
+    grid-row: 2;
   }
 `
 
@@ -656,7 +718,8 @@ const BookshelfSectionSplit = styled.div`
   grid-template-areas:
     "header"
     "main"
-    "aside";
+    "aside"
+    "charts";
   gap: ${theme.spacing.lg};
   align-items: stretch;
   min-width: 0;
@@ -666,11 +729,18 @@ const BookshelfSectionSplit = styled.div`
     grid-template-columns: minmax(0, 1fr) minmax(11rem, 14rem);
     grid-template-areas:
       "header header"
-      "main aside";
+      "main aside"
+      "charts charts";
     /* row: title → cards; column: same as tile gutter + Insights grid (md) */
     gap: ${theme.spacing.lg} ${theme.spacing.md};
     align-items: start;
   }
+`
+
+const BookshelfChartsRow = styled.div`
+  grid-area: charts;
+  min-width: 0;
+  width: 100%;
 `
 
 const BookshelfSectionHeader = styled.div`

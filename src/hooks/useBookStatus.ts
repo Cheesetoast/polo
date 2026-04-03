@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Book } from '../components/Book';
 import { ReadingStatus } from '../types/reading';
 import { DEFAULTS } from '../constants';
+import { localDateKey } from '../utils/readingActivityHeatmap';
 
 interface BookWithReadingStatus extends Book {
   status: ReadingStatus | null;
@@ -10,6 +11,7 @@ interface BookWithReadingStatus extends Book {
 }
 
 const STORAGE_KEY = 'book-status-data';
+const READING_ACTIVITY_KEY = 'polo-reading-activity-by-day';
 
 interface BookStatusData {
   [isbn: string]: {
@@ -21,6 +23,7 @@ interface BookStatusData {
 
 export const useBookStatus = (books: Book[]) => {
   const [readingStatusData, setReadingStatusData] = useState<BookStatusData>({});
+  const [activityByDay, setActivityByDay] = useState<Record<string, number>>({});
   const [isLoading, setIsLoading] = useState(true);
 
   // Default status constant
@@ -50,6 +53,33 @@ export const useBookStatus = (books: Book[]) => {
     } finally {
       setIsLoading(false);
     }
+  }, []);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(READING_ACTIVITY_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as Record<string, number>;
+        if (parsed && typeof parsed === 'object') {
+          setActivityByDay(parsed);
+        }
+      }
+    } catch (error) {
+      console.warn('Failed to load reading activity from localStorage:', error);
+    }
+  }, []);
+
+  const bumpReadingActivity = useCallback(() => {
+    setActivityByDay((prev) => {
+      const key = localDateKey(new Date());
+      const next = { ...prev, [key]: (prev[key] || 0) + 1 };
+      try {
+        localStorage.setItem(READING_ACTIVITY_KEY, JSON.stringify(next));
+      } catch (error) {
+        console.warn('Failed to persist reading activity:', error);
+      }
+      return next;
+    });
   }, []);
 
   // Save statuses to localStorage whenever they change
@@ -128,7 +158,8 @@ export const useBookStatus = (books: Book[]) => {
       });
       return newData;
     });
-  }, [books]);
+    bumpReadingActivity();
+  }, [books, bumpReadingActivity]);
 
   // Clear a book's status (remove it from localStorage)
   const clearBookStatus = useCallback((isbn: string | undefined) => {
@@ -139,7 +170,8 @@ export const useBookStatus = (books: Book[]) => {
       delete newData[isbn];
       return newData;
     });
-  }, []);
+    bumpReadingActivity();
+  }, [bumpReadingActivity]);
 
   // Update a book's progress
   const updateBookProgress = useCallback((isbn: string | undefined, progress: number) => {
@@ -153,7 +185,8 @@ export const useBookStatus = (books: Book[]) => {
         userRating: prev[isbn]?.userRating,
       },
     }));
-  }, []);
+    bumpReadingActivity();
+  }, [bumpReadingActivity]);
 
   // Update a book's user rating without changing its progress
   const updateBookRating = useCallback((isbn: string | undefined, rating: number | null) => {
@@ -170,7 +203,8 @@ export const useBookStatus = (books: Book[]) => {
         userRating: rating,
       },
     }));
-  }, [books]);
+    bumpReadingActivity();
+  }, [books, bumpReadingActivity]);
 
   // Reset all statuses to default
   const resetStatuses = useCallback(() => {
@@ -181,7 +215,9 @@ export const useBookStatus = (books: Book[]) => {
   const clearLocalStorage = useCallback(() => {
     try {
       localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(READING_ACTIVITY_KEY);
       setReadingStatusData({});
+      setActivityByDay({});
       console.log('LocalStorage cleared, using original JSON data');
     } catch (error) {
       console.warn('Failed to clear localStorage:', error);
@@ -195,6 +231,7 @@ export const useBookStatus = (books: Book[]) => {
 
   return {
     booksWithStatus,
+    activityByDay,
     updateBookStatus,
     updateBookProgress,
     updateBookRating,
