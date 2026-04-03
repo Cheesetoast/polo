@@ -9,7 +9,7 @@ const meta: Meta<typeof Dashboard> = {
     docs: {
       description: {
         component:
-          "Homepage insights: catalog pages, top author, longest book, genres, and average rating.",
+          "Homepage insights: catalog summary, pages, top author, longest book, and genres.",
       },
     },
   },
@@ -35,8 +35,8 @@ type Story = StoryObj<typeof Dashboard>
 
 const mockStats = {
   totalBooks: 104,
-  topGenres: ["Fiction", "Science Fiction", "Mystery"],
   averageRating: "4.2",
+  topGenres: ["Fiction", "Science Fiction", "Mystery"],
   totalPages: 248_900,
   distinctGenreCount: 14,
   topAuthor: {
@@ -57,8 +57,8 @@ export const EmptyStats: Story = {
   args: {
     stats: {
       totalBooks: 0,
-      topGenres: [],
       averageRating: "N/A",
+      topGenres: [],
       totalPages: 0,
       distinctGenreCount: 0,
       topAuthor: null,
@@ -71,8 +71,8 @@ export const FewBooks: Story = {
   args: {
     stats: {
       totalBooks: 3,
-      topGenres: ["Fiction", "Non-Fiction"],
       averageRating: "3.8",
+      topGenres: ["Fiction", "Non-Fiction"],
       totalPages: 890,
       distinctGenreCount: 2,
       topAuthor: { name: "George Orwell", count: 2, authorId: "george-orwell" },

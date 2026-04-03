@@ -4,8 +4,8 @@ import { Dashboard } from "../Dashboard"
 
 const mockStats = {
   totalBooks: 25,
-  topGenres: ["Fiction", "Non-Fiction", "Science Fiction"],
   averageRating: "4.2",
+  topGenres: ["Fiction", "Non-Fiction", "Science Fiction"],
   totalPages: 12_400,
   distinctGenreCount: 8,
   topAuthor: {
@@ -37,8 +37,8 @@ describe("Dashboard Component", () => {
   it("handles empty edge stats gracefully", () => {
     const emptyStats = {
       totalBooks: 0,
-      topGenres: [],
       averageRating: "0.0",
+      topGenres: [],
       totalPages: 0,
       distinctGenreCount: 0,
       topAuthor: null,

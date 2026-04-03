@@ -9,21 +9,16 @@ import { Dashboard } from "../components/Dashboard"
 import { WelcomeModal } from "../components/WelcomeModal"
 
 import booksData from "../data/books.json"
-import { useState, useMemo, useEffect } from "react"
+import { useState, useMemo, useEffect, useCallback } from "react"
 import { useBookStatus } from "../hooks/useBookStatus"
 import { navigate, Link } from "gatsby"
 import styled, { css } from "styled-components"
 import {
   heroEyebrowPulse,
-  heroMeshChaos,
   heroOrbDrift,
-  heroSheenSweep,
   heroTitleFlow,
   homeModuleSlamIn,
   linkShimmer,
-  shelfTileWobble,
-  statBlockSurge,
-  statNumberSurge,
 } from "../styles/motion"
 import { rgba, theme } from "../styles/theme"
 import { Button } from "../components/Button"
@@ -34,6 +29,24 @@ import { HomepageAuthorQuote } from "../components/HomepageAuthorQuote"
 import { ModuleInsetPanel } from "../components/ModuleInsetPanel"
 
 const BOOKS_DATA = booksData
+
+/** Spotlight beside search; always The Hobbit (matches `src/data/books.json`). */
+const BOOK_OF_THE_DAY = {
+  title: "The Hobbit",
+  author: "J.R.R. Tolkien",
+  authorId: "j-r-r-tolkien",
+  isbn: "978-0547928227",
+  pages: 310,
+} as const
+
+function bookPathFromIsbn(isbn: string) {
+  return `/book/${isbn.replace(/-/g, "")}`
+}
+
+/** Once per browser tab session; avoids replaying module entrance on client navigations back to `/`. */
+const HOME_MODULE_ENTRANCE_SESSION_KEY = "polo_home_module_entrance"
+
+type ModuleEntrancePhase = "hold" | "play" | "done"
 
 const HERO_ORBS = [
   { left: "10%", top: "24%", delay: -0.6 },
@@ -67,33 +80,73 @@ interface Book {
 const IndexPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+  const [welcomeChecked, setWelcomeChecked] = useState(false);
+  const [moduleEntranceDone, setModuleEntranceDone] = useState(false);
 
-  // Check localStorage on component mount
-  useEffect(() => {
-    if (MODAL_CONFIG.ENABLE_MODAL_DISMISS) {
-      const hasSeenWelcome = localStorage.getItem('hasSeenWelcome');
-      console.log('Welcome modal check:', { hasSeenWelcome, showWelcomeModal });
-      if (!hasSeenWelcome) {
-        console.log('Setting modal to show');
-        //setShowWelcomeModal(true);
-      }
-    } else {
-      // If storage is disabled, always show the modal
-      console.log('Modal storage disabled, showing modal');
-      // setShowWelcomeModal(true);
+  const persistModuleEntranceDone = useCallback(() => {
+    try {
+      sessionStorage.setItem(HOME_MODULE_ENTRANCE_SESSION_KEY, "1");
+    } catch {
+      /* private mode / quota */
     }
+    setModuleEntranceDone(true);
   }, []);
 
+  // Welcome modal + whether module entrance already ran this session
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem(HOME_MODULE_ENTRANCE_SESSION_KEY) === "1") {
+        setModuleEntranceDone(true);
+      }
+    } catch {
+      /* ignore */
+    }
+
+    if (MODAL_CONFIG.ENABLE_MODAL_DISMISS) {
+      const hasSeenWelcome = localStorage.getItem("hasSeenWelcome");
+      if (!hasSeenWelcome) {
+        setShowWelcomeModal(true);
+      }
+    } else {
+      setShowWelcomeModal(true);
+    }
+    setWelcomeChecked(true);
+  }, []);
+
+  const moduleEntrancePhase = useMemo((): ModuleEntrancePhase => {
+    if (moduleEntranceDone) return "done";
+    if (!welcomeChecked) return "hold";
+    if (showWelcomeModal) return "hold";
+    return "play";
+  }, [moduleEntranceDone, welcomeChecked, showWelcomeModal]);
+
+  // After entrance animation (staggered delays), mark done so it only runs once per session.
+  useEffect(() => {
+    if (moduleEntrancePhase !== "play") return;
+    const maxDelayMs = 360;
+    const durationMs = 550;
+    const id = window.setTimeout(persistModuleEntranceDone, maxDelayMs + durationMs + 80);
+    return () => window.clearTimeout(id);
+  }, [moduleEntrancePhase, persistModuleEntranceDone]);
+
+  // Reduced motion: skip animation but still treat entrance as finished for this session.
+  useEffect(() => {
+    if (!welcomeChecked || showWelcomeModal || moduleEntranceDone) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (!mq.matches) return;
+    persistModuleEntranceDone();
+  }, [
+    welcomeChecked,
+    showWelcomeModal,
+    moduleEntranceDone,
+    persistModuleEntranceDone,
+  ]);
+
   const handleCloseWelcomeModal = () => {
-    console.log('Closing welcome modal');
     setShowWelcomeModal(false);
 
-    // Only store in localStorage if enabled
     if (MODAL_CONFIG.ENABLE_MODAL_DISMISS) {
-      localStorage.setItem('hasSeenWelcome', 'true');
-      console.log('Modal status stored in localStorage');
-    } else {
-      console.log('Modal status not stored (storage disabled)');
+      localStorage.setItem("hasSeenWelcome", "true");
     }
   };
 
@@ -130,9 +183,9 @@ const IndexPage = () => {
         });
       }
     });
+    /* All genres sorted by book count so the list matches `distinctGenreCount`. */
     const topGenres = Object.entries(genreCounts)
       .sort(([, a], [, b]) => b - a)
-      .slice(0, 5)
       .map(([genre]) => genre);
 
     // Calculate average rating (use user rating if available, otherwise community rating)
@@ -204,16 +257,14 @@ const IndexPage = () => {
     };
   }, [books, booksWithStatus]);
 
-
   return (
     <Layout>
       <WelcomeModal
         isOpen={showWelcomeModal}
         onClose={handleCloseWelcomeModal}
       />
-      <main>
-        <HeroBand>
-          <HeroBackground aria-hidden="true" />
+      <HomepageRoot>
+        <HomepageCanvas>
           <HeroOrbField aria-hidden="true">
             {HERO_ORBS.map((orb, i) => (
               <HeroOrb
@@ -224,19 +275,21 @@ const IndexPage = () => {
               />
             ))}
           </HeroOrbField>
-          <ContentWrapper>
-            <HeroMain>
-              <Eyebrow variant="accent">Your reading library</Eyebrow>
-              <Text variant="h1">
-                {homepageTitle || SITE_CONFIG.SITE_NAME}
-              </Text>
-            </HeroMain>
-          </ContentWrapper>
-        </HeroBand>
+          <HomepageForeground>
+            <HeroBand>
+              <ContentWrapper>
+                <HeroMain>
+                  <Eyebrow variant="accent">Your reading library</Eyebrow>
+                  <Text variant="h1">
+                    {homepageTitle || SITE_CONFIG.SITE_NAME}
+                  </Text>
+                </HeroMain>
+              </ContentWrapper>
+            </HeroBand>
 
-        <ContentWrapper>
-          <HomepageModulesGrid>
-            <HomepageModuleSpan>
+            <ContentWrapper>
+              <HomepageModulesGrid>
+            <HomepageModuleSpan $phase={moduleEntrancePhase}>
               <HomepageSection variant="prominent" inModuleGrid>
                 <SectionSplit>
                   <SectionSplitMain>
@@ -264,15 +317,30 @@ const IndexPage = () => {
                       Browse all books →
                     </BrowseAllLink>
                   </SectionSplitMain>
-                  <SearchStatPanel>
-                    <SearchStatNumber>{books.length}</SearchStatNumber>
-                    <SearchStatLabel>books in the catalog</SearchStatLabel>
-                  </SearchStatPanel>
+                  <BookOfDayPanel>
+                    <Eyebrow variant="neutral">Book of the day</Eyebrow>
+                    <BookOfDayTitleLine>
+                      <BookOfDayTitleLink
+                        to={bookPathFromIsbn(BOOK_OF_THE_DAY.isbn)}
+                      >
+                        {BOOK_OF_THE_DAY.title}
+                      </BookOfDayTitleLink>
+                      <BookOfDayBy> by </BookOfDayBy>
+                      <BookOfDayAuthorLink
+                        to={`/author/${BOOK_OF_THE_DAY.authorId}`}
+                      >
+                        {BOOK_OF_THE_DAY.author}
+                      </BookOfDayAuthorLink>
+                    </BookOfDayTitleLine>
+                    <BookOfDayMeta>
+                      {BOOK_OF_THE_DAY.pages.toLocaleString()} pages
+                    </BookOfDayMeta>
+                  </BookOfDayPanel>
                 </SectionSplit>
               </HomepageSection>
             </HomepageModuleSpan>
 
-            <HomepageModuleBookshelf>
+            <HomepageModuleBookshelf $phase={moduleEntrancePhase}>
               <HomepageSection variant="prominent" inModuleGrid dense>
                 <BookshelfSectionSplit>
                   <BookshelfSectionHeader>
@@ -318,19 +386,20 @@ const IndexPage = () => {
               </HomepageSection>
             </HomepageModuleBookshelf>
 
-            <HomepageModuleQuote>
+            <HomepageModuleQuote $phase={moduleEntrancePhase}>
               <HomepageSection variant="prominent" inModuleGrid>
                 <HomepageAuthorQuote />
               </HomepageSection>
             </HomepageModuleQuote>
 
-            <HomepageModuleStats>
+            <HomepageModuleStats $phase={moduleEntrancePhase}>
               <Dashboard stats={dashboardStats} fillHeight />
             </HomepageModuleStats>
-          </HomepageModulesGrid>
-        </ContentWrapper>
-
-      </main>
+              </HomepageModulesGrid>
+            </ContentWrapper>
+          </HomepageForeground>
+        </HomepageCanvas>
+      </HomepageRoot>
     </Layout>
   )
 }
@@ -353,19 +422,52 @@ export const Head: HeadFC = () => (
 const HERO_NAV_OFFSET_MOBILE = "100px"
 const HERO_NAV_OFFSET_DESKTOP = "120px"
 
+/**
+ * Fill `Layout` `MainContent` and bleed into its vertical padding so `HeroBackground` meets the
+ * nav and footer (same values as `Layout.tsx` → `MainContent` padding-top / padding-bottom).
+ */
+const HomepageRoot = styled.main`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 0;
+  margin-top: calc(-1 * ${HERO_NAV_OFFSET_MOBILE});
+  margin-bottom: calc(-1 * ${theme.spacing.xl});
+  box-sizing: border-box;
+
+  @media (min-width: 768px) {
+    margin-top: calc(-1 * ${HERO_NAV_OFFSET_DESKTOP});
+    margin-bottom: calc(-1 * ${theme.spacing["2xl"]});
+  }
+`
+
+/** Full scroll height behind hero + modules; decorative layers use `position: absolute; inset: 0`. */
+const HomepageCanvas = styled.div`
+  position: relative;
+  z-index: 0;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  isolation: isolate;
+`
+
+const HomepageForeground = styled.div`
+  position: relative;
+  z-index: 1;
+`
+
 const HeroBand = styled.div`
   position: relative;
   z-index: 0;
   isolation: isolate;
   box-sizing: border-box;
   width: 100%;
-  margin-top: calc(-1 * ${HERO_NAV_OFFSET_MOBILE});
   margin-bottom: -${theme.spacing["2xl"]};
   padding-top: calc(${HERO_NAV_OFFSET_MOBILE} + ${theme.spacing.sm});
   padding-bottom: ${theme.spacing.xl};
 
   @media (min-width: 768px) {
-    margin-top: calc(-1 * ${HERO_NAV_OFFSET_DESKTOP});
     padding-top: calc(${HERO_NAV_OFFSET_DESKTOP} + ${theme.spacing.sm});
     padding-bottom: ${theme.spacing["2xl"]};
     margin-bottom: -${theme.spacing["3xl"]};
@@ -412,85 +514,6 @@ const HeroOrb = styled.div<{
   animation-delay: ${(p) => p.$delay}s;
 `
 
-/** Animated mesh behind hero copy (decorative). */
-const HeroBackground = styled.div`
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  background: ${theme.colors.background};
-
-  &::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 150%;
-    height: 150%;
-    transform: translate(-50%, -50%);
-    transform-origin: center center;
-    background: radial-gradient(
-        ellipse 58% 52% at 50% 44%,
-        ${rgba.indigo(0.14)} 0%,
-        transparent 58%
-      ),
-      radial-gradient(
-        ellipse 42% 40% at 72% 38%,
-        ${rgba.indigo(0.08)} 0%,
-        transparent 55%
-      ),
-      radial-gradient(
-        ellipse 48% 44% at 18% 62%,
-        ${rgba.indigo(0.06)} 0%,
-        transparent 52%
-      ),
-      radial-gradient(
-        ellipse 50% 46% at 50% 56%,
-        rgba(0, 0, 0, 0.05) 0%,
-        transparent 54%
-      );
-    animation: ${heroMeshChaos} 6.5s ease-in-out 1 forwards;
-    animation-delay: -0.85s;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      100deg,
-      transparent 0%,
-      ${rgba.indigo(0.02)} 18%,
-      ${rgba.indigo(0.14)} 48%,
-      rgba(255, 255, 255, 0.35) 52%,
-      ${rgba.indigo(0.12)} 58%,
-      transparent 82%,
-      transparent 100%
-    );
-    background-size: 280% 100%;
-    background-position: 0% 50%;
-    animation: ${heroSheenSweep} 2.5s linear 1 forwards;
-    animation-delay: -0.35s;
-    opacity: 0.85;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    &::before {
-      animation: none;
-      transform: translate(-50%, -50%);
-      opacity: 0.5;
-    }
-
-    &::after {
-      animation: none;
-      background-size: 100% 100%;
-      background-position: center;
-      opacity: 0.4;
-    }
-  }
-`
-
 const HeroMain = styled.div`
   position: relative;
   z-index: 1;
@@ -526,10 +549,29 @@ const HeroMain = styled.div`
   }
 `
 
-const homeExtremeModule = (delay: string) => css`
+const moduleEntranceCss = (delay: string, phase: ModuleEntrancePhase) => css`
   @media (prefers-reduced-motion: no-preference) {
-    animation: ${homeModuleSlamIn} 1.05s cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-delay: ${delay};
+    ${phase === "hold" &&
+    css`
+      opacity: 0;
+      transform: translate3d(0, 20px, 0);
+    `}
+    ${phase === "play" &&
+    css`
+      animation: ${homeModuleSlamIn} 0.55s ease-out both;
+      animation-delay: ${delay};
+    `}
+    ${phase === "done" &&
+    css`
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    `}
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
 `
 
@@ -559,18 +601,18 @@ const HomepageModulesGrid = styled.div`
   }
 `
 
-const HomepageModuleSpan = styled.div`
+const HomepageModuleSpan = styled.div<{ $phase: ModuleEntrancePhase }>`
   min-width: 0;
-  ${homeExtremeModule("0.06s")};
+  ${(p) => moduleEntranceCss("0.06s", p.$phase)}
 
   @media (min-width: 1024px) {
     grid-column: 1 / -1;
   }
 `
 
-const HomepageModuleBookshelf = styled.div`
+const HomepageModuleBookshelf = styled.div<{ $phase: ModuleEntrancePhase }>`
   min-width: 0;
-  ${homeExtremeModule("0.16s")};
+  ${(p) => moduleEntranceCss("0.16s", p.$phase)}
 
   @media (min-width: 1024px) {
     grid-column: 1;
@@ -578,9 +620,9 @@ const HomepageModuleBookshelf = styled.div`
   }
 `
 
-const HomepageModuleQuote = styled.div`
+const HomepageModuleQuote = styled.div<{ $phase: ModuleEntrancePhase }>`
   min-width: 0;
-  ${homeExtremeModule("0.28s")};
+  ${(p) => moduleEntranceCss("0.28s", p.$phase)}
 
   @media (min-width: 1024px) {
     grid-column: 1;
@@ -588,11 +630,11 @@ const HomepageModuleQuote = styled.div`
   }
 `
 
-const HomepageModuleStats = styled.div`
+const HomepageModuleStats = styled.div<{ $phase: ModuleEntrancePhase }>`
   min-width: 0;
   display: flex;
   flex-direction: column;
-  ${homeExtremeModule("0.36s")};
+  ${(p) => moduleEntranceCss("0.36s", p.$phase)}
 
   @media (min-width: 1024px) {
     grid-column: 2;
@@ -602,22 +644,6 @@ const HomepageModuleStats = styled.div`
       flex: 1;
       min-height: 0;
     }
-  }
-`
-
-/** Search row: full content width, so two columns are safe from ~900px. */
-const SectionSplit = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: ${theme.spacing.lg};
-  align-items: stretch;
-  min-width: 0;
-  width: 100%;
-
-  @media (min-width: 900px) {
-    grid-template-columns: minmax(0, 1fr) minmax(12rem, min(18.75rem, 40vw));
-    gap: ${theme.spacing['2xl']};
-    align-items: center;
   }
 `
 
@@ -641,7 +667,8 @@ const BookshelfSectionSplit = styled.div`
     grid-template-areas:
       "header header"
       "main aside";
-    gap: ${theme.spacing.lg};
+    /* row: title → cards; column: same as tile gutter + Insights grid (md) */
+    gap: ${theme.spacing.lg} ${theme.spacing.md};
     align-items: start;
   }
 `
@@ -651,9 +678,9 @@ const BookshelfSectionHeader = styled.div`
   min-width: 0;
   text-align: left;
 
-  /* Align with Search / Quote / Dashboard: space below module title */
+  /* Title → cards spacing comes from grid row-gap only (matches Insights column). */
   & > h2 {
-    margin-bottom: ${theme.spacing.lg};
+    margin-bottom: 0;
   }
 `
 
@@ -683,6 +710,22 @@ const ShelfBookshelfSupporting = styled.div`
   }
 `
 
+/** Search row: main + book-of-day column from ~900px (same rhythm as former search stats). */
+const SectionSplit = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${theme.spacing.lg};
+  align-items: stretch;
+  min-width: 0;
+  width: 100%;
+
+  @media (min-width: 900px) {
+    grid-template-columns: minmax(0, 1fr) minmax(12rem, min(18.75rem, 40vw));
+    gap: ${theme.spacing["2xl"]};
+    align-items: center;
+  }
+`
+
 const SectionSplitMain = styled.div`
   container-type: inline-size;
   min-width: 0;
@@ -693,40 +736,64 @@ const SectionSplitMain = styled.div`
   }
 `
 
-const SearchStatPanel = styled(ModuleInsetPanel).attrs({
-  $tone: "accent" as const,
-  $size: "well" as const,
+const BookOfDayPanel = styled(ModuleInsetPanel).attrs({
+  $tone: "neutral" as const,
+  $size: "tile" as const,
 })`
   width: 100%;
   min-width: 0;
-  text-align: center;
-
-  @media (prefers-reduced-motion: no-preference) {
-    animation: ${statBlockSurge} 2.8s ease-in-out 1 forwards;
-    animation-delay: 0.5s;
-  }
+  text-align: left;
 `
 
-const SearchStatNumber = styled.div`
-  font-size: clamp(${theme.fontSizes['3xl']}, 8vw, ${theme.fontSizes['5xl']});
-  font-weight: ${theme.fontWeights.semibold};
-  letter-spacing: -0.04em;
-  color: ${theme.colors.primary};
-  line-height: 1;
+const BookOfDayTitleLine = styled.p`
+  margin: 0 0 ${theme.spacing.xs};
+  font-size: ${theme.fontSizes.lg};
+  line-height: ${theme.lineHeights.lg};
+  min-width: 0;
+`
+
+const BookOfDayTitleLink = styled(Link)`
+  display: inline;
+  font-weight: ${theme.fontWeights.bold};
+  letter-spacing: -0.02em;
+  color: ${theme.colors.blue[500]};
+  text-decoration: none;
   overflow-wrap: anywhere;
-  display: inline-block;
+  word-break: break-word;
 
-  @media (prefers-reduced-motion: no-preference) {
-    animation: ${statNumberSurge} 2.4s ease-in-out 1 forwards;
-    animation-delay: 0.35s;
+  &:hover {
+    color: ${theme.colors.blue[600]};
+    text-decoration: underline;
   }
 `
 
-const SearchStatLabel = styled.div`
-  margin-top: ${theme.spacing.sm};
+const BookOfDayBy = styled.span`
   font-size: ${theme.fontSizes.sm};
-  font-weight: ${theme.fontWeights.medium};
   color: ${theme.colors.secondary};
+  font-weight: ${theme.fontWeights.normal};
+  letter-spacing: normal;
+  white-space: pre;
+`
+
+const BookOfDayAuthorLink = styled(Link)`
+  display: inline;
+  font-weight: ${theme.fontWeights.semibold};
+  color: ${theme.colors.blue[500]};
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  &:hover {
+    color: ${theme.colors.blue[600]};
+    text-decoration: underline;
+  }
+`
+
+const BookOfDayMeta = styled.p`
+  margin: ${theme.spacing.sm} 0 0;
+  font-size: ${theme.fontSizes.xs};
+  line-height: ${theme.lineHeights.sm};
+  color: ${theme.colors.muted};
 `
 
 /* md gap above link matches bookshelf column stack (BookshelfSectionMain gap). */
@@ -784,7 +851,7 @@ const SearchForm = styled.form`
 const ShelfMiniGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: ${theme.spacing.sm};
+  gap: ${theme.spacing.md};
   margin: 0;
   width: 100%;
   max-width: none;
@@ -801,22 +868,6 @@ const ShelfMiniCard = styled(ModuleInsetPanel).attrs({
 })`
   text-align: center;
   min-width: 0;
-
-  @media (prefers-reduced-motion: no-preference) {
-    animation: ${shelfTileWobble} 3.8s ease-in-out 1 forwards;
-
-    &:nth-child(1) {
-      animation-delay: 0s;
-    }
-
-    &:nth-child(2) {
-      animation-delay: -1.25s;
-    }
-
-    &:nth-child(3) {
-      animation-delay: -2.5s;
-    }
-  }
 `
 
 const ShelfMiniValue = styled.div`
@@ -839,7 +890,7 @@ const ShelfMiniLabel = styled.div`
 const ShelfAside = styled(ModuleInsetPanel).attrs({
   as: "aside" as const,
   $tone: "neutral" as const,
-  $size: "well" as const,
+  $size: "tile" as const,
 })`
   grid-area: aside;
   width: 100%;

@@ -17,46 +17,48 @@ export function moduleInsetSurface(opts: {
 
   if (opts.tone === "accent") {
     return css`
-      background-color: ${rgba.indigo(0.06)};
+      background-color: ${rgba.indigo(0.09)};
       background-image:
         radial-gradient(
           ellipse 115% 82% at 22% -14%,
-          rgba(255, 255, 255, 0.58) 0%,
+          rgba(255, 255, 255, 0.72) 0%,
           transparent 54%
         ),
         linear-gradient(
           158deg,
-          ${rgba.indigo(0.1)} 0%,
-          ${rgba.indigo(0.022)} 100%
+          ${rgba.indigo(0.12)} 0%,
+          ${rgba.indigo(0.04)} 100%
         );
-      border: 1px solid ${rgba.indigo(0.15)};
+      border: 1px solid ${rgba.indigo(0.24)};
       border-radius: ${radius};
       box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.42),
-        inset 0 -1px 0 ${rgba.indigo(0.06)},
-        0 1px 4px rgba(15, 23, 42, 0.06);
+        inset 0 1px 0 rgba(255, 255, 255, 0.55),
+        inset 0 -1px 0 ${rgba.indigo(0.08)},
+        0 1px 2px rgba(15, 23, 42, 0.05),
+        0 4px 12px rgba(15, 23, 42, 0.07);
     `
   }
 
   return css`
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.86);
     background-image:
       radial-gradient(
         ellipse 108% 74% at 50% -12%,
-        rgba(255, 255, 255, 0.58) 0%,
+        rgba(255, 255, 255, 0.95) 0%,
         transparent 52%
       ),
       linear-gradient(
         170deg,
-        rgba(255, 255, 255, 0.92) 0%,
-        rgba(241, 245, 249, 0.48) 100%
+        rgba(255, 255, 255, 0.98) 0%,
+        rgba(241, 245, 249, 0.82) 100%
       );
-    border: 1px solid rgba(226, 232, 240, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.45);
     border-radius: ${radius};
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.78),
-      inset 0 -1px 0 rgba(15, 23, 42, 0.032),
-      0 1px 3px rgba(15, 23, 42, 0.045);
+      inset 0 1px 0 rgba(255, 255, 255, 0.92),
+      inset 0 -1px 0 rgba(15, 23, 42, 0.045),
+      0 1px 2px rgba(15, 23, 42, 0.06),
+      0 4px 14px rgba(15, 23, 42, 0.06);
   `
 }
 
@@ -64,25 +66,84 @@ export function moduleInsetSurface(opts: {
 const rimAndLift =
   "inset 0 1px 0 rgba(255, 255, 255, 0.88), 0 1px 0 rgba(15, 23, 42, 0.05)"
 
-/** Full-width page canvas — mesh + light vignette for spatial depth */
+/**
+ * Full-width page canvas — same mesh + sheen as the homepage hero, static (no motion).
+ * Pseudo-layers sit behind direct children so page content stays above the wash.
+ */
 export const mainBackdrop = css`
   position: relative;
   isolation: isolate;
   background-color: ${theme.colors.background};
-  background-image:
-    linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.03) 0%,
-      transparent 14%,
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 150%;
+    height: 150%;
+    transform: translate(-50%, -50%);
+    transform-origin: center center;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        ellipse 58% 52% at 50% 44%,
+        ${rgba.indigo(0.14)} 0%,
+        transparent 58%
+      ),
+      radial-gradient(
+        ellipse 42% 40% at 72% 38%,
+        ${rgba.indigo(0.08)} 0%,
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse 48% 44% at 18% 62%,
+        ${rgba.indigo(0.06)} 0%,
+        transparent 52%
+      ),
+      radial-gradient(
+        ellipse 50% 46% at 50% 56%,
+        rgba(0, 0, 0, 0.05) 0%,
+        transparent 54%
+      );
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      100deg,
+      transparent 0%,
+      ${rgba.indigo(0.02)} 18%,
+      ${rgba.indigo(0.14)} 48%,
+      rgba(255, 255, 255, 0.35) 52%,
+      ${rgba.indigo(0.12)} 58%,
       transparent 82%,
-      rgba(0, 0, 0, 0.02) 100%
-    ),
-    radial-gradient(ellipse 120% 80% at 50% -28%, ${rgba.indigo(0.12)}, transparent 50%),
-    radial-gradient(ellipse 88% 52% at 100% 12%, ${rgba.indigo(0.06)}, transparent 46%),
-    radial-gradient(ellipse 72% 48% at -4% 48%, ${rgba.indigo(0.05)}, transparent 42%),
-    radial-gradient(ellipse 92% 58% at 100% 98%, ${rgba.indigo(0.06)}, transparent 40%),
-    radial-gradient(ellipse 125% 70% at 50% 102%, rgba(0, 0, 0, 0.03), transparent 48%);
-  background-attachment: scroll;
+      transparent 100%
+    );
+    background-size: 100% 100%;
+    background-position: center;
+    opacity: 0.85;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::before {
+      opacity: 0.5;
+    }
+
+    &::after {
+      opacity: 0.4;
+    }
+  }
+
+  /* Flex/grid: z-index on flex children stacks above pseudo-layers; avoid forcing position on page roots. */
+  & > * {
+    z-index: 1;
+  }
 `
 
 /** Primary content blocks — soft light falloff + faint cool floor for depth */
@@ -110,13 +171,13 @@ export const sectionSurfaceProminent = css`
       rgba(250, 250, 252, 0.98) 50%,
       rgba(248, 248, 250, 0.96) 100%
     );
-  border: 1px solid ${theme.colors.border};
+  border: 1px solid rgba(15, 23, 42, 0.1);
   border-radius: ${theme.borderRadius.xl};
   box-shadow:
     ${rimAndLift},
     ${theme.shadows.sm},
-    0 4px 16px rgba(0, 0, 0, 0.05),
-    0 26px 56px -30px rgba(0, 0, 0, 0.08);
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    0 28px 60px -28px rgba(0, 0, 0, 0.1);
 `
 
 /** Alternate sections — light frosted slate, same depth language as prominent */

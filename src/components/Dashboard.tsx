@@ -9,8 +9,8 @@ import { GenreLink } from "./GenreLink"
 
 export interface DashboardStats {
   totalBooks: number
-  topGenres: string[]
   averageRating: string
+  topGenres: string[]
   totalPages: number
   distinctGenreCount: number
   topAuthor: {
@@ -95,6 +95,20 @@ export const Dashboard = ({
       </InsightsGrid>
 
       <StatsDetails $fillHeight={fillHeight}>
+        <CatalogSummaryPanel>
+          <CatalogSummaryColumn>
+            <InsightKicker>Books in catalog</InsightKicker>
+            <PagesInsightValue>{stats.totalBooks}</PagesInsightValue>
+          </CatalogSummaryColumn>
+          <CatalogSummaryColumn>
+            <InsightKicker>Average rating</InsightKicker>
+            <CatalogRatingValue>{stats.averageRating} / 5</CatalogRatingValue>
+            <CatalogRatingHint>
+              Community or your ratings
+            </CatalogRatingHint>
+          </CatalogSummaryColumn>
+        </CatalogSummaryPanel>
+
         <StatSection>
           <SectionTitle variant="h3">Genres</SectionTitle>
           {stats.distinctGenreCount > 0 ? (
@@ -113,14 +127,6 @@ export const Dashboard = ({
               No genre data available
             </Text>
           )}
-        </StatSection>
-
-        <StatSection>
-          <SectionTitle variant="h3">Average rating</SectionTitle>
-          <Text variant="p" size="lg" weight="semibold">
-            {stats.averageRating} / 5
-          </Text>
-          <RatingHint>Across books with a community or your rating</RatingHint>
         </StatSection>
       </StatsDetails>
     </DashboardContainer>
@@ -149,16 +155,22 @@ const DashboardContainer = styled.div<{
       min-height: 0;
       display: flex;
       flex-direction: column;
+      /* Same inset as HomepageSection prominent + dense (Bookshelf module). */
+      padding: ${theme.spacing.md} ${theme.spacing.md};
+
+      @media (min-width: 768px) {
+        padding: ${theme.spacing.lg} ${theme.spacing.lg};
+      }
     `}
 `
 
 const DashboardTitle = styled(Text)`
-  margin-bottom: ${theme.spacing.lg};
   max-width: 100%;
   overflow-wrap: anywhere;
   word-break: break-word;
 
   && {
+    margin-bottom: 0;
     @media (max-width: 599px) {
       font-size: ${theme.fontSizes['2xl']};
       line-height: ${theme.lineHeights['2xl']};
@@ -170,7 +182,7 @@ const InsightsGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: ${theme.spacing.md};
-  margin: 0 0 ${theme.spacing.lg};
+  margin: ${theme.spacing.lg} 0 ${theme.spacing.lg};
   min-width: 0;
   width: 100%;
 
@@ -188,7 +200,6 @@ const InsightCell = styled(ModuleInsetPanel).attrs({
   $size: "tile" as const,
 })`
   container-type: inline-size;
-  padding: ${theme.spacing.md};
   min-width: 0;
   max-width: 100%;
 `
@@ -279,23 +290,70 @@ const SectionTitle = styled(Text)`
 `
 
 const StatsDetails = styled.div<{ $fillHeight: boolean }>`
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: ${theme.spacing.lg};
   min-width: 0;
   width: 100%;
-
-  @media (min-width: 420px) {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr));
-  }
 
   ${({ $fillHeight }) =>
     $fillHeight &&
     css`
       flex: 1;
       min-height: 0;
-      align-content: start;
     `}
+`
+
+const CatalogSummaryPanel = styled(ModuleInsetPanel).attrs({
+  $tone: "neutral" as const,
+  $size: "well" as const,
+})`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${theme.spacing.md};
+  min-width: 0;
+  width: 100%;
+
+  @media (min-width: 480px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: ${theme.spacing.lg};
+    align-items: start;
+  }
+`
+
+const CatalogSummaryColumn = styled.div`
+  min-width: 0;
+
+  & + & {
+    padding-top: ${theme.spacing.md};
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+  }
+
+  @media (min-width: 480px) {
+    & + & {
+      padding-top: 0;
+      border-top: none;
+      padding-left: ${theme.spacing.lg};
+      margin-left: 0;
+      border-left: 1px solid rgba(15, 23, 42, 0.08);
+    }
+  }
+`
+
+const CatalogRatingValue = styled.div`
+  margin: 0;
+  font-size: ${theme.fontSizes.lg};
+  font-weight: ${theme.fontWeights.semibold};
+  line-height: ${theme.lineHeights.lg};
+  color: ${theme.colors.primary};
+  font-variant-numeric: tabular-nums;
+`
+
+const CatalogRatingHint = styled.p`
+  margin: ${theme.spacing.sm} 0 0;
+  font-size: ${theme.fontSizes.xs};
+  line-height: ${theme.lineHeights.sm};
+  color: ${theme.colors.muted};
 `
 
 const StatSection = styled(ModuleInsetPanel).attrs({
@@ -316,11 +374,4 @@ const GenreList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: ${theme.spacing.xs};
-`
-
-const RatingHint = styled.p`
-  margin: ${theme.spacing.sm} 0 0;
-  font-size: ${theme.fontSizes.xs};
-  line-height: ${theme.lineHeights.sm};
-  color: ${theme.colors.muted};
 `
