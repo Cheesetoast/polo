@@ -86,8 +86,8 @@ jest.mock('../../components/Button', () => ({
   )
 }));
 
-jest.mock('../../components/BookBoard', () => ({
-  BookBoard: () => (
+jest.mock('../../components/BookBoardClient', () => ({
+  BookBoardClient: () => (
     <div data-testid="book-board">
       <h3>Book Board Component</h3>
       <p>Mock BookBoard Component</p>

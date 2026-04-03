@@ -84,9 +84,10 @@ export const Dashboard = ({ stats, className, style }: DashboardProps) => {
 
 // Styled Components
 const DashboardContainer = styled.div`
-  background: ${theme.colors.white};
-  border: 1px solid ${theme.colors.muted};
-  border-radius: ${theme.borderRadius.lg};
+  background: ${theme.colors.surface};
+  border: 1px solid ${theme.colors.border};
+  border-radius: ${theme.borderRadius.xl};
+  box-shadow: ${theme.shadows.sm};
   padding: ${theme.spacing.lg};
   margin-bottom: ${theme.spacing.lg};
 `;
@@ -101,9 +102,9 @@ const StatsGrid = styled.div`
 const StatCard = styled.div`
   text-align: center;
   padding: ${theme.spacing.md};
-  background: ${theme.colors.muted}10;
-  border-radius: ${theme.borderRadius.md};
-  border: 1px solid ${theme.colors.muted}20;
+  background: ${theme.colors.background};
+  border-radius: ${theme.borderRadius.lg};
+  border: 1px solid ${theme.colors.border};
 `;
 
 const StatNumber = styled.div`
@@ -135,8 +136,9 @@ const StatsDetails = styled.div`
 
 const StatSection = styled.div`
   padding: ${theme.spacing.md};
-  background: ${theme.colors.muted}05;
-  border-radius: ${theme.borderRadius.md};
+  background: ${theme.colors.background};
+  border-radius: ${theme.borderRadius.lg};
+  border: 1px solid ${theme.colors.border};
 `;
 
 const GenreList = styled.div`
@@ -147,9 +149,9 @@ const GenreList = styled.div`
 
 const GenreTag = styled.span`
   background: ${theme.colors.primary};
-  color: white;
+  color: ${theme.colors.white};
   padding: ${theme.spacing.xs} ${theme.spacing.sm};
-  border-radius: ${theme.borderRadius.sm};
+  border-radius: ${theme.borderRadius.md};
   font-size: ${theme.fontSizes.sm};
   font-weight: ${theme.fontWeights.medium};
 `;

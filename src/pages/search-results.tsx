@@ -11,6 +11,7 @@ import { useBookStatus } from "../hooks/useBookStatus"
 import booksData from "../data/books.json"
 import { useState, useMemo, useEffect, useCallback } from "react"
 import { Button } from "../components/Button"
+import { TextInput } from "../components/TextInput"
 import styled from "styled-components"
 import { theme } from "../styles/theme"
 
@@ -153,11 +154,12 @@ const SearchResultsPage = () => {
           </div>
 
           <SearchContainer>
-            <SearchInput 
-              type="text" 
-              placeholder="Search by title, author, or description..." 
-              value={searchQuery} 
-              onChange={(e) => setSearchQuery(e.target.value)} 
+            <TextInput
+              type="text"
+              placeholder="Search by title, author, or description..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              marginBottom="md"
             />
             
             <FiltersContainer>
@@ -214,21 +216,6 @@ export const Head: HeadFC = () => (
 // Styled Components
 const SearchContainer = styled.div`
   margin-bottom: ${theme.spacing.lg};
-`;
-
-const SearchInput = styled.input`
-  width: 100%;
-  padding: ${theme.spacing.md};
-  border: 1px solid ${theme.colors.muted};
-  border-radius: ${theme.borderRadius.md};
-  font-size: ${theme.fontSizes.base};
-  margin-bottom: ${theme.spacing.md};
-  
-  &:focus {
-    outline: none;
-    border-color: ${theme.colors.primary};
-    box-shadow: 0 0 0 2px ${theme.colors.primary}20;
-  }
 `;
 
 const FiltersContainer = styled.div`

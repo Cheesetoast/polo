@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import styled from 'styled-components';
-import { BookBoard } from './BookBoard';
+import { BookBoardClient } from './BookBoardClient';
 import { useBookStatus } from '../hooks/useBookStatus';
 import { Book } from './Book';
 import { Button } from './Button';
@@ -82,7 +82,7 @@ export const BookBoardContainer = ({
         )}
       </Header>
       
-      <BookBoard 
+      <BookBoardClient
         booksWithStatus={booksWithStatus}
         updateBookStatus={updateBookStatus}
       />

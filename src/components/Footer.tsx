@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
 import { Text } from './Text';
+import { theme } from '../styles/theme';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -110,9 +111,10 @@ export default Footer;
 
 // Styled Components
 const FooterContainer = styled.footer`
-  background-color: #111827;
-  color: #ffffff;
-  padding: 3rem 0 2rem;
+  background-color: ${theme.colors.surface};
+  color: ${theme.colors.primary};
+  border-top: 1px solid ${theme.colors.border};
+  padding: ${theme.spacing['2xl']} 0 ${theme.spacing.xl};
   margin-top: auto;
 `;
 
@@ -132,32 +134,36 @@ const FooterSection = styled.div`
 `;
 
 const FooterTitle = styled(Text)`
-  color: #ffffff;
+  color: ${theme.colors.primary};
   font-weight: 600;
+  letter-spacing: -0.02em;
   margin-bottom: 0.5rem;
 `;
 
 const FooterText = styled(Text)`
   line-height: 1.6;
+  color: ${theme.colors.secondary};
 `;
 
 const FooterLink = styled(Link)`
-  color: #ffffff;
+  color: ${theme.colors.secondary};
   text-decoration: none;
+  font-size: ${theme.fontSizes.sm};
   transition: color 0.2s ease;
 
   &:hover {
-    color: #9ca3af;
+    color: ${theme.colors.blue[500]};
   }
 `;
 
 const FooterExternalLink = styled.a`
-  color: #ffffff;
+  color: ${theme.colors.secondary};
   text-decoration: none;
+  font-size: ${theme.fontSizes.sm};
   transition: color 0.2s ease;
 
   &:hover {
-    color: #9ca3af;
+    color: ${theme.colors.blue[500]};
   }
 `;
 
@@ -173,21 +179,24 @@ const SocialLink = styled.a`
   justify-content: center;
   width: 40px;
   height: 40px;
-  background-color: #4b5563;
-  border-radius: 50%;
-  transition: background-color 0.2s ease;
-  color: #ffffff;
+  background-color: ${theme.colors.background};
+  border: 1px solid ${theme.colors.border};
+  border-radius: ${theme.borderRadius.full};
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  color: ${theme.colors.primary};
   text-decoration: none;
 
   &:hover {
-    background-color: #6b7280;
+    background-color: ${theme.colors.surface};
+    border-color: ${theme.colors.muted};
+    transform: translateY(-1px);
   }
 `;
 
 const FooterBottom = styled.div`
   text-align: center;
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid #4b5563;
-  color: #4b5563;
+  margin-top: ${theme.spacing.lg};
+  padding-top: ${theme.spacing.lg};
+  border-top: 1px solid ${theme.colors.border};
+  color: ${theme.colors.muted};
 `;

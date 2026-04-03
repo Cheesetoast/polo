@@ -14,6 +14,8 @@ import { Author } from '../utils/authorUtils';
 import { BookLink } from '../components/BookLink';
 import { AuthorLink } from '../components/AuthorLink';
 import { GenreLink } from '../components/GenreLink';
+import { TextInput } from '../components/TextInput';
+import { Button } from '../components/Button';
 
 const AuthorsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -88,11 +90,12 @@ const AuthorsPage = () => {
         </Header>
 
         <FiltersContainer>
-          <SearchInput
+          <TextInput
             type="text"
             placeholder="Search authors by name, bio, or genre..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            marginBottom="lg"
           />
 
           <FiltersRow>
@@ -134,18 +137,18 @@ const AuthorsPage = () => {
               </FilterSelect>
             </FilterGroup>
 
-            <ClearButton onClick={clearFilters}>
+            <Button type="button" variant="secondary" size="small" onClick={clearFilters}>
               Clear Filters
-            </ClearButton>
+            </Button>
           </FiltersRow>
         </FiltersContainer>
 
         {filteredAuthors.length === 0 ? (
           <ResultsInfo>
             <p>No authors found matching your criteria.</p>
-            <ClearButton onClick={clearFilters}>
+            <Button type="button" variant="secondary" size="small" onClick={clearFilters}>
               Clear All Filters
-            </ClearButton>
+            </Button>
           </ResultsInfo>
         ) : (
           <AuthorsGrid>
@@ -270,20 +273,6 @@ const FiltersContainer = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 `;
 
-const SearchInput = styled.input`
-  width: 100%;
-  padding: 16px;
-  font-size: 1.1rem;
-  border: 2px solid #d1d5db;
-  border-radius: 8px;
-  outline: none;
-  margin-bottom: 24px;
-
-  &:focus {
-    border-color: #007bff;
-  }
-`;
-
 const FiltersRow = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -313,21 +302,6 @@ const FilterSelect = styled.select`
 
   &:focus {
     border-color: #007bff;
-  }
-`;
-
-const ClearButton = styled.button`
-  padding: 8px 16px;
-  background: #6b7280;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background: #4b5563;
   }
 `;
 

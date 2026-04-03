@@ -9,14 +9,14 @@ import { Dashboard } from "../components/Dashboard"
 import { WelcomeModal } from "../components/WelcomeModal"
 
 import booksData from "../data/books.json"
-import { useState, useMemo, useEffect } from "react"
+import { useState, useMemo, useEffect, useRef } from "react"
 import { useBookStatus } from "../hooks/useBookStatus"
 import { navigate } from "gatsby"
 import styled from "styled-components"
 import { theme } from "../styles/theme"
 import { Button } from "../components/Button"
+import { TextInput } from "../components/TextInput"
 
-// Move booksData to a constant outside the component to prevent re-creation on each render
 const BOOKS_DATA = booksData;
 
 interface Book {
@@ -39,6 +39,7 @@ interface Book {
   pages?: number;
 }
 
+
 const IndexPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
@@ -50,12 +51,12 @@ const IndexPage = () => {
       console.log('Welcome modal check:', { hasSeenWelcome, showWelcomeModal });
       if (!hasSeenWelcome) {
         console.log('Setting modal to show');
-        setShowWelcomeModal(true);
+        //setShowWelcomeModal(true);
       }
     } else {
       // If storage is disabled, always show the modal
       console.log('Modal storage disabled, showing modal');
-      setShowWelcomeModal(true);
+      // setShowWelcomeModal(true);
     }
   }, []);
 
@@ -129,6 +130,7 @@ const IndexPage = () => {
     };
   }, [books, booksWithStatus]);
 
+
   return (
     <Layout>
       <WelcomeModal
@@ -157,15 +159,16 @@ const IndexPage = () => {
                 navigate(`/search-results?search=${encodeURIComponent(searchQuery.trim())}`);
               }
             }}>
-              <SearchInput
+              <TextInput
                 type="text"
                 placeholder="Search by title, author, or description..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                inputWidth="flex"
               />
-              <SearchButton type="submit">
+              <Button type="submit" variant="primary" size="medium">
                 Search
-              </SearchButton>
+              </Button>
             </SearchForm>
           </HomepageSearchSection>
 
@@ -176,7 +179,7 @@ const IndexPage = () => {
             <Text variant="p" color="secondary" align="center">
               Use our visual Kanban board to track your reading progress and organize your bookshelf
             </Text>
-            <Button onClick={() => navigate('/bookshelf')} variant="primary" size="large">
+            <Button onClick={() => navigate('/bookshelf')} variant="primary">
               View My Bookshelf
             </Button>
           </BookshelfSection>
@@ -204,70 +207,30 @@ export const Head: HeadFC = () => (
 const HomepageSearchSection = styled.section`
   text-align: center;
   margin: ${theme.spacing.xl} 0;
-  padding: ${theme.spacing.xl};
-  background: linear-gradient(135deg, ${theme.colors.primary}05 0%, ${theme.colors.primary}10 100%);
-  border-radius: ${theme.borderRadius.lg};
-  border: 1px solid ${theme.colors.primary}10;
+  padding: ${theme.spacing['2xl']} ${theme.spacing.xl};
+  background: ${theme.colors.surface};
+  border-radius: ${theme.borderRadius.xl};
+  border: 1px solid ${theme.colors.border};
+  box-shadow: ${theme.shadows.sm};
 `;
 
 const SearchForm = styled.form`
   display: flex;
-  gap: ${theme.spacing.md};
-  max-width: 600px;
+  gap: ${theme.spacing.sm};
+  max-width: 560px;
   margin: ${theme.spacing.lg} auto 0;
-  
+
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: stretch;
   }
 `;
 
-const SearchInput = styled.input`
-  flex: 1;
-  padding: ${theme.spacing.md};
-  border: 2px solid ${theme.colors.muted};
-  border-radius: ${theme.borderRadius.md};
-  font-size: ${theme.fontSizes.base};
-  transition: border-color 0.2s ease;
-  
-  &:focus {
-    outline: none;
-    border-color: ${theme.colors.primary};
-    box-shadow: 0 0 0 3px ${theme.colors.primary}20;
-  }
-  
-  &::placeholder {
-    color: ${theme.colors.muted};
-  }
-`;
-
-const SearchButton = styled.button`
-  padding: ${theme.spacing.md} ${theme.spacing.lg};
-  background-color: ${theme.colors.primary};
-  color: white;
-  border: none;
-  border-radius: ${theme.borderRadius.md};
-  font-size: ${theme.fontSizes.base};
-  font-weight: ${theme.fontWeights.medium};
-  cursor: pointer;
-  transition: all 0.2s ease;
-  
-  &:hover {
-    background-color: ${theme.colors.primary}dd;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px ${theme.colors.primary}40;
-  }
-  
-  &:active {
-    transform: translateY(0);
-  }
-`;
-
 const BookshelfSection = styled.section`
   text-align: center;
   margin: ${theme.spacing.xl} 0;
-  padding: ${theme.spacing.xl};
-  background: linear-gradient(135deg, ${theme.colors.secondary}05 0%, ${theme.colors.secondary}10 100%);
-  border-radius: ${theme.borderRadius.lg};
-  border: 1px solid ${theme.colors.secondary}10;
+  padding: ${theme.spacing['2xl']} ${theme.spacing.xl};
+  background: ${theme.colors.background};
+  border-radius: ${theme.borderRadius.xl};
+  border: 1px solid ${theme.colors.border};
 `;

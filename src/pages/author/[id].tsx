@@ -5,6 +5,8 @@ import { getAuthorById, getBooksByAuthor } from '../../utils/authorUtils';
 import Layout from '../../components/Layout';
 import SEO from '../../components/SEO';
 import { Book } from '../../components/Book';
+import { Button } from '../../components/Button';
+import { theme } from '../../styles/theme';
 
 interface AuthorPageProps {
   params: {
@@ -23,9 +25,14 @@ const AuthorPage = ({ params }: AuthorPageProps) => {
         <NotFoundContainer>
           <NotFoundTitle>Author Not Found</NotFoundTitle>
           <NotFoundText>The author you're looking for doesn't exist.</NotFoundText>
-          <BackButton onClick={() => navigate('/authors')}>
+          <Button
+            type="button"
+            variant="ghost"
+            onClick={() => navigate('/authors')}
+            style={{ marginBottom: theme.spacing.lg }}
+          >
             Back to Authors
-          </BackButton>
+          </Button>
         </NotFoundContainer>
       </Layout>
     );
@@ -46,9 +53,14 @@ const AuthorPage = ({ params }: AuthorPageProps) => {
         description={author.bio || `Explore books by ${author.name}`} 
       />
               <PageContainer>
-        <BackButton onClick={handleBackToAuthors}>
+        <Button
+          type="button"
+          variant="ghost"
+          onClick={handleBackToAuthors}
+          style={{ marginBottom: theme.spacing.lg }}
+        >
           ← Back to Authors
-        </BackButton>
+        </Button>
 
         <AuthorHeader>
           <AuthorImageSection>
@@ -163,24 +175,6 @@ const PageContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px;
-`;
-
-const BackButton = styled.button`
-  background: none;
-  border: none;
-  color: #007bff;
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 8px 0;
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: color 0.2s;
-
-  &:hover {
-    color: #6c757d;
-  }
 `;
 
 const NotFoundContainer = styled.div`

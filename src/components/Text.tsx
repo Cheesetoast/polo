@@ -75,6 +75,7 @@ const StyledText = styled.div.withConfig({
 })<TextProps>`
   margin: 0;
   line-height: 1.5;
+  font-family: ${theme.fontFamily};
   
   ${({ truncate }) => truncate && css`
     overflow: hidden;
@@ -111,6 +112,7 @@ const StyledText = styled.div.withConfig({
           font-size: ${theme.fontSizes['5xl']};
           font-weight: ${theme.fontWeights.bold};
           line-height: ${theme.lineHeights['5xl']};
+          letter-spacing: -0.03em;
           margin-bottom: ${theme.spacing.lg};
         `;
       case 'h2':
@@ -118,6 +120,7 @@ const StyledText = styled.div.withConfig({
           font-size: ${theme.fontSizes['4xl']};
           font-weight: ${theme.fontWeights.bold};
           line-height: ${theme.lineHeights['4xl']};
+          letter-spacing: -0.025em;
           margin-bottom: ${theme.spacing.lg};
         `;
       case 'h3':
@@ -125,6 +128,7 @@ const StyledText = styled.div.withConfig({
           font-size: ${theme.fontSizes['3xl']};
           font-weight: ${theme.fontWeights.semibold};
           line-height: ${theme.lineHeights['3xl']};
+          letter-spacing: -0.02em;
           margin-bottom: ${theme.spacing.md};
         `;
       case 'h4':

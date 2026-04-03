@@ -4,6 +4,8 @@ import { navigate } from 'gatsby';
 import { getBooksByGenre, getBooksByAuthorGenre } from '../../utils/authorUtils';
 import Layout from '../../components/Layout';
 import SEO from '../../components/SEO';
+import { Button } from '../../components/Button';
+import { theme } from '../../styles/theme';
 
 interface GenrePageProps {
   params: {
@@ -31,9 +33,14 @@ const GenrePage = ({ params }: GenrePageProps) => {
         <NotFoundContainer>
           <NotFoundTitle>No Books Found</NotFoundTitle>
           <NotFoundText>No books found in the {genre} genre.</NotFoundText>
-          <BackButton onClick={() => navigate('/bookshelf')}>
+          <Button
+            type="button"
+            variant="ghost"
+            onClick={() => navigate('/bookshelf')}
+            style={{ marginBottom: theme.spacing.lg }}
+          >
             Back to Bookshelf
-          </BackButton>
+          </Button>
         </NotFoundContainer>
       </Layout>
     );
@@ -54,9 +61,14 @@ const GenrePage = ({ params }: GenrePageProps) => {
         description={`Explore ${books.length} books in the ${genre} genre`} 
       />
       <PageContainer>
-        <BackButton onClick={handleBackToBookshelf}>
+        <Button
+          type="button"
+          variant="ghost"
+          onClick={handleBackToBookshelf}
+          style={{ marginBottom: theme.spacing.lg }}
+        >
           ← Back to Bookshelf
-        </BackButton>
+        </Button>
 
         <GenreHeader>
           <GenreTitle>{genre}</GenreTitle>
@@ -103,24 +115,6 @@ const PageContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px;
-`;
-
-const BackButton = styled.button`
-  background: none;
-  border: none;
-  color: #007bff;
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 8px 0;
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: color 0.2s;
-
-  &:hover {
-    color: #6c757d;
-  }
 `;
 
 const NotFoundContainer = styled.div`

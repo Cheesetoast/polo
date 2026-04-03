@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { navigate } from 'gatsby';
+import { theme } from '../styles/theme';
 
 interface GenreLinkProps {
   genre: string;
@@ -42,15 +43,16 @@ export const GenreLink = ({
 };
 
 const StyledGenreLink = styled.span`
-  background: #111827;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.8rem;
+  background: ${theme.colors.primary};
+  color: ${theme.colors.white};
+  padding: ${theme.spacing.xs} ${theme.spacing.sm};
+  border-radius: ${theme.borderRadius.md};
+  font-size: ${theme.fontSizes.sm};
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 
   &:hover {
-    background: #374151;
+    background: ${theme.colors.gray[600]};
+    transform: translateY(-1px);
   }
 `;

@@ -2,6 +2,10 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { BookBoardContainer } from '../BookBoardContainer';
 
+jest.mock('../BookBoardClient', () => ({
+  BookBoardClient: () => <div data-testid="book-board-client" />,
+}));
+
 jest.mock('../../hooks/useBookStatus', () => ({
   useBookStatus: () => ({
     booksWithStatus: [],

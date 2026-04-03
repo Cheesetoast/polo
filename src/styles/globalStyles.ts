@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { theme } from './theme';
 
 const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
@@ -7,10 +8,17 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
   body {
-    font-family: 'Helvetica Neue', sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
+    font-family: ${theme.fontFamily};
+    background-color: ${theme.colors.background};
+    color: ${theme.colors.primary};
+    line-height: ${theme.lineHeights.base};
   }
 
   a {

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 import { SITE_CONFIG } from '../constants';
+import { theme } from '../styles/theme';
 
 interface NavItem {
   label: string;
@@ -98,22 +99,18 @@ const NavContainer = styled.nav.withConfig({
   right: 0;
   z-index: 1000;
   transition: all 0.3s ease;
-  background: ${({ transparent, scrolled }) => 
-    transparent && !scrolled 
-      ? 'transparent' 
-      : 'rgba(255, 255, 255, 0.95)'};
-  backdrop-filter: ${({ transparent, scrolled }) => 
-    transparent && !scrolled 
-      ? 'none' 
-      : 'blur(10px)'};
-  border-bottom: ${({ transparent, scrolled }) => 
-    transparent && !scrolled 
-      ? 'none' 
-      : '1px solid rgba(0, 0, 0, 0.1)'};
-  box-shadow: ${({ transparent, scrolled }) => 
-    transparent && !scrolled 
-      ? 'none' 
-      : '0 2px 20px rgba(0, 0, 0, 0.1)'};
+  background: ${({ transparent, scrolled }) =>
+    transparent && !scrolled
+      ? 'transparent'
+      : 'rgba(255, 255, 255, 0.72)'};
+  backdrop-filter: ${({ transparent, scrolled }) =>
+    transparent && !scrolled ? 'none' : 'blur(20px) saturate(180%)'};
+  -webkit-backdrop-filter: ${({ transparent, scrolled }) =>
+    transparent && !scrolled ? 'none' : 'blur(20px) saturate(180%)'};
+  border-bottom: ${({ transparent, scrolled }) =>
+    transparent && !scrolled ? 'none' : `1px solid ${theme.colors.border}`};
+  box-shadow: ${({ transparent, scrolled }) =>
+    transparent && !scrolled ? 'none' : theme.shadows.nav};
 `;
 
 const NavContent = styled.div`
@@ -131,14 +128,16 @@ const NavContent = styled.div`
 `;
 
 const LogoLink = styled(Link)`
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #333;
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-family: ${theme.fontFamily};
+  letter-spacing: -0.02em;
+  color: ${theme.colors.primary};
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
 
   &:hover {
-    color: #663399;
+    color: ${theme.colors.blue[500]};
   }
 `;
 
@@ -156,8 +155,8 @@ const NavLinks = styled.ul.withConfig({
     top: 70px;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px) saturate(180%);
     flex-direction: column;
     align-items: center;
     padding: 2rem 0;
@@ -166,7 +165,7 @@ const NavLinks = styled.ul.withConfig({
     opacity: ${({ isOpen }) => isOpen ? '1' : '0'};
     visibility: ${({ isOpen }) => isOpen ? 'visible' : 'hidden'};
     transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid ${theme.colors.border};
   }
 `;
 
@@ -175,15 +174,16 @@ const NavLink = styled.li`
 `;
 
 const NavLinkAnchor = styled.a`
-  color: #333;
+  color: ${theme.colors.secondary};
   text-decoration: none;
   font-weight: 500;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  font-size: 0.9375rem;
+  font-family: ${theme.fontFamily};
+  transition: color 0.2s ease;
   position: relative;
 
   &:hover {
-    color: #663399;
+    color: ${theme.colors.primary};
   }
 
   &::after {
@@ -193,8 +193,9 @@ const NavLinkAnchor = styled.a`
     left: 0;
     width: 0;
     height: 2px;
-    background: #663399;
-    transition: width 0.3s ease;
+    background: ${theme.colors.blue[500]};
+    border-radius: 1px;
+    transition: width 0.2s ease;
   }
 
   &:hover::after {
@@ -211,15 +212,16 @@ const NavLinkAnchor = styled.a`
 `;
 
 const NavLinkGatsby = styled(Link)`
-  color: #333;
+  color: ${theme.colors.secondary};
   text-decoration: none;
   font-weight: 500;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  font-size: 0.9375rem;
+  font-family: ${theme.fontFamily};
+  transition: color 0.2s ease;
   position: relative;
 
   &:hover {
-    color: #663399;
+    color: ${theme.colors.primary};
   }
 
   &::after {
@@ -229,8 +231,9 @@ const NavLinkGatsby = styled(Link)`
     left: 0;
     width: 0;
     height: 2px;
-    background: #663399;
-    transition: width 0.3s ease;
+    background: ${theme.colors.blue[500]};
+    border-radius: 1px;
+    transition: width 0.2s ease;
   }
 
   &:hover::after {
@@ -273,9 +276,9 @@ const HamburgerLine = styled.span.withConfig({
   shouldForwardProp: (prop) => prop !== 'isOpen',
 })<{ isOpen?: boolean }>`
   width: 2rem;
-  height: 0.25rem;
-  background: #333;
-  border-radius: 10px;
+  height: 0.2rem;
+  background: ${theme.colors.primary};
+  border-radius: ${theme.borderRadius.full};
   transition: all 0.3s linear;
   position: relative;
   transform-origin: 1px;

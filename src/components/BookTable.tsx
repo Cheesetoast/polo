@@ -5,6 +5,7 @@ import { theme } from '../styles/theme';
 import { Text } from './Text';
 import { StatusIndicator } from './StatusIndicator';
 import { BookProgressBar } from './BookProgressBar';
+import { Button } from './Button';
 import { Book } from './Book';
 import { ReadingStatus } from '../types/reading';
 
@@ -141,31 +142,37 @@ export const BookTable = ({ books, onBookClick, onAuthorClick, pageSize = 10 }: 
           </PaginationInfo>
           
           <PaginationControls>
-            <PaginationButton 
-              onClick={handlePreviousPage} 
+            <Button
+              type="button"
+              variant="pagination"
+              onClick={handlePreviousPage}
               disabled={currentPage === 1}
             >
               Previous
-            </PaginationButton>
-            
+            </Button>
+
             <PaginationNumbers>
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                <PaginationNumber
+                <Button
                   key={page}
+                  type="button"
+                  variant="pagination"
+                  pageActive={page === currentPage}
                   onClick={() => handlePageChange(page)}
-                  active={page === currentPage}
                 >
                   {page}
-                </PaginationNumber>
+                </Button>
               ))}
             </PaginationNumbers>
-            
-            <PaginationButton 
-              onClick={handleNextPage} 
+
+            <Button
+              type="button"
+              variant="pagination"
+              onClick={handleNextPage}
               disabled={currentPage === totalPages}
             >
               Next
-            </PaginationButton>
+            </Button>
           </PaginationControls>
         </PaginationContainer>
       )}
@@ -261,52 +268,10 @@ const PaginationControls = styled.div`
   gap: ${theme.spacing.xs};
 `;
 
-const PaginationButton = styled.button<{ disabled?: boolean }>`
-  padding: ${theme.spacing.xs} ${theme.spacing.sm};
-  border: 1px solid ${theme.colors.muted};
-  border-radius: ${theme.borderRadius.sm};
-  background-color: white;
-  color: ${theme.colors.gray?.[600] || '#6b7280'};
-  cursor: pointer;
-  font-size: ${theme.fontSizes.sm};
-  transition: all 0.2s ease;
-
-  &:hover:not(:disabled) {
-    background-color: ${theme.colors.gray?.[50] || '#f9fafb'};
-    border-color: ${theme.colors.gray?.[300] || '#d1d5db'};
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-`;
-
 const PaginationNumbers = styled.div`
   display: flex;
   gap: 4px;
   margin: 0 ${theme.spacing.sm};
-`;
-
-const PaginationNumber = styled.button.withConfig({
-  shouldForwardProp: (prop) => prop !== 'active',
-})<{ active?: boolean }>`
-  padding: ${theme.spacing.xs};
-  min-width: 32px;
-  height: 32px;
-  border: 1px solid ${theme.colors.muted};
-  border-radius: ${theme.borderRadius.sm};
-  background-color: ${props => props.active ? theme.colors.primary : 'white'};
-  color: ${props => props.active ? 'white' : theme.colors.gray?.[600] || '#6b7280'};
-  cursor: pointer;
-  font-size: ${theme.fontSizes.sm};
-  font-weight: ${props => props.active ? theme.fontWeights.medium : theme.fontWeights.normal};
-  transition: all 0.2s ease;
-
-  &:hover:not([disabled]) {
-    background-color: ${props => props.active ? theme.colors.primary : theme.colors.gray?.[50] || '#f9fafb'};
-    border-color: ${props => props.active ? theme.colors.primary : theme.colors.gray?.[300] || '#d1d5db'};
-  }
 `;
 
 const BookTitleLink = styled(Link)`
@@ -328,12 +293,12 @@ const AuthorLink = styled.span.withConfig({
   
   ${props => props.clickable && `
     cursor: pointer;
-    color: ${theme.colors.primary || '#663399'};
+    color: ${theme.colors.blue[500]};
     text-decoration: underline;
     transition: color 0.2s ease;
     
     &:hover {
-      color: ${theme.colors.primaryDark || '#4a1f7a'};
+      color: ${theme.colors.blue[700]};
     }
   `}
 `;

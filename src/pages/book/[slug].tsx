@@ -146,9 +146,14 @@ const BookPage = ({ params }: BookPageProps) => {
     <Layout>
       <main>
         <ContentWrapper>
-          <BackButton onClick={() => navigate('/search')}>
+          <Button
+            type="button"
+            variant="ghost"
+            onClick={() => navigate('/search')}
+            style={{ marginBottom: theme.spacing.lg }}
+          >
             ← Back to Search
-          </BackButton>
+          </Button>
 
           <BookContainer>
             <BookHeader>
@@ -401,23 +406,6 @@ const ConfirmModalActions = styled.div`
   gap: ${theme.spacing.sm};
   margin-top: ${theme.spacing.sm};
 `;
-const BackButton = styled.button`
-  background: none;
-  border: none;
-  color: ${theme.colors.primary};
-  font-size: ${theme.fontSizes.base};
-  cursor: pointer;
-  padding: ${theme.spacing.sm} 0;
-  margin-bottom: ${theme.spacing.lg};
-  display: flex;
-  align-items: center;
-  gap: ${theme.spacing.xs};
-  
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
 const BookContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;

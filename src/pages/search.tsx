@@ -8,6 +8,7 @@ import { BookTable } from "../components/BookTable"
 import booksData from "../data/books.json"
 import { useState, useMemo } from "react"
 import { Button } from "../components/Button"
+import { TextInput } from "../components/TextInput"
 import styled from "styled-components"
 import { theme } from "../styles/theme"
 import { navigate } from "gatsby"
@@ -80,11 +81,12 @@ const SearchPage = () => {
               const queryString = params.toString();
               navigate(`/search-results${queryString ? `?${queryString}` : ''}`);
             }}>
-              <SearchInput
+              <TextInput
                 type="text"
                 placeholder="Search by title, author, or description..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                marginBottom="md"
               />
               
               <FiltersContainer>
@@ -128,12 +130,17 @@ const SearchPage = () => {
               
               <AuthorsGrid>
                 {authors && authors.length > 0 && authors.slice(0, 12).map(author => (
-                  <AuthorButton
+                  <Button
                     key={author}
+                    type="button"
+                    variant="muted"
+                    size="small"
+                    fullWidth
+                    contentAlign="start"
                     onClick={() => navigate(`/search-results?author=${encodeURIComponent(author)}`)}
                   >
                     {author}
-                  </AuthorButton>
+                  </Button>
                 ))}
               </AuthorsGrid>
             </QuickSearchSection>
@@ -163,20 +170,6 @@ const SearchForm = styled.form`
   border-radius: ${theme.borderRadius.lg};
   border: 1px solid ${theme.colors.muted};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-const SearchInput = styled.input`
-  width: 100%;
-  padding: ${theme.spacing.md};
-  border: 2px solid ${theme.colors.muted};
-  border-radius: ${theme.borderRadius.md};
-  font-size: ${theme.fontSizes.base};
-  margin-bottom: ${theme.spacing.md};
-  
-  &:focus {
-    outline: none;
-    border-color: ${theme.colors.primary};
-  }
 `;
 
 const FiltersContainer = styled.div`
@@ -220,22 +213,4 @@ const AuthorsGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: ${theme.spacing.sm};
   margin-top: ${theme.spacing.md};
-`;
-
-const AuthorButton = styled.button`
-  padding: ${theme.spacing.sm} ${theme.spacing.md};
-  border: 1px solid ${theme.colors.muted};
-  border-radius: ${theme.borderRadius.md};
-  background-color: white;
-  color: ${theme.colors.gray?.[600] || '#374151'};
-  font-size: ${theme.fontSizes.sm};
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-align: left;
-  
-  &:hover {
-    background-color: ${theme.colors.primary};
-    color: white;
-    border-color: ${theme.colors.primary};
-  }
 `;

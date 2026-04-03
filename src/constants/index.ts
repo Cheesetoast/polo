@@ -1,4 +1,4 @@
-import { ReadingStatus } from '../components/BookBoard';
+import { ReadingStatus } from '../types/reading';
 
 export const SITE_CONFIG = {
   SITE_NAME: 'Book Stack'

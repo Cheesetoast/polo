@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Layout from '../components/Layout';
 import { ContentWrapper } from '../components/ContentWrapper';
 import { Text } from '../components/Text';
-import { BookBoard } from '../components/BookBoard';
+import { BookBoardClient } from '../components/BookBoardClient';
 import { Button } from '../components/Button';
 import { useBookStatus } from '../hooks/useBookStatus';
 import booksData from '../data/books.json';
@@ -76,7 +76,7 @@ const BookshelfPage = () => {
         </ActionSection>
 
                   {booksWithAssignedStatus.length > 0 ? (
-            <BookBoard 
+            <BookBoardClient
               booksWithStatus={booksWithStatus}
               updateBookStatus={updateBookStatus}
             />

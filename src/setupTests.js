@@ -12,6 +12,7 @@ jest.mock('gatsby', () => ({
   ),
   graphql: jest.fn(),
   useStaticQuery: jest.fn(),
+  navigate: jest.fn(),
 }));
 
 // Mock gatsby-plugin-image
