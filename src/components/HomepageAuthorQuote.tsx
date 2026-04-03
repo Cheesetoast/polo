@@ -66,7 +66,6 @@ const QuoteFigure = styled(ModuleInsetPanel).attrs({
   $size: "well" as const,
 })`
   margin: 0;
-  padding: ${theme.spacing.lg};
   width: 100%;
   min-width: 0;
 `

@@ -62,13 +62,14 @@ const Root = styled.section<{
           position: relative;
           z-index: ${$variant === "prominent" ? 1 : "auto"};
           margin: 0;
+          /* Same horizontal inset as other prominent modules; dense = tighter vertical only */
           padding: ${$dense
-            ? `${theme.spacing.md} ${theme.spacing.sm}`
+            ? `${theme.spacing.md} ${theme.spacing.md}`
             : `${theme.spacing.lg} ${theme.spacing.md}`};
 
           @media (min-width: 768px) {
             padding: ${$dense
-              ? `${theme.spacing.lg} ${theme.spacing.md}`
+              ? `${theme.spacing.lg} ${theme.spacing.lg}`
               : `${theme.spacing.xl} ${theme.spacing.lg}`};
           }
         `

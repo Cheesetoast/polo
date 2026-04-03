@@ -27,14 +27,14 @@ const StyledContentWrapper = styled.div`
   max-width: 1280px;
   min-width: 0;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 ${theme.spacing.lg};
   overflow-x: clip;
-  
+
   @media (min-width: 768px) {
-    padding: 0 48px;
+    padding: 0 ${theme.spacing["2xl"]};
   }
-  
+
   @media (min-width: 1024px) {
-    padding: 0 64px;
+    padding: 0 ${theme.spacing["3xl"]};
   }
 `;

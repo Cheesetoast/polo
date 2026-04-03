@@ -134,8 +134,12 @@ const DashboardContainer = styled.div<{
   box-sizing: border-box;
   max-width: 100%;
   min-width: 0;
-  padding: ${theme.spacing.lg};
+  padding: ${theme.spacing.lg} ${theme.spacing.md};
   margin-bottom: ${theme.spacing.lg};
+
+  @media (min-width: 768px) {
+    padding: ${theme.spacing.xl} ${theme.spacing.lg};
+  }
 
   ${({ $fillHeight }) =>
     $fillHeight &&
@@ -300,7 +304,6 @@ const StatSection = styled(ModuleInsetPanel).attrs({
 })`
   min-width: 0;
   max-width: 100%;
-  padding: ${theme.spacing.lg};
 `
 
 const GenreMeta = styled.p`

@@ -217,8 +217,12 @@ export const Head: HeadFC = () => (
 // Styled Components
 const SearchContainer = styled.div`
   margin-bottom: ${theme.spacing.lg};
-  padding: ${theme.spacing.lg};
+  padding: ${theme.spacing.lg} ${theme.spacing.md};
   ${panelSearchStrip}
+
+  @media (min-width: 768px) {
+    padding: ${theme.spacing.xl} ${theme.spacing.lg};
+  }
 `;
 
 const FiltersContainer = styled.div`

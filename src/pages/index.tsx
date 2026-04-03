@@ -458,11 +458,15 @@ const HeroMain = styled.div`
 const HomepageModulesGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  gap: ${theme.spacing.lg};
+  gap: ${theme.spacing.md};
   padding-top: ${theme.spacing.lg};
   padding-bottom: ${theme.spacing.xl};
   min-width: 0;
   width: 100%;
+
+  @media (min-width: 480px) {
+    gap: ${theme.spacing.lg};
+  }
 
   @media (min-width: 768px) {
     padding-top: ${theme.spacing.xl};
@@ -613,7 +617,6 @@ const SearchStatPanel = styled(ModuleInsetPanel).attrs({
   width: 100%;
   min-width: 0;
   text-align: center;
-  padding: ${theme.spacing.lg};
 `
 
 const SearchStatNumber = styled.div`
@@ -677,7 +680,6 @@ const ShelfMiniCard = styled(ModuleInsetPanel).attrs({
   $size: "tile" as const,
 })`
   text-align: center;
-  padding: ${theme.spacing.sm};
   min-width: 0;
 `
 
@@ -706,7 +708,6 @@ const ShelfAside = styled(ModuleInsetPanel).attrs({
   grid-area: aside;
   width: 100%;
   min-width: 0;
-  padding: ${theme.spacing.lg};
 `
 
 /** Same level as dashboard inset titles (h3); compact type for the narrow aside. */

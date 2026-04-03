@@ -154,12 +154,12 @@ const IntroLead = styled.p`
 
 const BoardSection = styled.section`
   margin: ${theme.spacing.md} 0 ${theme.spacing.xl};
-  padding: ${theme.spacing.md} ${theme.spacing.md} ${theme.spacing.lg};
+  padding: ${theme.spacing.lg} ${theme.spacing.md} ${theme.spacing.lg};
   text-align: left;
   ${sectionSurfaceProminent}
 
   @media (min-width: 768px) {
-    padding: ${theme.spacing.lg} ${theme.spacing.lg} ${theme.spacing.xl};
+    padding: ${theme.spacing.xl} ${theme.spacing.lg} ${theme.spacing.xl};
   }
 `
 
@@ -188,7 +188,7 @@ const StatsGrid = styled.div`
 
 const StatCard = styled.div`
   text-align: center;
-  padding: ${theme.spacing.md} ${theme.spacing.sm};
+  padding: ${theme.spacing.md};
   border-radius: ${theme.borderRadius.md};
   background: ${theme.colors.surface};
   border: 1px solid ${theme.colors.border};
