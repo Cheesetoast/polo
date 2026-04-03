@@ -16,6 +16,7 @@ import booksData from "../../data/books.json"
 import { navigate } from "gatsby"
 import styled from "styled-components"
 import { theme } from "../../styles/theme"
+import { bookPageShell } from "../../styles/surfaceStyles"
 
 interface Book {
   title: string;
@@ -409,6 +410,7 @@ const ConfirmModalActions = styled.div`
 const BookContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;
+  ${bookPageShell}
 `;
 
 const BookHeader = styled.div`

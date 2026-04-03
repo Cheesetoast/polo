@@ -5,7 +5,7 @@ import Layout from '../components/Layout';
 import { 
   getAllBookGenres,
   getAllAuthorGenres,
-  getBooksByGenre,
+  resolveGenreBooks,
   getAuthorsByGenre
 } from '../utils/authorUtils';
 import { BookLink } from '../components/BookLink';
@@ -13,6 +13,7 @@ import { AuthorLink } from '../components/AuthorLink';
 import { GenreLink } from '../components/GenreLink';
 import { TextInput } from '../components/TextInput';
 import { Button } from '../components/Button';
+import { panelFilters } from '../styles/surfaceStyles';
 
 const GenresPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -27,7 +28,9 @@ const GenresPage = () => {
   const allGenres = useMemo(() => {
     const combined = [...new Set([...bookGenres, ...authorGenres])];
     // Filter to only include genres that have books
-    const genresWithBooks = combined.filter(genre => getBooksByGenre(genre).length > 0);
+    const genresWithBooks = combined.filter(
+      genre => resolveGenreBooks(genre).books.length > 0
+    );
     return genresWithBooks.sort();
   }, [bookGenres, authorGenres]);
 
@@ -53,16 +56,16 @@ const GenresPage = () => {
     return genres.sort((a, b) => {
       switch (sortBy) {
         case 'count':
-          const aBookCount = getBooksByGenre(a).length;
-          const bBookCount = getBooksByGenre(b).length;
+          const aBookCount = resolveGenreBooks(a).books.length;
+          const bBookCount = resolveGenreBooks(b).books.length;
           const aAuthorCount = getAuthorsByGenre(a).length;
           const bAuthorCount = getAuthorsByGenre(b).length;
           const aTotal = aBookCount + aAuthorCount;
           const bTotal = bBookCount + bAuthorCount;
           return bTotal - aTotal;
         case 'popularity':
-          const aBookCount2 = getBooksByGenre(a).length;
-          const bBookCount2 = getBooksByGenre(b).length;
+          const aBookCount2 = resolveGenreBooks(a).books.length;
+          const bBookCount2 = resolveGenreBooks(b).books.length;
           return bBookCount2 - aBookCount2;
         default:
           return a.localeCompare(b);
@@ -81,7 +84,7 @@ const GenresPage = () => {
   };
 
   const getGenreStats = (genre: string) => {
-    const books = getBooksByGenre(genre);
+    const { books } = resolveGenreBooks(genre);
     const authors = getAuthorsByGenre(genre);
     return { books, authors };
   };
@@ -139,9 +142,9 @@ const GenresPage = () => {
         {filteredGenres.length === 0 ? (
           <ResultsInfo>
             <p>No genres found matching your criteria.</p>
-            <ClearButton onClick={clearFilters}>
+            <Button type="button" variant="secondary" size="small" onClick={clearFilters}>
               Clear All Filters
-            </ClearButton>
+            </Button>
           </ResultsInfo>
         ) : (
           <GenresGrid>
@@ -253,9 +256,7 @@ const Subtitle = styled.p`
 const FiltersContainer = styled.div`
   margin-bottom: 32px;
   padding: 24px;
-  background: #f9fafb;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  ${panelFilters}
 `;
 
 const FiltersRow = styled.div`

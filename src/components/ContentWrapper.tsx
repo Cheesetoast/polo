@@ -22,9 +22,13 @@ export const ContentWrapper = ({
 
 // Styled Components
 const StyledContentWrapper = styled.div`
-  max-width: 1200px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1280px;
+  min-width: 0;
   margin: 0 auto;
   padding: 0 24px;
+  overflow-x: clip;
   
   @media (min-width: 768px) {
     padding: 0 48px;

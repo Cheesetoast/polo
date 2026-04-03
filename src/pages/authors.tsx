@@ -16,6 +16,7 @@ import { AuthorLink } from '../components/AuthorLink';
 import { GenreLink } from '../components/GenreLink';
 import { TextInput } from '../components/TextInput';
 import { Button } from '../components/Button';
+import { panelFilters } from '../styles/surfaceStyles';
 
 const AuthorsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -268,9 +269,7 @@ const Subtitle = styled.p`
 const FiltersContainer = styled.div`
   margin-bottom: 32px;
   padding: 24px;
-  background: #f9fafb;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  ${panelFilters}
 `;
 
 const FiltersRow = styled.div`

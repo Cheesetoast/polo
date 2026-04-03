@@ -11,6 +11,7 @@ export interface TextProps {
   align?: 'left' | 'center' | 'right' | 'justify';
   truncate?: boolean;
   className?: string;
+  id?: string;
   as?: keyof JSX.IntrinsicElements;
   style?: Record<string, any>; // Generic CSS properties
 }
@@ -24,6 +25,7 @@ export const Text = ({
   align,
   truncate = false,
   className,
+  id,
   as,
   style,
   ...props
@@ -59,6 +61,7 @@ export const Text = ({
       align={align}
       truncate={truncate}
       className={className}
+      id={id}
       style={style}
       {...props}
     >
@@ -109,18 +112,22 @@ const StyledText = styled.div.withConfig({
     switch (variant) {
       case 'h1':
         return css`
-          font-size: ${theme.fontSizes['5xl']};
-          font-weight: ${theme.fontWeights.bold};
-          line-height: ${theme.lineHeights['5xl']};
-          letter-spacing: -0.03em;
+          font-size: ${theme.fontSizes['6xl']};
+          font-weight: ${theme.fontWeights.semibold};
+          line-height: ${theme.lineHeights['6xl']};
+          letter-spacing: -0.04em;
           margin-bottom: ${theme.spacing.lg};
+          @media (max-width: 768px) {
+            font-size: ${theme.fontSizes['5xl']};
+            line-height: ${theme.lineHeights['5xl']};
+          }
         `;
       case 'h2':
         return css`
           font-size: ${theme.fontSizes['4xl']};
-          font-weight: ${theme.fontWeights.bold};
+          font-weight: ${theme.fontWeights.semibold};
           line-height: ${theme.lineHeights['4xl']};
-          letter-spacing: -0.025em;
+          letter-spacing: -0.03em;
           margin-bottom: ${theme.spacing.lg};
         `;
       case 'h3':

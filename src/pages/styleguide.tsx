@@ -4,9 +4,12 @@ import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import { Text } from "../components/Text"
 import { Button } from "../components/Button"
+import { TextInput } from "../components/TextInput"
+import { Eyebrow } from "../components/Eyebrow"
 import { ContentWrapper } from "../components/ContentWrapper"
 import { SITE_CONFIG } from "../constants"
 import { theme } from "../styles/theme"
+import { styleguideIntro, styleguideSection } from "../styles/surfaceStyles"
 
 type ColorLeaf = string | Record<string, string>
 
@@ -36,9 +39,10 @@ const StyleguidePage = () => {
           <PageIntro>
             <Text variant="h1">Style guide</Text>
             <Text variant="p" color="secondary">
-              Design tokens and UI primitives for Polo. Component variants and states live in{" "}
-              <StorybookHint>Storybook</StorybookHint> — run{" "}
-              <code>npm run storybook</code>.
+              Single source of truth: <code>src/styles/theme.ts</code> (Inter, cool neutrals, purple
+              accent) plus shared surfaces in <code>surfaceStyles.ts</code>. Layout applies{" "}
+              <code>mainBackdrop</code> to the page shell. Component variants and stories also live in{" "}
+              <StorybookHint>Storybook</StorybookHint>. Run <code>npm run storybook</code>.
             </Text>
           </PageIntro>
 
@@ -46,8 +50,10 @@ const StyleguidePage = () => {
             <SectionTitle>
               <Text variant="h2">Typography</Text>
               <Text variant="p" color="secondary">
-                System UI stack via <code>theme.fontFamily</code> (Apple / Google–style). Scale from{" "}
-                <code>theme.fontSizes</code>.
+                <code>theme.fontFamily</code> is Inter with system fallbacks. Sizes and line heights
+                pair via <code>theme.fontSizes</code> and <code>theme.lineHeights</code>. The{" "}
+                <code>Text</code> component applies weights and tracking per variant (e.g. semibold
+                headings, tight tracking on <code>h1</code> / <code>h2</code>).
               </Text>
             </SectionTitle>
             <TypeScale>
@@ -61,8 +67,16 @@ const StyleguidePage = () => {
                       <Text variant="caption" color="secondary">
                         {size}
                       </Text>
+                      <Text variant="caption" color="secondary">
+                        lh{" "}
+                        {String(
+                          theme.lineHeights[name as keyof typeof theme.lineHeights] ?? "n/a"
+                        )}
+                      </Text>
                     </TypeMeta>
-                    <Text style={{ fontSize: size }}>The quick brown fox jumps over the lazy dog</Text>
+                    <TypeSample $size={name}>
+                      The quick brown fox jumps over the lazy dog
+                    </TypeSample>
                   </TypeRow>
                 )
               )}
@@ -75,18 +89,52 @@ const StyleguidePage = () => {
               <Text variant="h2">Heading 2</Text>
               <Text variant="h3">Heading 3</Text>
               <Text variant="h4">Heading 4</Text>
-              <Text variant="p">Body paragraph — default copy style.</Text>
+              <Text variant="h5">Heading 5</Text>
+              <Text variant="h6">Heading 6</Text>
+              <Text variant="p">Body paragraph, default copy style.</Text>
               <Text variant="caption" color="secondary">
                 Caption / secondary
               </Text>
             </VariantStack>
+            <SubsectionLabel>
+              <Text variant="h4">
+                <code>Eyebrow</code> (marketing label)
+              </Text>
+            </SubsectionLabel>
+            <Text variant="p" color="secondary" style={{ marginBottom: theme.spacing.sm }}>
+              Uppercase labels for heroes and sections. Shared <code>Eyebrow</code> component in{" "}
+              <code>src/components/Eyebrow.tsx</code> (<code>variant=&quot;accent&quot;</code> or{" "}
+              <code>neutral</code>) so pages match the homepage.
+            </Text>
+            <PatternExamples>
+              <div>
+                <Eyebrow variant="accent">Accent eyebrow</Eyebrow>
+                <Text variant="h3" style={{ marginBottom: theme.spacing.xs }}>
+                  Section title
+                </Text>
+                <Text variant="p" color="secondary" style={{ margin: 0 }}>
+                  Supporting line.
+                </Text>
+              </div>
+              <div>
+                <Eyebrow variant="neutral">Neutral eyebrow</Eyebrow>
+                <Text variant="h3" style={{ marginBottom: theme.spacing.xs }}>
+                  Another block
+                </Text>
+                <Text variant="p" color="secondary" style={{ margin: 0 }}>
+                  Muted label + heading + body.
+                </Text>
+              </div>
+            </PatternExamples>
           </Section>
 
           <Section>
             <SectionTitle>
               <Text variant="h2">Color</Text>
               <Text variant="p" color="secondary">
-                Semantic and UI colors from <code>theme.colors</code>.
+                Semantic UI colors from <code>theme.colors</code>: primary text, surfaces, border,
+                and <code>blue[500-700]</code> for accent (buttons, links, focus). Tints in{" "}
+                <code>surfaceStyles</code> use the same accent family.
               </Text>
             </SectionTitle>
             <SwatchGrid>
@@ -110,7 +158,7 @@ const StyleguidePage = () => {
             <SectionTitle>
               <Text variant="h2">Spacing</Text>
               <Text variant="p" color="secondary">
-                <code>theme.spacing</code> — used for padding, gaps, and layout rhythm.
+                <code>theme.spacing</code> covers padding, gaps, and layout rhythm.
               </Text>
             </SectionTitle>
             <SpacingDemo>
@@ -126,6 +174,25 @@ const StyleguidePage = () => {
                 </SpacingRow>
               ))}
             </SpacingDemo>
+          </Section>
+
+          <Section>
+            <SectionTitle>
+              <Text variant="h2">Shadows</Text>
+              <Text variant="p" color="secondary">
+                <code>theme.shadows</code> backs cards, nav, and elevated panels.
+              </Text>
+            </SectionTitle>
+            <ShadowRow>
+              {(Object.entries(theme.shadows) as Array<[string, string]>).map(([name, val]) => (
+                <ShadowCard key={name} $shadow={val}>
+                  <Text variant="caption" weight="medium">
+                    {name}
+                  </Text>
+                  <ShadowCode>{val}</ShadowCode>
+                </ShadowCard>
+              ))}
+            </ShadowRow>
           </Section>
 
           <Section>
@@ -152,8 +219,8 @@ const StyleguidePage = () => {
             <SectionTitle>
               <Text variant="h2">Buttons</Text>
               <Text variant="p" color="secondary">
-                Shared <code>Button</code> — primary, secondary, outline, ghost, muted, pagination; sizes
-                small / medium / large.
+                Shared <code>Button</code> variants: primary, secondary, outline, ghost, muted, and
+                pagination. Sizes are small, medium, and large.
               </Text>
             </SectionTitle>
             <ButtonRow>
@@ -185,6 +252,27 @@ const StyleguidePage = () => {
               <Button disabled>Disabled</Button>
             </ButtonRow>
           </Section>
+
+          <Section>
+            <SectionTitle>
+              <Text variant="h2">Text input</Text>
+              <Text variant="p" color="secondary">
+                Shared <code>TextInput</code> uses the theme border, radius, and focus ring (accent).
+                Pair with <code>Button</code> in a flex row for search-style UIs.
+              </Text>
+            </SectionTitle>
+            <InputRow>
+              <TextInput placeholder="Default width (full in this column)" />
+            </InputRow>
+            <InputRow>
+              <SearchLikeRow>
+                <TextInput inputWidth="flex" placeholder="Flex grow beside a button…" />
+                <Button type="button" variant="primary">
+                  Action
+                </Button>
+              </SearchLikeRow>
+            </InputRow>
+          </Section>
         </ContentWrapper>
       </main>
     </Layout>
@@ -195,7 +283,7 @@ export default StyleguidePage
 
 export const Head: HeadFC = () => (
   <SEO
-    title={`Style guide — ${SITE_CONFIG.SITE_NAME}`}
+    title={`Style guide | ${SITE_CONFIG.SITE_NAME}`}
     description="Design tokens, typography, color, spacing, and UI primitives for the Polo site."
     keywords={["design system", "style guide", "typography", "components"]}
   />
@@ -206,8 +294,8 @@ const PageIntro = styled.div`
   flex-direction: column;
   gap: ${theme.spacing.md};
   margin-bottom: ${theme.spacing.xl};
-  padding-bottom: ${theme.spacing.lg};
-  border-bottom: 1px solid ${theme.colors.muted};
+  padding: ${theme.spacing["2xl"]};
+  ${styleguideIntro}
 `
 
 const StorybookHint = styled.span`
@@ -216,6 +304,7 @@ const StorybookHint = styled.span`
 
 const Section = styled.section`
   margin-bottom: ${theme.spacing.xl};
+  ${styleguideSection}
 `
 
 const SectionTitle = styled.div`
@@ -226,10 +315,10 @@ const SectionTitle = styled.div`
 
   code {
     font-size: ${theme.fontSizes.sm};
-    background: ${theme.colors.white};
+    background: ${theme.colors.surface};
     padding: 2px 6px;
     border-radius: ${theme.borderRadius.sm};
-    border: 1px solid ${theme.colors.muted};
+    border: 1px solid ${theme.colors.border};
   }
 `
 
@@ -266,9 +355,70 @@ const VariantStack = styled.div`
   flex-direction: column;
   gap: ${theme.spacing.sm};
   padding: ${theme.spacing.md};
-  background: ${theme.colors.white};
+  background: ${theme.colors.surface};
   border-radius: ${theme.borderRadius.md};
-  border: 1px solid ${theme.colors.muted};
+  border: 1px solid ${theme.colors.border};
+`
+
+const TypeSample = styled.span<{ $size: string }>`
+  font-family: ${theme.fontFamily};
+  font-size: ${({ $size }) => theme.fontSizes[$size as keyof typeof theme.fontSizes]};
+  line-height: ${({ $size }) =>
+    theme.lineHeights[$size as keyof typeof theme.lineHeights] ?? theme.lineHeights.base};
+`
+
+const PatternExamples = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: ${theme.spacing.lg};
+  padding: ${theme.spacing.lg};
+  background: ${theme.colors.surface};
+  border-radius: ${theme.borderRadius.md};
+  border: 1px solid ${theme.colors.border};
+`
+
+const ShadowRow = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: ${theme.spacing.md};
+`
+
+const ShadowCard = styled.div<{ $shadow: string }>`
+  padding: ${theme.spacing.md};
+  background: ${theme.colors.surface};
+  border-radius: ${theme.borderRadius.md};
+  border: 1px solid ${theme.colors.border};
+  box-shadow: ${({ $shadow }) => $shadow};
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.md};
+  min-height: 100px;
+`
+
+const ShadowCode = styled.pre`
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.5;
+  color: ${theme.colors.secondary};
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+`
+
+const InputRow = styled.div`
+  margin-bottom: ${theme.spacing.md};
+  max-width: 560px;
+`
+
+const SearchLikeRow = styled.div`
+  display: flex;
+  gap: ${theme.spacing.sm};
+  align-items: stretch;
+  width: 100%;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
 `
 
 const SwatchGrid = styled.div`
@@ -327,8 +477,8 @@ const RadiusRow = styled.div`
 
 const RadiusCard = styled.div<{ $radius: string }>`
   padding: ${theme.spacing.md};
-  background: ${theme.colors.white};
-  border: 1px solid ${theme.colors.muted};
+  background: ${theme.colors.surface};
+  border: 1px solid ${theme.colors.border};
   border-radius: ${({ $radius }) => $radius};
   min-width: 120px;
   display: flex;

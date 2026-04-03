@@ -9,19 +9,24 @@ import { Dashboard } from "../components/Dashboard"
 import { WelcomeModal } from "../components/WelcomeModal"
 
 import booksData from "../data/books.json"
-import { useState, useMemo, useEffect, useRef } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { useBookStatus } from "../hooks/useBookStatus"
-import { navigate } from "gatsby"
-import styled from "styled-components"
-import { theme } from "../styles/theme"
+import { navigate, Link } from "gatsby"
+import styled, { keyframes } from "styled-components"
+import { rgba, theme } from "../styles/theme"
 import { Button } from "../components/Button"
 import { TextInput } from "../components/TextInput"
+import { Eyebrow } from "../components/Eyebrow"
+import { HomepageSection } from "../components/HomepageSection"
+import { HomepageAuthorQuote } from "../components/HomepageAuthorQuote"
+import { ModuleInsetPanel } from "../components/ModuleInsetPanel"
 
 const BOOKS_DATA = booksData;
 
 interface Book {
   title: string;
   author: string;
+  authorId?: string;
   description: {
     description: string;
   };
@@ -121,12 +126,62 @@ const IndexPage = () => {
       }, 0) / booksWithRatings.length).toFixed(1)
       : '0.0';
 
+    const totalPages = books.reduce((sum, book) => {
+      const n = book.pages;
+      return sum + (typeof n === "number" && n > 0 ? n : 0);
+    }, 0);
+
+    const genreSet = new Set<string>();
+    books.forEach((book) => {
+      book.genres?.forEach((g) => genreSet.add(g));
+    });
+
+    const authorTally: Record<
+      string,
+      { name: string; count: number; authorId?: string }
+    > = {};
+    books.forEach((book) => {
+      const key = book.authorId || book.author;
+      if (!authorTally[key]) {
+        authorTally[key] = {
+          name: book.author,
+          count: 0,
+          authorId: book.authorId,
+        };
+      }
+      authorTally[key].count += 1;
+    });
+    const topAuthorEntry = Object.values(authorTally).sort(
+      (a, b) => b.count - a.count
+    )[0];
+    const topAuthor = topAuthorEntry
+      ? {
+          name: topAuthorEntry.name,
+          count: topAuthorEntry.count,
+          authorId: topAuthorEntry.authorId,
+        }
+      : null;
+
+    let longestBook: { title: string; pages: number } | null = null;
+    books.forEach((book) => {
+      const p = book.pages;
+      if (typeof p !== "number" || p <= 0) return;
+      if (!longestBook || p > longestBook.pages) {
+        longestBook = { title: book.title, pages: p };
+      }
+    });
+
     return {
+      totalBooks: books.length,
       finishedBooks,
       currentlyReading,
       wantToRead,
       topGenres,
-      averageRating
+      averageRating,
+      totalPages,
+      distinctGenreCount: genreSet.size,
+      topAuthor,
+      longestBook,
     };
   }, [books, booksWithStatus]);
 
@@ -138,54 +193,112 @@ const IndexPage = () => {
         onClose={handleCloseWelcomeModal}
       />
       <main>
+        <HeroBand>
+          <HeroBackground aria-hidden="true" />
+          <ContentWrapper>
+            <HeroMain>
+              <Eyebrow variant="accent">Your reading library</Eyebrow>
+              <Text variant="h1">
+                {homepageTitle || SITE_CONFIG.SITE_NAME}
+              </Text>
+            </HeroMain>
+          </ContentWrapper>
+        </HeroBand>
+
         <ContentWrapper>
-          <div>
-            <Text variant="h1">
-              {homepageTitle || SITE_CONFIG.SITE_NAME}
-            </Text>
-          </div>
+          <HomepageModulesGrid>
+            <HomepageModuleSpan>
+              <HomepageSection variant="prominent" inModuleGrid>
+                <SectionSplit>
+                  <SectionSplitMain>
+                    <Eyebrow variant="neutral">Search</Eyebrow>
+                    <Text variant="h2">Find your next great read</Text>
+                    <SearchForm onSubmit={(e) => {
+                      e.preventDefault();
+                      if (searchQuery.trim()) {
+                        navigate(`/search-results?search=${encodeURIComponent(searchQuery.trim())}`);
+                      }
+                    }}>
+                      <TextInput
+                        type="text"
+                        aria-label="Search books by title, author, description, genres, or tags"
+                        placeholder="Search by title, author, or description..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        inputWidth="flex"
+                      />
+                      <Button type="submit" variant="primary" size="medium">
+                        Search
+                      </Button>
+                    </SearchForm>
+                    <BrowseAllLink to="/search-results">
+                      Browse all books →
+                    </BrowseAllLink>
+                  </SectionSplitMain>
+                  <SearchStatPanel>
+                    <SearchStatNumber>{books.length}</SearchStatNumber>
+                    <SearchStatLabel>books in the catalog</SearchStatLabel>
+                  </SearchStatPanel>
+                </SectionSplit>
+              </HomepageSection>
+            </HomepageModuleSpan>
 
-          <HomepageSearchSection>
-            <Text variant="h2" align="center">
-              Find Your Next Great Read
-            </Text>
-            <Text variant="p" color="secondary" align="center">
-              Search through our collection of books by title, author, or description
-            </Text>
+            <HomepageModuleBookshelf>
+              <HomepageSection variant="prominent" inModuleGrid dense>
+                <BookshelfSectionSplit>
+                  <BookshelfSectionHeader>
+                    <Eyebrow variant="neutral">Bookshelf</Eyebrow>
+                    <Text variant="h2">Organize your reading</Text>
+                  </BookshelfSectionHeader>
+                  <BookshelfSectionMain>
+                    <ShelfMiniGrid>
+                      <ShelfMiniCard>
+                        <ShelfMiniValue>{dashboardStats.wantToRead}</ShelfMiniValue>
+                        <ShelfMiniLabel>Want to read</ShelfMiniLabel>
+                      </ShelfMiniCard>
+                      <ShelfMiniCard>
+                        <ShelfMiniValue>{dashboardStats.currentlyReading}</ShelfMiniValue>
+                        <ShelfMiniLabel>Reading</ShelfMiniLabel>
+                      </ShelfMiniCard>
+                      <ShelfMiniCard>
+                        <ShelfMiniValue>{dashboardStats.finishedBooks}</ShelfMiniValue>
+                        <ShelfMiniLabel>Finished</ShelfMiniLabel>
+                      </ShelfMiniCard>
+                    </ShelfMiniGrid>
+                    <BrowseAllLink to="/bookshelf">Open bookshelf →</BrowseAllLink>
+                    <ShelfBookshelfSupporting>
+                      <Text variant="p" color="secondary" size="sm">
+                        These numbers mirror your three board columns—change a book’s status and
+                        the counts move with you.
+                      </Text>
+                      <Text variant="p" color="secondary" size="sm">
+                        Your shelf is stored in the browser, so you can come back anytime and pick
+                        up where you left off.
+                      </Text>
+                    </ShelfBookshelfSupporting>
+                  </BookshelfSectionMain>
+                  <ShelfAside>
+                    <ShelfAsideTitle>On the board</ShelfAsideTitle>
+                    <ShelfAsideList>
+                      <li>Move books between columns with the status control</li>
+                      <li>See rating and progress at a glance</li>
+                      <li>Next column: catalog insights (not shelf status)</li>
+                    </ShelfAsideList>
+                  </ShelfAside>
+                </BookshelfSectionSplit>
+              </HomepageSection>
+            </HomepageModuleBookshelf>
 
-            <SearchForm onSubmit={(e) => {
-              e.preventDefault();
-              if (searchQuery.trim()) {
-                navigate(`/search-results?search=${encodeURIComponent(searchQuery.trim())}`);
-              }
-            }}>
-              <TextInput
-                type="text"
-                placeholder="Search by title, author, or description..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                inputWidth="flex"
-              />
-              <Button type="submit" variant="primary" size="medium">
-                Search
-              </Button>
-            </SearchForm>
-          </HomepageSearchSection>
+            <HomepageModuleQuote>
+              <HomepageSection variant="prominent" inModuleGrid>
+                <HomepageAuthorQuote />
+              </HomepageSection>
+            </HomepageModuleQuote>
 
-          <BookshelfSection>
-            <Text variant="h2" align="center">
-              Organize Your Reading
-            </Text>
-            <Text variant="p" color="secondary" align="center">
-              Use our visual Kanban board to track your reading progress and organize your bookshelf
-            </Text>
-            <Button onClick={() => navigate('/bookshelf')} variant="primary">
-              View My Bookshelf
-            </Button>
-          </BookshelfSection>
-
-          <Dashboard stats={dashboardStats} />
-
+            <HomepageModuleStats>
+              <Dashboard stats={dashboardStats} fillHeight />
+            </HomepageModuleStats>
+          </HomepageModulesGrid>
         </ContentWrapper>
 
       </main>
@@ -203,34 +316,422 @@ export const Head: HeadFC = () => (
   />
 )
 
-// Styled Components
-const HomepageSearchSection = styled.section`
+// Styled Components — `<900px`: single column, full-width blocks, left-aligned (matches section mains)
+const heroGradientDrift = keyframes`
+  0%,
+  100% {
+    background-position: 45% 50%;
+  }
+  50% {
+    background-position: 55% 50%;
+  }
+`
+
+const heroGlowPulse = keyframes`
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.52;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.04);
+    opacity: 0.7;
+  }
+`
+
+/**
+ * Full viewport-width hero. Pulls up by Layout `MainContent` padding-top so the wash sits
+ * under the fixed nav; overlaps the next section via negative margin-bottom.
+ * Keep offsets in sync with `Layout.tsx` → `MainContent` padding-top.
+ */
+const HERO_NAV_OFFSET_MOBILE = "100px"
+const HERO_NAV_OFFSET_DESKTOP = "120px"
+
+const HeroBand = styled.div`
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: calc(-1 * ${HERO_NAV_OFFSET_MOBILE});
+  margin-bottom: -${theme.spacing["2xl"]};
+  padding-top: calc(${HERO_NAV_OFFSET_MOBILE} + ${theme.spacing.sm});
+  padding-bottom: ${theme.spacing.xl};
+
+  @media (min-width: 768px) {
+    margin-top: calc(-1 * ${HERO_NAV_OFFSET_DESKTOP});
+    padding-top: calc(${HERO_NAV_OFFSET_DESKTOP} + ${theme.spacing.sm});
+    padding-bottom: ${theme.spacing["2xl"]};
+    margin-bottom: -${theme.spacing["3xl"]};
+  }
+
+  @media (min-width: 900px) {
+    padding-top: calc(${HERO_NAV_OFFSET_DESKTOP} + ${theme.spacing.md});
+  }
+`
+
+/** Animated mesh behind hero copy (decorative). */
+const HeroBackground = styled.div`
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: ${theme.colors.background};
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 150%;
+    height: 150%;
+    transform: translate(-50%, -50%);
+    transform-origin: center center;
+    background: radial-gradient(
+        ellipse 58% 52% at 50% 44%,
+        ${rgba.indigo(0.14)} 0%,
+        transparent 58%
+      ),
+      radial-gradient(
+        ellipse 42% 40% at 72% 38%,
+        ${rgba.indigo(0.08)} 0%,
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse 48% 44% at 18% 62%,
+        ${rgba.indigo(0.06)} 0%,
+        transparent 52%
+      ),
+      radial-gradient(
+        ellipse 50% 46% at 50% 56%,
+        rgba(0, 0, 0, 0.05) 0%,
+        transparent 54%
+      );
+    animation: ${heroGlowPulse} 22s ease-in-out infinite;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      ${rgba.indigo(0.04)} 35%,
+      ${rgba.indigo(0.07)} 50%,
+      ${rgba.indigo(0.04)} 65%,
+      transparent 100%
+    );
+    background-size: 240% 100%;
+    background-position: 50% 50%;
+    animation: ${heroGradientDrift} 26s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::before {
+      animation: none;
+      transform: translate(-50%, -50%);
+      opacity: 0.5;
+    }
+
+    &::after {
+      animation: none;
+      background-size: 100% 100%;
+      background-position: center;
+    }
+  }
+`
+
+const HeroMain = styled.div`
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 42rem;
+
+  @media (min-width: 900px) {
+    max-width: 720px;
+  }
+`
+
+/** Homepage content below hero: one full-width row, then bookshelf + stats in two columns on large screens. */
+const HomepageModulesGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${theme.spacing.lg};
+  padding-top: ${theme.spacing.lg};
+  padding-bottom: ${theme.spacing.xl};
+  min-width: 0;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    padding-top: ${theme.spacing.xl};
+    gap: ${theme.spacing.xl};
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.88fr);
+    grid-template-rows: auto 1fr;
+    align-items: stretch;
+  }
+`
+
+const HomepageModuleSpan = styled.div`
+  min-width: 0;
+
+  @media (min-width: 1024px) {
+    grid-column: 1 / -1;
+  }
+`
+
+const HomepageModuleBookshelf = styled.div`
+  min-width: 0;
+
+  @media (min-width: 1024px) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+`
+
+const HomepageModuleQuote = styled.div`
+  min-width: 0;
+
+  @media (min-width: 1024px) {
+    grid-column: 1;
+    grid-row: 3;
+  }
+`
+
+const HomepageModuleStats = styled.div`
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 1024px) {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+
+    > * {
+      flex: 1;
+      min-height: 0;
+    }
+  }
+`
+
+/** Search row: full content width, so two columns are safe from ~900px. */
+const SectionSplit = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${theme.spacing.lg};
+  align-items: stretch;
+  min-width: 0;
+  width: 100%;
+
+  @media (min-width: 900px) {
+    grid-template-columns: minmax(0, 1fr) minmax(12rem, min(18.75rem, 40vw));
+    gap: ${theme.spacing['2xl']};
+    align-items: center;
+  }
+`
+
+/**
+ * Bookshelf: full-width title row, then stats + CTA (main) and “On the board” aside on large screens.
+ */
+const BookshelfSectionSplit = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "main"
+    "aside";
+  gap: ${theme.spacing.lg};
+  align-items: stretch;
+  min-width: 0;
+  width: 100%;
+
+  @media (min-width: 900px) {
+    grid-template-columns: minmax(0, 1fr) minmax(11rem, 14rem);
+    grid-template-areas:
+      "header header"
+      "main aside";
+    gap: ${theme.spacing.lg};
+    align-items: start;
+  }
+`
+
+const BookshelfSectionHeader = styled.div`
+  grid-area: header;
+  min-width: 0;
+  text-align: left;
+
+  /* Align with Search / Quote / Dashboard: space below module title */
+  & > h2 {
+    margin-bottom: ${theme.spacing.lg};
+  }
+`
+
+const BookshelfSectionMain = styled.div`
+  grid-area: main;
+  min-width: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: ${theme.spacing.md};
+
+  a {
+    margin-top: 0;
+  }
+`
+
+const ShelfBookshelfSupporting = styled.div`
+  max-width: 28rem;
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.sm};
+
+  p {
+    margin: 0;
+    line-height: ${theme.lineHeights.lg};
+  }
+`
+
+const SectionSplitMain = styled.div`
+  container-type: inline-size;
+  min-width: 0;
+  text-align: left;
+
+  & > h2 {
+    margin-bottom: ${theme.spacing.lg};
+  }
+`
+
+const SearchStatPanel = styled(ModuleInsetPanel).attrs({
+  $tone: "accent" as const,
+  $size: "well" as const,
+})`
+  width: 100%;
+  min-width: 0;
   text-align: center;
-  margin: ${theme.spacing.xl} 0;
-  padding: ${theme.spacing['2xl']} ${theme.spacing.xl};
-  background: ${theme.colors.surface};
-  border-radius: ${theme.borderRadius.xl};
-  border: 1px solid ${theme.colors.border};
-  box-shadow: ${theme.shadows.sm};
-`;
+  padding: ${theme.spacing.lg};
+`
+
+const SearchStatNumber = styled.div`
+  font-size: clamp(${theme.fontSizes['3xl']}, 8vw, ${theme.fontSizes['5xl']});
+  font-weight: ${theme.fontWeights.semibold};
+  letter-spacing: -0.04em;
+  color: ${theme.colors.primary};
+  line-height: 1;
+  overflow-wrap: anywhere;
+`
+
+const SearchStatLabel = styled.div`
+  margin-top: ${theme.spacing.sm};
+  font-size: ${theme.fontSizes.sm};
+  font-weight: ${theme.fontWeights.medium};
+  color: ${theme.colors.secondary};
+`
+
+/* md gap above link matches bookshelf column stack (BookshelfSectionMain gap). */
+const BrowseAllLink = styled(Link)`
+  display: inline-block;
+  margin-top: ${theme.spacing.md};
+  font-size: ${theme.fontSizes.sm};
+  font-weight: ${theme.fontWeights.medium};
+  color: ${theme.colors.blue[500]};
+
+  &:hover {
+    color: ${theme.colors.blue[700]};
+  }
+`
 
 const SearchForm = styled.form`
   display: flex;
   gap: ${theme.spacing.sm};
-  max-width: 560px;
-  margin: ${theme.spacing.lg} auto 0;
+  width: 100%;
+  max-width: 640px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 899px) {
     flex-direction: column;
     align-items: stretch;
+    max-width: none;
   }
-`;
+`
 
-const BookshelfSection = styled.section`
+const ShelfMiniGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: ${theme.spacing.sm};
+  margin: 0;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+
+  @media (max-width: 479px) {
+    grid-template-columns: 1fr;
+  }
+`
+
+const ShelfMiniCard = styled(ModuleInsetPanel).attrs({
+  $tone: "neutral" as const,
+  $size: "tile" as const,
+})`
   text-align: center;
-  margin: ${theme.spacing.xl} 0;
-  padding: ${theme.spacing['2xl']} ${theme.spacing.xl};
-  background: ${theme.colors.background};
-  border-radius: ${theme.borderRadius.xl};
-  border: 1px solid ${theme.colors.border};
-`;
+  padding: ${theme.spacing.sm};
+  min-width: 0;
+`
+
+const ShelfMiniValue = styled.div`
+  font-size: clamp(${theme.fontSizes.xl}, 4vw, ${theme.fontSizes['2xl']});
+  font-weight: ${theme.fontWeights.semibold};
+  color: ${theme.colors.primary};
+  line-height: 1.2;
+`
+
+const ShelfMiniLabel = styled.div`
+  font-size: ${theme.fontSizes.xs};
+  color: ${theme.colors.secondary};
+  margin-top: ${theme.spacing.xs};
+  line-height: ${theme.lineHeights.sm};
+  word-break: normal;
+  overflow-wrap: normal;
+  text-wrap: balance;
+`
+
+const ShelfAside = styled(ModuleInsetPanel).attrs({
+  as: "aside" as const,
+  $tone: "neutral" as const,
+  $size: "well" as const,
+})`
+  grid-area: aside;
+  width: 100%;
+  min-width: 0;
+  padding: ${theme.spacing.lg};
+`
+
+/** Same level as dashboard inset titles (h3); compact type for the narrow aside. */
+const ShelfAsideTitle = styled(Text).attrs({ variant: "h3" as const })`
+  && {
+    margin: 0 0 ${theme.spacing.md};
+    font-size: ${theme.fontSizes.sm};
+    font-weight: ${theme.fontWeights.semibold};
+    line-height: ${theme.lineHeights.lg};
+    color: ${theme.colors.primary};
+  }
+`
+
+const ShelfAsideList = styled.ul`
+  margin: 0;
+  padding-left: ${theme.spacing.lg};
+  font-size: ${theme.fontSizes.sm};
+  line-height: ${theme.lineHeights.lg};
+  color: ${theme.colors.secondary};
+
+  li {
+    margin-bottom: ${theme.spacing.xs};
+  }
+
+  li:last-child {
+    margin-bottom: 0;
+  }
+`

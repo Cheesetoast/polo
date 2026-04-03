@@ -80,6 +80,12 @@ jest.mock('../../components/Text', () => ({
   }
 }));
 
+jest.mock('../../components/Eyebrow', () => ({
+  Eyebrow: ({ children }: { children: React.ReactNode }) => (
+    <span data-testid="eyebrow">{children}</span>
+  ),
+}));
+
 jest.mock('../../components/Button', () => ({
   Button: ({ children, onClick, ...props }: any) => (
     <button onClick={onClick} {...props}>{children}</button>
@@ -122,19 +128,19 @@ describe('BookshelfPage', () => {
     expect(screen.getByText('Mock BookBoard Component')).toBeInTheDocument();
   });
 
-  it('navigates to search page when "Add More Books" button is clicked', () => {
+  it('navigates to search page when "Add more books" button is clicked', () => {
     render(<BookshelfPage />);
     
-    const addBooksButton = screen.getByText('Add More Books');
+    const addBooksButton = screen.getByText('Add more books');
     fireEvent.click(addBooksButton);
     
     expect(navigate).toHaveBeenCalledWith('/search');
   });
 
-  it('navigates to home page when "Back to Dashboard" button is clicked', () => {
+  it('navigates to home page when "Back to home" button is clicked', () => {
     render(<BookshelfPage />);
     
-    const backButton = screen.getByText('Back to Dashboard');
+    const backButton = screen.getByText('Back to home');
     fireEvent.click(backButton);
     
     expect(navigate).toHaveBeenCalledWith('/');
@@ -143,9 +149,9 @@ describe('BookshelfPage', () => {
   it('displays management section with reset and clear buttons', () => {
     render(<BookshelfPage />);
     
-    expect(screen.getByText('Bookshelf Management')).toBeInTheDocument();
-    expect(screen.getByText('Reset All Statuses')).toBeInTheDocument();
-    expect(screen.getByText('Clear Local Storage')).toBeInTheDocument();
+    expect(screen.getByText('Bookshelf management')).toBeInTheDocument();
+    expect(screen.getByText('Reset all statuses')).toBeInTheDocument();
+    expect(screen.getByText('Clear local storage')).toBeInTheDocument();
   });
 
   it('shows empty state when no books are organized', () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { navigate } from 'gatsby';
-import { getBooksByGenre, getBooksByAuthorGenre } from '../../utils/authorUtils';
+import { resolveGenreBooks } from '../../utils/authorUtils';
 import Layout from '../../components/Layout';
 import SEO from '../../components/SEO';
 import { Button } from '../../components/Button';
@@ -15,16 +15,7 @@ interface GenrePageProps {
 
 const GenrePage = ({ params }: GenrePageProps) => {
   const genre = decodeURIComponent(params.genre);
-  
-  // Try to get books by exact genre match first
-  let books = getBooksByGenre(genre);
-  let genreType = 'book';
-  
-  // If no books found, try author genre matching
-  if (books.length === 0) {
-    books = getBooksByAuthorGenre(genre);
-    genreType = 'author';
-  }
+  const { books, match } = resolveGenreBooks(genre);
 
   if (books.length === 0) {
     return (
@@ -74,7 +65,8 @@ const GenrePage = ({ params }: GenrePageProps) => {
           <GenreTitle>{genre}</GenreTitle>
                   <GenreSubtitle>
           {books.length} book{books.length !== 1 ? 's' : ''} found
-          {genreType === 'author' && ` (matched from author genre: ${genre})`}
+          {match === 'author-genre' &&
+            ' (books by authors tagged with this genre)'}
         </GenreSubtitle>
         </GenreHeader>
 

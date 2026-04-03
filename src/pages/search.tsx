@@ -11,6 +11,7 @@ import { Button } from "../components/Button"
 import { TextInput } from "../components/TextInput"
 import styled from "styled-components"
 import { theme } from "../styles/theme"
+import { panelElevated } from "../styles/surfaceStyles"
 import { navigate } from "gatsby"
 
 interface Book {
@@ -166,10 +167,7 @@ export const Head: HeadFC = () => (
 const SearchForm = styled.form`
   margin: ${theme.spacing.xl} 0;
   padding: ${theme.spacing.lg};
-  background: white;
-  border-radius: ${theme.borderRadius.lg};
-  border: 1px solid ${theme.colors.muted};
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  ${panelElevated}
 `;
 
 const FiltersContainer = styled.div`
@@ -202,10 +200,7 @@ const FilterSelect = styled.select`
 const QuickSearchSection = styled.div`
   margin-top: ${theme.spacing.xl};
   padding: ${theme.spacing.lg};
-  background: white;
-  border-radius: ${theme.borderRadius.lg};
-  border: 1px solid ${theme.colors.muted};
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  ${panelElevated}
 `;
 
 const AuthorsGrid = styled.div`

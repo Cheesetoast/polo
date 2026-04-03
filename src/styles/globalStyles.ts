@@ -19,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${theme.colors.background};
     color: ${theme.colors.primary};
     line-height: ${theme.lineHeights.base};
+    font-feature-settings: 'cv02', 'cv03', 'ss01';
   }
 
   a {

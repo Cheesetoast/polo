@@ -1,162 +1,323 @@
-import styled from 'styled-components';
-import { theme } from '../styles/theme';
-import { Text } from './Text';
-import { Button } from './Button';
-import { navigate } from 'gatsby';
-import { GenreLink } from './GenreLink';
+import styled, { css } from "styled-components"
+import { Link } from "gatsby"
+import { theme } from "../styles/theme"
+import { dashboardShell } from "../styles/surfaceStyles"
+import { ModuleInsetPanel } from "./ModuleInsetPanel"
+import { Text } from "./Text"
+import { Eyebrow } from "./Eyebrow"
+import { GenreLink } from "./GenreLink"
 
-interface DashboardStats {
-  finishedBooks: number;
-  currentlyReading: number;
-  wantToRead: number;
-  topGenres: string[];
-  averageRating: string;
+export interface DashboardStats {
+  totalBooks: number
+  topGenres: string[]
+  averageRating: string
+  totalPages: number
+  distinctGenreCount: number
+  topAuthor: {
+    name: string
+    count: number
+    authorId?: string
+  } | null
+  longestBook: { title: string; pages: number } | null
 }
 
 interface DashboardProps {
-  stats: DashboardStats;
-  className?: string;
-  style?: Record<string, any>; // Generic CSS properties
+  stats: DashboardStats
+  /** Stretch to fill a grid/flex column (homepage module layout). */
+  fillHeight?: boolean
+  className?: string
+  style?: Record<string, any>
 }
 
-export const Dashboard = ({ stats, className, style }: DashboardProps) => {
+export const Dashboard = ({
+  stats,
+  fillHeight = false,
+  className,
+  style,
+}: DashboardProps) => {
   return (
-    <DashboardContainer className={className} style={style}>
-      <DashboardTitle variant="h3">
-        Reading Statistics
-      </DashboardTitle>
+    <DashboardContainer
+      $fillHeight={fillHeight}
+      className={className}
+      style={style}
+    >
+      <Eyebrow variant="neutral">Insights</Eyebrow>
+      <DashboardTitle variant="h2">Library by the numbers</DashboardTitle>
 
-      <StatsGrid>
+      <InsightsGrid>
+        <InsightCell>
+          <InsightKicker>Pages in catalog</InsightKicker>
+          <PagesInsightValue>
+            {stats.totalPages > 0
+              ? stats.totalPages.toLocaleString()
+              : "—"}
+          </PagesInsightValue>
+        </InsightCell>
 
-        <StatCard>
-          <StatNumber>{stats.wantToRead}</StatNumber>
-          <StatLabel>Want to Read</StatLabel>
-        </StatCard>
-
-        <StatCard>
-          <StatNumber>{stats.currentlyReading}</StatNumber>
-          <StatLabel>Currently Reading</StatLabel>
-        </StatCard>
-
-        <StatCard>
-          <StatNumber>{stats.finishedBooks}</StatNumber>
-          <StatLabel>Finished</StatLabel>
-        </StatCard>
-      </StatsGrid>
-
-      <StatsDetails>
-        <StatSection>
-          <SectionTitle variant="h4">
-            Top Genres
-          </SectionTitle>
-          {stats.topGenres.length > 0 ? (
+        <InsightCell>
+          <InsightKicker>Top author</InsightKicker>
+          {stats.topAuthor ? (
             <>
-              <GenreList>
-                {stats.topGenres.map((genre, index) => (
-                  <GenreLink 
-                    key={index}
-                    genre={genre}
-                  >
-                    {genre}
-                  </GenreLink>
-                ))}
-              </GenreList>
+              {stats.topAuthor.authorId ? (
+                <InsightAuthorLink to={`/author/${stats.topAuthor.authorId}`}>
+                  {stats.topAuthor.name}
+                </InsightAuthorLink>
+              ) : (
+                <InsightEmphasis>{stats.topAuthor.name}</InsightEmphasis>
+              )}
+              <InsightMeta>
+                {stats.topAuthor.count}{" "}
+                {stats.topAuthor.count === 1 ? "book" : "books"}
+              </InsightMeta>
             </>
           ) : (
-            <Text variant="p" color="secondary">No genre data available</Text>
+            <Text variant="p" color="secondary">
+              —
+            </Text>
+          )}
+        </InsightCell>
+
+        <InsightCell>
+          <InsightKicker>Longest book</InsightKicker>
+          {stats.longestBook ? (
+            <>
+              <InsightEmphasis>{stats.longestBook.title}</InsightEmphasis>
+              <InsightMeta>
+                {stats.longestBook.pages.toLocaleString()} pages
+              </InsightMeta>
+            </>
+          ) : (
+            <Text variant="p" color="secondary">
+              —
+            </Text>
+          )}
+        </InsightCell>
+      </InsightsGrid>
+
+      <StatsDetails $fillHeight={fillHeight}>
+        <StatSection>
+          <SectionTitle variant="h3">Genres</SectionTitle>
+          {stats.distinctGenreCount > 0 ? (
+            <GenreMeta>{stats.distinctGenreCount} distinct genres</GenreMeta>
+          ) : null}
+          {stats.topGenres.length > 0 ? (
+            <GenreList>
+              {stats.topGenres.map((genre, index) => (
+                <GenreLink key={index} genre={genre}>
+                  {genre}
+                </GenreLink>
+              ))}
+            </GenreList>
+          ) : (
+            <Text variant="p" color="secondary">
+              No genre data available
+            </Text>
           )}
         </StatSection>
 
         <StatSection>
-          <SectionTitle variant="h4">
-            Average Rating
-          </SectionTitle>
+          <SectionTitle variant="h3">Average rating</SectionTitle>
           <Text variant="p" size="lg" weight="semibold">
             {stats.averageRating} / 5
           </Text>
+          <RatingHint>Across books with a community or your rating</RatingHint>
         </StatSection>
-
-
       </StatsDetails>
     </DashboardContainer>
-  );
-};
+  )
+}
 
-// Styled Components
-const DashboardContainer = styled.div`
-  background: ${theme.colors.surface};
-  border: 1px solid ${theme.colors.border};
-  border-radius: ${theme.borderRadius.xl};
-  box-shadow: ${theme.shadows.sm};
+const DashboardContainer = styled.div<{
+  $fillHeight: boolean
+}>`
+  ${dashboardShell}
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
   padding: ${theme.spacing.lg};
   margin-bottom: ${theme.spacing.lg};
-`;
 
-const StatsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: ${theme.spacing.md};
-  margin-bottom: ${theme.spacing.lg};
-`;
-
-const StatCard = styled.div`
-  text-align: center;
-  padding: ${theme.spacing.md};
-  background: ${theme.colors.background};
-  border-radius: ${theme.borderRadius.lg};
-  border: 1px solid ${theme.colors.border};
-`;
-
-const StatNumber = styled.div`
-  font-size: ${theme.fontSizes['3xl']};
-  font-weight: ${theme.fontWeights.bold};
-  color: ${theme.colors.primary};
-  margin-bottom: ${theme.spacing.xs};
-`;
-
-const StatLabel = styled.div`
-  font-size: ${theme.fontSizes.sm};
-  color: ${theme.colors.secondary};
-  font-weight: ${theme.fontWeights.medium};
-`;
+  ${({ $fillHeight }) =>
+    $fillHeight &&
+    css`
+      margin-bottom: 0;
+      height: 100%;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    `}
+`
 
 const DashboardTitle = styled(Text)`
-  margin-bottom: ${theme.spacing.md};
-`;
+  margin-bottom: ${theme.spacing.lg};
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 
-const SectionTitle = styled(Text)`
-  margin-bottom: ${theme.spacing.sm};
-`;
+  && {
+    @media (max-width: 599px) {
+      font-size: ${theme.fontSizes['2xl']};
+      line-height: ${theme.lineHeights['2xl']};
+    }
+  }
+`
 
-const StatsDetails = styled.div`
+const InsightsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: ${theme.spacing.lg};
-`;
+  grid-template-columns: 1fr;
+  gap: ${theme.spacing.md};
+  margin: 0 0 ${theme.spacing.lg};
+  min-width: 0;
+  width: 100%;
 
-const StatSection = styled.div`
+  @media (min-width: 560px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+`
+
+const InsightCell = styled(ModuleInsetPanel).attrs({
+  $tone: "neutral" as const,
+  $size: "tile" as const,
+})`
+  container-type: inline-size;
   padding: ${theme.spacing.md};
-  background: ${theme.colors.background};
-  border-radius: ${theme.borderRadius.lg};
-  border: 1px solid ${theme.colors.border};
-`;
+  min-width: 0;
+  max-width: 100%;
+`
+
+const InsightKicker = styled.p`
+  margin: 0 0 ${theme.spacing.sm};
+  font-size: ${theme.fontSizes.xs};
+  font-weight: ${theme.fontWeights.semibold};
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: ${theme.colors.muted};
+  line-height: 1.35;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  hyphens: auto;
+
+  @media (max-width: 399px) {
+    letter-spacing: 0.03em;
+  }
+`
+
+/** Fluid type from cell width so long totals don’t spill out of narrow columns. */
+const PagesInsightValue = styled.div`
+  min-width: 0;
+  max-width: 100%;
+  font-weight: ${theme.fontWeights.bold};
+  letter-spacing: -0.02em;
+  color: ${theme.colors.primary};
+  line-height: 1.12;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  font-size: ${theme.fontSizes.xl};
+
+  @supports (font-size: 1cqi) {
+    font-size: clamp(
+      ${theme.fontSizes.sm},
+      3.25cqi + 0.4rem,
+      ${theme.fontSizes["2xl"]}
+    );
+  }
+`
+
+const InsightEmphasis = styled.p`
+  margin: 0 0 ${theme.spacing.xs};
+  font-size: ${theme.fontSizes.base};
+  font-weight: ${theme.fontWeights.semibold};
+  line-height: ${theme.lineHeights.base};
+  color: ${theme.colors.primary};
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+`
+
+const InsightAuthorLink = styled(Link)`
+  display: inline-block;
+  max-width: 100%;
+  margin: 0 0 ${theme.spacing.xs};
+  font-size: ${theme.fontSizes.base};
+  font-weight: ${theme.fontWeights.semibold};
+  line-height: ${theme.lineHeights.base};
+  color: ${theme.colors.blue[500]};
+  text-decoration: none;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  &:hover {
+    color: ${theme.colors.blue[600]};
+    text-decoration: underline;
+  }
+`
+
+const InsightMeta = styled.p`
+  margin: 0;
+  font-size: ${theme.fontSizes.sm};
+  color: ${theme.colors.secondary};
+  line-height: ${theme.lineHeights.sm};
+`
+
+/** Semantic h3 for outline; size matches former h4 inside inset panels. */
+const SectionTitle = styled(Text)`
+  && {
+    font-size: ${theme.fontSizes["2xl"]};
+    line-height: ${theme.lineHeights["2xl"]};
+    letter-spacing: -0.02em;
+    margin-bottom: ${theme.spacing.md};
+  }
+`
+
+const StatsDetails = styled.div<{ $fillHeight: boolean }>`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${theme.spacing.lg};
+  min-width: 0;
+  width: 100%;
+
+  @media (min-width: 420px) {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr));
+  }
+
+  ${({ $fillHeight }) =>
+    $fillHeight &&
+    css`
+      flex: 1;
+      min-height: 0;
+      align-content: start;
+    `}
+`
+
+const StatSection = styled(ModuleInsetPanel).attrs({
+  $tone: "neutral" as const,
+  $size: "well" as const,
+})`
+  min-width: 0;
+  max-width: 100%;
+  padding: ${theme.spacing.lg};
+`
+
+const GenreMeta = styled.p`
+  margin: 0 0 ${theme.spacing.sm};
+  font-size: ${theme.fontSizes.sm};
+  color: ${theme.colors.secondary};
+`
 
 const GenreList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: ${theme.spacing.xs};
-`;
+`
 
-const GenreTag = styled.span`
-  background: ${theme.colors.primary};
-  color: ${theme.colors.white};
-  padding: ${theme.spacing.xs} ${theme.spacing.sm};
-  border-radius: ${theme.borderRadius.md};
-  font-size: ${theme.fontSizes.sm};
-  font-weight: ${theme.fontWeights.medium};
-`;
-
-const ViewAllGenresButton = styled(Button)`
-  margin-top: ${theme.spacing.sm};
-  width: 100%;
-`;
+const RatingHint = styled.p`
+  margin: ${theme.spacing.sm} 0 0;
+  font-size: ${theme.fontSizes.xs};
+  line-height: ${theme.lineHeights.sm};
+  color: ${theme.colors.muted};
+`

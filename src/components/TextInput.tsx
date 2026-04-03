@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
-import { theme } from '../styles/theme';
+import { rgba, theme } from '../styles/theme';
 
 export type TextInputWidth = 'full' | 'flex';
 
@@ -47,7 +47,7 @@ const StyledTextInput = styled.input.withConfig({
   &:focus {
     outline: none;
     border-color: ${theme.colors.blue[500]};
-    box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
+    box-shadow: 0 0 0 3px ${rgba.indigo(0.2)};
   }
 
   &::placeholder {

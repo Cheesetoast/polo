@@ -1,6 +1,11 @@
-// Design system tokens — neutral surfaces + crisp accent (Apple / Google–inspired)
+/** Brand blue tints for borders, glows, and glass (Apple-style accent). */
+export const rgba = {
+  indigo: (a: number) => `rgba(0, 113, 227, ${a})`,
+} as const;
+
+// Design system tokens — neutral surfaces + crisp accent blue
 export const theme = {
-  fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif`,
+  fontFamily: `'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif`,
 
   // Typography
   fontSizes: {
@@ -13,6 +18,7 @@ export const theme = {
     '3xl': '30px',
     '4xl': '36px',
     '5xl': '48px',
+    '6xl': '56px',
   },
 
   // Font weights
@@ -35,7 +41,8 @@ export const theme = {
     '2xl': 1.45,
     '3xl': 1.35,
     '4xl': 1.2,
-    '5xl': 1.1,
+    '5xl': 1.08,
+    '6xl': 1.05,
   },
 
   // Colors — text / UI neutrals + single accent blue
@@ -76,6 +83,7 @@ export const theme = {
     lg: '24px',
     xl: '32px',
     '2xl': '48px',
+    '3xl': '64px',
   },
 
   // Border radius — slightly rounder for a current UI feel

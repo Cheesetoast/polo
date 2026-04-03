@@ -4,7 +4,7 @@ import {
   type ButtonHTMLAttributes,
 } from 'react';
 import styled, { css } from 'styled-components';
-import { theme } from '../styles/theme';
+import { rgba, theme } from '../styles/theme';
 
 export type ButtonVariant =
   | 'primary'
@@ -116,7 +116,7 @@ const StyledButton = styled.button.withConfig({
           box-shadow: none;
         }
         &:focus-visible {
-          box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.35);
+          box-shadow: 0 0 0 2px ${rgba.indigo(0.35)};
         }
       `;
     }
@@ -153,7 +153,7 @@ const StyledButton = styled.button.withConfig({
           box-shadow: none;
         }
         &:focus-visible {
-          box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.25);
+          box-shadow: 0 0 0 3px ${rgba.indigo(0.25)};
         }
       `;
     }
@@ -182,7 +182,7 @@ const StyledButton = styled.button.withConfig({
           box-shadow: none;
         }
         &:focus-visible {
-          box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.3);
+          box-shadow: 0 0 0 2px ${rgba.indigo(0.3)};
         }
       `;
     }
@@ -241,7 +241,7 @@ const StyledButton = styled.button.withConfig({
           &:hover:not(:disabled) {
             background-color: ${theme.colors.blue[600]};
             transform: translateY(-1px);
-            box-shadow: ${theme.shadows.md};
+            box-shadow: 0 4px 12px rgba(0, 113, 227, 0.35);
           }
         `;
     }
@@ -257,12 +257,13 @@ const StyledButton = styled.button.withConfig({
     `}
 
   &:focus-visible {
-    ${({ variant }) =>
-      variant !== 'ghost' &&
-      variant !== 'pagination' &&
-      variant !== 'muted' &&
-      css`
-        box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.35);
-      `}
+    ${({ variant = 'primary' }) => {
+      if (variant === 'ghost' || variant === 'pagination' || variant === 'muted') {
+        return css``;
+      }
+      return css`
+        box-shadow: 0 0 0 3px ${rgba.indigo(0.35)};
+      `;
+    }}
   }
 `;

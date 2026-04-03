@@ -43,7 +43,7 @@ describe('page smoke (initial render)', () => {
 
   it('renders home (index)', () => {
     render(<IndexPage />);
-    expect(screen.getByText('Find Your Next Great Read')).toBeInTheDocument();
+    expect(screen.getByText('Find your next great read')).toBeInTheDocument();
   });
 
   it('renders search', () => {
@@ -109,6 +109,14 @@ describe('page smoke (initial render)', () => {
     expect(
       screen.getByRole('heading', { level: 1, name: 'Fiction' })
     ).toBeInTheDocument();
+  });
+
+  it('renders genre page for author-only genre (books via author tags)', () => {
+    render(<GenrePage params={{ genre: 'Social Commentary' }} />);
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'Social Commentary' })
+    ).toBeInTheDocument();
+    expect(screen.queryByText('No Books Found')).not.toBeInTheDocument();
   });
 
   it('renders author page for a known id', () => {

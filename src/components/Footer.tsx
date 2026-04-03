@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
 import { Text } from './Text';
-import { theme } from '../styles/theme';
+import { footerWashDrift } from '../styles/motion';
+import { rgba, theme } from '../styles/theme';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -111,15 +112,35 @@ export default Footer;
 
 // Styled Components
 const FooterContainer = styled.footer`
+  flex-shrink: 0;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background-color: ${theme.colors.surface};
+  background-image: linear-gradient(
+    105deg,
+    ${rgba.indigo(0.04)} 0%,
+    transparent 30%,
+    rgba(0, 0, 0, 0.02) 52%,
+    transparent 72%,
+    ${rgba.indigo(0.035)} 100%
+  );
+  background-size: 240% 100%;
+  background-position: 0% 50%;
+  animation: ${footerWashDrift} 48s ease-in-out infinite alternate;
   color: ${theme.colors.primary};
   border-top: 1px solid ${theme.colors.border};
   padding: ${theme.spacing['2xl']} 0 ${theme.spacing.xl};
-  margin-top: auto;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    background-size: 100% 100%;
+    background-position: 50% 50%;
+  }
 `;
 
 const FooterContent = styled.div`
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 2rem;
   display: grid;
@@ -152,7 +173,7 @@ const FooterLink = styled(Link)`
   transition: color 0.2s ease;
 
   &:hover {
-    color: ${theme.colors.blue[500]};
+    color: ${theme.colors.blue[600]};
   }
 `;
 
@@ -163,7 +184,7 @@ const FooterExternalLink = styled.a`
   transition: color 0.2s ease;
 
   &:hover {
-    color: ${theme.colors.blue[500]};
+    color: ${theme.colors.blue[600]};
   }
 `;
 

@@ -1,191 +1,275 @@
-import React, { useEffect, useMemo } from 'react';
-import { navigate } from 'gatsby';
-import styled from 'styled-components';
-import Layout from '../components/Layout';
-import { ContentWrapper } from '../components/ContentWrapper';
-import { Text } from '../components/Text';
-import { BookBoardClient } from '../components/BookBoardClient';
-import { Button } from '../components/Button';
-import { useBookStatus } from '../hooks/useBookStatus';
-import booksData from '../data/books.json';
-import { theme } from '../styles/theme';
+import { useMemo } from "react"
+import { navigate } from "gatsby"
+import styled from "styled-components"
+import Layout from "../components/Layout"
+import { ContentWrapper } from "../components/ContentWrapper"
+import { Text } from "../components/Text"
+import { Eyebrow } from "../components/Eyebrow"
+import { BookBoardClient } from "../components/BookBoardClient"
+import { Button } from "../components/Button"
+import { useBookStatus } from "../hooks/useBookStatus"
+import booksData from "../data/books.json"
+import { theme } from "../styles/theme"
+import {
+  sectionSurfaceProminent,
+  sectionSurfaceSoft,
+} from "../styles/surfaceStyles"
 
-// Move booksData to a constant outside the component to prevent re-creation on each render
-const BOOKS_DATA = booksData;
+const BOOKS_DATA = booksData
 
 const BookshelfPage = () => {
-  const { booksWithStatus, updateBookStatus, resetStatuses, clearLocalStorage } = useBookStatus(BOOKS_DATA);
+  const { booksWithStatus, updateBookStatus, resetStatuses, clearLocalStorage } =
+    useBookStatus(BOOKS_DATA)
 
-  // Filter out books with null status (unassigned books)
-  const booksWithAssignedStatus = booksWithStatus.filter(book => book.status !== null);
+  const booksWithAssignedStatus = useMemo(
+    () => booksWithStatus.filter((book) => book.status !== null),
+    [booksWithStatus]
+  )
 
-  const handleBookStatusChange = (isbn: string, status: any) => {
-    updateBookStatus(isbn, status);
-  };
-
-  const handleGoToSearch = () => {
-    navigate('/search');
-  };
-
-  const handleGoToHome = () => {
-    navigate('/');
-  };
+  const counts = useMemo(() => {
+    const list = booksWithAssignedStatus
+    return {
+      total: list.length,
+      want: list.filter((b) => b.status === "want-to-read").length,
+      reading: list.filter((b) => b.status === "currently-reading").length,
+      finished: list.filter((b) => b.status === "finished").length,
+    }
+  }, [booksWithAssignedStatus])
 
   return (
     <Layout>
-      <ContentWrapper>
-        <PageHeader>
-          <Text variant="h1">My Bookshelf</Text>
-          <Text variant="p" color="secondary">
-            Organize your reading journey with this visual Kanban board
-          </Text>
-        </PageHeader>
+      <main>
+        <ContentWrapper>
+          <PageIntro>
+            <Eyebrow variant="accent">Your shelf</Eyebrow>
+            <Text variant="h1">My Bookshelf</Text>
+            <IntroLead>
+              Organize your reading journey with simple columns that match your home
+              dashboard.
+            </IntroLead>
+          </PageIntro>
 
-        <StatsSection>
-          <StatCard>
-            <Text variant="h3" weight="bold">{booksWithAssignedStatus.length}</Text>
-            <Text variant="caption" color="secondary">Books Organized</Text>
-          </StatCard>
-          <StatCard>
-            <Text variant="h3" weight="bold">
-              {booksWithAssignedStatus.filter(book => book.status === 'want-to-read').length}
-            </Text>
-            <Text variant="caption" color="secondary">Want to Read</Text>
-          </StatCard>
-          <StatCard>
-            <Text variant="h3" weight="bold">
-              {booksWithAssignedStatus.filter(book => book.status === 'currently-reading').length}
-            </Text>
-            <Text variant="caption" color="secondary">Currently Reading</Text>
-          </StatCard>
-          <StatCard>
-            <Text variant="h3" weight="bold">
-              {booksWithAssignedStatus.filter(book => book.status === 'finished').length}
-            </Text>
-            <Text variant="caption" color="secondary">Finished</Text>
-          </StatCard>
-        </StatsSection>
+          <BoardSection>
+            <BoardSectionLead>
+              <Eyebrow variant="neutral">Board</Eyebrow>
+              <Text variant="h2">Reading columns</Text>
+              <Text variant="p" color="secondary">
+                Set status per book. Changes stay in this browser until you reset.
+              </Text>
+            </BoardSectionLead>
 
-        <ActionSection>
-          <Button onClick={handleGoToSearch} variant="primary">
-            Add More Books
-          </Button>
-          <Button onClick={handleGoToHome} variant="secondary">
-            Back to Dashboard
-          </Button>
-        </ActionSection>
+            {booksWithAssignedStatus.length > 0 ? (
+              <BoardMount>
+                <BookBoardClient
+                  booksWithStatus={booksWithStatus}
+                  updateBookStatus={updateBookStatus}
+                />
+              </BoardMount>
+            ) : (
+              <EmptyState>
+                <Text variant="h3">No books organized yet</Text>
+                <Text variant="p" color="secondary">
+                  Start from search. Assign want to read, reading, or finished and the
+                  columns will fill in.
+                </Text>
+                <Button type="button" onClick={() => navigate("/search")} variant="primary">
+                  Find your next book
+                </Button>
+              </EmptyState>
+            )}
 
-                  {booksWithAssignedStatus.length > 0 ? (
-            <BookBoardClient
-              booksWithStatus={booksWithStatus}
-              updateBookStatus={updateBookStatus}
-            />
-          ) : (
-          <EmptyState>
-            <Text variant="h2" align="center">No books organized yet</Text>
-            <Text variant="p" color="secondary" align="center">
-              Start by adding books to your reading list from the search page
+            <StatsGrid>
+              <StatCard>
+                <StatValue>{counts.total}</StatValue>
+                <StatLabel>Organized</StatLabel>
+              </StatCard>
+              <StatCard>
+                <StatValue>{counts.want}</StatValue>
+                <StatLabel>Want to read</StatLabel>
+              </StatCard>
+              <StatCard>
+                <StatValue>{counts.reading}</StatValue>
+                <StatLabel>Reading</StatLabel>
+              </StatCard>
+              <StatCard>
+                <StatValue>{counts.finished}</StatValue>
+                <StatLabel>Finished</StatLabel>
+              </StatCard>
+            </StatsGrid>
+
+            <ActionRow>
+              <Button type="button" onClick={() => navigate("/search")} variant="primary">
+                Add more books
+              </Button>
+              <Button type="button" onClick={() => navigate("/")} variant="outline">
+                Back to home
+              </Button>
+            </ActionRow>
+          </BoardSection>
+
+          <ManagementSection>
+            <Eyebrow variant="neutral">Management</Eyebrow>
+            <Text variant="h3">Bookshelf management</Text>
+            <Text variant="p" color="secondary">
+              Reset all statuses or clear stored data if you want a clean slate.
             </Text>
-            <Button onClick={handleGoToSearch} variant="primary" size="large">
-              Find Your Next Book
-            </Button>
-          </EmptyState>
-        )}
-
-        <ManagementSection>
-          <Text variant="h3">Bookshelf Management</Text>
-          <Text variant="p" color="secondary">
-            Manage your reading organization and reset statuses if needed
-          </Text>
-          <ButtonContainer>
-            <Button onClick={resetStatuses} variant="outline">
-              Reset All Statuses
-            </Button>
-            <Button onClick={clearLocalStorage} variant="outline">
-              Clear Local Storage
-            </Button>
-          </ButtonContainer>
-        </ManagementSection>
-      </ContentWrapper>
+            <ManagementButtons>
+              <Button type="button" onClick={resetStatuses} variant="outline">
+                Reset all statuses
+              </Button>
+              <Button type="button" onClick={clearLocalStorage} variant="outline">
+                Clear local storage
+              </Button>
+            </ManagementButtons>
+          </ManagementSection>
+        </ContentWrapper>
+      </main>
     </Layout>
-  );
-};
+  )
+}
 
-export default BookshelfPage;
+export default BookshelfPage
 
-// Styled Components
-const PageHeader = styled.div`
-  text-align: center;
-  margin-bottom: ${theme.spacing.xl};
-  
-  h1 {
-    margin-bottom: ${theme.spacing.sm};
+const PageIntro = styled.div`
+  width: 100%;
+  max-width: 42rem;
+  margin: 0 0 ${theme.spacing.lg};
+  padding-top: ${theme.spacing.xs};
+  text-align: left;
+
+  @media (min-width: 900px) {
+    max-width: 720px;
+    margin: 0 0 ${theme.spacing.xl};
+    padding-top: ${theme.spacing.sm};
   }
-`;
+`
 
-const StatsSection = styled.div`
+const IntroLead = styled.p`
+  margin: ${theme.spacing.sm} 0 0;
+  font-size: ${theme.fontSizes.lg};
+  line-height: ${theme.lineHeights.lg};
+  color: ${theme.colors.secondary};
+  max-width: 52ch;
+`
+
+const BoardSection = styled.section`
+  margin: ${theme.spacing.md} 0 ${theme.spacing.xl};
+  padding: ${theme.spacing.md} ${theme.spacing.md} ${theme.spacing.lg};
+  text-align: left;
+  ${sectionSurfaceProminent}
+
+  @media (min-width: 768px) {
+    padding: ${theme.spacing.lg} ${theme.spacing.lg} ${theme.spacing.xl};
+  }
+`
+
+const BoardSectionLead = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.xs};
+  margin-bottom: ${theme.spacing.md};
+`
+
+const StatsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: ${theme.spacing.md};
-  margin-bottom: ${theme.spacing.xl};
-`;
+  grid-template-columns: 1fr;
+  gap: ${theme.spacing.sm};
+  margin: ${theme.spacing.lg} 0 ${theme.spacing.md};
+  width: 100%;
+
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+`
 
 const StatCard = styled.div`
-  background: ${theme.colors.white};
-  border: 1px solid ${theme.colors.gray[600]};
-  border-radius: ${theme.borderRadius.md};
-  padding: ${theme.spacing.md};
   text-align: center;
-  
-  h3 {
-    color: ${theme.colors.primary};
-    margin-bottom: ${theme.spacing.xs};
-  }
-`;
+  padding: ${theme.spacing.md} ${theme.spacing.sm};
+  border-radius: ${theme.borderRadius.md};
+  background: ${theme.colors.surface};
+  border: 1px solid ${theme.colors.border};
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+`
 
-const ActionSection = styled.div`
+const StatValue = styled.div`
+  font-size: ${theme.fontSizes["3xl"]};
+  font-weight: ${theme.fontWeights.semibold};
+  color: ${theme.colors.primary};
+  line-height: 1.15;
+`
+
+const StatLabel = styled.div`
+  margin-top: ${theme.spacing.xs};
+  font-size: ${theme.fontSizes.sm};
+  color: ${theme.colors.secondary};
+  font-weight: ${theme.fontWeights.medium};
+`
+
+const ActionRow = styled.div`
   display: flex;
-  gap: ${theme.spacing.md};
-  justify-content: center;
-  margin-bottom: ${theme.spacing.xl};
   flex-wrap: wrap;
-`;
+  gap: ${theme.spacing.sm};
+  margin-bottom: 0;
+
+  @media (max-width: 899px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+`
+
+const BoardMount = styled.div`
+  min-width: 0;
+`
 
 const EmptyState = styled.div`
+  margin-top: 0;
+  padding: ${theme.spacing.xl} ${theme.spacing.md};
   text-align: center;
-  padding: ${theme.spacing.xl};
-  background: ${theme.colors.muted}10;
   border-radius: ${theme.borderRadius.lg};
-  margin: ${theme.spacing.xl} 0;
-  
-  h2 {
-    margin-bottom: ${theme.spacing.md};
-  }
-  
-  p {
-    margin-bottom: ${theme.spacing.lg};
-  }
-`;
+  background: rgba(148, 163, 184, 0.1);
+  border: 1px solid ${theme.colors.border};
 
-const ManagementSection = styled.div`
-  margin-top: ${theme.spacing.xl};
-  padding: ${theme.spacing.lg};
-  background: ${theme.colors.muted}10;
-  border-radius: ${theme.borderRadius.lg};
-  text-align: center;
-  
   h3 {
     margin-bottom: ${theme.spacing.sm};
   }
-  
+
   p {
     margin-bottom: ${theme.spacing.lg};
+    max-width: 36rem;
+    margin-left: auto;
+    margin-right: auto;
   }
-`;
 
-const ButtonContainer = styled.div`
+  @media (max-width: 899px) {
+    button {
+      width: 100%;
+    }
+  }
+`
+
+const ManagementSection = styled.section`
+  margin: ${theme.spacing.xl} 0;
+  padding: ${theme.spacing.lg} ${theme.spacing.md};
+  text-align: left;
+  ${sectionSurfaceSoft}
+
+  @media (min-width: 768px) {
+    padding: ${theme.spacing.xl} ${theme.spacing.lg};
+  }
+`
+
+const ManagementButtons = styled.div`
   display: flex;
-  gap: ${theme.spacing.md};
-  justify-content: center;
   flex-wrap: wrap;
-`;
+  gap: ${theme.spacing.sm};
+  margin-top: ${theme.spacing.md};
+
+  @media (max-width: 899px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+`

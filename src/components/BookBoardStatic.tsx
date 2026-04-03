@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import { navigate } from 'gatsby';
-import { theme } from '../styles/theme';
+import { rgba, theme } from '../styles/theme';
 import { Text } from './Text';
 import { ReadingStatus } from '../types/reading';
 
@@ -43,16 +43,6 @@ export const BookBoardStatic = React.memo(
 
     return (
       <BoardContainer>
-        <BoardTitle>
-          My Reading Board
-          {getTotalAssignedBooks() > 0 && (
-            <BoardSubtitle>
-              {getTotalAssignedBooks()} book
-              {getTotalAssignedBooks() !== 1 ? 's' : ''} organized
-            </BoardSubtitle>
-          )}
-        </BoardTitle>
-
         {getTotalAssignedBooks() === 0 ? (
           <EmptyState>
             <div>
@@ -166,22 +156,6 @@ const BoardContainer = styled.div`
   min-height: 400px;
 `;
 
-const BoardTitle = styled.h2`
-  text-align: center;
-  font-size: ${theme.fontSizes.xl};
-  font-weight: ${theme.fontWeights.bold};
-  color: ${theme.colors.primary};
-  margin-bottom: ${theme.spacing.md};
-`;
-
-const BoardSubtitle = styled.div`
-  text-align: center;
-  font-size: ${theme.fontSizes.sm};
-  font-weight: ${theme.fontWeights.normal};
-  color: ${theme.colors.secondary};
-  margin-top: ${theme.spacing.xs};
-`;
-
 const ColumnsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -244,7 +218,7 @@ const ColumnContent = styled.div<{ $isDropTarget?: boolean }>`
   ${({ $isDropTarget }) =>
     $isDropTarget &&
     css`
-      background: rgba(0, 113, 227, 0.06);
+      background: ${rgba.indigo(0.08)};
       border-color: ${theme.colors.blue[500]};
       box-shadow: inset 0 0 0 1px ${theme.colors.blue[500]};
     `}
@@ -344,7 +318,7 @@ const StatusSelect = styled.select`
   &:focus {
     outline: none;
     border-color: ${theme.colors.blue[500]};
-    box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.2);
+    box-shadow: 0 0 0 2px ${rgba.indigo(0.25)};
   }
 `;
 

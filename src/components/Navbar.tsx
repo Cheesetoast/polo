@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 import { SITE_CONFIG } from '../constants';
-import { theme } from '../styles/theme';
+import { rgba, theme } from '../styles/theme';
 
 interface NavItem {
   label: string;
@@ -14,9 +14,13 @@ interface NavbarProps {
   transparent?: boolean;
 }
 
+const MOBILE_NAV_MQ = '(max-width: 768px)';
+
 const Navbar = ({ transparent = false }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  /** Avoid animating menu open/opacity when crossing the mobile breakpoint (resize flash). */
+  const [suppressMobileMenuTransition, setSuppressMobileMenuTransition] = useState(false);
 
   const navItems: NavItem[] = [
     { label: 'Home', href: '/' },
@@ -44,6 +48,23 @@ const Navbar = ({ transparent = false }: NavbarProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return;
+    const mq = window.matchMedia(MOBILE_NAV_MQ);
+    if (typeof mq.addEventListener !== 'function') return;
+
+    const onViewportChange = () => {
+      setSuppressMobileMenuTransition(true);
+      setIsOpen(false);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => setSuppressMobileMenuTransition(false));
+      });
+    };
+
+    mq.addEventListener('change', onViewportChange);
+    return () => mq.removeEventListener('change', onViewportChange);
+  }, []);
+
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const closeMenu = () => setIsOpen(false);
@@ -55,7 +76,7 @@ const Navbar = ({ transparent = false }: NavbarProps) => {
           {SITE_CONFIG.SITE_NAME}
         </LogoLink>
 
-        <NavLinks isOpen={isOpen}>
+        <NavLinks isOpen={isOpen} suppressTransition={suppressMobileMenuTransition}>
           {navItems.map((item) => (
             <NavLink key={item.href}>
               {item.external ? (
@@ -102,19 +123,21 @@ const NavContainer = styled.nav.withConfig({
   background: ${({ transparent, scrolled }) =>
     transparent && !scrolled
       ? 'transparent'
-      : 'rgba(255, 255, 255, 0.72)'};
+      : 'linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 250, 255, 0.88) 100%)'};
   backdrop-filter: ${({ transparent, scrolled }) =>
     transparent && !scrolled ? 'none' : 'blur(20px) saturate(180%)'};
   -webkit-backdrop-filter: ${({ transparent, scrolled }) =>
     transparent && !scrolled ? 'none' : 'blur(20px) saturate(180%)'};
   border-bottom: ${({ transparent, scrolled }) =>
-    transparent && !scrolled ? 'none' : `1px solid ${theme.colors.border}`};
+    transparent && !scrolled ? 'none' : `1px solid ${rgba.indigo(0.14)}`};
   box-shadow: ${({ transparent, scrolled }) =>
-    transparent && !scrolled ? 'none' : theme.shadows.nav};
+    transparent && !scrolled
+      ? 'none'
+      : `0 1px 0 rgba(255, 255, 255, 0.65), 0 4px 24px ${rgba.indigo(0.08)}`};
 `;
 
 const NavContent = styled.div`
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 2rem;
   display: flex;
@@ -142,8 +165,8 @@ const LogoLink = styled(Link)`
 `;
 
 const NavLinks = styled.ul.withConfig({
-  shouldForwardProp: (prop) => prop !== 'isOpen',
-})<{ isOpen: boolean }>`
+  shouldForwardProp: (prop) => prop !== 'isOpen' && prop !== 'suppressTransition',
+})<{ isOpen: boolean; suppressTransition?: boolean }>`
   display: flex;
   list-style: none;
   margin: 0;
@@ -155,16 +178,29 @@ const NavLinks = styled.ul.withConfig({
     top: 70px;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.92);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.97) 0%,
+      rgba(248, 248, 250, 0.94) 45%,
+      rgba(245, 245, 247, 0.9) 100%
+    );
     backdrop-filter: blur(20px) saturate(180%);
     flex-direction: column;
     align-items: center;
     padding: 2rem 0;
     gap: 1.5rem;
-    transform: ${({ isOpen }) => isOpen ? 'translateY(0)' : 'translateY(-100%)'};
-    opacity: ${({ isOpen }) => isOpen ? '1' : '0'};
-    visibility: ${({ isOpen }) => isOpen ? 'visible' : 'hidden'};
-    transition: all 0.3s ease;
+    transform: ${({ isOpen }) => (isOpen ? 'translateY(0)' : 'translateY(-100%)')};
+    opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
+    visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
+    transition: ${({ suppressTransition }) =>
+      suppressTransition
+        ? 'none'
+        : 'transform 0.3s ease, opacity 0.3s ease, visibility 0s linear 0.3s'};
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
     border-bottom: 1px solid ${theme.colors.border};
   }
 `;
@@ -177,7 +213,8 @@ const NavLinkAnchor = styled.a`
   color: ${theme.colors.secondary};
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.01em;
   font-family: ${theme.fontFamily};
   transition: color 0.2s ease;
   position: relative;
@@ -194,7 +231,7 @@ const NavLinkAnchor = styled.a`
     width: 0;
     height: 2px;
     background: ${theme.colors.blue[500]};
-    border-radius: 1px;
+    border-radius: 2px;
     transition: width 0.2s ease;
   }
 
@@ -215,7 +252,8 @@ const NavLinkGatsby = styled(Link)`
   color: ${theme.colors.secondary};
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.01em;
   font-family: ${theme.fontFamily};
   transition: color 0.2s ease;
   position: relative;
@@ -232,7 +270,7 @@ const NavLinkGatsby = styled(Link)`
     width: 0;
     height: 2px;
     background: ${theme.colors.blue[500]};
-    border-radius: 1px;
+    border-radius: 2px;
     transition: width 0.2s ease;
   }
 

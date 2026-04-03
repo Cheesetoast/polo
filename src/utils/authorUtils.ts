@@ -130,30 +130,69 @@ export const getAllBookGenres = (): string[] => {
 };
 
 /**
- * Get all books by genre
+ * Get all books by genre (exact string match on book.genres only)
  */
 export const getBooksByGenre = (genre: string): BookWithAuthorId[] => {
   return books.filter(book => book.genres.includes(genre));
 };
 
+export type GenreMatchKind = 'book-exact' | 'book-fuzzy' | 'author-genre';
+
+function dedupeBooksByIsbn(list: BookWithAuthorId[]): BookWithAuthorId[] {
+  const seen = new Set<string>();
+  return list.filter(b => {
+    if (seen.has(b.isbn)) return false;
+    seen.add(b.isbn);
+    return true;
+  });
+}
+
 /**
- * Get all books by author genre (with fuzzy matching)
+ * Resolve books for a genre label: exact book tag, fuzzy book tag, then authors
+ * tagged with that genre (case-insensitive exact match on author.genres).
  */
-export const getBooksByAuthorGenre = (authorGenre: string): BookWithAuthorId[] => {
-  // First try exact match
-  let matchingBooks = books.filter(book => book.genres.includes(authorGenre));
-  
-  // If no exact match, try fuzzy matching
-  if (matchingBooks.length === 0) {
-    const lowerAuthorGenre = authorGenre.toLowerCase();
-    matchingBooks = books.filter(book => {
-      return book.genres.some(bookGenre => {
-        const lowerBookGenre = bookGenre.toLowerCase();
-        return lowerBookGenre.includes(lowerAuthorGenre) || 
-               lowerAuthorGenre.includes(lowerBookGenre);
-      });
-    });
+export const resolveGenreBooks = (
+  genre: string
+): { books: BookWithAuthorId[]; match: GenreMatchKind | 'none' } => {
+  const g = genre.trim();
+  if (!g) return { books: [], match: 'none' };
+
+  const exact = books.filter(book => book.genres.includes(g));
+  if (exact.length > 0) {
+    return {
+      books: dedupeBooksByIsbn(exact as BookWithAuthorId[]),
+      match: 'book-exact'
+    };
   }
-  
-  return matchingBooks;
+
+  const lowerG = g.toLowerCase();
+  const fuzzy = books.filter(book =>
+    book.genres.some(bookGenre => {
+      const lb = bookGenre.toLowerCase();
+      return lb.includes(lowerG) || lowerG.includes(lb);
+    })
+  );
+  if (fuzzy.length > 0) {
+    return {
+      books: dedupeBooksByIsbn(fuzzy as BookWithAuthorId[]),
+      match: 'book-fuzzy'
+    };
+  }
+
+  const authorIds = new Set(
+    authors
+      .filter(a => a.genres.some(ag => ag.toLowerCase() === lowerG))
+      .map(a => a.id)
+  );
+  const byAuthorTag = books.filter(
+    b => b.authorId && authorIds.has(b.authorId)
+  ) as BookWithAuthorId[];
+  if (byAuthorTag.length > 0) {
+    return {
+      books: dedupeBooksByIsbn(byAuthorTag),
+      match: 'author-genre'
+    };
+  }
+
+  return { books: [], match: 'none' };
 };

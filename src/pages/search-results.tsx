@@ -14,6 +14,7 @@ import { Button } from "../components/Button"
 import { TextInput } from "../components/TextInput"
 import styled from "styled-components"
 import { theme } from "../styles/theme"
+import { panelSearchStrip } from "../styles/surfaceStyles"
 
 interface Book {
   title: string;
@@ -216,6 +217,8 @@ export const Head: HeadFC = () => (
 // Styled Components
 const SearchContainer = styled.div`
   margin-bottom: ${theme.spacing.lg};
+  padding: ${theme.spacing.lg};
+  ${panelSearchStrip}
 `;
 
 const FiltersContainer = styled.div`
