@@ -39,12 +39,6 @@ jest.mock('../../components/Button', () => ({
   ),
 }));
 
-jest.mock('../../components/StatusIndicator', () => ({
-  StatusIndicator: ({ status, size }: { status: string; size: string }) => (
-    <div data-testid="status-indicator" data-status={status} data-size={size} />
-  ),
-}));
-
 jest.mock('../../components/ImageBlock', () => ({
   ImageBlock: ({ image, alt }: { image: any; alt: string }) => (
     <img data-testid="image" alt={alt} />
@@ -121,17 +115,6 @@ describe('BookPage', () => {
     expect(screen.getByText('Book Not Found')).toBeInTheDocument();
     expect(screen.getByText("The book you're looking for doesn't exist.")).toBeInTheDocument();
     expect(screen.getByText('Back to Search')).toBeInTheDocument();
-  });
-
-  it('displays status indicator', () => {
-    const params = { slug: '9781234567890' };
-    
-    render(<BookPage params={params} />);
-
-    const statusIndicator = screen.getByTestId('status-indicator');
-    expect(statusIndicator).toBeInTheDocument();
-    expect(statusIndicator).toHaveAttribute('data-status', 'finished');
-    expect(statusIndicator).toHaveAttribute('data-size', 'large');
   });
 
   it('displays progress bar when progress is available', () => {

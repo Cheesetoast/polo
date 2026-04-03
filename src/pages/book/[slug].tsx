@@ -1,21 +1,20 @@
 import type { HeadFC, PageProps } from "gatsby"
 import { useStaticQuery, graphql } from "gatsby"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Layout from "../../components/Layout"
 import SEO from "../../components/SEO"
 import { Text } from "../../components/Text"
 import { ContentWrapper } from "../../components/ContentWrapper"
 import { Button } from "../../components/Button"
 import { BookProgressBar } from "../../components/BookProgressBar"
-import { StatusIndicator } from "../../components/StatusIndicator"
 import { ImageBlock } from "../../components/ImageBlock"
 import { AuthorLink } from "../../components/AuthorLink"
 import { useBookStatus } from "../../hooks/useBookStatus"
 import { ReadingStatus } from "../../types/reading"
 import booksData from "../../data/books.json"
 import { navigate } from "gatsby"
-import styled from "styled-components"
-import { theme } from "../../styles/theme"
+import styled, { css } from "styled-components"
+import { rgba, theme } from "../../styles/theme"
 import { bookPageShell } from "../../styles/surfaceStyles"
 
 interface Book {
@@ -42,6 +41,16 @@ interface BookPageProps extends PageProps {
   };
 }
 
+type BookPageStatusChoice = ReadingStatus | "none"
+
+const BOOK_PAGE_STATUS_CHOICES: { value: BookPageStatusChoice; label: string }[] =
+  [
+    { value: "none", label: "No Status" },
+    { value: "want-to-read", label: "Want to Read" },
+    { value: "currently-reading", label: "Currently Reading" },
+    { value: "finished", label: "Finished" },
+  ]
+
 const BookPage = ({ params }: BookPageProps) => {
   const { slug } = params;
   
@@ -52,6 +61,18 @@ const BookPage = ({ params }: BookPageProps) => {
   const bookWithStatus = booksWithStatus.find(b => b.isbn === book?.isbn);
 
   const [showFinishConfirm, setShowFinishConfirm] = useState(false);
+  const [ratingJustSaved, setRatingJustSaved] = useState(false);
+  const ratingHighlightTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  );
+
+  useEffect(() => {
+    return () => {
+      if (ratingHighlightTimeoutRef.current !== null) {
+        clearTimeout(ratingHighlightTimeoutRef.current);
+      }
+    };
+  }, []);
   
   // Star Rating Component
   const StarRating = ({ rating, onRatingChange }: { rating: number; onRatingChange: (rating: number) => void }) => {
@@ -95,7 +116,7 @@ const BookPage = ({ params }: BookPageProps) => {
     };
     
     return (
-      <StarContainer>
+      <StarContainer aria-labelledby="book-page-your-rating-label">
         {[0, 1, 2, 3, 4].map(renderStar)}
       </StarContainer>
     );
@@ -143,68 +164,102 @@ const BookPage = ({ params }: BookPageProps) => {
     return status;
   };
 
+  const handleStatusChoice = (choice: BookPageStatusChoice) => {
+    if (choice === "none") {
+      updateBookStatus(book.isbn, null);
+      return;
+    }
+    if (choice === "finished") {
+      if (bookWithStatus?.status === "finished") return;
+      setShowFinishConfirm(true);
+      return;
+    }
+    updateBookStatus(book.isbn, choice);
+  };
+
   return (
     <Layout>
-      <main>
+      <BookPageMain>
         <ContentWrapper>
-          <Button
+          <BookBackButton
             type="button"
             variant="ghost"
             onClick={() => navigate('/search')}
-            style={{ marginBottom: theme.spacing.lg }}
           >
             ← Back to Search
-          </Button>
+          </BookBackButton>
 
           <BookContainer>
             <BookHeader>
-              <div>
-                <Text variant="h1">{book.title}</Text>
-                <Text variant="h3" color="secondary">
+              <BookHeaderText>
+                <Text variant="h1" align="center">
+                  {book.title}
+                </Text>
+                <Text variant="h3" color="secondary" align="center">
                   By <AuthorLink authorName={book.author}>{book.author}</AuthorLink>
                 </Text>
-              </div>
+              </BookHeaderText>
             </BookHeader>
-
-            <StatusIndicatorRow>
-              <StatusIndicator 
-                status={bookWithStatus?.status || null} 
-                size="large" 
-              />
-            </StatusIndicatorRow>
 
             <StatusContainer>
               <StatusLabelGroup>
-                <FieldLabel variant="caption" color="secondary">
+                <FieldLabel
+                  id="book-page-status-label"
+                  variant="caption"
+                  color="secondary"
+                >
                   Update Status:
                 </FieldLabel>
 
-                <StatusSelector
-                  value={bookWithStatus?.status || ""}
-                  onChange={(e) => {
-                    const newStatus = e.target.value as ReadingStatus | "";
-
-                    if (newStatus === "") {
-                      // Clear the status by setting it to null
-                      updateBookStatus(book.isbn, null);
-                      return;
-                    }
-
-                    if (newStatus === "finished") {
-                      // Show custom confirmation modal instead of using window.confirm
-                      setShowFinishConfirm(true);
-                      return;
-                    }
-
-                    // Update to the selected status for other options
-                    updateBookStatus(book.isbn, newStatus as ReadingStatus);
-                  }}
+                <StatusToggleGroup
+                  role="radiogroup"
+                  aria-labelledby="book-page-status-label"
                 >
-                  <option value="">No Status</option>
-                  <option value="want-to-read">Want to Read</option>
-                  <option value="currently-reading">Currently Reading</option>
-                  <option value="finished">Finished</option>
-                </StatusSelector>
+                  {BOOK_PAGE_STATUS_CHOICES.map(({ value, label }) => {
+                    const current = bookWithStatus?.status ?? null;
+                    const selected =
+                      value === "none"
+                        ? current === null
+                        : current === value;
+                    return (
+                      <StatusToggle
+                        key={value}
+                        id={`book-page-status-${value}`}
+                        type="button"
+                        role="radio"
+                        aria-checked={selected}
+                        $selected={selected}
+                        tabIndex={selected ? 0 : -1}
+                        onClick={() => handleStatusChoice(value)}
+                        onKeyDown={(e) => {
+                          if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") {
+                            return;
+                          }
+                          e.preventDefault();
+                          const i = BOOK_PAGE_STATUS_CHOICES.findIndex(
+                            (c) => c.value === value
+                          );
+                          const next =
+                            e.key === "ArrowRight"
+                              ? Math.min(
+                                  i + 1,
+                                  BOOK_PAGE_STATUS_CHOICES.length - 1
+                                )
+                              : Math.max(i - 1, 0);
+                          const nextValue = BOOK_PAGE_STATUS_CHOICES[next].value;
+                          handleStatusChoice(nextValue);
+                          requestAnimationFrame(() => {
+                            document
+                              .getElementById(`book-page-status-${nextValue}`)
+                              ?.focus();
+                          });
+                        }}
+                      >
+                        {label}
+                      </StatusToggle>
+                    );
+                  })}
+                </StatusToggleGroup>
               </StatusLabelGroup>
               
               {/* Progress Input */}
@@ -225,34 +280,58 @@ const BookPage = ({ params }: BookPageProps) => {
                   />
                 </ProgressControl>
               )}
-
-              {/* User Rating Input */}
-              <RatingSection>
-                <StarRating
-                  rating={bookWithStatus?.userRating || 0}
-                  onRatingChange={(rating) => updateBookRating(book.isbn, rating)}
-                />
-              </RatingSection>
             </StatusContainer>
 
             <BookContent>
               <BookMain>
-                {book.image?.gatsbyImageData && (
-                  <BookImage>
-                    <ImageBlock
-                      image={book.image.gatsbyImageData}
-                      alt={book.image.title || book.title}
-                    />
-                  </BookImage>
-                )}
-
-                <BookDetails>
-                  {book.description?.description && (
+                <BookDescriptionColumn>
+                  {book.description?.description ? (
                     <BookDescription>
                       <Text variant="h4">Description</Text>
                       <Text variant="p">{book.description.description}</Text>
                     </BookDescription>
+                  ) : (
+                    <Text variant="p" color="secondary">
+                      No description available.
+                    </Text>
                   )}
+                </BookDescriptionColumn>
+
+                <BookSidebarColumn>
+                  {book.image?.gatsbyImageData && (
+                    <BookImage>
+                      <ImageBlock
+                        image={book.image.gatsbyImageData}
+                        alt={book.image.title || book.title}
+                      />
+                    </BookImage>
+                  )}
+
+                  <SidebarRatingSection>
+                    <SidebarRatingLabel
+                      id="book-page-your-rating-label"
+                      variant="caption"
+                      color="secondary"
+                    >
+                      Your rating
+                    </SidebarRatingLabel>
+                    <RatingStarsWrap $highlight={ratingJustSaved}>
+                      <StarRating
+                        rating={bookWithStatus?.userRating || 0}
+                        onRatingChange={(rating) => {
+                          updateBookRating(book.isbn, rating);
+                          if (ratingHighlightTimeoutRef.current !== null) {
+                            clearTimeout(ratingHighlightTimeoutRef.current);
+                          }
+                          setRatingJustSaved(true);
+                          ratingHighlightTimeoutRef.current = setTimeout(() => {
+                            setRatingJustSaved(false);
+                            ratingHighlightTimeoutRef.current = null;
+                          }, 900);
+                        }}
+                      />
+                    </RatingStarsWrap>
+                  </SidebarRatingSection>
 
                   <BookMetadata>
                     <MetadataItem>
@@ -276,10 +355,8 @@ const BookPage = ({ params }: BookPageProps) => {
                       <Text variant="caption" weight="medium">Rating:</Text>
                       <Text variant="p">{getRatingDisplay(book, bookWithStatus)}</Text>
                     </MetadataItem>
-
-
                   </BookMetadata>
-                </BookDetails>
+                </BookSidebarColumn>
               </BookMain>
             </BookContent>
           </BookContainer>
@@ -316,7 +393,7 @@ const BookPage = ({ params }: BookPageProps) => {
             </ConfirmModalOverlay>
           )}
         </ContentWrapper>
-      </main>
+      </BookPageMain>
     </Layout>
   );
 };
@@ -337,21 +414,104 @@ export const Head: HeadFC<BookPageProps> = ({ params }) => {
 };
 
 // Styled Components
-const StatusSelector = styled.select`
-  padding: ${theme.spacing.xs} ${theme.spacing.sm};
-  border: 1px solid ${theme.colors.muted};
-  border-radius: ${theme.borderRadius.sm};
-  background: white;
-  font-size: ${theme.fontSizes.sm};
-  cursor: pointer;
-  min-width: 140px;
-  
-  &:focus {
-    outline: none;
-    border-color: ${theme.colors.primary};
-    box-shadow: 0 0 0 2px ${theme.colors.primary}20;
+const BookPageMain = styled.main`
+  min-width: 0;
+  width: 100%;
+`;
+
+const BookBackButton = styled(Button)`
+  margin-bottom: ${theme.spacing.md};
+  max-width: 100%;
+
+  @media (min-width: 768px) {
+    margin-bottom: ${theme.spacing.lg};
   }
 `;
+
+const StatusToggleGroup = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  margin-top: ${theme.spacing.xs};
+  border: 1px solid ${theme.colors.border};
+  border-radius: ${theme.borderRadius.md};
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+
+  @media (min-width: 640px) {
+    width: auto;
+    max-width: 100%;
+  }
+`
+
+const StatusToggle = styled.button<{ $selected: boolean }>`
+  appearance: none;
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  padding: ${theme.spacing.sm} ${theme.spacing.xs};
+  font-family: ${theme.fontFamily};
+  font-size: ${theme.fontSizes.xs};
+  font-weight: ${theme.fontWeights.medium};
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  border: none;
+  border-radius: 0;
+  border-right: 1px solid ${theme.colors.border};
+  cursor: pointer;
+  white-space: normal;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  @media (min-width: 480px) {
+    padding: ${theme.spacing.xs} ${theme.spacing.sm};
+    font-size: ${theme.fontSizes.sm};
+    line-height: ${theme.lineHeights.sm};
+    white-space: nowrap;
+    min-height: 0;
+  }
+
+  &:last-child {
+    border-right: none;
+  }
+
+  ${(p) =>
+    p.$selected
+      ? css`
+          background-color: ${rgba.indigo(0.12)};
+          color: ${theme.colors.blue[700]};
+          font-weight: ${theme.fontWeights.semibold};
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+          z-index: 1;
+        `
+      : css`
+          background-color: transparent;
+          color: ${theme.colors.secondary};
+
+          &:hover {
+            background-color: ${rgba.indigo(0.05)};
+            color: ${theme.colors.primary};
+          }
+        `}
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 2px ${rgba.indigo(0.5)};
+    z-index: 2;
+  }
+`
 
 const ProgressControl = styled.div`
   display: flex;
@@ -359,6 +519,13 @@ const ProgressControl = styled.div`
   align-items: stretch;
   gap: 4px;
   margin-top: 4px;
+  min-width: 0;
+  width: 100%;
+
+  @media (min-width: 640px) {
+    width: auto;
+    flex: 0 1 14rem;
+  }
 `;
 
 const ProgressLabelRow = styled.div`
@@ -374,7 +541,9 @@ const ProgressInput = styled.input.attrs({
   max: 100,
   step: 1,
 })`
-  width: 160px;
+  width: 100%;
+  max-width: 20rem;
+  min-width: 0;
   cursor: pointer;
   accent-color: ${theme.colors.primary};
 `;
@@ -382,11 +551,14 @@ const ProgressInput = styled.input.attrs({
 const ConfirmModalOverlay = styled.div`
   position: fixed;
   inset: 0;
+  padding: ${theme.spacing.md};
   background: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  box-sizing: border-box;
+  overflow-y: auto;
 `;
 
 const ConfirmModalContent = styled.div`
@@ -395,31 +567,65 @@ const ConfirmModalContent = styled.div`
   border-radius: ${theme.borderRadius.md};
   max-width: 420px;
   width: 100%;
+  min-width: 0;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing.md};
+  box-sizing: border-box;
 `;
 
 const ConfirmModalActions = styled.div`
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column-reverse;
   gap: ${theme.spacing.sm};
   margin-top: ${theme.spacing.sm};
+
+  & > * {
+    width: 100%;
+  }
+
+  @media (min-width: 480px) {
+    flex-direction: row;
+    justify-content: flex-end;
+
+    & > * {
+      width: auto;
+    }
+  }
 `;
 const BookContainer = styled.div`
-  max-width: 800px;
+  max-width: 960px;
   margin: 0 auto;
   ${bookPageShell}
+
+  @media (min-width: 768px) {
+    padding: ${theme.spacing.xl};
+  }
+
+  @media (min-width: 1024px) {
+    padding: ${theme.spacing["2xl"]};
+  }
 `;
 
 const BookHeader = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: ${theme.spacing.xl};
+  align-items: center;
+  margin-bottom: ${theme.spacing.lg};
   gap: ${theme.spacing.md};
-`;
+
+  @media (min-width: 768px) {
+    margin-bottom: ${theme.spacing.xl};
+  }
+`
+
+const BookHeaderText = styled.div`
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto;
+  text-align: center;
+`
 
 const BookContent = styled.div`
   display: flex;
@@ -429,28 +635,43 @@ const BookContent = styled.div`
 
 const BookMain = styled.div`
   display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: ${theme.spacing.xl};
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: ${theme.spacing.lg};
+  grid-template-columns: 1fr;
+  gap: ${theme.spacing.lg};
+  align-items: start;
+
+  @media (min-width: 768px) {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: ${theme.spacing["2xl"]};
   }
-`;
+`
 
-const BookImage = styled.div`
-  width: 200px;
-  height: 300px;
-  border-radius: ${theme.borderRadius.md};
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
+const BookDescriptionColumn = styled.div`
+  min-width: 0;
+  overflow-wrap: anywhere;
+`
 
-const BookDetails = styled.div`
+const BookSidebarColumn = styled.aside`
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing.lg};
-`;
+  min-width: 0;
+
+  @media (max-width: 767px) {
+    align-items: center;
+  }
+`
+
+const BookImage = styled.div`
+  width: 100%;
+  max-width: min(220px, 72vw);
+  border-radius: ${theme.borderRadius.md};
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  @media (min-width: 768px) {
+    max-width: 200px;
+  }
+`
 
 const BookDescription = styled.div`
   display: flex;
@@ -462,48 +683,95 @@ const BookMetadata = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing.md};
+  min-width: 0;
+  width: 100%;
+
+  @media (max-width: 767px) {
+    align-self: stretch;
+    text-align: left;
+  }
 `;
 
 const MetadataItem = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing.xs};
-`;
-
-const StatusIndicatorRow = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  margin-bottom: ${theme.spacing.xs};
+  overflow-wrap: anywhere;
 `;
 
 const StatusContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
   gap: ${theme.spacing.md};
   margin-top: ${theme.spacing.sm};
   margin-bottom: ${theme.spacing.lg};
+  min-width: 0;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
 `;
 
 const StatusLabelGroup = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2px;
+  flex: 1 1 auto;
+  min-width: 0;
+
+  @media (min-width: 640px) {
+    flex: 1 1 12rem;
+  }
 `;
 
 const FieldLabel = styled(Text)`
   font-weight: 500;
 `;
 
-const RatingSection = styled.div`
+const SidebarRatingSection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  align-items: center;
-  margin-top: 8px;
-`;
+  align-items: flex-start;
+  gap: ${theme.spacing.sm};
+  width: 100%;
+  min-width: 0;
+
+  @media (max-width: 767px) {
+    align-items: center;
+  }
+`
+
+const SidebarRatingLabel = styled(FieldLabel)`
+  margin-bottom: 0;
+`
+
+const RatingStarsWrap = styled.div<{ $highlight: boolean }>`
+  padding: ${theme.spacing.xs} ${theme.spacing.sm};
+  margin: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  border-radius: ${theme.borderRadius.md};
+  border: 1px solid ${theme.colors.border};
+  background-color: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition:
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    background-color 0.35s ease;
+
+  ${(p) =>
+    p.$highlight &&
+    css`
+      background-color: ${rgba.indigo(0.08)};
+      border-color: ${rgba.indigo(0.42)};
+      box-shadow:
+        0 0 0 1px ${rgba.indigo(0.2)},
+        0 4px 14px ${rgba.indigo(0.12)};
+    `}
+`
 
 const StarContainer = styled.div`
   display: flex;
@@ -511,19 +779,27 @@ const StarContainer = styled.div`
   align-items: center;
 `;
 
+/** Empty / unselected stars — much lighter than `theme.colors.muted` so fills read clearly. */
+const STAR_EMPTY = "#e8e8ed";
+
 const Star = styled.span`
-  font-size: 24px;
+  font-size: clamp(1.25rem, 4.5vw, 1.5rem);
   cursor: pointer;
-  color: ${theme.colors.muted};
+  color: ${STAR_EMPTY};
   transition: color 0.2s ease;
   margin-right: 2px;
+  touch-action: manipulation;
   
   &.active {
     color: ${theme.colors.warning || '#f59e0b'};
   }
   
   &.half-star {
-    background: linear-gradient(90deg, ${theme.colors.warning || '#f59e0b'} 50%, ${theme.colors.muted} 50%);
+    background: linear-gradient(
+      90deg,
+      ${theme.colors.warning || "#f59e0b"} 50%,
+      ${STAR_EMPTY} 50%
+    );
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

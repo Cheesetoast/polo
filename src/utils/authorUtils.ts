@@ -136,6 +136,37 @@ export const getBooksByGenre = (genre: string): BookWithAuthorId[] => {
   return books.filter(book => book.genres.includes(genre));
 };
 
+/** One row per distinct author contributing to a book list (for genre stats). */
+export interface BookAuthorSummary {
+  key: string;
+  name: string;
+}
+
+/**
+ * Dedupe authors from books (by `authorId` when set, else normalized `author` name).
+ * Names prefer the catalog entry when the id or name matches `authors.json`.
+ */
+export const getBookAuthorSummariesFromBooks = (
+  bookList: { authorId?: string; author: string }[]
+): BookAuthorSummary[] => {
+  const map = new Map<string, BookAuthorSummary>();
+  for (const book of bookList) {
+    const id = book.authorId?.trim();
+    const key = id
+      ? `id:${id}`
+      : `name:${book.author.trim().toLowerCase()}`;
+    if (map.has(key)) continue;
+    const catalog = id
+      ? getAuthorById(id)
+      : getAuthorByName(book.author);
+    const name = catalog?.name ?? book.author;
+    map.set(key, { key, name });
+  }
+  return [...map.values()].sort((a, b) =>
+    a.name.localeCompare(b.name, undefined, { sensitivity: "base" })
+  );
+};
+
 export type GenreMatchKind = 'book-exact' | 'book-fuzzy' | 'author-genre';
 
 function dedupeBooksByIsbn(list: BookWithAuthorId[]): BookWithAuthorId[] {

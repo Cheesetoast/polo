@@ -6,11 +6,10 @@ import {
   getAllBookGenres,
   getAllAuthorGenres,
   resolveGenreBooks,
-  getAuthorsByGenre
+  getBookAuthorSummariesFromBooks
 } from '../utils/authorUtils';
 import { BookLink } from '../components/BookLink';
 import { AuthorLink } from '../components/AuthorLink';
-import { GenreLink } from '../components/GenreLink';
 import { TextInput } from '../components/TextInput';
 import { Button } from '../components/Button';
 import { panelFilters } from '../styles/surfaceStyles';
@@ -55,14 +54,21 @@ const GenresPage = () => {
     // Sort genres
     return genres.sort((a, b) => {
       switch (sortBy) {
-        case 'count':
-          const aBookCount = resolveGenreBooks(a).books.length;
-          const bBookCount = resolveGenreBooks(b).books.length;
-          const aAuthorCount = getAuthorsByGenre(a).length;
-          const bAuthorCount = getAuthorsByGenre(b).length;
+        case 'count': {
+          const aResolved = resolveGenreBooks(a);
+          const bResolved = resolveGenreBooks(b);
+          const aBookCount = aResolved.books.length;
+          const bBookCount = bResolved.books.length;
+          const aAuthorCount = getBookAuthorSummariesFromBooks(
+            aResolved.books
+          ).length;
+          const bAuthorCount = getBookAuthorSummariesFromBooks(
+            bResolved.books
+          ).length;
           const aTotal = aBookCount + aAuthorCount;
           const bTotal = bBookCount + bAuthorCount;
           return bTotal - aTotal;
+        }
         case 'popularity':
           const aBookCount2 = resolveGenreBooks(a).books.length;
           const bBookCount2 = resolveGenreBooks(b).books.length;
@@ -85,7 +91,7 @@ const GenresPage = () => {
 
   const getGenreStats = (genre: string) => {
     const { books } = resolveGenreBooks(genre);
-    const authors = getAuthorsByGenre(genre);
+    const authors = getBookAuthorSummariesFromBooks(books);
     return { books, authors };
   };
 
@@ -150,22 +156,14 @@ const GenresPage = () => {
           <GenresGrid>
             {filteredGenres.map(genre => {
               const stats = getGenreStats(genre);
-              const isBookGenre = bookGenres.includes(genre);
-              const isAuthorGenre = authorGenres.includes(genre);
-              
+
               return (
                 <GenreCard
                   key={genre}
                   onClick={() => handleGenreClick(genre)}
                 >
                   <GenreHeader>
-                    <GenreName>
-                      {genre}
-                    </GenreName>
-                    <GenreBadges>
-                      {isBookGenre && <BookBadge>📚 Books</BookBadge>}
-                      {isAuthorGenre && <AuthorBadge>✍️ Authors</AuthorBadge>}
-                    </GenreBadges>
+                    <GenreName>{genre}</GenreName>
                   </GenreHeader>
 
                   <GenreStats>
@@ -205,7 +203,7 @@ const GenresPage = () => {
                       <SampleLabel>Sample Authors:</SampleLabel>
                       <SampleList>
                         {stats.authors.slice(0, 3).map(author => (
-                          <AuthorLink key={author.id} authorName={author.name}>
+                          <AuthorLink key={author.key} authorName={author.name}>
                             {author.name}
                           </AuthorLink>
                         ))}
@@ -318,9 +316,6 @@ const GenreCard = styled.div`
 `;
 
 const GenreHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
   margin-bottom: 16px;
 `;
 
@@ -328,31 +323,6 @@ const GenreName = styled.h3`
   margin: 0;
   font-size: 1.5rem;
   color: #111827;
-  flex: 1;
-`;
-
-const GenreBadges = styled.div`
-  display: flex;
-  gap: 8px;
-  flex-shrink: 0;
-`;
-
-const BookBadge = styled.span`
-  background: #dbeafe;
-  color: #1e40af;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 500;
-`;
-
-const AuthorBadge = styled.span`
-  background: #fef3c7;
-  color: #92400e;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 500;
 `;
 
 const GenreStats = styled.div`
