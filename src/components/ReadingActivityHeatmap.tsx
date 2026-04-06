@@ -1,11 +1,37 @@
+import { useSyncExternalStore } from "react"
 import styled, { css, keyframes } from "styled-components"
 import { theme } from "../styles/theme"
 import { ModuleInsetPanel } from "./ModuleInsetPanel"
 import { buildReadingHeatmapGrid, intensityLevel } from "../utils/readingActivityHeatmap"
 
-const WEEKS = 26
+/** Full history on large screens; shorter window on phones so the grid isn’t a long horizontal strip. */
+const HEATMAP_WEEKS_DESKTOP = 26
+const HEATMAP_WEEKS_MOBILE = 12
+const HEATMAP_MOBILE_MQ = "(max-width: 767px)"
+
 const CELL = 11
 const GAP = 3
+
+function subscribeHeatmapMobileMq(cb: () => void) {
+  if (typeof window === "undefined" || !window.matchMedia) return () => {}
+  const mq = window.matchMedia(HEATMAP_MOBILE_MQ)
+  mq.addEventListener("change", cb)
+  return () => mq.removeEventListener("change", cb)
+}
+
+function getHeatmapMobileSnapshot(): boolean {
+  if (typeof window === "undefined" || !window.matchMedia) return false
+  return window.matchMedia(HEATMAP_MOBILE_MQ).matches
+}
+
+function useHeatmapWeeksBack(): number {
+  const mobile = useSyncExternalStore(
+    subscribeHeatmapMobileMq,
+    getHeatmapMobileSnapshot,
+    () => false
+  )
+  return mobile ? HEATMAP_WEEKS_MOBILE : HEATMAP_WEEKS_DESKTOP
+}
 
 const cellFade = keyframes`
   from {
@@ -228,9 +254,10 @@ export function ReadingActivityHeatmap({
   embedded = false,
   className,
 }: ReadingActivityHeatmapProps) {
+  const weeksBack = useHeatmapWeeksBack()
   const { weeks, maxCount, activeDaysInRange } = buildReadingHeatmapGrid(
     activityByDay,
-    WEEKS
+    weeksBack
   )
 
   const summary =
@@ -238,7 +265,7 @@ export function ReadingActivityHeatmap({
       ? "No logged activity in this window yet."
       : `${activeDaysInRange} active day${
           activeDaysInRange === 1 ? "" : "s"
-        } in the last ${WEEKS} weeks.`
+        } in the last ${weeksBack} weeks.`
 
   return (
     <Root
@@ -251,7 +278,8 @@ export function ReadingActivityHeatmap({
       <Title>Reading activity</Title>
       <Caption>
         Each square is a day; darker green means more shelf updates that day
-        (status, progress, or your rating). Stored only in this browser.
+        (status, progress, or your rating). A shorter range is shown on small
+        screens. Stored only in this browser.
       </Caption>
       <HeatmapOuter>
         <WeekdayAxis aria-hidden>

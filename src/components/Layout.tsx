@@ -38,6 +38,9 @@ const MainContent = styled.main`
   display: flex;
   flex-direction: column;
   min-height: 0;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
   ${mainBackdrop}
   padding-top: 100px;
   padding-bottom: ${theme.spacing.xl};

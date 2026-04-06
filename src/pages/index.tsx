@@ -484,6 +484,7 @@ const HomepageRoot = styled.main`
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-width: 0;
   min-height: 0;
   margin-top: calc(-1 * ${HERO_NAV_OFFSET_MOBILE});
   margin-bottom: calc(-1 * ${theme.spacing.xl});
