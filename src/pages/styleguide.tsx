@@ -1,5 +1,5 @@
 import type { HeadFC } from "gatsby"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import { Text } from "../components/Text"
@@ -81,51 +81,60 @@ const StyleguidePage = () => {
                 )
               )}
             </TypeScale>
-            <SubsectionLabel>
-              <Text variant="h4">Text component variants</Text>
-            </SubsectionLabel>
-            <VariantStack>
-              <Text variant="h1">Heading 1</Text>
-              <Text variant="h2">Heading 2</Text>
-              <Text variant="h3">Heading 3</Text>
-              <Text variant="h4">Heading 4</Text>
-              <Text variant="h5">Heading 5</Text>
-              <Text variant="h6">Heading 6</Text>
-              <Text variant="p">Body paragraph, default copy style.</Text>
-              <Text variant="caption" color="secondary">
-                Caption / secondary
-              </Text>
-            </VariantStack>
-            <SubsectionLabel>
-              <Text variant="h4">
-                <code>Eyebrow</code> (marketing label)
-              </Text>
-            </SubsectionLabel>
-            <Text variant="p" color="secondary" style={{ marginBottom: theme.spacing.sm }}>
-              Uppercase labels for heroes and sections. Shared <code>Eyebrow</code> component in{" "}
-              <code>src/components/Eyebrow.tsx</code> (<code>variant=&quot;accent&quot;</code> or{" "}
-              <code>neutral</code>) so pages match the homepage.
-            </Text>
-            <PatternExamples>
-              <div>
-                <Eyebrow variant="accent">Accent eyebrow</Eyebrow>
-                <Text variant="h3" style={{ marginBottom: theme.spacing.xs }}>
-                  Section title
+
+            <Subsection>
+              <SubsectionIntro>
+                <Text variant="h3">Text component variants</Text>
+                <Text variant="p" color="secondary">
+                  Heading levels, body, and caption styles from the shared <code>Text</code>{" "}
+                  component (<code>variant</code> prop).
                 </Text>
-                <Text variant="p" color="secondary" style={{ margin: 0 }}>
-                  Supporting line.
+              </SubsectionIntro>
+              <VariantStack>
+                <Text variant="h1">Heading 1</Text>
+                <Text variant="h2">Heading 2</Text>
+                <Text variant="h3">Heading 3</Text>
+                <Text variant="h4">Heading 4</Text>
+                <Text variant="h5">Heading 5</Text>
+                <Text variant="h6">Heading 6</Text>
+                <Text variant="p">Body paragraph, default copy style.</Text>
+                <Text variant="caption" color="secondary">
+                  Caption / secondary
                 </Text>
-              </div>
-              <div>
-                <Eyebrow variant="neutral">Neutral eyebrow</Eyebrow>
-                <Text variant="h3" style={{ marginBottom: theme.spacing.xs }}>
-                  Another block
+              </VariantStack>
+            </Subsection>
+
+            <Subsection>
+              <SubsectionIntro>
+                <Text variant="h3">Eyebrow</Text>
+                <Text variant="p" color="secondary">
+                  Marketing label for heroes and sections. The component applies{" "}
+                  <code>text-transform: uppercase</code>, letter-spacing, and color. Use{" "}
+                  <code>variant=&quot;accent&quot;</code> or <code>neutral</code> (
+                  <code>src/components/Eyebrow.tsx</code>), matching the homepage.
                 </Text>
-                <Text variant="p" color="secondary" style={{ margin: 0 }}>
-                  Muted label + heading + body.
-                </Text>
-              </div>
-            </PatternExamples>
+              </SubsectionIntro>
+              <PatternExamples>
+                <div>
+                  <Eyebrow variant="accent">Accent eyebrow</Eyebrow>
+                  <Text variant="h3" style={{ marginBottom: theme.spacing.xs }}>
+                    Section title
+                  </Text>
+                  <Text variant="p" color="secondary" style={{ margin: 0 }}>
+                    Supporting line.
+                  </Text>
+                </div>
+                <div>
+                  <Eyebrow variant="neutral">Neutral eyebrow</Eyebrow>
+                  <Text variant="h3" style={{ marginBottom: theme.spacing.xs }}>
+                    Another block
+                  </Text>
+                  <Text variant="p" color="secondary" style={{ margin: 0 }}>
+                    Muted label + heading + body.
+                  </Text>
+                </div>
+              </PatternExamples>
+            </Subsection>
           </Section>
 
           <Section>
@@ -198,6 +207,9 @@ const StyleguidePage = () => {
           <Section>
             <SectionTitle>
               <Text variant="h2">Border radius</Text>
+              <Text variant="p" color="secondary">
+                Corner radii from <code>theme.borderRadius</code> for cards, inputs, and panels.
+              </Text>
             </SectionTitle>
             <RadiusRow>
               {(Object.entries(theme.borderRadius) as Array<[string, string]>).map(
@@ -289,6 +301,18 @@ export const Head: HeadFC = () => (
   />
 )
 
+/** Inline <code> in intros — same font and chrome as section titles. */
+const styleguideInlineCode = css`
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: ${theme.fontSizes.sm};
+    background: ${theme.colors.surface};
+    padding: 2px 6px;
+    border-radius: ${theme.borderRadius.sm};
+    border: 1px solid ${theme.colors.border};
+  }
+`
+
 const PageIntro = styled.div`
   display: flex;
   flex-direction: column;
@@ -296,6 +320,7 @@ const PageIntro = styled.div`
   margin-bottom: ${theme.spacing.xl};
   padding: ${theme.spacing["2xl"]};
   ${styleguideIntro}
+  ${styleguideInlineCode}
 `
 
 const StorybookHint = styled.span`
@@ -312,21 +337,31 @@ const SectionTitle = styled.div`
   flex-direction: column;
   gap: ${theme.spacing.sm};
   margin-bottom: ${theme.spacing.lg};
+  ${styleguideInlineCode}
+`
 
-  code {
-    font-size: ${theme.fontSizes.sm};
-    background: ${theme.colors.surface};
-    padding: 2px 6px;
-    border-radius: ${theme.borderRadius.sm};
-    border: 1px solid ${theme.colors.border};
+const Subsection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.md};
+
+  & + & {
+    margin-top: ${theme.spacing.xl};
   }
+`
+
+const SubsectionIntro = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.sm};
+  ${styleguideInlineCode}
 `
 
 const TypeScale = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing.md};
-  margin-bottom: ${theme.spacing.lg};
+  margin-bottom: ${theme.spacing.xl};
 `
 
 const TypeRow = styled.div`
@@ -344,10 +379,6 @@ const TypeMeta = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2px;
-`
-
-const SubsectionLabel = styled.div`
-  margin-bottom: ${theme.spacing.sm};
 `
 
 const VariantStack = styled.div`
@@ -423,8 +454,12 @@ const SearchLikeRow = styled.div`
 
 const SwatchGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: ${theme.spacing.md};
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
 `
 
 const Swatch = styled.div`

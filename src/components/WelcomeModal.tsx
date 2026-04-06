@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useLayoutEffect, useState } from "react"
 import { createPortal } from "react-dom"
 import { Link } from "gatsby"
 import styled, { css } from "styled-components"
@@ -19,7 +19,7 @@ const MODAL_OVERLAY_Z = 10000
 export const WelcomeModal = ({ isOpen, onClose }: WelcomeModalProps) => {
   const [mountNode, setMountNode] = useState<HTMLElement | null>(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setMountNode(document.body)
   }, [])
 

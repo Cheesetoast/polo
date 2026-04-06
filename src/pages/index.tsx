@@ -12,12 +12,11 @@ import booksData from "../data/books.json"
 import { useState, useMemo, useEffect, useCallback } from "react"
 import { useBookStatus } from "../hooks/useBookStatus"
 import { navigate, Link } from "gatsby"
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 import {
   heroEyebrowPulse,
   heroOrbDrift,
   heroTitleFlow,
-  homeModuleSlamIn,
   linkShimmer,
 } from "../styles/motion"
 import { rgba, theme } from "../styles/theme"
@@ -28,6 +27,10 @@ import { HomepageSection } from "../components/HomepageSection"
 import { HomepageAuthorQuote } from "../components/HomepageAuthorQuote"
 import { ModuleInsetPanel } from "../components/ModuleInsetPanel"
 import { BookshelfVizPanels } from "../components/BookshelfVizPanels"
+import {
+  HomepageEntranceReveal,
+  type HomepageEntrancePhase,
+} from "../components/HomepageEntranceReveal"
 
 const BOOKS_DATA = booksData
 
@@ -46,8 +49,6 @@ function bookPathFromIsbn(isbn: string) {
 
 /** Once per browser tab session; avoids replaying module entrance on client navigations back to `/`. */
 const HOME_MODULE_ENTRANCE_SESSION_KEY = "polo_home_module_entrance"
-
-type ModuleEntrancePhase = "hold" | "play" | "done"
 
 const HERO_ORBS = [
   { left: "10%", top: "24%", delay: -0.6 },
@@ -114,14 +115,14 @@ const IndexPage = () => {
     setWelcomeChecked(true);
   }, []);
 
-  const moduleEntrancePhase = useMemo((): ModuleEntrancePhase => {
+  const moduleEntrancePhase = useMemo((): HomepageEntrancePhase => {
     if (moduleEntranceDone) return "done";
     if (!welcomeChecked) return "hold";
     if (showWelcomeModal) return "hold";
     return "play";
   }, [moduleEntranceDone, welcomeChecked, showWelcomeModal]);
 
-  // After entrance animation (staggered delays), mark done so it only runs once per session.
+  // After entrance motion (staggered transition-delay + duration), mark done once per session.
   useEffect(() => {
     if (moduleEntrancePhase !== "play") return;
     const maxDelayMs = 360;
@@ -334,8 +335,9 @@ const IndexPage = () => {
 
             <ContentWrapper>
               <HomepageModulesGrid>
-            <HomepageModuleSpan $phase={moduleEntrancePhase}>
-              <HomepageSection variant="prominent" inModuleGrid>
+            <HomepageModuleSpan>
+              <HomepageEntranceReveal phase={moduleEntrancePhase} delayMs={60}>
+                <HomepageSection variant="prominent" inModuleGrid>
                 <SectionSplit>
                   <SectionSplitMain>
                     <Eyebrow variant="neutral">Search</Eyebrow>
@@ -382,12 +384,14 @@ const IndexPage = () => {
                     </BookOfDayMeta>
                   </BookOfDayPanel>
                 </SectionSplit>
-              </HomepageSection>
+                </HomepageSection>
+              </HomepageEntranceReveal>
             </HomepageModuleSpan>
 
             <HomepageModuleLeftStack>
-            <HomepageModuleBookshelf $phase={moduleEntrancePhase}>
-              <HomepageSection variant="prominent" inModuleGrid dense>
+            <HomepageModuleBookshelf>
+              <HomepageEntranceReveal phase={moduleEntrancePhase} delayMs={160}>
+                <HomepageSection variant="prominent" inModuleGrid dense>
                 <BookshelfSectionSplit>
                   <BookshelfSectionHeader>
                     <Eyebrow variant="neutral">Bookshelf</Eyebrow>
@@ -435,18 +439,23 @@ const IndexPage = () => {
                     />
                   </BookshelfChartsRow>
                 </BookshelfSectionSplit>
-              </HomepageSection>
+                </HomepageSection>
+              </HomepageEntranceReveal>
             </HomepageModuleBookshelf>
 
-            <HomepageModuleQuote $phase={moduleEntrancePhase}>
-              <HomepageSection variant="prominent" inModuleGrid>
-                <HomepageAuthorQuote />
-              </HomepageSection>
+            <HomepageModuleQuote>
+              <HomepageEntranceReveal phase={moduleEntrancePhase} delayMs={280}>
+                <HomepageSection variant="prominent" inModuleGrid>
+                  <HomepageAuthorQuote />
+                </HomepageSection>
+              </HomepageEntranceReveal>
             </HomepageModuleQuote>
             </HomepageModuleLeftStack>
 
-            <HomepageModuleStats $phase={moduleEntrancePhase}>
-              <Dashboard stats={dashboardStats} fillHeight />
+            <HomepageModuleStats>
+              <HomepageEntranceReveal phase={moduleEntrancePhase} delayMs={360}>
+                <Dashboard stats={dashboardStats} fillHeight />
+              </HomepageEntranceReveal>
             </HomepageModuleStats>
               </HomepageModulesGrid>
             </ContentWrapper>
@@ -603,32 +612,6 @@ const HeroMain = styled.div`
   }
 `
 
-const moduleEntranceCss = (delay: string, phase: ModuleEntrancePhase) => css`
-  @media (prefers-reduced-motion: no-preference) {
-    ${phase === "hold" &&
-    css`
-      opacity: 0;
-      transform: translate3d(0, 20px, 0);
-    `}
-    ${phase === "play" &&
-    css`
-      animation: ${homeModuleSlamIn} 0.55s ease-out both;
-      animation-delay: ${delay};
-    `}
-    ${phase === "done" &&
-    css`
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    `}
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    opacity: 1;
-    transform: none;
-    animation: none;
-  }
-`
-
 /** Homepage below hero: search; left column stacks bookshelf + literature; insights beside that column (large screens). */
 const HomepageModulesGrid = styled.div`
   display: grid;
@@ -679,30 +662,26 @@ const HomepageModuleLeftStack = styled.div`
   }
 `
 
-const HomepageModuleSpan = styled.div<{ $phase: ModuleEntrancePhase }>`
+const HomepageModuleSpan = styled.div`
   min-width: 0;
-  ${(p) => moduleEntranceCss("0.06s", p.$phase)}
 
   @media (min-width: 1024px) {
     grid-column: 1 / -1;
   }
 `
 
-const HomepageModuleBookshelf = styled.div<{ $phase: ModuleEntrancePhase }>`
+const HomepageModuleBookshelf = styled.div`
   min-width: 0;
-  ${(p) => moduleEntranceCss("0.16s", p.$phase)}
 `
 
-const HomepageModuleQuote = styled.div<{ $phase: ModuleEntrancePhase }>`
+const HomepageModuleQuote = styled.div`
   min-width: 0;
-  ${(p) => moduleEntranceCss("0.28s", p.$phase)}
 `
 
-const HomepageModuleStats = styled.div<{ $phase: ModuleEntrancePhase }>`
+const HomepageModuleStats = styled.div`
   min-width: 0;
   display: flex;
   flex-direction: column;
-  ${(p) => moduleEntranceCss("0.36s", p.$phase)}
 
   @media (min-width: 1024px) {
     grid-column: 2;

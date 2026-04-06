@@ -232,30 +232,36 @@ const BookPage = ({ params }: BookPageProps) => {
                         tabIndex={selected ? 0 : -1}
                         onClick={() => handleStatusChoice(value)}
                         onKeyDown={(e) => {
-                          if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") {
-                            return;
-                          }
-                          e.preventDefault();
                           const i = BOOK_PAGE_STATUS_CHOICES.findIndex(
                             (c) => c.value === value
                           );
-                          const next =
-                            e.key === "ArrowRight"
-                              ? Math.min(
-                                  i + 1,
-                                  BOOK_PAGE_STATUS_CHOICES.length - 1
-                                )
-                              : Math.max(i - 1, 0);
-                          const nextValue = BOOK_PAGE_STATUS_CHOICES[next].value;
-                          handleStatusChoice(nextValue);
-                          requestAnimationFrame(() => {
-                            document
-                              .getElementById(`book-page-status-${nextValue}`)
-                              ?.focus();
-                          });
+                          const go = (next: number) => {
+                            const nextValue = BOOK_PAGE_STATUS_CHOICES[next].value;
+                            handleStatusChoice(nextValue);
+                            requestAnimationFrame(() => {
+                              document
+                                .getElementById(`book-page-status-${nextValue}`)
+                                ?.focus();
+                            });
+                          };
+                          if (
+                            e.key === "ArrowRight" ||
+                            e.key === "ArrowDown"
+                          ) {
+                            e.preventDefault();
+                            go(Math.min(i + 1, BOOK_PAGE_STATUS_CHOICES.length - 1));
+                            return;
+                          }
+                          if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+                            e.preventDefault();
+                            go(Math.max(i - 1, 0));
+                          }
                         }}
                       >
-                        {label}
+                        <StatusToggleCheck aria-hidden $visible={selected}>
+                          ✓
+                        </StatusToggleCheck>
+                        <StatusToggleLabelText>{label}</StatusToggleLabelText>
                       </StatusToggle>
                     );
                   })}
@@ -431,25 +437,43 @@ const BookBackButton = styled(Button)`
 const StatusToggleGroup = styled.div`
   display: flex;
   flex-direction: column;
+  gap: ${theme.spacing.md};
   width: 100%;
   min-width: 0;
   margin-top: ${theme.spacing.xs};
-  border: 1px solid ${theme.colors.border};
-  border-radius: ${theme.borderRadius.md};
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
-  overflow: hidden;
 
   @media (min-width: 640px) {
     flex-direction: row;
-    flex-wrap: nowrap;
-    width: auto;
-    max-width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
+    flex-wrap: wrap;
+    gap: ${theme.spacing.md};
   }
+`
+
+const StatusToggleCheck = styled.span<{ $visible: boolean }>`
+  position: absolute;
+  left: ${theme.spacing.md};
+  top: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.125rem;
+  font-size: ${theme.fontSizes.base};
+  font-weight: ${theme.fontWeights.bold};
+  line-height: 1;
+  pointer-events: none;
+  opacity: ${(p) => (p.$visible ? 1 : 0)};
+  transform: ${(p) =>
+    p.$visible ? "translateY(-50%) scale(1)" : "translateY(-50%) scale(0.85)"};
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+`
+
+const StatusToggleLabelText = styled.span`
+  display: block;
+  width: 100%;
+  min-width: 0;
+  text-align: center;
 `
 
 const StatusToggle = styled.button<{ $selected: boolean }>`
@@ -464,9 +488,8 @@ const StatusToggle = styled.button<{ $selected: boolean }>`
   font-weight: ${theme.fontWeights.medium};
   line-height: ${theme.lineHeights.sm};
   letter-spacing: -0.01em;
-  border: none;
-  border-radius: 0;
-  border-bottom: 1px solid ${theme.colors.border};
+  border: 1px solid ${theme.colors.border};
+  border-radius: ${theme.borderRadius.md};
   cursor: pointer;
   white-space: normal;
   overflow-wrap: anywhere;
@@ -475,28 +498,20 @@ const StatusToggle = styled.button<{ $selected: boolean }>`
   align-items: center;
   justify-content: center;
   min-height: 2.75rem;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
   transition:
     background-color 0.15s ease,
     color 0.15s ease,
+    border-color 0.15s ease,
     box-shadow 0.15s ease;
 
   @media (min-width: 640px) {
     width: auto;
-    flex: 1 1 auto;
-    min-width: 0;
-    padding: ${theme.spacing.xs} ${theme.spacing.sm};
-    border-bottom: none;
-    border-right: 1px solid ${theme.colors.border};
-    min-height: 0;
+    flex: 1 1 10rem;
+    min-width: min(10rem, 100%);
     white-space: nowrap;
-
-    &:last-child {
-      border-right: none;
-    }
-  }
-
-  &:last-child {
-    border-bottom: none;
+    overflow-wrap: normal;
   }
 
   ${(p) =>
@@ -505,16 +520,19 @@ const StatusToggle = styled.button<{ $selected: boolean }>`
           background-color: ${rgba.indigo(0.12)};
           color: ${theme.colors.blue[700]};
           font-weight: ${theme.fontWeights.semibold};
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+          border-color: ${rgba.indigo(0.35)};
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.55),
+            0 0 0 1px ${rgba.indigo(0.12)};
           z-index: 1;
         `
       : css`
-          background-color: transparent;
           color: ${theme.colors.secondary};
 
           &:hover {
             background-color: ${rgba.indigo(0.05)};
             color: ${theme.colors.primary};
+            border-color: ${rgba.indigo(0.2)};
           }
         `}
 

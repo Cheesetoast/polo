@@ -2,18 +2,6 @@ import { keyframes } from "styled-components"
 
 /* ─── Homepage “extreme” motion (opt-in via styled-components; respect reduced-motion in CSS) ─── */
 
-/** Homepage module bands — fade up without overshoot */
-export const homeModuleSlamIn = keyframes`
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 20px, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-`
-
 /** Hero headline gradient drift */
 export const heroTitleFlow = keyframes`
   0% {
