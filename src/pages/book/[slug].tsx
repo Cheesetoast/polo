@@ -430,41 +430,46 @@ const BookBackButton = styled(Button)`
 
 const StatusToggleGroup = styled.div`
   display: flex;
-  flex-wrap: nowrap;
+  flex-direction: column;
   width: 100%;
   min-width: 0;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
   margin-top: ${theme.spacing.xs};
   border: 1px solid ${theme.colors.border};
   border-radius: ${theme.borderRadius.md};
   background: rgba(255, 255, 255, 0.72);
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  overflow: hidden;
 
   @media (min-width: 640px) {
+    flex-direction: row;
+    flex-wrap: nowrap;
     width: auto;
     max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
   }
 `
 
 const StatusToggle = styled.button<{ $selected: boolean }>`
   appearance: none;
   position: relative;
-  flex: 1 1 auto;
-  min-width: 0;
+  width: 100%;
+  flex: none;
   margin: 0;
-  padding: ${theme.spacing.sm} ${theme.spacing.xs};
+  padding: ${theme.spacing.sm} ${theme.spacing.md};
   font-family: ${theme.fontFamily};
-  font-size: ${theme.fontSizes.xs};
+  font-size: ${theme.fontSizes.sm};
   font-weight: ${theme.fontWeights.medium};
-  line-height: 1.35;
+  line-height: ${theme.lineHeights.sm};
   letter-spacing: -0.01em;
   border: none;
   border-radius: 0;
-  border-right: 1px solid ${theme.colors.border};
+  border-bottom: 1px solid ${theme.colors.border};
   cursor: pointer;
   white-space: normal;
+  overflow-wrap: anywhere;
   text-align: center;
   display: flex;
   align-items: center;
@@ -475,16 +480,23 @@ const StatusToggle = styled.button<{ $selected: boolean }>`
     color 0.15s ease,
     box-shadow 0.15s ease;
 
-  @media (min-width: 480px) {
+  @media (min-width: 640px) {
+    width: auto;
+    flex: 1 1 auto;
+    min-width: 0;
     padding: ${theme.spacing.xs} ${theme.spacing.sm};
-    font-size: ${theme.fontSizes.sm};
-    line-height: ${theme.lineHeights.sm};
-    white-space: nowrap;
+    border-bottom: none;
+    border-right: 1px solid ${theme.colors.border};
     min-height: 0;
+    white-space: nowrap;
+
+    &:last-child {
+      border-right: none;
+    }
   }
 
   &:last-child {
-    border-right: none;
+    border-bottom: none;
   }
 
   ${(p) =>
@@ -518,14 +530,9 @@ const ProgressControl = styled.div`
   flex-direction: column;
   align-items: stretch;
   gap: 4px;
-  margin-top: 4px;
   min-width: 0;
   width: 100%;
-
-  @media (min-width: 640px) {
-    width: auto;
-    flex: 0 1 14rem;
-  }
+  max-width: 28rem;
 `;
 
 const ProgressLabelRow = styled.div`
@@ -703,16 +710,10 @@ const StatusContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: ${theme.spacing.md};
+  gap: ${theme.spacing.sm};
   margin-top: ${theme.spacing.sm};
   margin-bottom: ${theme.spacing.lg};
   min-width: 0;
-
-  @media (min-width: 640px) {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-end;
-  }
 `;
 
 const StatusLabelGroup = styled.div`
@@ -723,7 +724,7 @@ const StatusLabelGroup = styled.div`
   min-width: 0;
 
   @media (min-width: 640px) {
-    flex: 1 1 12rem;
+    flex: 1 1 4rem;
   }
 `;
 
