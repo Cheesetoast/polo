@@ -30,6 +30,12 @@ export const MODAL_CONFIG = {
   ENABLE_MODAL_DISMISS: true, // Set to false to disable localStorage and show modal every time
 } as const;
 
+/** Toggle homepage bar-chart panels (Insights genre mix, Bookshelf rating spread). */
+export const HOMEPAGE_VIZ = {
+  SHOW_GENRE_MIX: false,
+  SHOW_RATING_SPREAD: false,
+} as const;
+
 // Default Values
 export const DEFAULTS = {
   FALLBACK_TITLE: SITE_CONFIG.SITE_NAME,

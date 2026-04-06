@@ -50,7 +50,6 @@ describe("Dashboard Component", () => {
     )
     expect(screen.getByText("War and Peace")).toBeInTheDocument()
     expect(screen.getByText("8 distinct genres")).toBeInTheDocument()
-    expect(screen.getByText("Genre mix")).toBeInTheDocument()
     expect(screen.getByText("Catalog by length")).toBeInTheDocument()
   })
 

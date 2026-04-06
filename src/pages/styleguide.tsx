@@ -42,7 +42,7 @@ const StyleguidePage = () => {
               Single source of truth: <code>src/styles/theme.ts</code> (Inter, cool neutrals, purple
               accent) plus shared surfaces in <code>surfaceStyles.ts</code>. Layout applies{" "}
               <code>mainBackdrop</code> to the page shell. Component variants and stories also live in{" "}
-              <StorybookHint>Storybook</StorybookHint>. Run <code>npm run storybook</code>.
+              <StorybookHint>Storybook</StorybookHint>.
             </Text>
           </PageIntro>
 

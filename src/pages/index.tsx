@@ -425,7 +425,7 @@ const IndexPage = () => {
                     <ShelfAsideList>
                       <li>Move books between columns with the status control</li>
                       <li>See rating and progress at a glance</li>
-                      <li>Below: rating spread and reading activity by day</li>
+                      <li>Below: reading activity by day</li>
                     </ShelfAsideList>
                   </ShelfAside>
                   <BookshelfChartsRow>

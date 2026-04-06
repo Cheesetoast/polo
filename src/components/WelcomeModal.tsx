@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { createPortal } from "react-dom"
-import styled from "styled-components"
+import { Link } from "gatsby"
+import styled, { css } from "styled-components"
 import { rgba, theme } from "../styles/theme"
 import { sectionSurfaceProminent } from "../styles/surfaceStyles"
 import { Text } from "./Text"
@@ -48,6 +49,13 @@ export const WelcomeModal = ({ isOpen, onClose }: WelcomeModalProps) => {
           </Text>
           <Text variant="p" color="secondary">
             Feel free to explore.
+          </Text>
+          <Text variant="p" color="secondary">
+            For design tokens, components, and patterns, see the{" "}
+            <StyledRouterLink to="/styleguide" onClick={onClose}>
+              styleguide
+            </StyledRouterLink>
+            .
           </Text>
 
           <ModalSeparator role="presentation" aria-hidden />
@@ -205,7 +213,7 @@ const FooterTagline = styled(Text)`
   max-width: 28rem;
 `
 
-const StyledLink = styled.a`
+const inlineLinkCss = css`
   color: ${theme.colors.blue[500]};
   font-weight: ${theme.fontWeights.semibold};
   text-decoration: none;
@@ -222,4 +230,12 @@ const StyledLink = styled.a`
     box-shadow: 0 0 0 3px ${rgba.indigo(0.35)};
     text-decoration: underline;
   }
+`
+
+const StyledLink = styled.a`
+  ${inlineLinkCss}
+`
+
+const StyledRouterLink = styled(Link)`
+  ${inlineLinkCss}
 `

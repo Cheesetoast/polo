@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { HOMEPAGE_VIZ } from "../constants"
 import { theme } from "../styles/theme"
 import { ModuleInsetPanel } from "./ModuleInsetPanel"
 import { InsightBarRows } from "./InsightChartBars"
@@ -50,7 +51,7 @@ export function BookshelfVizPanels({
 
   return (
     <BookshelfChartsStack>
-      {showRatingSpread ? (
+      {HOMEPAGE_VIZ.SHOW_RATING_SPREAD && showRatingSpread ? (
         <BookshelfChartPanel
           role="region"
           aria-label="Distribution of rounded community or user ratings"

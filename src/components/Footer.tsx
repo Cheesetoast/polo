@@ -13,7 +13,7 @@ const Footer = () => {
       <FooterContent>
         <FooterSection>
           <FooterTitle variant="h4">
-            About Polo
+            About Book Stack
           </FooterTitle>
           <FooterText variant="p">
             A personal book collection and reading tracker. Discover new books, 
@@ -32,10 +32,13 @@ const Footer = () => {
             Search Books
           </FooterLink>
           <FooterLink to="/bookshelf">
-            My Bookshelf
+            Bookshelf
           </FooterLink>
           <FooterLink to="/project">
             About
+          </FooterLink>
+          <FooterLink to="/styleguide">
+            Styleguide
           </FooterLink>
         </FooterSection>
 
@@ -56,46 +59,6 @@ const Footer = () => {
           >
             Open Library
           </FooterExternalLink>
-          <FooterExternalLink 
-            href="https://goodreads.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            Goodreads
-          </FooterExternalLink>
-        </FooterSection>
-
-        <FooterSection>
-          <FooterTitle variant="h4">
-            Connect
-          </FooterTitle>
-          <FooterText variant="p">Follow us for reading recommendations and updates.</FooterText>
-          <SocialLinks>
-            <SocialLink 
-              href="https://github.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              aria-label="GitHub"
-            >
-              📚
-            </SocialLink>
-            <SocialLink 
-              href="https://twitter.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              aria-label="Twitter"
-            >
-              🐦
-            </SocialLink>
-            <SocialLink 
-              href="https://instagram.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              aria-label="Instagram"
-            >
-              📷
-            </SocialLink>
-          </SocialLinks>
         </FooterSection>
       </FooterContent>
 
@@ -185,32 +148,6 @@ const FooterExternalLink = styled.a`
 
   &:hover {
     color: ${theme.colors.blue[600]};
-  }
-`;
-
-const SocialLinks = styled.div`
-  display: flex;
-  gap: 1rem;
-  margin-top: 0.5rem;
-`;
-
-const SocialLink = styled.a`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background-color: ${theme.colors.background};
-  border: 1px solid ${theme.colors.border};
-  border-radius: ${theme.borderRadius.full};
-  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-  color: ${theme.colors.primary};
-  text-decoration: none;
-
-  &:hover {
-    background-color: ${theme.colors.surface};
-    border-color: ${theme.colors.muted};
-    transform: translateY(-1px);
   }
 `;
 

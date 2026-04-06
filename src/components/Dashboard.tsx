@@ -5,6 +5,7 @@ import { dashboardShell } from "../styles/surfaceStyles"
 import { ModuleInsetPanel } from "./ModuleInsetPanel"
 import { Text } from "./Text"
 import { Eyebrow } from "./Eyebrow"
+import { HOMEPAGE_VIZ } from "../constants"
 import { GenreLink } from "./GenreLink"
 import {
   InsightBarRows,
@@ -106,7 +107,7 @@ export const Dashboard = ({
         </InsightCell>
       </InsightsGrid>
 
-      {stats.genreChart.length > 0 ? (
+      {HOMEPAGE_VIZ.SHOW_GENRE_MIX && stats.genreChart.length > 0 ? (
         <GenreChartPanel
           $fillHeight={fillHeight}
           role="region"

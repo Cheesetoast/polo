@@ -9,7 +9,7 @@ const meta: Meta<typeof Dashboard> = {
     docs: {
       description: {
         component:
-          "Homepage insights: genre mix, catalog by length, catalog summary, tiles, and genre tags. Rating spread and reading activity heatmap live in the Bookshelf module.",
+          "Homepage insights: catalog by length, catalog summary, tiles, and genre tags (genre mix panel toggled via HOMEPAGE_VIZ). Reading activity heatmap lives in the Bookshelf module (rating spread toggled the same way).",
       },
     },
   },
