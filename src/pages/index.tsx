@@ -341,7 +341,7 @@ const IndexPage = () => {
                 <SectionSplit>
                   <SectionSplitMain>
                     <Eyebrow variant="neutral">Search</Eyebrow>
-                    <Text variant="h2">Find your next great read</Text>
+                    <Text variant="h2">Find your next great read!</Text>
                     <SearchForm onSubmit={(e) => {
                       e.preventDefault();
                       if (searchQuery.trim()) {
@@ -358,6 +358,19 @@ const IndexPage = () => {
                       />
                       <Button type="submit" variant="primary" size="medium">
                         Search
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="medium"
+                        onClick={() => {
+                          if (!books.length) return;
+                          const randomBook =
+                            books[Math.floor(Math.random() * books.length)];
+                          navigate(bookPathFromIsbn(randomBook.isbn));
+                        }}
+                      >
+                        Random book
                       </Button>
                     </SearchForm>
                     <BrowseAllLink to="/search-results">
