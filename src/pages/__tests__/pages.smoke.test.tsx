@@ -10,6 +10,7 @@ import AuthorsPage from '../authors';
 import GenresPage from '../genres';
 import ProjectPage from '../project';
 import StyleguidePage from '../styleguide';
+import ReadingGoalPage from '../reading-goal';
 import NotFoundPage from '../404';
 import Dev404Page from '../dev-404-page';
 import BookPage from '../book/[slug]';
@@ -43,7 +44,7 @@ describe('page smoke (initial render)', () => {
 
   it('renders home (index)', () => {
     render(<IndexPage />);
-    expect(screen.getByText('Find your next great read')).toBeInTheDocument();
+    expect(screen.getByText(/Welcome back to/i)).toBeInTheDocument();
   });
 
   it('renders search', () => {
@@ -62,6 +63,13 @@ describe('page smoke (initial render)', () => {
     render(<BookshelfPage />);
     expect(
       screen.getByRole('heading', { level: 1, name: 'My Bookshelf' })
+    ).toBeInTheDocument();
+  });
+
+  it('renders reading-goal', () => {
+    render(<ReadingGoalPage />);
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'Reading goal' })
     ).toBeInTheDocument();
   });
 

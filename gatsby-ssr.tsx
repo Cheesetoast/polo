@@ -18,7 +18,7 @@ export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHeadComponents }) =
     <link
       key="inter-font"
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap"
     />,
   ])
 }

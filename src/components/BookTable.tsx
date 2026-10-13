@@ -185,8 +185,8 @@ const TableContainer = styled.div`
   overflow-x: auto;
   border-radius: ${theme.borderRadius.md};
   border: 1px solid ${theme.colors.muted};
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: ${theme.colors.surface};
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
 `;
@@ -202,11 +202,11 @@ const Table = styled.table`
 const TableHeader = styled.th`
   padding: ${theme.spacing.md};
   text-align: left;
-  background-color: ${theme.colors.gray?.[50] || '#f9fafb'};
-  border-bottom: 2px solid ${theme.colors.muted};
+  background-color: rgba(255, 255, 255, 0.04);
+  border-bottom: 2px solid ${theme.colors.border};
   font-weight: ${theme.fontWeights.bold};
   font-size: ${theme.fontSizes.sm};
-  color: ${theme.colors.gray?.[700] || '#374151'};
+  color: ${theme.colors.secondary};
   white-space: nowrap; /* Prevents text wrapping */
 `;
 
@@ -225,7 +225,7 @@ const TableRow = styled.tr.withConfig({
     cursor: pointer;
     
     &:hover {
-      background-color: ${theme.colors.gray?.[50] || '#f9fafb'};
+      background-color: rgba(255, 255, 255, 0.04);
     }
   `}
   
@@ -255,11 +255,11 @@ const PaginationContainer = styled.div`
   align-items: center;
   padding: ${theme.spacing.md};
   border-top: 1px solid ${theme.colors.muted};
-  background-color: ${theme.colors.gray?.[50] || '#f9fafb'};
+  background-color: rgba(255, 255, 255, 0.03);
 `;
 
 const PaginationInfo = styled.div`
-  color: ${theme.colors.gray?.[600] || '#6b7280'};
+  color: ${theme.colors.secondary};
 `;
 
 const PaginationControls = styled.div`
@@ -288,7 +288,7 @@ const AuthorLink = styled.span.withConfig({
   shouldForwardProp: (prop) => prop !== 'clickable',
 })<{ clickable?: boolean }>`
   font-size: ${theme.fontSizes.sm};
-  color: ${theme.colors.gray?.[600] || '#6b7280'};
+  color: ${theme.colors.secondary};
   word-break: break-word;
   
   ${props => props.clickable && `

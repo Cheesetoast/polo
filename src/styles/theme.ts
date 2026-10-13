@@ -1,11 +1,12 @@
-/** Brand blue tints for borders, glows, and glass (Apple-style accent). */
+/** Accent tints for borders, glows, and glass (dashboard gold). */
 export const rgba = {
-  indigo: (a: number) => `rgba(0, 113, 227, ${a})`,
+  indigo: (a: number) => `rgba(245, 192, 66, ${a})`,
+  coral: (a: number) => `rgba(232, 90, 79, ${a})`,
 } as const;
 
-// Design system tokens — neutral surfaces + crisp accent blue
+// Design system tokens — dark reading dashboard
 export const theme = {
-  fontFamily: `'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif`,
+  fontFamily: `'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif`,
 
   // Typography
   fontSizes: {
@@ -45,34 +46,38 @@ export const theme = {
     '6xl': 1.05,
   },
 
-  // Colors — text / UI neutrals + single accent blue
+  // Colors — warm dark surfaces + gold accent
   colors: {
-    primary: '#1d1d1f',
-    secondary: '#6e6e73',
-    muted: '#aeaeb2',
-    background: '#f5f5f7',
-    surface: '#ffffff',
-    border: '#d2d2d7',
+    primary: '#f7f1ec',
+    secondary: '#9a8f8a',
+    muted: '#7a706c',
+    background: '#1a1210',
+    surface: '#241c1a',
+    border: 'rgba(255, 255, 255, 0.1)',
     success: '#34c759',
-    error: '#ff3b30',
-    warning: '#ff9500',
+    error: '#e85a4f',
+    warning: '#f5c042',
+    /** Dark ink for text on gold / light controls */
+    ink: '#1a1210',
+    accent: '#f5c042',
+    coral: '#e85a4f',
     blue: {
-      500: '#0071e3',
-      600: '#0077ed',
-      700: '#0066cc',
+      500: '#f5c042',
+      600: '#e0ab30',
+      700: '#c99520',
     },
     gray: {
-      600: '#6e6e73',
+      600: '#7a706c',
     },
     white: '#ffffff',
   },
 
-  // Elevation (soft, diffuse — not heavy Material shadows)
+  // Elevation
   shadows: {
-    sm: '0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.08)',
-    md: '0 4px 12px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04)',
-    lg: '0 12px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04)',
-    nav: '0 1px 0 rgba(0, 0, 0, 0.06), 0 4px 24px rgba(0, 0, 0, 0.04)',
+    sm: '0 1px 2px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.25)',
+    md: '0 4px 12px rgba(0, 0, 0, 0.28), 0 2px 4px rgba(0, 0, 0, 0.2)',
+    lg: '0 12px 40px rgba(0, 0, 0, 0.35), 0 4px 12px rgba(0, 0, 0, 0.22)',
+    nav: '0 1px 0 rgba(255, 255, 255, 0.06), 0 4px 24px rgba(0, 0, 0, 0.25)',
   },
 
   // Spacing
@@ -86,12 +91,12 @@ export const theme = {
     '3xl': '64px',
   },
 
-  // Border radius — slightly rounder for a current UI feel
+  // Border radius — soft dashboard cards
   borderRadius: {
-    sm: '6px',
-    md: '10px',
-    lg: '14px',
-    xl: '20px',
+    sm: '8px',
+    md: '14px',
+    lg: '20px',
+    xl: '28px',
     full: '9999px',
   },
 } as const;

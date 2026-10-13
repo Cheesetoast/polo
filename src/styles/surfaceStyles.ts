@@ -17,54 +17,38 @@ export function moduleInsetSurface(opts: {
 
   if (opts.tone === "accent") {
     return css`
-      background-color: ${rgba.indigo(0.09)};
-      background-image:
-        radial-gradient(
-          ellipse 115% 82% at 22% -14%,
-          rgba(255, 255, 255, 0.72) 0%,
-          transparent 54%
-        ),
-        linear-gradient(
-          158deg,
-          ${rgba.indigo(0.12)} 0%,
-          ${rgba.indigo(0.04)} 100%
-        );
-      border: 1px solid ${rgba.indigo(0.24)};
+      background-color: ${rgba.indigo(0.12)};
+      background-image: linear-gradient(
+        158deg,
+        ${rgba.indigo(0.16)} 0%,
+        ${rgba.indigo(0.05)} 100%
+      );
+      border: 1px solid ${rgba.indigo(0.28)};
       border-radius: ${radius};
       box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.55),
-        inset 0 -1px 0 ${rgba.indigo(0.08)},
-        0 1px 2px rgba(15, 23, 42, 0.05),
-        0 4px 12px rgba(15, 23, 42, 0.07);
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 4px 12px rgba(0, 0, 0, 0.2);
     `
   }
 
   return css`
-    background-color: rgba(255, 255, 255, 0.86);
-    background-image:
-      radial-gradient(
-        ellipse 108% 74% at 50% -12%,
-        rgba(255, 255, 255, 0.95) 0%,
-        transparent 52%
-      ),
-      linear-gradient(
-        170deg,
-        rgba(255, 255, 255, 0.98) 0%,
-        rgba(241, 245, 249, 0.82) 100%
-      );
-    border: 1px solid rgba(148, 163, 184, 0.45);
+    background-color: rgba(255, 255, 255, 0.04);
+    background-image: linear-gradient(
+      170deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+    border: 1px solid ${theme.colors.border};
     border-radius: ${radius};
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.92),
-      inset 0 -1px 0 rgba(15, 23, 42, 0.045),
-      0 1px 2px rgba(15, 23, 42, 0.06),
-      0 4px 14px rgba(15, 23, 42, 0.06);
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 4px 14px rgba(0, 0, 0, 0.2);
   `
 }
 
 /** Top rim + contact edge — reads as a physical layer above the mesh */
 const rimAndLift =
-  "inset 0 1px 0 rgba(255, 255, 255, 0.88), 0 1px 0 rgba(15, 23, 42, 0.05)"
+  "inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 1px 0 rgba(0, 0, 0, 0.25)"
 
 /**
  * Full-width page canvas — same mesh + sheen as the homepage hero, static (no motion).
@@ -146,67 +130,38 @@ export const mainBackdrop = css`
   }
 `
 
-/** Primary content blocks — soft light falloff + faint cool floor for depth */
+/** Primary content blocks — elevated dark cards */
 export const sectionSurfaceProminent = css`
   background-color: ${theme.colors.surface};
-  background-image:
-    radial-gradient(
-      ellipse 110% 80% at 12% -8%,
-      rgba(255, 255, 255, 0.88) 0%,
-      transparent 52%
-    ),
-    radial-gradient(
-      ellipse 88% 68% at 0% 100%,
-      ${rgba.indigo(0.04)} 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      ellipse 90% 70% at 100% 100%,
-      ${rgba.indigo(0.05)} 0%,
-      transparent 55%
-    ),
-    linear-gradient(
-      168deg,
-      ${theme.colors.surface} 0%,
-      rgba(250, 250, 252, 0.98) 50%,
-      rgba(248, 248, 250, 0.96) 100%
-    );
-  border: 1px solid rgba(15, 23, 42, 0.1);
-  border-radius: ${theme.borderRadius.xl};
-  box-shadow:
-    ${rimAndLift},
-    ${theme.shadows.sm},
-    0 4px 20px rgba(0, 0, 0, 0.06),
-    0 28px 60px -28px rgba(0, 0, 0, 0.1);
-`
-
-/** Alternate sections — light frosted slate, same depth language as prominent */
-export const sectionSurfaceSoft = css`
-  background-color: rgba(255, 255, 255, 0.78);
-  background-image:
-    radial-gradient(
-      ellipse 105% 75% at 10% -6%,
-      rgba(255, 255, 255, 0.55) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      ellipse 85% 65% at 100% 100%,
-      ${rgba.indigo(0.03)} 0%,
-      transparent 52%
-    ),
-    linear-gradient(
-      158deg,
-      rgba(255, 255, 255, 0.9) 0%,
-      rgba(245, 245, 247, 0.55) 42%,
-      rgba(241, 241, 243, 0.62) 100%
-    );
+  background-image: linear-gradient(
+    168deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    ${theme.colors.surface} 45%,
+    #1f1715 100%
+  );
   border: 1px solid ${theme.colors.border};
   border-radius: ${theme.borderRadius.xl};
   box-shadow:
     ${rimAndLift},
     ${theme.shadows.sm},
-    0 3px 14px rgba(0, 0, 0, 0.04),
-    0 20px 44px -32px rgba(0, 0, 0, 0.08);
+    0 4px 20px rgba(0, 0, 0, 0.25),
+    0 28px 60px -28px rgba(0, 0, 0, 0.4);
+`
+
+/** Alternate sections — slightly softer dark panel */
+export const sectionSurfaceSoft = css`
+  background-color: rgba(255, 255, 255, 0.03);
+  background-image: linear-gradient(
+    158deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border: 1px solid ${theme.colors.border};
+  border-radius: ${theme.borderRadius.xl};
+  box-shadow:
+    ${rimAndLift},
+    ${theme.shadows.sm},
+    0 3px 14px rgba(0, 0, 0, 0.2);
   @supports (backdrop-filter: blur(10px)) {
     backdrop-filter: blur(10px);
   }
@@ -214,49 +169,32 @@ export const sectionSurfaceSoft = css`
 
 /** Search / filter panels */
 export const panelElevated = css`
-  background: linear-gradient(
-    160deg,
-    ${theme.colors.surface} 0%,
-    rgba(248, 250, 255, 0.96) 100%
-  );
-  border: 1px solid ${rgba.indigo(0.1)};
+  background: ${theme.colors.surface};
+  border: 1px solid ${theme.colors.border};
   border-radius: ${theme.borderRadius.lg};
   box-shadow:
     ${rimAndLift},
-    0 2px 6px rgba(0, 0, 0, 0.04),
-    0 8px 22px rgba(15, 23, 42, 0.05),
-    0 16px 40px -26px ${rgba.indigo(0.13)};
+    0 8px 22px rgba(0, 0, 0, 0.22);
 `
 
 /** Results page filter strip */
 export const panelSearchStrip = css`
-  background: linear-gradient(
-    155deg,
-    rgba(255, 255, 255, 0.98) 0%,
-    rgba(241, 245, 254, 0.85) 100%
-  );
-  border: 1px solid ${rgba.indigo(0.1)};
+  background: ${theme.colors.surface};
+  border: 1px solid ${theme.colors.border};
   border-radius: ${theme.borderRadius.lg};
   box-shadow:
     ${rimAndLift},
-    ${theme.shadows.sm},
-    0 12px 32px -22px ${rgba.indigo(0.12)};
+    ${theme.shadows.sm};
 `
 
 /** Authors / genres filter wells */
 export const panelFilters = css`
-  background: linear-gradient(
-    165deg,
-    rgba(249, 250, 251, 0.98) 0%,
-    rgba(241, 245, 249, 0.92) 55%,
-    rgba(238, 242, 255, 0.42) 100%
-  );
-  border: 1px solid rgba(148, 163, 184, 0.22);
-  border-radius: 12px;
+  background: ${theme.colors.surface};
+  border: 1px solid ${theme.colors.border};
+  border-radius: ${theme.borderRadius.lg};
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.82),
-    0 1px 0 rgba(15, 23, 42, 0.04),
-    0 2px 10px rgba(15, 23, 42, 0.05);
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 2px 10px rgba(0, 0, 0, 0.2);
 `
 
 /** Compact inset — same language as homepage shelf stat tiles */
@@ -266,16 +204,12 @@ export const statTile = moduleInsetSurface({ tone: "neutral", size: "tile" })
 export const dashboardShell = sectionSurfaceProminent
 
 export const dashboardStatCard = css`
-  background: linear-gradient(
-    155deg,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(241, 245, 249, 0.72) 100%
-  );
-  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid ${theme.colors.border};
   border-radius: ${theme.borderRadius.lg};
   box-shadow:
     ${rimAndLift},
-    0 2px 6px rgba(15, 23, 42, 0.05);
+    0 2px 6px rgba(0, 0, 0, 0.2);
 `
 
 export const dashboardDetailPanel = moduleInsetSurface({
@@ -285,86 +219,63 @@ export const dashboardDetailPanel = moduleInsetSurface({
 
 /** Empty / management callouts */
 export const panelMuted = css`
-  background: linear-gradient(
-    160deg,
-    rgba(249, 250, 251, 0.96) 0%,
-    rgba(241, 245, 249, 0.82) 100%
-  );
-  border: 1px solid rgba(203, 213, 225, 0.55);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid ${theme.colors.border};
   border-radius: ${theme.borderRadius.lg};
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.7),
-    0 1px 2px rgba(15, 23, 42, 0.04);
+    ${rimAndLift},
+    0 2px 8px rgba(0, 0, 0, 0.18);
 `
 
 /** Book detail page shell */
 export const bookPageShell = css`
   padding: ${theme.spacing.lg};
-  background: linear-gradient(
-    165deg,
-    rgba(255, 255, 255, 0.99) 0%,
-    rgba(248, 250, 255, 0.94) 100%
-  );
-  border: 1px solid ${rgba.indigo(0.1)};
+  background: ${theme.colors.surface};
+  border: 1px solid ${theme.colors.border};
   border-radius: ${theme.borderRadius.xl};
   box-shadow:
     ${rimAndLift},
     ${theme.shadows.md},
-    0 6px 20px rgba(15, 23, 42, 0.05),
-    0 28px 64px -32px ${rgba.indigo(0.13)};
+    0 16px 40px rgba(0, 0, 0, 0.28);
 `
 
 /** Style guide intro + section blocks */
 export const styleguideIntro = css`
-  background: linear-gradient(
-    155deg,
-    rgba(255, 255, 255, 0.99) 0%,
-    rgba(241, 245, 254, 0.72) 100%
-  );
-  border: 1px solid ${rgba.indigo(0.11)};
+  background: ${theme.colors.surface};
+  border: 1px solid ${theme.colors.border};
   border-radius: ${theme.borderRadius.xl};
   box-shadow:
     ${rimAndLift},
-    0 4px 14px rgba(15, 23, 42, 0.05),
-    0 14px 40px -22px ${rgba.indigo(0.14)};
+    0 8px 24px rgba(0, 0, 0, 0.22);
 `
 
 export const styleguideSection = css`
   padding: ${theme.spacing.lg};
   border-radius: ${theme.borderRadius.lg};
-  background: linear-gradient(
-    175deg,
-    rgba(255, 255, 255, 0.78) 0%,
-    rgba(248, 250, 252, 0.55) 100%
-  );
-  border: 1px solid rgba(226, 232, 240, 0.85);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid ${theme.colors.border};
   box-shadow:
     ${rimAndLift},
-    0 2px 6px rgba(15, 23, 42, 0.04);
+    0 4px 16px rgba(0, 0, 0, 0.18);
 `
 
 /** Simple project / text intro card */
 export const projectIntroCard = css`
   padding: ${theme.spacing["2xl"]};
   margin-top: ${theme.spacing.md};
-  background: linear-gradient(
-    155deg,
-    rgba(255, 255, 255, 0.97) 0%,
-    rgba(241, 245, 254, 0.65) 100%
-  );
-  border: 1px solid ${rgba.indigo(0.12)};
+  background: ${theme.colors.surface};
+  border: 1px solid ${theme.colors.border};
   border-radius: ${theme.borderRadius.xl};
   box-shadow:
     ${rimAndLift},
-    0 4px 14px rgba(15, 23, 42, 0.05),
-    0 18px 44px -24px ${rgba.indigo(0.16)};
+    0 8px 24px rgba(0, 0, 0, 0.22);
 `
 
 /**
  * Native OS select arrows ignore padding-right. Reset appearance and draw a
  * chevron inset from the right edge so right spacing is controllable.
  */
-const SELECT_CHEVRON_SVG = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 4.5L6 8L9.5 4.5' stroke='%2364748b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`
+const SELECT_CHEVRON_SVG = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 4.5L6 8L9.5 4.5' stroke='%239a8f8a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`
 
 export const nativeSelectChevron = css`
   appearance: none;

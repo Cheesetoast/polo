@@ -498,8 +498,8 @@ const StatusToggle = styled.button<{ $selected: boolean }>`
   align-items: center;
   justify-content: center;
   min-height: 2.75rem;
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   transition:
     background-color 0.15s ease,
     color 0.15s ease,
@@ -517,28 +517,26 @@ const StatusToggle = styled.button<{ $selected: boolean }>`
   ${(p) =>
     p.$selected
       ? css`
-          background-color: ${rgba.indigo(0.12)};
-          color: ${theme.colors.blue[700]};
+          background-color: ${theme.colors.accent};
+          color: ${theme.colors.ink};
           font-weight: ${theme.fontWeights.semibold};
-          border-color: ${rgba.indigo(0.35)};
-          box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.55),
-            0 0 0 1px ${rgba.indigo(0.12)};
+          border-color: ${theme.colors.accent};
+          box-shadow: 0 0 0 1px ${rgba.indigo(0.2)};
           z-index: 1;
         `
       : css`
           color: ${theme.colors.secondary};
 
           &:hover {
-            background-color: ${rgba.indigo(0.05)};
+            background-color: rgba(245, 192, 66, 0.12);
             color: ${theme.colors.primary};
-            border-color: ${rgba.indigo(0.2)};
+            border-color: ${rgba.indigo(0.35)};
           }
         `}
 
   &:focus-visible {
     outline: none;
-    box-shadow: inset 0 0 0 2px ${rgba.indigo(0.5)};
+    box-shadow: 0 0 0 2px ${rgba.indigo(0.5)};
     z-index: 2;
   }
 `
@@ -570,7 +568,7 @@ const ProgressInput = styled.input.attrs({
   max-width: 20rem;
   min-width: 0;
   cursor: pointer;
-  accent-color: ${theme.colors.primary};
+  accent-color: ${theme.colors.accent};
 `;
 
 const ConfirmModalOverlay = styled.div`
@@ -587,13 +585,15 @@ const ConfirmModalOverlay = styled.div`
 `;
 
 const ConfirmModalContent = styled.div`
-  background: #ffffff;
+  background: ${theme.colors.surface};
+  color: ${theme.colors.primary};
+  border: 1px solid ${theme.colors.border};
   padding: ${theme.spacing.lg};
   border-radius: ${theme.borderRadius.md};
   max-width: 420px;
   width: 100%;
   min-width: 0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing.md};
@@ -774,8 +774,8 @@ const RatingStarsWrap = styled.div<{ $highlight: boolean }>`
   box-sizing: border-box;
   border-radius: ${theme.borderRadius.md};
   border: 1px solid ${theme.colors.border};
-  background-color: rgba(255, 255, 255, 0.72);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  background-color: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   transition:
     border-color 0.35s ease,
     box-shadow 0.35s ease,
@@ -784,11 +784,11 @@ const RatingStarsWrap = styled.div<{ $highlight: boolean }>`
   ${(p) =>
     p.$highlight &&
     css`
-      background-color: ${rgba.indigo(0.08)};
-      border-color: ${rgba.indigo(0.42)};
+      background-color: ${rgba.indigo(0.14)};
+      border-color: ${rgba.indigo(0.45)};
       box-shadow:
-        0 0 0 1px ${rgba.indigo(0.2)},
-        0 4px 14px ${rgba.indigo(0.12)};
+        0 0 0 1px ${rgba.indigo(0.25)},
+        0 4px 14px rgba(0, 0, 0, 0.25);
     `}
 `
 
@@ -798,8 +798,8 @@ const StarContainer = styled.div`
   align-items: center;
 `;
 
-/** Empty / unselected stars — much lighter than `theme.colors.muted` so fills read clearly. */
-const STAR_EMPTY = "#e8e8ed";
+/** Empty / unselected stars — dim on dark surfaces so gold fills read clearly. */
+const STAR_EMPTY = "rgba(255, 255, 255, 0.18)";
 
 const Star = styled.span`
   font-size: clamp(1.25rem, 4.5vw, 1.5rem);

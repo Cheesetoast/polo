@@ -124,17 +124,17 @@ const NavContainer = styled.nav.withConfig({
   background: ${({ transparent, scrolled }) =>
     transparent && !scrolled
       ? 'transparent'
-      : 'linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 250, 255, 0.88) 100%)'};
+      : 'linear-gradient(180deg, rgba(36, 28, 26, 0.96) 0%, rgba(26, 18, 16, 0.92) 100%)'};
   backdrop-filter: ${({ transparent, scrolled }) =>
     transparent && !scrolled ? 'none' : 'blur(20px) saturate(180%)'};
   -webkit-backdrop-filter: ${({ transparent, scrolled }) =>
     transparent && !scrolled ? 'none' : 'blur(20px) saturate(180%)'};
   border-bottom: ${({ transparent, scrolled }) =>
-    transparent && !scrolled ? 'none' : `1px solid ${rgba.indigo(0.14)}`};
+    transparent && !scrolled ? 'none' : `1px solid ${theme.colors.border}`};
   box-shadow: ${({ transparent, scrolled }) =>
     transparent && !scrolled
       ? 'none'
-      : `0 1px 0 rgba(255, 255, 255, 0.65), 0 4px 24px ${rgba.indigo(0.08)}`};
+      : theme.shadows.nav};
 `;
 
 const NavContent = styled.div`
@@ -181,9 +181,9 @@ const NavLinks = styled.ul.withConfig({
     right: 0;
     background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.97) 0%,
-      rgba(248, 248, 250, 0.94) 45%,
-      rgba(245, 245, 247, 0.9) 100%
+      rgba(36, 28, 26, 0.98) 0%,
+      rgba(26, 18, 16, 0.96) 45%,
+      rgba(26, 18, 16, 0.94) 100%
     );
     backdrop-filter: blur(20px) saturate(180%);
     flex-direction: column;

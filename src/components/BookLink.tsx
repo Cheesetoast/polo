@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { navigate } from 'gatsby';
+import { theme } from '../styles/theme';
 
 interface BookLinkProps {
   isbn: string;
@@ -29,7 +30,7 @@ export const BookLink = ({ isbn, children, className, style }: BookLinkProps) =>
 };
 
 const StyledBookLink = styled.span`
-  color: #007bff;
+  color: ${theme.colors.accent};
   font-size: 0.9rem;
   margin-right: 8px;
   cursor: pointer;
@@ -37,10 +38,10 @@ const StyledBookLink = styled.span`
   transition: color 0.2s ease;
 
   &:hover {
-    color: #0056b3;
+    color: ${theme.colors.blue[600]};
   }
 
   &:active {
-    color: #004085;
+    color: ${theme.colors.blue[700]};
   }
 `;

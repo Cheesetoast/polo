@@ -1,35 +1,56 @@
-import { type ReactNode } from 'react';
-import styled from 'styled-components';
-import GlobalStyle from '../styles/globalStyles';
-import { mainBackdrop } from '../styles/surfaceStyles';
-import { theme } from '../styles/theme';
-import Navbar from './Navbar';
-import Footer from './Footer';
+import { type ReactNode } from "react"
+import styled from "styled-components"
+import GlobalStyle from "../styles/globalStyles"
+import { theme } from "../styles/theme"
+import { AppSidebar } from "./AppSidebar"
+import Footer from "./Footer"
 
 interface LayoutProps {
-  children: ReactNode;
-  transparentNavbar?: boolean;
+  children: ReactNode
+  /** @deprecated No-op — site uses the dashboard shell. Kept for call-site compatibility. */
+  transparentNavbar?: boolean
+  /** @deprecated No-op — dashboard shell is always on. */
+  variant?: "default" | "dashboard"
 }
 
-const Layout = ({ children, transparentNavbar = false }: LayoutProps) => (
+const Layout = ({ children }: LayoutProps) => (
   <>
     <GlobalStyle />
-    <Navbar transparent={transparentNavbar} />
-    <LayoutBody>
-      <MainContent>{children}</MainContent>
-      <Footer />
-    </LayoutBody>
+    <Shell>
+      <AppSidebar />
+      <ContentColumn>
+        <MainContent>{children}</MainContent>
+        <Footer />
+      </ContentColumn>
+    </Shell>
   </>
-);
+)
 
-export default Layout;
+export default Layout
 
-// Styled Components — flex column so footer sits under content without a bogus min-height gap
-const LayoutBody = styled.div`
+const Shell = styled.div`
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(245, 192, 66, 0.08), transparent 50%),
+    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(232, 90, 79, 0.1), transparent 45%),
+    ${theme.colors.background};
+  color: ${theme.colors.primary};
+  font-family: ${theme.fontFamily};
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+`
+
+const ContentColumn = styled.div`
   display: flex;
   flex-direction: column;
+  min-width: 0;
   min-height: 100vh;
-`;
+`
 
 const MainContent = styled.main`
   position: relative;
@@ -41,12 +62,9 @@ const MainContent = styled.main`
   min-width: 0;
   max-width: 100%;
   overflow-x: clip;
-  ${mainBackdrop}
-  padding-top: 100px;
-  padding-bottom: ${theme.spacing.xl};
+  padding: 1.75rem 2rem 2rem;
 
-  @media (min-width: 768px) {
-    padding-top: 120px;
-    padding-bottom: ${theme.spacing['2xl']};
+  @media (max-width: 900px) {
+    padding: 1.25rem 1rem 1.75rem;
   }
-`;
+`

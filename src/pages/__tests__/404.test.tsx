@@ -44,12 +44,6 @@ jest.mock('../../components/ButtonContainer', () => ({
   ),
 }));
 
-jest.mock('../../components/Navbar', () => {
-  return function MockNavbar() {
-    return <div data-testid="navbar" />;
-  };
-});
-
 describe('NotFoundPage', () => {
   const mockNavigate = jest.fn();
   
@@ -108,9 +102,4 @@ describe('NotFoundPage', () => {
     expect(screen.getByText(/If you believe this page should exist/)).toBeInTheDocument();
   });
 
-  it('renders the navbar', () => {
-    render(<NotFoundPage />);
-    
-    expect(screen.getByTestId('navbar')).toBeInTheDocument();
-  });
 });

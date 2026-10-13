@@ -17,6 +17,7 @@ import { GenreLink } from '../components/GenreLink';
 import { TextInput } from '../components/TextInput';
 import { Button } from '../components/Button';
 import { nativeSelectChevron, panelFilters } from '../styles/surfaceStyles';
+import { theme } from '../styles/theme';
 
 const AuthorsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -257,12 +258,12 @@ const Header = styled.div`
 const Title = styled.h1`
   font-size: 3rem;
   margin: 0 0 16px 0;
-  color: #111827;
+  color: ${theme.colors.primary};
 `;
 
 const Subtitle = styled.p`
   font-size: 1.2rem;
-  color: #6b7280;
+  color: ${theme.colors.secondary};
   margin: 0;
 `;
 
@@ -287,28 +288,29 @@ const FilterGroup = styled.div`
 
 const FilterLabel = styled.label`
   font-weight: 600;
-  color: #6b7280;
+  color: ${theme.colors.secondary};
   font-size: 0.9rem;
 `;
 
 const FilterSelect = styled.select`
   padding: 8px 12px;
-  border: 1px solid #d1d5db;
+  border: 1px solid ${theme.colors.border};
   border-radius: 6px;
   font-size: 0.9rem;
-  background-color: white;
+  background-color: ${theme.colors.surface};
+  color: ${theme.colors.primary};
   outline: none;
   ${nativeSelectChevron}
 
   &:focus {
-    border-color: #007bff;
+    border-color: ${theme.colors.blue[500]};
   }
 `;
 
 const ResultsInfo = styled.div`
   text-align: center;
   padding: 48px;
-  color: #6b7280;
+  color: ${theme.colors.secondary};
 `;
 
 const AuthorsGrid = styled.div`
@@ -318,16 +320,16 @@ const AuthorsGrid = styled.div`
 `;
 
 const AuthorCard = styled.div`
-  border: 1px solid #e5e7eb;
+  border: 1px solid ${theme.colors.border};
   border-radius: 12px;
   padding: 24px;
-  background: white;
+  background: ${theme.colors.surface};
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
   }
 `;
 
@@ -345,34 +347,34 @@ const AuthorInfo = styled.div`
 const AuthorName = styled.h3`
   margin: 0 0 8px 0;
   font-size: 1.3rem;
-  color: #111827;
+  color: ${theme.colors.primary};
 `;
 
 const AuthorFullName = styled.p`
   margin: 0 0 8px 0;
   font-size: 0.9rem;
-  color: #6b7280;
+  color: ${theme.colors.secondary};
   font-style: italic;
 `;
 
 const AuthorYears = styled.p`
   margin: 0;
   font-size: 0.9rem;
-  color: #9ca3af;
+  color: ${theme.colors.muted};
   font-weight: 500;
 `;
 
 const AuthorBio = styled.p`
   margin: 0 0 16px 0;
   line-height: 1.5;
-  color: #6b7280;
+  color: ${theme.colors.secondary};
   font-size: 0.9rem;
 `;
 
 const AuthorNationality = styled.p`
   margin: 0 0 16px 0;
   font-size: 0.9rem;
-  color: #9ca3af;
+  color: ${theme.colors.muted};
   font-weight: 500;
 `;
 
@@ -387,7 +389,7 @@ const GenresContainer = styled.div`
 
 
 const MoreGenres = styled.span`
-  color: #9ca3af;
+  color: ${theme.colors.muted};
   font-size: 0.8rem;
   font-style: italic;
 `;
@@ -398,7 +400,7 @@ const BooksContainer = styled.div`
 
 const BooksLabel = styled.span`
   font-weight: 600;
-  color: #6b7280;
+  color: ${theme.colors.secondary};
   font-size: 0.9rem;
   margin-right: 8px;
 `;
@@ -410,7 +412,7 @@ const BooksList = styled.span`
 
 
 const MoreBooks = styled.span`
-  color: #9ca3af;
+  color: ${theme.colors.muted};
   font-size: 0.8rem;
   font-style: italic;
 `;

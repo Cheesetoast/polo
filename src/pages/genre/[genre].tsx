@@ -118,13 +118,13 @@ const NotFoundContainer = styled.div`
 
 const NotFoundTitle = styled.h1`
   font-size: 2.5rem;
-  color: #6c757d;
+  color: ${theme.colors.secondary};
   margin: 0 0 16px 0;
 `;
 
 const NotFoundText = styled.p`
   font-size: 1.1rem;
-  color: #9ca3af;
+  color: ${theme.colors.muted};
   margin: 0 0 24px 0;
 `;
 
@@ -136,12 +136,12 @@ const GenreHeader = styled.div`
 const GenreTitle = styled.h1`
   font-size: 3rem;
   margin: 0 0 16px 0;
-  color: #111827;
+  color: ${theme.colors.primary};
 `;
 
 const GenreSubtitle = styled.p`
   font-size: 1.2rem;
-  color: #6b7280;
+  color: ${theme.colors.secondary};
   margin: 0;
 `;
 
@@ -152,36 +152,36 @@ const BooksGrid = styled.div`
 `;
 
 const BookCard = styled.div`
-  border: 1px solid #e5e7eb;
+  border: 1px solid ${theme.colors.border};
   border-radius: 12px;
   padding: 24px;
-  background: white;
+  background: ${theme.colors.surface};
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
   }
 `;
 
 const BookTitle = styled.h3`
   margin: 0 0 8px 0;
   font-size: 1.3rem;
-  color: #111827;
+  color: ${theme.colors.primary};
 `;
 
 const BookAuthor = styled.p`
   margin: 0 0 12px 0;
   font-size: 1rem;
-  color: #6b7280;
+  color: ${theme.colors.secondary};
   font-style: italic;
 `;
 
 const BookDescription = styled.p`
   margin: 0 0 16px 0;
   line-height: 1.5;
-  color: #6b7280;
+  color: ${theme.colors.secondary};
   font-size: 0.9rem;
 `;
 
@@ -190,7 +190,7 @@ const BookMeta = styled.div`
   justify-content: space-between;
   align-items: center;
   font-size: 0.9rem;
-  color: #9ca3af;
+  color: ${theme.colors.muted};
 `;
 
 const Rating = styled.span`
@@ -209,10 +209,11 @@ const BookGenres = styled.div`
 `;
 
 const BookGenreTag = styled.span`
-  background: #f3f4f6;
-  color: #374151;
+  background: rgba(245, 192, 66, 0.14);
+  color: ${theme.colors.accent};
+  border: 1px solid rgba(245, 192, 66, 0.28);
   padding: 2px 6px;
-  border-radius: 4px;
+  border-radius: ${theme.borderRadius.sm};
   font-size: 0.7rem;
   font-weight: 500;
 `;

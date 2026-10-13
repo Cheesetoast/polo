@@ -43,16 +43,19 @@ export const GenreLink = ({
 };
 
 const StyledGenreLink = styled.span`
-  background: ${theme.colors.primary};
-  color: ${theme.colors.white};
+  background: rgba(245, 192, 66, 0.16);
+  color: ${theme.colors.accent};
+  border: 1px solid rgba(245, 192, 66, 0.35);
   padding: ${theme.spacing.xs} ${theme.spacing.sm};
   border-radius: ${theme.borderRadius.md};
   font-size: ${theme.fontSizes.sm};
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 
   &:hover {
-    background: ${theme.colors.gray[600]};
+    background: ${theme.colors.accent};
+    color: ${theme.colors.ink};
+    border-color: ${theme.colors.accent};
     transform: translateY(-1px);
   }
 `;

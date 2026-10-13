@@ -146,9 +146,9 @@ const StyledButton = styled.button.withConfig({
                 min-height: 38px;
               `}
         &:hover:not(:disabled) {
-          background: ${theme.colors.primary};
-          color: ${theme.colors.white};
-          border-color: ${theme.colors.primary};
+          background: ${theme.colors.blue[500]};
+          color: ${theme.colors.ink};
+          border-color: ${theme.colors.blue[500]};
           transform: none;
           box-shadow: none;
         }
@@ -169,15 +169,15 @@ const StyledButton = styled.button.withConfig({
         border-width: 1px;
         border-color: ${theme.colors.border};
         border-radius: ${theme.borderRadius.sm};
-        background: ${pageActive ? theme.colors.primary : theme.colors.surface};
-        color: ${pageActive ? theme.colors.white : theme.colors.secondary};
+        background: ${pageActive ? theme.colors.blue[500] : theme.colors.surface};
+        color: ${pageActive ? theme.colors.ink : theme.colors.secondary};
         box-shadow: none;
         &:hover:not(:disabled) {
           background: ${pageActive
-            ? theme.colors.primary
-            : theme.colors.background};
-          border-color: ${pageActive ? theme.colors.primary : theme.colors.border};
-          color: ${pageActive ? theme.colors.white : theme.colors.primary};
+            ? theme.colors.blue[600]
+            : "rgba(255, 255, 255, 0.06)"};
+          border-color: ${pageActive ? theme.colors.blue[600] : theme.colors.border};
+          color: ${pageActive ? theme.colors.ink : theme.colors.primary};
           transform: none;
           box-shadow: none;
         }
@@ -227,7 +227,7 @@ const StyledButton = styled.button.withConfig({
           border-color: ${theme.colors.blue[500]};
           &:hover:not(:disabled) {
             background-color: ${theme.colors.blue[500]};
-            color: ${theme.colors.white};
+            color: ${theme.colors.ink};
           }
         `;
       case 'ghost':
@@ -237,11 +237,11 @@ const StyledButton = styled.button.withConfig({
       default:
         return css`
           background-color: ${theme.colors.blue[500]};
-          color: ${theme.colors.white};
+          color: ${theme.colors.ink};
           &:hover:not(:disabled) {
             background-color: ${theme.colors.blue[600]};
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 113, 227, 0.35);
+            box-shadow: 0 4px 12px rgba(245, 192, 66, 0.35);
           }
         `;
     }

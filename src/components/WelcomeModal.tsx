@@ -117,7 +117,7 @@ const ModalOverlay = styled.div.withConfig({
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  background: rgba(15, 23, 42, 0.42);
+  background: rgba(10, 6, 5, 0.72);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
 

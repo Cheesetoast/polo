@@ -43,7 +43,7 @@ const ProgressHeader = styled.div`
 const ProgressBarTrack = styled.div`
     width: 100%;
     height: 6px;
-    background-color: ${theme.colors.muted};
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: ${theme.borderRadius.sm};
     overflow: hidden;
 `;
@@ -53,6 +53,6 @@ const ProgressBarFill = styled.div.withConfig({
 })<{ progress: number }>`
   width: ${props => props.progress}%;
   height: 100%;
-  background-color: ${theme.colors.primary};
+  background-color: ${theme.colors.accent};
   transition: width 0.3s ease;
 `;

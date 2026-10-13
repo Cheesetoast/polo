@@ -59,7 +59,11 @@ const SearchPage = () => {
     setSelectedGenre("");
   };
 
-
+  const handleRandomBook = () => {
+    if (!books.length) return;
+    const book = books[Math.floor(Math.random() * books.length)];
+    navigate(`/book/${book.isbn.replace(/-/g, "")}`);
+  };
 
   return (
     <Layout>
@@ -110,6 +114,15 @@ const SearchPage = () => {
                   size="small"
                 >
                   Search
+                </Button>
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="small"
+                  onClick={handleRandomBook}
+                >
+                  Random book
                 </Button>
 
                 <Button 
@@ -186,15 +199,16 @@ const FilterGroup = styled.div`
 
 const FilterSelect = styled.select`
   padding: ${theme.spacing.sm} ${theme.spacing.md};
-  border: 1px solid ${theme.colors.muted};
+  border: 1px solid ${theme.colors.border};
   border-radius: ${theme.borderRadius.sm};
   font-size: ${theme.fontSizes.sm};
-  background-color: white;
+  background-color: ${theme.colors.surface};
+  color: ${theme.colors.primary};
   ${nativeSelectChevron}
 
   &:focus {
     outline: none;
-    border-color: ${theme.colors.primary};
+    border-color: ${theme.colors.blue[500]};
   }
 `;
 

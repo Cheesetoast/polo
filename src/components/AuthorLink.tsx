@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { navigate } from 'gatsby';
+import { theme } from '../styles/theme';
 
 interface AuthorLinkProps {
   authorName: string;
@@ -42,18 +43,18 @@ export const AuthorLink = ({
 };
 
 const StyledAuthorLink = styled.span`
-  color: #007bff;
+  color: ${theme.colors.accent};
   text-decoration: none;
   cursor: pointer;
   font-weight: 500;
   transition: color 0.2s ease;
 
   &:hover {
-    color: #0056b3;
+    color: ${theme.colors.blue[600]};
     text-decoration: underline;
   }
 
   &:active {
-    color: #004085;
+    color: ${theme.colors.blue[700]};
   }
 `;

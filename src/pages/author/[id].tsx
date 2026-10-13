@@ -186,13 +186,13 @@ const NotFoundContainer = styled.div`
 
 const NotFoundTitle = styled.h1`
   font-size: 2.5rem;
-  color: #6c757d;
+  color: ${theme.colors.secondary};
   margin: 0 0 16px 0;
 `;
 
 const NotFoundText = styled.p`
   font-size: 1.2rem;
-  color: #6c757d;
+  color: ${theme.colors.secondary};
   margin: 0 0 24px 0;
 `;
 
@@ -225,8 +225,8 @@ const AuthorPlaceholder = styled.div`
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background: #007bff;
-  color: white;
+  background: ${theme.colors.blue[500]};
+  color: ${theme.colors.ink};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -242,7 +242,7 @@ const AuthorInfoSection = styled.div`
 const AuthorName = styled.h1`
   font-size: 3rem;
   margin: 0 0 16px 0;
-  color: #007bff;
+  color: ${theme.colors.blue[500]};
 
   @media (max-width: 768px) {
     font-size: 2.5rem;
@@ -251,7 +251,7 @@ const AuthorName = styled.h1`
 
 const AuthorFullName = styled.p`
   font-size: 1.3rem;
-  color: #6c757d;
+  color: ${theme.colors.secondary};
   margin: 0 0 24px 0;
   font-style: italic;
 `;
@@ -269,12 +269,12 @@ const MetaItem = styled.div`
 
 const MetaLabel = styled.span`
   font-weight: 600;
-  color: #6c757d;
+  color: ${theme.colors.secondary};
   min-width: 100px;
 `;
 
 const MetaValue = styled.span`
-  color: #6c757d;
+  color: ${theme.colors.secondary};
 `;
 
 const AuthorWebsite = styled.div`
@@ -283,16 +283,16 @@ const AuthorWebsite = styled.div`
 
 const WebsiteLink = styled.a`
   display: inline-block;
-  background: #007bff;
-  color: white;
+  background: ${theme.colors.accent};
+  color: ${theme.colors.ink};
   padding: 12px 24px;
-  border-radius: 8px;
+  border-radius: ${theme.borderRadius.md};
   text-decoration: none;
   font-weight: 500;
   transition: background-color 0.2s;
 
   &:hover {
-    background: #6c757d;
+    background: ${theme.colors.blue[600]};
   }
 `;
 
@@ -302,16 +302,16 @@ const BioSection = styled.section`
 
 const SectionTitle = styled.h2`
   font-size: 2rem;
-  color: #007bff;
+  color: ${theme.colors.blue[500]};
   margin: 0 0 24px 0;
-  border-bottom: 3px solid #007bff;
+  border-bottom: 3px solid ${theme.colors.blue[500]};
   padding-bottom: 8px;
 `;
 
 const BioText = styled.p`
   font-size: 1.1rem;
   line-height: 1.7;
-  color: #6c757d;
+  color: ${theme.colors.secondary};
   margin: 0;
 `;
 
@@ -326,17 +326,20 @@ const GenresList = styled.div`
 `;
 
 const GenreTag = styled.span`
-  background: #007bff;
-  color: white;
+  background: rgba(245, 192, 66, 0.16);
+  color: ${theme.colors.accent};
+  border: 1px solid rgba(245, 192, 66, 0.35);
   padding: 8px 16px;
-  border-radius: 20px;
+  border-radius: ${theme.borderRadius.md};
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 
   &:hover {
-    background: #0056b3;
+    background: ${theme.colors.accent};
+    color: ${theme.colors.ink};
+    border-color: ${theme.colors.accent};
   }
 `;
 
@@ -353,7 +356,7 @@ const NoBooks = styled.div`
 
 const NoBooksText = styled.p`
   font-size: 1.2rem;
-  color: #6c757d;
+  color: ${theme.colors.secondary};
   margin: 0;
 `;
 
@@ -364,34 +367,34 @@ const BooksGrid = styled.div`
 `;
 
 const BookCard = styled.div`
-  background: white;
-  border: 1px solid #dee2e6;
+  background: ${theme.colors.surface};
+  border: 1px solid ${theme.colors.border};
   border-radius: 8px;
   padding: 16px;
   cursor: pointer;
   transition: box-shadow 0.2s;
 
   &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
   }
 `;
 
 const BookTitle = styled.div`
   font-size: 1.2rem;
   font-weight: 600;
-  color: #007bff;
+  color: ${theme.colors.blue[500]};
   margin: 0 0 8px 0;
 `;
 
 const BookAuthor = styled.div`
   font-size: 1rem;
-  color: #6c757d;
+  color: ${theme.colors.secondary};
   margin: 0 0 8px 0;
 `;
 
 const BookDescription = styled.div`
   font-size: 0.9rem;
-  color: #6c757d;
+  color: ${theme.colors.secondary};
   line-height: 1.5;
   margin: 0;
 `;

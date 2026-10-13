@@ -2,6 +2,10 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import Layout from '../Layout';
 
+jest.mock('@gatsbyjs/reach-router', () => ({
+  useLocation: () => ({ pathname: '/' }),
+}));
+
 describe('Layout', () => {
   it('renders children inside main content', () => {
     const { getByText } = render(<Layout><div>child</div></Layout>);
@@ -11,5 +15,11 @@ describe('Layout', () => {
   it('renders with transparent navbar option', () => {
     const { container } = render(<Layout transparentNavbar><div>child</div></Layout>);
     expect(container.firstChild).toBeTruthy();
+  });
+
+  it('renders app sidebar navigation', () => {
+    const { getByLabelText } = render(<Layout><div>child</div></Layout>);
+    expect(getByLabelText('Primary')).toBeInTheDocument();
+    expect(getByLabelText('Home')).toBeInTheDocument();
   });
 });

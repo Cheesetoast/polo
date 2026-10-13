@@ -32,12 +32,6 @@ jest.mock('../../components/ButtonContainer', () => ({
   ),
 }));
 
-jest.mock('../../components/Navbar', () => {
-  return function MockNavbar() {
-    return <div data-testid="navbar" />;
-  };
-});
-
 jest.mock('../../components/Layout', () => {
   return function MockLayout({ children }: { children: React.ReactNode }) {
     return <div data-testid="layout">{children}</div>;
@@ -110,9 +104,4 @@ describe('Dev404Page', () => {
     expect(screen.getByText(/This is the development 404 page/)).toBeInTheDocument();
   });
 
-  it('renders the navbar', () => {
-    render(<Dev404Page />);
-    
-    expect(screen.getByTestId('navbar')).toBeInTheDocument();
-  });
 });

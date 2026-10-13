@@ -129,6 +129,13 @@ const SearchResultsPage = () => {
     navigate(`/book/${book.isbn.replace(/-/g, '')}`);
   };
 
+  const handleRandomBook = () => {
+    const pool = filteredBooks.length > 0 ? filteredBooks : books;
+    if (!pool.length) return;
+    const book = pool[Math.floor(Math.random() * pool.length)];
+    navigate(`/book/${book.isbn.replace(/-/g, "")}`);
+  };
+
   // Generate page title based on filters
   const getPageTitle = () => {
     if (selectedAuthor) {
@@ -180,6 +187,15 @@ const SearchResultsPage = () => {
 
 
 
+
+              <Button
+                type="button"
+                variant="outline"
+                size="small"
+                onClick={handleRandomBook}
+              >
+                Random book
+              </Button>
 
               <Button 
                 onClick={handleClearFilters} 
@@ -241,14 +257,15 @@ const FilterGroup = styled.div`
 
 const FilterSelect = styled.select`
   padding: ${theme.spacing.sm};
-  border: 1px solid ${theme.colors.muted};
+  border: 1px solid ${theme.colors.border};
   border-radius: ${theme.borderRadius.sm};
   font-size: ${theme.fontSizes.sm};
-  background-color: white;
+  background-color: ${theme.colors.surface};
+  color: ${theme.colors.primary};
   ${nativeSelectChevron}
 
   &:focus {
     outline: none;
-    border-color: ${theme.colors.primary};
+    border-color: ${theme.colors.blue[500]};
   }
 `;

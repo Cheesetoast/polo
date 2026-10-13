@@ -39,10 +39,10 @@ const StyleguidePage = () => {
           <PageIntro>
             <Text variant="h1">Style guide</Text>
             <Text variant="p" color="secondary">
-              Single source of truth: <code>src/styles/theme.ts</code> (Inter, cool neutrals, purple
-              accent) plus shared surfaces in <code>surfaceStyles.ts</code>. Layout applies{" "}
-              <code>mainBackdrop</code> to the page shell. Component variants and stories also live in{" "}
-              <StorybookHint>Storybook</StorybookHint>.
+              Single source of truth: <code>src/styles/theme.ts</code> (Plus Jakarta Sans, warm dark
+              surfaces, gold accent) plus shared surfaces in <code>surfaceStyles.ts</code>. Layout
+              applies <code>mainBackdrop</code> to the page shell. Component variants and stories
+              also live in <StorybookHint>Storybook</StorybookHint>.
             </Text>
           </PageIntro>
 
@@ -50,10 +50,11 @@ const StyleguidePage = () => {
             <SectionTitle>
               <Text variant="h2">Typography</Text>
               <Text variant="p" color="secondary">
-                <code>theme.fontFamily</code> is Inter with system fallbacks. Sizes and line heights
-                pair via <code>theme.fontSizes</code> and <code>theme.lineHeights</code>. The{" "}
-                <code>Text</code> component applies weights and tracking per variant (e.g. semibold
-                headings, tight tracking on <code>h1</code> / <code>h2</code>).
+                <code>theme.fontFamily</code> is Plus Jakarta Sans with Inter/system fallbacks.
+                Sizes and line heights pair via <code>theme.fontSizes</code> and{" "}
+                <code>theme.lineHeights</code>. The <code>Text</code> component applies weights and
+                tracking per variant (e.g. semibold headings, tight tracking on <code>h1</code> /{" "}
+                <code>h2</code>).
               </Text>
             </SectionTitle>
             <TypeScale>
@@ -141,9 +142,9 @@ const StyleguidePage = () => {
             <SectionTitle>
               <Text variant="h2">Color</Text>
               <Text variant="p" color="secondary">
-                Semantic UI colors from <code>theme.colors</code>: primary text, surfaces, border,
-                and <code>blue[500-700]</code> for accent (buttons, links, focus). Tints in{" "}
-                <code>surfaceStyles</code> use the same accent family.
+                Semantic UI colors from <code>theme.colors</code>: cream primary text, warm dark
+                surfaces, border, and gold <code>accent</code> / <code>blue[500-700]</code> for
+                buttons, links, and focus. Tints in <code>surfaceStyles</code> use the same family.
               </Text>
             </SectionTitle>
             <SwatchGrid>
@@ -473,8 +474,8 @@ const SwatchTile = styled.div<{ $color: string }>`
   aspect-ratio: 1;
   border-radius: ${theme.borderRadius.md};
   background: ${({ $color }) => $color};
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  border: 1px solid ${theme.colors.border};
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
 `
 
 const SwatchLabel = styled.div`
@@ -499,7 +500,7 @@ const SpacingBar = styled.div<{ $width: string }>`
   height: 12px;
   width: ${({ $width }) => $width};
   max-width: 100%;
-  background: ${theme.colors.primary};
+  background: ${theme.colors.accent};
   border-radius: ${theme.borderRadius.sm};
   opacity: 0.85;
 `

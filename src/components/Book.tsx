@@ -153,8 +153,8 @@ const StyledBook = styled.div<{ $isDragging?: boolean }>`
   border-radius: ${theme.borderRadius.md};
   padding: ${theme.spacing.md};
   width: 100%;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: ${theme.colors.surface};
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
   transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
   transform: ${props => props.$isDragging ? 'scale(1.05)' : 'scale(1)'};
   box-shadow: ${props => props.$isDragging ? '0 4px 8px rgba(0, 0, 0, 0.15)' : '0 2px 4px rgba(0, 0, 0, 0.1)'};
@@ -261,24 +261,28 @@ const MetadataContainer = styled.div`
 `;
 
 const GenreTag = styled.span`
-  background-color: ${theme.colors.primary};
-  color: white;
+  background-color: rgba(245, 192, 66, 0.16);
+  color: ${theme.colors.accent};
+  border: 1px solid rgba(245, 192, 66, 0.35);
   padding: 2px 8px;
-  border-radius: 4px;
+  border-radius: ${theme.borderRadius.sm};
   font-size: 0.75rem;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: ${theme.colors.accent};
+    color: ${theme.colors.ink};
+    border-color: ${theme.colors.accent};
   }
 `;
 
 const RatingTag = styled.span`
-  background-color: ${theme.colors.secondary};
-  color: white;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: ${theme.colors.secondary};
+  border: 1px solid ${theme.colors.border};
   padding: 2px 8px;
-  border-radius: 4px;
+  border-radius: ${theme.borderRadius.sm};
   font-size: 0.75rem;
 `;
 
