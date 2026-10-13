@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import { navigate } from 'gatsby';
 import { rgba, theme } from '../styles/theme';
+import { nativeSelectChevron } from '../styles/surfaceStyles';
 import { Text } from './Text';
 import { ReadingStatus } from '../types/reading';
 
@@ -312,8 +313,9 @@ const StatusSelect = styled.select`
   border-radius: ${theme.borderRadius.sm};
   font-size: ${theme.fontSizes.sm};
   font-family: ${theme.fontFamily};
-  background: ${theme.colors.surface};
+  background-color: ${theme.colors.surface};
   color: ${theme.colors.primary};
+  ${nativeSelectChevron}
 
   &:focus {
     outline: none;

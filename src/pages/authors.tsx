@@ -16,7 +16,7 @@ import { AuthorLink } from '../components/AuthorLink';
 import { GenreLink } from '../components/GenreLink';
 import { TextInput } from '../components/TextInput';
 import { Button } from '../components/Button';
-import { panelFilters } from '../styles/surfaceStyles';
+import { nativeSelectChevron, panelFilters } from '../styles/surfaceStyles';
 
 const AuthorsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -296,8 +296,9 @@ const FilterSelect = styled.select`
   border: 1px solid #d1d5db;
   border-radius: 6px;
   font-size: 0.9rem;
-  background: white;
+  background-color: white;
   outline: none;
+  ${nativeSelectChevron}
 
   &:focus {
     border-color: #007bff;

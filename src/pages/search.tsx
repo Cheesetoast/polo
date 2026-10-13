@@ -11,7 +11,7 @@ import { Button } from "../components/Button"
 import { TextInput } from "../components/TextInput"
 import styled from "styled-components"
 import { theme } from "../styles/theme"
-import { panelElevated } from "../styles/surfaceStyles"
+import { nativeSelectChevron, panelElevated } from "../styles/surfaceStyles"
 import { navigate } from "gatsby"
 
 interface Book {
@@ -189,8 +189,9 @@ const FilterSelect = styled.select`
   border: 1px solid ${theme.colors.muted};
   border-radius: ${theme.borderRadius.sm};
   font-size: ${theme.fontSizes.sm};
-  background: white;
-  
+  background-color: white;
+  ${nativeSelectChevron}
+
   &:focus {
     outline: none;
     border-color: ${theme.colors.primary};

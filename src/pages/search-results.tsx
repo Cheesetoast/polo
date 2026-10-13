@@ -14,7 +14,7 @@ import { Button } from "../components/Button"
 import { TextInput } from "../components/TextInput"
 import styled from "styled-components"
 import { theme } from "../styles/theme"
-import { panelSearchStrip } from "../styles/surfaceStyles"
+import { nativeSelectChevron, panelSearchStrip } from "../styles/surfaceStyles"
 
 interface Book {
   title: string;
@@ -245,7 +245,8 @@ const FilterSelect = styled.select`
   border-radius: ${theme.borderRadius.sm};
   font-size: ${theme.fontSizes.sm};
   background-color: white;
-  
+  ${nativeSelectChevron}
+
   &:focus {
     outline: none;
     border-color: ${theme.colors.primary};

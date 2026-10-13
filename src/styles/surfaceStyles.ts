@@ -359,3 +359,20 @@ export const projectIntroCard = css`
     0 4px 14px rgba(15, 23, 42, 0.05),
     0 18px 44px -24px ${rgba.indigo(0.16)};
 `
+
+/**
+ * Native OS select arrows ignore padding-right. Reset appearance and draw a
+ * chevron inset from the right edge so right spacing is controllable.
+ */
+const SELECT_CHEVRON_SVG = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 4.5L6 8L9.5 4.5' stroke='%2364748b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`
+
+export const nativeSelectChevron = css`
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: ${SELECT_CHEVRON_SVG};
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px 12px;
+  padding-right: 2.25rem;
+`
