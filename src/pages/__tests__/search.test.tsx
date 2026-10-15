@@ -48,7 +48,7 @@ jest.mock('../search', () => {
   return function MockSearchPage() {
     return (
       <div data-testid="search-page">
-        <h1>Search Books</h1>
+        <h1>Search</h1>
         <p>Find your next great read from our collection</p>
         <input 
           type="text" 
@@ -78,7 +78,7 @@ describe('SearchPage', () => {
   it('renders search page with title and description', () => {
     render(<SearchPage />);
     
-    expect(screen.getByText('Search Books')).toBeInTheDocument();
+    expect(screen.getByText('Search')).toBeInTheDocument();
     expect(screen.getByText('Find your next great read from our collection')).toBeInTheDocument();
   });
 

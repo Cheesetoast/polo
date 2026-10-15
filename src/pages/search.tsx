@@ -70,7 +70,7 @@ const SearchPage = () => {
       <main>
         <ContentWrapper>
           <div>
-            <Text variant="h1">Search Books</Text>
+            <Text variant="h1">Search</Text>
             <Text variant="p" color="secondary">
               Find your next great read from our collection
             </Text>

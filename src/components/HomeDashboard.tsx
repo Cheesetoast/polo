@@ -119,7 +119,8 @@ export function HomeDashboard({ homepageTitle }: HomeDashboardProps) {
     navigate(bookPathFromIsbn(book.isbn))
   }
 
-  const brand = homepageTitle || SITE_CONFIG.SITE_NAME
+  const siteTitle = SITE_CONFIG.SITE_NAME
+  const tagline = homepageTitle?.trim() || "Read. Track. Repeat."
   const todayLabel = new Date().toLocaleDateString(undefined, {
     month: "short",
     day: "numeric",
@@ -129,16 +130,16 @@ export function HomeDashboard({ homepageTitle }: HomeDashboardProps) {
     <ContentRoot>
         <Header>
           <GreetingBlock>
-            <Greeting>
-              Welcome back to <em>{brand}</em>
-            </Greeting>
+            <Greeting>{siteTitle}</Greeting>
+            <TaglineSeparator aria-hidden>/</TaglineSeparator>
+            <Tagline>{tagline}</Tagline>
           </GreetingBlock>
           <HeaderActions onSubmit={onSearch}>
             <SearchField>
               <SearchIcon aria-hidden />
               <SearchInput
                 type="search"
-                placeholder="Search book.."
+                placeholder="Search books..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 aria-label="Search books"
@@ -147,9 +148,6 @@ export function HomeDashboard({ homepageTitle }: HomeDashboardProps) {
             <DiscoverButton type="button" onClick={() => navigate("/search-results")}>
               Discover books
             </DiscoverButton>
-            <Avatar aria-hidden title={brand}>
-              {brand.slice(0, 1)}
-            </Avatar>
           </HeaderActions>
         </Header>
 
@@ -471,8 +469,9 @@ const Header = styled.header`
 const GreetingBlock = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
   flex-wrap: wrap;
+  min-width: 0;
 `
 
 const Greeting = styled.h1`
@@ -481,11 +480,26 @@ const Greeting = styled.h1`
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.15;
+  color: var(--dash-yellow);
+`
 
-  em {
-    font-style: normal;
-    color: var(--dash-yellow);
-  }
+const TaglineSeparator = styled.span`
+  color: var(--dash-muted);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1;
+  opacity: 0.9;
+`
+
+const Tagline = styled.p`
+  margin: 0;
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--dash-text);
+  opacity: 0.72;
+  line-height: 1.2;
+  white-space: nowrap;
 `
 
 const HeaderActions = styled.form`
@@ -544,17 +558,6 @@ const DiscoverButton = styled.button`
     transform: translateY(-1px);
     box-shadow: 0 10px 24px rgba(245, 192, 66, 0.28);
   }
-`
-
-const Avatar = styled.div`
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  font-weight: 700;
-  background: linear-gradient(145deg, #5b8def, #9b6bff);
-  flex: none;
 `
 
 const TopGrid = styled.div`

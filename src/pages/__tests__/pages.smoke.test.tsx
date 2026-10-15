@@ -44,13 +44,16 @@ describe('page smoke (initial render)', () => {
 
   it('renders home (index)', () => {
     render(<IndexPage />);
-    expect(screen.getByText(/Welcome back to/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 1, name: "Book Stack" })
+    ).toBeInTheDocument();
+    expect(screen.getByText("Read. Track. Repeat.")).toBeInTheDocument();
   });
 
   it('renders search', () => {
     render(<SearchPage />);
     expect(
-      screen.getByRole('heading', { level: 1, name: 'Search Books' })
+      screen.getByRole('heading', { level: 1, name: 'Search' })
     ).toBeInTheDocument();
   });
 

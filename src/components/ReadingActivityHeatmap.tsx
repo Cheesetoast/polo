@@ -1,37 +1,17 @@
-import { useSyncExternalStore } from "react"
 import styled, { css, keyframes } from "styled-components"
 import { theme } from "../styles/theme"
 import { ModuleInsetPanel } from "./ModuleInsetPanel"
-import { buildReadingHeatmapGrid, intensityLevel } from "../utils/readingActivityHeatmap"
+import {
+  READING_ACTIVITY_WEEKS,
+  buildReadingHeatmapGrid,
+  intensityLevel,
+} from "../utils/readingActivityHeatmap"
 
-/** Full history on large screens; shorter window on phones so the grid isn’t a long horizontal strip. */
-const HEATMAP_WEEKS_DESKTOP = 26
-const HEATMAP_WEEKS_MOBILE = 12
-const HEATMAP_MOBILE_MQ = "(max-width: 767px)"
+/** Full year of week columns so all 12 months can appear (GitHub-style). */
+export const HEATMAP_WEEKS = READING_ACTIVITY_WEEKS
 
 const CELL = 11
 const GAP = 3
-
-function subscribeHeatmapMobileMq(cb: () => void) {
-  if (typeof window === "undefined" || !window.matchMedia) return () => {}
-  const mq = window.matchMedia(HEATMAP_MOBILE_MQ)
-  mq.addEventListener("change", cb)
-  return () => mq.removeEventListener("change", cb)
-}
-
-function getHeatmapMobileSnapshot(): boolean {
-  if (typeof window === "undefined" || !window.matchMedia) return false
-  return window.matchMedia(HEATMAP_MOBILE_MQ).matches
-}
-
-function useHeatmapWeeksBack(): number {
-  const mobile = useSyncExternalStore(
-    subscribeHeatmapMobileMq,
-    getHeatmapMobileSnapshot,
-    () => false
-  )
-  return mobile ? HEATMAP_WEEKS_MOBILE : HEATMAP_WEEKS_DESKTOP
-}
 
 const cellFade = keyframes`
   from {
@@ -84,6 +64,7 @@ const Caption = styled.p`
 
 const HeatmapOuter = styled.div`
   display: flex;
+  align-items: flex-start;
   gap: ${theme.spacing.sm};
   min-width: 0;
   width: 100%;
@@ -94,6 +75,8 @@ const WeekdayAxis = styled.div`
   flex-direction: column;
   justify-content: space-between;
   flex-shrink: 0;
+  /* Align with grid cells under the month row */
+  margin-top: 14px;
   height: calc(7 * ${CELL}px + 6 * ${GAP}px);
   font-size: 9px;
   line-height: 1;
@@ -115,9 +98,33 @@ const ScrollRegion = styled.div`
     height: 6px;
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(15, 23, 42, 0.12);
+    background: rgba(255, 255, 255, 0.12);
     border-radius: ${theme.borderRadius.full};
   }
+`
+
+const GridStack = styled.div`
+  width: max-content;
+`
+
+const MonthAxis = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: ${GAP}px;
+  height: 12px;
+  margin-bottom: 2px;
+  font-size: 9px;
+  line-height: 1;
+  color: ${theme.colors.secondary};
+  user-select: none;
+`
+
+const MonthTick = styled.span`
+  display: block;
+  width: ${CELL}px;
+  flex-shrink: 0;
+  overflow: visible;
+  white-space: nowrap;
 `
 
 const Grid = styled.div`
@@ -240,6 +247,18 @@ function formatTooltipDate(d: Date): string {
   })
 }
 
+/** Label the first week column of each month (GitHub-style). */
+function monthTickLabel(
+  week: { date: Date }[],
+  prevMonth: number | null
+): string {
+  const date = week[0]?.date
+  if (!date) return ""
+  const month = date.getMonth()
+  if (prevMonth !== null && month === prevMonth) return ""
+  return date.toLocaleDateString(undefined, { month: "short" })
+}
+
 export interface ReadingActivityHeatmapProps {
   activityByDay: Record<string, number>
   fillHeight?: boolean
@@ -254,10 +273,9 @@ export function ReadingActivityHeatmap({
   embedded = false,
   className,
 }: ReadingActivityHeatmapProps) {
-  const weeksBack = useHeatmapWeeksBack()
   const { weeks, maxCount, activeDaysInRange } = buildReadingHeatmapGrid(
     activityByDay,
-    weeksBack
+    HEATMAP_WEEKS
   )
 
   const summary =
@@ -265,7 +283,7 @@ export function ReadingActivityHeatmap({
       ? "No logged activity in this window yet."
       : `${activeDaysInRange} active day${
           activeDaysInRange === 1 ? "" : "s"
-        } in the last ${weeksBack} weeks.`
+        } in the last year.`
 
   return (
     <Root
@@ -277,9 +295,9 @@ export function ReadingActivityHeatmap({
     >
       <Title>Reading activity</Title>
       <Caption>
-        Each square is a day; darker green means more shelf updates that day
-        (status, progress, or your rating). A shorter range is shown on small
-        screens. Stored only in this browser.
+        Each square is a day over the past year; darker green means more shelf
+        updates that day (status, progress, or your rating). Scroll sideways on
+        smaller screens. Stored only in this browser.
       </Caption>
       <HeatmapOuter>
         <WeekdayAxis aria-hidden>
@@ -288,42 +306,55 @@ export function ReadingActivityHeatmap({
           ))}
         </WeekdayAxis>
         <ScrollRegion>
-          <Grid role="presentation">
-            {weeks.map((column, wi) => (
-              <WeekCol
-                key={`${column[0]?.key}-${wi}`}
-                role="presentation"
-                aria-label={`Week of ${formatTooltipDate(column[0].date)}`}
-              >
-                {column.map((cell, di) => {
-                  const level = intensityLevel(
-                    cell.count,
-                    maxCount,
-                    cell.isFuture
-                  )
-                  const label = cell.isFuture
-                    ? `${formatTooltipDate(cell.date)} — future`
-                    : cell.count === 0
-                      ? `${formatTooltipDate(cell.date)} — no activity`
-                      : `${formatTooltipDate(cell.date)} — ${cell.count} update${
-                          cell.count === 1 ? "" : "s"
-                        }`
-                  return (
-                    <Cell
-                      key={cell.key}
-                      type="button"
-                      disabled={cell.isFuture}
-                      $muted={cell.isFuture}
-                      $level={level}
-                      $animDelay={wi * 8 + di * 2}
-                      title={label}
-                      aria-label={label}
-                    />
-                  )
-                })}
-              </WeekCol>
-            ))}
-          </Grid>
+          <GridStack>
+            <MonthAxis aria-hidden>
+              {weeks.map((column, wi) => {
+                const prevMonth =
+                  wi > 0 ? weeks[wi - 1][0]?.date.getMonth() ?? null : null
+                return (
+                  <MonthTick key={`${column[0]?.key}-month`}>
+                    {monthTickLabel(column, prevMonth)}
+                  </MonthTick>
+                )
+              })}
+            </MonthAxis>
+            <Grid role="presentation">
+              {weeks.map((column, wi) => (
+                <WeekCol
+                  key={`${column[0]?.key}-${wi}`}
+                  role="presentation"
+                  aria-label={`Week of ${formatTooltipDate(column[0].date)}`}
+                >
+                  {column.map((cell, di) => {
+                    const level = intensityLevel(
+                      cell.count,
+                      maxCount,
+                      cell.isFuture
+                    )
+                    const label = cell.isFuture
+                      ? `${formatTooltipDate(cell.date)} — future`
+                      : cell.count === 0
+                        ? `${formatTooltipDate(cell.date)} — no activity`
+                        : `${formatTooltipDate(cell.date)} — ${cell.count} update${
+                            cell.count === 1 ? "" : "s"
+                          }`
+                    return (
+                      <Cell
+                        key={cell.key}
+                        type="button"
+                        disabled={cell.isFuture}
+                        $muted={cell.isFuture}
+                        $level={level}
+                        $animDelay={wi * 8 + di * 2}
+                        title={label}
+                        aria-label={label}
+                      />
+                    )
+                  })}
+                </WeekCol>
+              ))}
+            </Grid>
+          </GridStack>
         </ScrollRegion>
       </HeatmapOuter>
       <LegendRow>

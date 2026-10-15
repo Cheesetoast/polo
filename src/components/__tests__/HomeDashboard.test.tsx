@@ -13,17 +13,23 @@ describe("HomeDashboard", () => {
     localStorage.clear()
   })
 
-  it("renders the welcome greeting with the site brand", () => {
+  it("renders the site title with the tagline beside it", () => {
     render(<HomeDashboard />)
 
-    expect(screen.getByText(/Welcome back to/i)).toBeInTheDocument()
-    expect(screen.getByText("Book Stack")).toBeInTheDocument()
+    expect(
+      screen.getByRole("heading", { level: 1, name: "Book Stack" })
+    ).toBeInTheDocument()
+    expect(screen.getByText("Read. Track. Repeat.")).toBeInTheDocument()
   })
 
-  it("uses an optional homepage title override", () => {
-    render(<HomeDashboard homepageTitle="Custom Stack" />)
+  it("uses Contentful homepage title as the tagline", () => {
+    render(<HomeDashboard homepageTitle="Custom tagline copy" />)
 
-    expect(screen.getByText("Custom Stack")).toBeInTheDocument()
+    expect(
+      screen.getByRole("heading", { level: 1, name: "Book Stack" })
+    ).toBeInTheDocument()
+    expect(screen.getByText("Custom tagline copy")).toBeInTheDocument()
+    expect(screen.queryByText("Read. Track. Repeat.")).not.toBeInTheDocument()
   })
 
   it("renders reading goal, book of the day, and shelf modules", async () => {

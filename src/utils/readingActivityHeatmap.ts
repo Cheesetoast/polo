@@ -16,6 +16,77 @@ function addDays(d: Date, n: number): Date {
   return x
 }
 
+/** Deterministic PRNG so demo activity is stable across reloads. */
+function mulberry32(seed: number) {
+  return () => {
+    let t = (seed += 0x6d2b79f5)
+    t = Math.imul(t ^ (t >>> 15), t | 1)
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+
+/**
+ * Demo reading-activity history for empty localStorage.
+ * Sparse weekdays, busier weekends/Tue–Thu, slightly denser recent weeks.
+ */
+/** Week columns shown on the heatmap (full year). */
+export const READING_ACTIVITY_WEEKS = 53
+
+/**
+ * Merge a full-year demo seed under existing activity so older months are
+ * filled without overwriting days the user (or prior seed) already logged.
+ */
+export function backfillReadingActivityByDay(
+  existing: Record<string, number>,
+  today: Date = new Date(),
+  weeksBack = READING_ACTIVITY_WEEKS,
+  seed = 20261015
+): Record<string, number> {
+  return {
+    ...buildDefaultReadingActivityByDay(today, weeksBack, seed),
+    ...existing,
+  }
+}
+
+export function buildDefaultReadingActivityByDay(
+  today: Date = new Date(),
+  weeksBack = READING_ACTIVITY_WEEKS,
+  seed = 20261015
+): Record<string, number> {
+  const rand = mulberry32(seed)
+  const end = startOfLocalDay(today)
+  const activity: Record<string, number> = {}
+
+  for (let daysAgo = weeksBack * 7 - 1; daysAgo >= 0; daysAgo--) {
+    const date = addDays(end, -daysAgo)
+    if (date > end) continue
+
+    const weekday = date.getDay()
+    const weeksAgo = daysAgo / 7
+
+    let chance = 0.2
+    if (weekday === 0 || weekday === 6) chance = 0.48
+    else if (weekday === 2 || weekday === 4) chance = 0.32
+    else if (weekday === 1) chance = 0.14
+
+    if (weeksAgo < 4) chance += 0.14
+    else if (weeksAgo > 18) chance -= 0.08
+
+    if (rand() > Math.max(0.05, Math.min(0.75, chance))) continue
+
+    const roll = rand()
+    let count = 1
+    if (roll > 0.72) count = 2
+    if (roll > 0.9) count = 3
+    if (roll > 0.97) count = 4
+
+    activity[localDateKey(date)] = count
+  }
+
+  return activity
+}
+
 /** Sunday-start of the calendar week containing `d` (local). */
 export function getSundayOfWeek(d: Date): Date {
   const x = startOfLocalDay(d)

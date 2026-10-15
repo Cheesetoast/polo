@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 
 export const READING_GOAL_STORAGE_KEY = "polo-reading-goal"
-export const DEFAULT_READING_GOAL = 50
+export const DEFAULT_READING_GOAL = 10
 export const MIN_READING_GOAL = 1
 export const MAX_READING_GOAL = 500
 

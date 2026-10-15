@@ -2,7 +2,11 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Book } from '../components/Book';
 import { ReadingStatus } from '../types/reading';
 import { DEFAULTS } from '../constants';
-import { localDateKey } from '../utils/readingActivityHeatmap';
+import {
+  backfillReadingActivityByDay,
+  buildDefaultReadingActivityByDay,
+  localDateKey,
+} from '../utils/readingActivityHeatmap';
 
 interface BookWithReadingStatus extends Book {
   status: ReadingStatus | null;
@@ -11,7 +15,13 @@ interface BookWithReadingStatus extends Book {
 }
 
 const STORAGE_KEY = 'book-status-data';
+/** Bumped when demo shelf counts change so existing browsers pick up new defaults. */
+const BOOK_STATUS_SEED_VERSION_KEY = 'polo-book-status-seed-version';
+const BOOK_STATUS_SEED_VERSION = 4;
 const READING_ACTIVITY_KEY = 'polo-reading-activity-by-day';
+/** Bumped when the demo activity window expands (e.g. 26 → 53 weeks). */
+const READING_ACTIVITY_VERSION_KEY = 'polo-reading-activity-version';
+const READING_ACTIVITY_VERSION = 2;
 
 interface BookStatusData {
   [isbn: string]: {
@@ -19,6 +29,47 @@ interface BookStatusData {
     progress?: number;
     userRating?: number | null;
   };
+}
+
+/** Demo shelf for first-time visitors / reset. */
+export const DEFAULT_SHELF_COUNTS = {
+  'want-to-read': 23,
+  'currently-reading': 2,
+  finished: 6,
+} as const;
+
+function repeatSeed(
+  status: ReadingStatus,
+  progress: number,
+  count: number
+): Array<{ status: ReadingStatus; progress: number }> {
+  return Array.from({ length: count }, () => ({ status, progress }));
+}
+
+export const DEFAULT_STATUS_SEED: Array<{
+  status: ReadingStatus;
+  progress: number;
+}> = [
+  ...repeatSeed('want-to-read', 0, DEFAULT_SHELF_COUNTS['want-to-read']),
+  { status: 'currently-reading', progress: 34 },
+  { status: 'currently-reading', progress: 68 },
+  ...repeatSeed('finished', 100, DEFAULT_SHELF_COUNTS.finished),
+];
+
+export function buildDefaultReadingStatusData(books: Book[]): BookStatusData {
+  const withIsbn = books.filter((book) => Boolean(book.isbn));
+  const data: BookStatusData = {};
+
+  DEFAULT_STATUS_SEED.forEach((entry, index) => {
+    const book = withIsbn[index];
+    if (!book?.isbn) return;
+    data[book.isbn] = {
+      status: entry.status,
+      progress: entry.progress,
+    };
+  });
+
+  return data;
 }
 
 export const useBookStatus = (books: Book[]) => {
@@ -29,14 +80,18 @@ export const useBookStatus = (books: Book[]) => {
   // Default status constant
   const DEFAULT_STATUS: ReadingStatus | null = DEFAULTS.DEFAULT_BOOK_STATUS;
 
-  // Load statuses from localStorage on mount
+  // Load statuses from localStorage on mount; seed / refresh demo shelf when needed
   useEffect(() => {
     try {
+      const seedVersion = Number(
+        localStorage.getItem(BOOK_STATUS_SEED_VERSION_KEY) || '0'
+      );
       const stored = localStorage.getItem(STORAGE_KEY);
+      let migrated: BookStatusData = {};
+
       if (stored) {
         const parsed = JSON.parse(stored);
-        // Migrate old format to new format
-        const migrated = Object.entries(parsed).reduce((acc, [isbn, data]) => {
+        migrated = Object.entries(parsed || {}).reduce((acc, [isbn, data]) => {
           if (typeof data === 'string') {
             // Old format: just status string
             acc[isbn] = { status: data as ReadingStatus, progress: 0 };
@@ -46,26 +101,65 @@ export const useBookStatus = (books: Book[]) => {
           }
           return acc;
         }, {} as BookStatusData);
-        setReadingStatusData(migrated);
       }
+
+      const needsDemoSeed =
+        Object.keys(migrated).length === 0 ||
+        seedVersion < BOOK_STATUS_SEED_VERSION;
+
+      setReadingStatusData(
+        needsDemoSeed ? buildDefaultReadingStatusData(books) : migrated
+      );
+      localStorage.setItem(
+        BOOK_STATUS_SEED_VERSION_KEY,
+        String(BOOK_STATUS_SEED_VERSION)
+      );
     } catch (error) {
       console.warn('Failed to load book statuses from localStorage:', error);
+      setReadingStatusData(buildDefaultReadingStatusData(books));
     } finally {
       setIsLoading(false);
     }
+    // Catalog is static for this app; seed only on first mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     try {
+      const version = Number(
+        localStorage.getItem(READING_ACTIVITY_VERSION_KEY) || '0'
+      );
       const raw = localStorage.getItem(READING_ACTIVITY_KEY);
+      let stored: Record<string, number> = {};
+
       if (raw) {
         const parsed = JSON.parse(raw) as Record<string, number>;
         if (parsed && typeof parsed === 'object') {
-          setActivityByDay(parsed);
+          stored = parsed;
         }
       }
+
+      const hasStored = Object.keys(stored).length > 0;
+      let next: Record<string, number>;
+
+      if (!hasStored) {
+        next = buildDefaultReadingActivityByDay();
+      } else if (version < READING_ACTIVITY_VERSION) {
+        // Expand older short seeds to a full year without clobbering logged days.
+        next = backfillReadingActivityByDay(stored);
+      } else {
+        next = stored;
+      }
+
+      setActivityByDay(next);
+      localStorage.setItem(READING_ACTIVITY_KEY, JSON.stringify(next));
+      localStorage.setItem(
+        READING_ACTIVITY_VERSION_KEY,
+        String(READING_ACTIVITY_VERSION)
+      );
     } catch (error) {
       console.warn('Failed to load reading activity from localStorage:', error);
+      setActivityByDay(buildDefaultReadingActivityByDay());
     }
   }, []);
 
@@ -206,23 +300,32 @@ export const useBookStatus = (books: Book[]) => {
     bumpReadingActivity();
   }, [books, bumpReadingActivity]);
 
-  // Reset all statuses to default
+  // Reset all statuses to the demo seed
   const resetStatuses = useCallback(() => {
-    setReadingStatusData({});
-  }, []);
+    setReadingStatusData(buildDefaultReadingStatusData(books));
+  }, [books]);
 
-  // Clear localStorage and reset to use original JSON data
+  // Restore demo shelf + reading activity seeds
   const clearLocalStorage = useCallback(() => {
     try {
       localStorage.removeItem(STORAGE_KEY);
-      localStorage.removeItem(READING_ACTIVITY_KEY);
-      setReadingStatusData({});
-      setActivityByDay({});
-      console.log('LocalStorage cleared, using original JSON data');
+      localStorage.setItem(
+        BOOK_STATUS_SEED_VERSION_KEY,
+        String(BOOK_STATUS_SEED_VERSION)
+      );
+      const seededActivity = buildDefaultReadingActivityByDay();
+      localStorage.setItem(READING_ACTIVITY_KEY, JSON.stringify(seededActivity));
+      localStorage.setItem(
+        READING_ACTIVITY_VERSION_KEY,
+        String(READING_ACTIVITY_VERSION)
+      );
+      setReadingStatusData(buildDefaultReadingStatusData(books));
+      setActivityByDay(seededActivity);
+      console.log('LocalStorage cleared, restored default shelf and activity seeds');
     } catch (error) {
       console.warn('Failed to clear localStorage:', error);
     }
-  }, []);
+  }, [books]);
 
   // Memoize booksWithStatus to ensure proper re-renders
   const booksWithStatus = useMemo(() => {

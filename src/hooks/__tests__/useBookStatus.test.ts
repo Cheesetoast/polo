@@ -1,7 +1,14 @@
-import { renderHook, act } from '@testing-library/react';
-import { useBookStatus } from '../useBookStatus';
+import { renderHook, act, waitFor } from '@testing-library/react';
+import {
+  DEFAULT_SHELF_COUNTS,
+  buildDefaultReadingStatusData,
+  useBookStatus,
+} from '../useBookStatus';
 import { Book } from '../../components/Book';
 import { localDateKey } from '../../utils/readingActivityHeatmap';
+import booksData from '../../data/books.json';
+
+const catalogBooks = booksData as Book[];
 
 const mockBooks: Book[] = [
   {
@@ -12,8 +19,6 @@ const mockBooks: Book[] = [
     communityRating: 4.0,
     genre: 'Fiction',
     pages: 300,
-    progress: 100, // Finished book
-
   },
   {
     title: 'Book 2',
@@ -23,8 +28,6 @@ const mockBooks: Book[] = [
     communityRating: 3.5,
     genre: 'Non-Fiction',
     pages: 250,
-    progress: 50, // Currently reading
-
   },
   {
     title: 'Book 3',
@@ -34,99 +37,141 @@ const mockBooks: Book[] = [
     communityRating: 4.5,
     genre: 'Fiction',
     pages: 400,
-    // No progress - will be null status
-
-  }
+  },
 ];
+
+describe('buildDefaultReadingStatusData', () => {
+  it('seeds 23 want-to-read, 2 currently-reading, and 6 finished', () => {
+    const seed = buildDefaultReadingStatusData(catalogBooks);
+    const counts = Object.values(seed).reduce(
+      (acc, entry) => {
+        if (!entry.status) return acc;
+        acc[entry.status] = (acc[entry.status] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
+
+    expect(counts['want-to-read']).toBe(DEFAULT_SHELF_COUNTS['want-to-read']);
+    expect(counts['currently-reading']).toBe(
+      DEFAULT_SHELF_COUNTS['currently-reading']
+    );
+    expect(counts.finished).toBe(DEFAULT_SHELF_COUNTS.finished);
+
+    const finishedEntries = Object.values(seed).filter(
+      (entry) => entry.status === 'finished'
+    );
+    expect(finishedEntries.every((entry) => entry.progress === 100)).toBe(true);
+  });
+});
 
 describe('useBookStatus', () => {
   beforeEach(() => {
-    // Clear localStorage before each test
     localStorage.clear();
   });
 
-  it('initializes books with correct default statuses', () => {
-    const { result } = renderHook(() => useBookStatus(mockBooks));
-    
-    expect(result.current.booksWithStatus).toHaveLength(3);
-    
-    // Book 1 should be 'finished' (has progress = 100)
-    expect(result.current.booksWithStatus[0].status).toBe('finished');
-    
-    // Book 2 should be 'currently-reading' (has progress > 0)
-    expect(result.current.booksWithStatus[1].status).toBe('currently-reading');
-    
-    // Book 3 should be null (no progress)
-    expect(result.current.booksWithStatus[2].status).toBe(null);
+  it('initializes with the demo shelf seed when storage is empty', async () => {
+    const { result } = renderHook(() => useBookStatus(catalogBooks));
+
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+
+    const byStatus = result.current.booksWithStatus.reduce(
+      (acc, book) => {
+        if (!book.status) return acc;
+        acc[book.status] = (acc[book.status] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
+
+    expect(byStatus['want-to-read']).toBe(DEFAULT_SHELF_COUNTS['want-to-read']);
+    expect(byStatus['currently-reading']).toBe(
+      DEFAULT_SHELF_COUNTS['currently-reading']
+    );
+    expect(byStatus.finished).toBe(DEFAULT_SHELF_COUNTS.finished);
   });
 
-  it('updates book status when updateBookStatus is called', () => {
+  it('updates book status when updateBookStatus is called', async () => {
     const { result } = renderHook(() => useBookStatus(mockBooks));
-    
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+
     act(() => {
-      result.current.updateBookStatus('978-1', 'in-progress');
+      result.current.updateBookStatus('978-1', 'finished');
     });
-    
-    const updatedBook = result.current.booksWithStatus.find(book => book.isbn === '978-1');
-    expect(updatedBook?.status).toBe('in-progress');
+
+    const updatedBook = result.current.booksWithStatus.find(
+      (book) => book.isbn === '978-1'
+    );
+    expect(updatedBook?.status).toBe('finished');
   });
 
-  it('updates book progress when updateBookProgress is called', () => {
+  it('updates book progress when updateBookProgress is called', async () => {
     const { result } = renderHook(() => useBookStatus(mockBooks));
-    
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+
     act(() => {
       result.current.updateBookProgress('978-1', 75);
     });
-    
-    const updatedBook = result.current.booksWithStatus.find(book => book.isbn === '978-1');
+
+    const updatedBook = result.current.booksWithStatus.find(
+      (book) => book.isbn === '978-1'
+    );
     expect(updatedBook?.progress).toBe(75);
   });
 
-  it('resets all statuses when resetStatuses is called', () => {
-    const { result } = renderHook(() => useBookStatus(mockBooks));
-    
-    // First, update a book status
+  it('resets statuses back to the demo seed', async () => {
+    const { result } = renderHook(() => useBookStatus(catalogBooks));
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+
+    const firstIsbn = catalogBooks[0].isbn;
     act(() => {
-      result.current.updateBookStatus('978-1', 'in-progress');
+      result.current.updateBookStatus(firstIsbn, 'finished');
     });
-    
-    // Then reset
+
     act(() => {
       result.current.resetStatuses();
     });
-    
-    // Should return to default statuses
-    const book1 = result.current.booksWithStatus.find(book => book.isbn === '978-1');
-    expect(book1?.status).toBe('finished'); // Back to default based on progress = 100
+
+    const book1 = result.current.booksWithStatus.find(
+      (book) => book.isbn === firstIsbn
+    );
+    expect(book1?.status).toBe('want-to-read');
   });
 
-  it('loads statuses from localStorage on mount', () => {
-    // Set up localStorage with some data
+  it('loads statuses from localStorage on mount', async () => {
     const storedData = {
-      '978-1': { status: 'in-progress', progress: 25 }
+      '978-1': { status: 'finished', progress: 25 },
     };
     localStorage.setItem('book-status-data', JSON.stringify(storedData));
-    
+    localStorage.setItem('polo-book-status-seed-version', '4');
+
     const { result } = renderHook(() => useBookStatus(mockBooks));
-    
-    const book1 = result.current.booksWithStatus.find(book => book.isbn === '978-1');
-    expect(book1?.status).toBe('in-progress');
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+
+    const book1 = result.current.booksWithStatus.find(
+      (book) => book.isbn === '978-1'
+    );
+    expect(book1?.status).toBe('finished');
     expect(book1?.progress).toBe(25);
   });
 
-  it('saves statuses to localStorage when updated', () => {
+  it('saves statuses to localStorage when updated', async () => {
     const { result } = renderHook(() => useBookStatus(mockBooks));
-    
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+
     act(() => {
-      result.current.updateBookStatus('978-1', 'in-progress');
+      result.current.updateBookStatus('978-1', 'finished');
     });
-    
-    const storedData = JSON.parse(localStorage.getItem('book-status-data') || '{}');
-    expect(storedData['978-1'].status).toBe('in-progress');
+
+    const storedData = JSON.parse(
+      localStorage.getItem('book-status-data') || '{}'
+    );
+    expect(storedData['978-1'].status).toBe('finished');
   });
 
-  it('records reading activity when status updates', () => {
+  it('records reading activity when status updates', async () => {
     const { result } = renderHook(() => useBookStatus(mockBooks));
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
     const key = localDateKey(new Date());
 
     act(() => {
@@ -140,42 +185,47 @@ describe('useBookStatus', () => {
     expect(result.current.activityByDay[key]).toBeGreaterThanOrEqual(1);
   });
 
-  it('handles books without ISBN gracefully', () => {
+  it('handles books without ISBN gracefully', async () => {
     const booksWithoutISBN = [
       {
         title: 'Book X',
         author: 'Author X',
         description: { description: 'Description X' },
-        isbn: '', // Empty ISBN
+        isbn: '',
         communityRating: 4.0,
         genre: 'Fiction',
-    
-      }
+      },
     ];
-    
+
     const { result } = renderHook(() => useBookStatus(booksWithoutISBN));
-    
-    // Should not crash and should assign null status
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+
     expect(result.current.booksWithStatus).toHaveLength(1);
     expect(result.current.booksWithStatus[0].status).toBe(null);
   });
 
-  it('clears localStorage when clearLocalStorage is called', () => {
-    const { result } = renderHook(() => useBookStatus(mockBooks));
-    
-    // First, update a book status to create localStorage data
+  it('restores the demo seed when clearLocalStorage is called', async () => {
+    const { result } = renderHook(() => useBookStatus(catalogBooks));
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+
+    const firstIsbn = catalogBooks[0].isbn;
     act(() => {
-      result.current.updateBookStatus('978-1', 'in-progress');
+      result.current.updateBookStatus(firstIsbn, 'finished');
     });
-    
-    // Then clear localStorage
+
     act(() => {
       result.current.clearLocalStorage();
     });
-    
-    // localStorage should be empty or contain empty object
-    const storedData = localStorage.getItem('book-status-data');
-    expect(storedData).toBe('{}');
-    expect(localStorage.getItem('polo-reading-activity-by-day')).toBeNull();
+
+    await waitFor(() => {
+      const book1 = result.current.booksWithStatus.find(
+        (book) => book.isbn === firstIsbn
+      );
+      expect(book1?.status).toBe('want-to-read');
+    });
+    const activity = JSON.parse(
+      localStorage.getItem('polo-reading-activity-by-day') || '{}'
+    );
+    expect(Object.keys(activity).length).toBeGreaterThan(0);
   });
 });
